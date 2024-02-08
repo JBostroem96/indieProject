@@ -1,5 +1,5 @@
 Date: 02/06/24
-Task: Reading material for this week and watching this week's videos.
+Task: Reading material for this week and watching this week's videos and doing the demo(s).
 Hours: 5.
 
 
