@@ -7,3 +7,38 @@ With this description, it's understandable that there needs to be a way to store
 There are many things this application needs to be able to track, and this is because some of the data involved is affected by other factors, specifically, the rules. For instance, there is a maximum of 500 points for the races, but the maximum is determined by the number of hours in the races themselves. For example, 3-6 hour races allow for a total of 50 points, while 8-12 hour races allow for a total of 100 points.
 
 This application's goal is to automate this heavy data processing. It would spare a lot of work and effort that goes into manually entering all these different values, not to mention the tedium involved. In addition, manual input is prone to user error, especially when dealing with a lot of data, not to mention having to manage that kind of quantity. By implementing an automatic system, we are streamlining the process where there is less room for user error.
+
+These technologies are expected to be used. However, do note that they could change if considered necessary:
+<br>
+**Security**<br>
+    AWS
+<br>
+**Database**<br>
+    MySQL 8.X
+<br>
+**ORM Framework**<br>
+    Hibernate
+<br>
+**Dependency Management**<br>
+    Maven
+<br>
+**CSS Framework**<br>
+    Bootstrap
+<br>
+**Data Validation**<br>
+    Bootstrap, possibly using Javascript
+<br>
+**Logging**<br>
+    Log4j
+<br>
+**Hosting**<br>
+    AWS
+<br>
+**Project Lombok**
+<br>
+**Unit Testing**<br>
+JUnit
+<br>
+**Text Editor**<br>
+IntelliJ IDEA
+
