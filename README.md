@@ -12,7 +12,7 @@ This application's goal is to automate this heavy data processing. It would spar
 **TECHNOLOGIES**:
 
 
-These technologies are expected to be used. However, do note that they could change if considered necessary:
+These technologies are expected to be used. However, do note that they could change if considered necessary
 
 
 **Security**<br>
