@@ -1,4 +1,4 @@
-PROBLEM STATEMENT:
+**PROBLEM STATEMENT**:
 
 https://www.wisconsinadventureracingseries.com/ is a racing series that is free and offers prizes to winners. They are present in WI, IL and MN, and offer a wide variety of different racing activities, such as biking, paddling, running or trekking, not to mention other challenges. However, it is mostly not a solo sport, as teams generally form for the premier division. That said, there are races that do allow for solo racing.
 
@@ -8,47 +8,42 @@ There are many things this application needs to be able to track, and this is be
 
 This application's goal is to automate this heavy data processing. It would spare a lot of work and effort that goes into manually entering all these different values, not to mention the tedium involved. In addition, manual input is prone to user error, especially when dealing with a lot of data, not to mention having to manage that kind of quantity. By implementing an automatic system, we are streamlining the process where there is less room for user error.
 
+
+**TECHNOLOGIES**:
+
+
 These technologies are expected to be used. However, do note that they could change if considered necessary:
-<br><br>
+
+
 **Security**<br>
     AWS
-<br>
-<br>
+
 **Database**<br>
     MySQL 8.X
-<br>
-<br>
+
 **ORM Framework**<br>
     Hibernate
-<br>
-<br>
+
 **Dependency Management**<br>
     Maven
-<br>
-<br>
+
 **CSS Framework**<br>
     Bootstrap
-<br>
-<br>
+
 **Data Validation**<br>
     Bootstrap, possibly using Javascript
-<br>
-<br>
+
 **Logging**<br>
     Log4j
-<br>
-<br>
+
 **Hosting**<br>
     AWS
-<br>
-<br>
+
 **Project Lombok**
-<br>
-<br>
+
 **Unit Testing**<br>
 JUnit
-<br>
-<br>
+
 **Text Editor**<br>
 IntelliJ IDEA
 
