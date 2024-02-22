@@ -9,9 +9,9 @@ Week 2:
 Week 4:
 
 1. Write project plan [incomplete]
-2. List Technologies [incomplete]
+2. List Technologies [Completed]
 3. Confirm MVP stories meet the objectives [incomplete]
-4. Design screens, making sure all the must user stories are covered [incomplete]
-5. Update the time log [incomplete]
+4. Design screens, making sure all the must user stories are covered [Completed]
+5. Update the time log [Completed]
 
 
