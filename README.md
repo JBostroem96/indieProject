@@ -47,3 +47,18 @@ JUnit
 **Text Editor**<br>
 IntelliJ IDEA
 
+
+More information about this project can be found below:
+
+[User Stories]https://github.com/JBostroem96/indieProject/blob/master/DesignDocuments/userStories.md
+
+[Wireframes]https://github.com/JBostroem96/indieProject/tree/master/DesignDocuments/Wireframes
+
+[**Project Plan**]https://github.com/JBostroem96/indieProject/blob/master/ProjectPlan.md
+
+I track my work and time spent here:
+
+[Time Log]https://github.com/JBostroem96/indieProject/blob/master/timeLog.md
+
+
+
