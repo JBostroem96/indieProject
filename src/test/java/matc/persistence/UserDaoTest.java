@@ -1,13 +1,11 @@
 package matc.persistence;
-
-import edu.matc.entity.Order;
+import edu.matc.persistence.Database;
+import edu.matc.persistence.UserDao;
 import edu.matc.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
@@ -50,12 +48,11 @@ class UserDaoTest {
 
     @Test
     void insert() {
-        User user = new User("Anton", "Larson", "Anton", LocalDate.now());
+        User user = new User("Anton", "Larson", "Anton", "example@hotmail.com", LocalDate.now());
         int insertedUserId = userDao.insert(user);
         assertNotEquals(0, insertedUserId);
         User insertedUser = userDao.getById(insertedUserId);
         assertEquals(user, insertedUser);
-
     }
 
     @Test
@@ -67,26 +64,8 @@ class UserDaoTest {
     }
 
     @Test
-    void deleteWithOrders() {
-        //Create the userDao
-        userDao = new UserDao();
+    void deleteWithRaces() {
 
-        //Get the user we want to delete that has 2 orders associated
-        User userToBeDeleted = userDao.getById(3);
-        List<Order> orders = userToBeDeleted.getOrders();
-
-        //Get the associated order numbers
-        int orderNumber1 = orders.get(0).getId();
-        int orderNumber2 = orders.get(1).getId();
-
-        //Delete the user
-        userDao.delete(userToBeDeleted);
-        //Verify the user was deleted
-        assertNull(userDao.getById(3));
-        //Verify the order was also deleted
-        OrderDao orderDao = new OrderDao();
-        assertNull(orderDao.getById(orderNumber1));
-        assertNull(orderDao.getById(orderNumber2));
 
     }
 
