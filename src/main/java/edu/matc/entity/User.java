@@ -40,6 +40,15 @@ public class User {
     public User() {
     }
 
+    /**
+     * Instantiates a new User.
+     *
+     * @param firstName   the first name
+     * @param lastName    the last name
+     * @param userName    the username
+     * @param email       the email
+     * @param dateOfBirth the date of birth
+     */
     public User(String firstName, String lastName, String userName, String email, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -175,16 +184,6 @@ public class User {
     }
 
     /**
-     * Gets the age.
-     *
-     * @return the calculated age
-     */
-    public int getAge() {
-
-        return (int) ChronoUnit.YEARS.between(dateOfBirth, LocalDate.now());
-    }
-
-    /**
      * Overrides the toString method
      * @return the first name, last name, username, id, date of birth, and age
      */
@@ -197,7 +196,6 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", id=" + id +
                 ", dateOfBirth=" + dateOfBirth +
-                ", age=" + getAge() +
                 '}';
     }
 
