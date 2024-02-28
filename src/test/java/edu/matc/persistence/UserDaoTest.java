@@ -6,10 +6,16 @@ import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class' purpose is to test the functionality of this application
+ */
 class UserDaoTest {
 
     private GenericDao userDao;
 
+    /**
+     * Triggers before everything else
+     */
     @BeforeEach
     void setUp() {
 
@@ -17,6 +23,11 @@ class UserDaoTest {
         database.runSQL("cleanDB.sql");
         userDao = new GenericDao(User.class);
     }
+
+
+    /**
+     * Gets by id.
+     */
     @Test
     void getById() {
 
@@ -25,6 +36,9 @@ class UserDaoTest {
         assertEquals(userDao.getById(1), retrievedUser);
     }
 
+    /**
+     * Update.
+     */
     @Test
     void update() {
 
@@ -44,6 +58,9 @@ class UserDaoTest {
         assertEquals(userToUpdate, updatedUser);
     }
 
+    /**
+     * Insert.
+     */
     @Test
     void insert() {
         User user = new User("Anton", "Larson", "Anton", "example@hotmail.com", LocalDate.now());
@@ -53,6 +70,9 @@ class UserDaoTest {
         assertEquals(user, insertedUser);
     }
 
+    /**
+     * Delete.
+     */
     @Test
     void delete() {
         userDao = new GenericDao(User.class);
@@ -61,12 +81,18 @@ class UserDaoTest {
 
     }
 
+    /**
+     * Delete with races.
+     */
     @Test
     void deleteWithRaces() {
 
 
     }
 
+    /**
+     * Gets all.
+     */
     @Test
     void getAll() {
 
@@ -74,11 +100,16 @@ class UserDaoTest {
         assertEquals(6, users.size());
     }
 
+    /**
+     * This test's purpose is to ensure that the property has the
+     * matching value. In this case "Joe" is a first name in
+     * the table
+     */
     @Test
     void getByPropertyEqual() {
-    }
 
-    @Test
-    void getByPropertyLike() {
+        List<User> authors = userDao.findByPropertyEqual("firstName", "Joe");
+        assertEquals(1, authors.size());
+        assertEquals(1, authors.get(0).getId());
     }
 }
