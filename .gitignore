@@ -13,6 +13,9 @@ target/
 *.ipr
 *.xml
 *.properties
+*.sql
+logs/
+dba/
 
 ### Eclipse ###
 .apt_generated

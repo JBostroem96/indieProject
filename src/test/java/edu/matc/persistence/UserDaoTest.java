@@ -1,6 +1,4 @@
-package matc.persistence;
-import edu.matc.persistence.Database;
-import edu.matc.persistence.GenericDao;
+package edu.matc.persistence;
 import edu.matc.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,13 +49,13 @@ class UserDaoTest {
         User user = new User("Anton", "Larson", "Anton", "example@hotmail.com", LocalDate.now());
         int insertedUserId = userDao.insert(user);
         assertNotEquals(0, insertedUserId);
-        User insertedUser = userDao.getById(insertedUserId);
+        User insertedUser = (User)userDao.getById(insertedUserId);
         assertEquals(user, insertedUser);
     }
 
     @Test
     void delete() {
-        userDao = new UserDao();
+        userDao = new GenericDao(User.class);
         userDao.delete(userDao.getById(2));
         assertNull(userDao.getById(2));
 

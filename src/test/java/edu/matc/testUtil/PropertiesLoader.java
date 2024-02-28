@@ -1,4 +1,4 @@
-package matc.testUtil;
+package edu.matc.testUtil;
 
 import java.io.IOException;
 import java.util.Properties;

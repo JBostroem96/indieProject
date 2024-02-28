@@ -1,8 +1,5 @@
 package edu.matc.persistence;
-
-
-import edu.matc.utilities.PropertiesLoader;
-
+import edu.matc.testUtil.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.Connection;
