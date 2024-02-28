@@ -1,6 +1,6 @@
 package matc.persistence;
 import edu.matc.persistence.Database;
-import edu.matc.persistence.UserDao;
+import edu.matc.persistence.GenericDao;
 import edu.matc.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,19 +10,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
 
-    private UserDao userDao;
+    private GenericDao userDao;
 
     @BeforeEach
     void setUp() {
 
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
-        userDao = new UserDao();
+        userDao = new GenericDao(User.class);
     }
     @Test
     void getById() {
 
-        User retrievedUser = userDao.getById(1);
+        User retrievedUser = (User)userDao.getById(1);
         assertNotNull(retrievedUser);
         assertEquals(userDao.getById(1), retrievedUser);
     }
@@ -34,7 +34,7 @@ class UserDaoTest {
         String lastName = "Janson";
         String userName = "Jon";
 
-        User userToUpdate = userDao.getById(1);
+        User userToUpdate = (User)userDao.getById(1);
 
         userToUpdate.setUserName(userName);
         userToUpdate.setFirstName(firstName);
@@ -42,7 +42,7 @@ class UserDaoTest {
 
         userDao.update(userToUpdate);
 
-        User updatedUser = userDao.getById(1);
+        User updatedUser = (User)userDao.getById(1);
         assertEquals(userToUpdate, updatedUser);
     }
 
