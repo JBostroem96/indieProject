@@ -8,10 +8,18 @@ Week 2:
 
 Week 4:
 
-1. Write project plan [incomplete]
+1. Write project plan [In Progress]
 2. List Technologies [Completed]
-3. Confirm MVP stories meet the objectives [incomplete]
+3. Confirm MVP stories meet the objectives [Completed]
 4. Design screens, making sure all the must user stories are covered [Completed]
 5. Update the time log [Completed]
+
+Week 7:
+
+1. Create at least one table [Completed]
+2. Create at least on dao to CRUD [Completed]
+3. Create database [Completed]
+4. Implement Log4j2 [Completed]
+5. Implement Hibernate [Completed]
 
 
