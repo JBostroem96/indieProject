@@ -19,22 +19,47 @@ public class TokenResponse {
 	@JsonProperty("expires_in")
 	private int expiresIn;
 
+	/**
+	 * Get access token string.
+	 *
+	 * @return the string
+	 */
 	public String getAccessToken(){
 		return accessToken;
 	}
 
+	/**
+	 * Get refresh token string.
+	 *
+	 * @return the string
+	 */
 	public String getRefreshToken(){
 		return refreshToken;
 	}
 
+	/**
+	 * Get id token string.
+	 *
+	 * @return the string
+	 */
 	public String getIdToken(){
 		return idToken;
 	}
 
+	/**
+	 * Get token type string.
+	 *
+	 * @return the string
+	 */
 	public String getTokenType(){
 		return tokenType;
 	}
 
+	/**
+	 * Get expires in int.
+	 *
+	 * @return the int
+	 */
 	public int getExpiresIn(){
 		return expiresIn;
 	}

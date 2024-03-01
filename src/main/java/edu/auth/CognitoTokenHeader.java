@@ -10,10 +10,20 @@ public class CognitoTokenHeader{
 	@JsonProperty("alg")
 	private String alg;
 
+	/**
+	 * Get kid string.
+	 *
+	 * @return the string
+	 */
 	public String getKid(){
 		return kid;
 	}
 
+	/**
+	 * Get alg string.
+	 *
+	 * @return the string
+	 */
 	public String getAlg(){
 		return alg;
 	}
