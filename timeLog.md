@@ -16,7 +16,7 @@ Date: 03/07/24
 Task: Worked in this week's activities and exercise
 Hours: 5.
 
-Date: 03/08/24
-Task: Completed this week's exercise and gave prof dev feedback
+Date: 03/08/24<br>
+Task: Completed this week's exercise and gave prof dev feedback<br>
 Hours: 3.
 
