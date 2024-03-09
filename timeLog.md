@@ -12,8 +12,8 @@ Task: Created wireframes, user stories and a project plan for
 my project<br>
 Hours: 3.
 
-Date: 03/07/24
-Task: Worked in this week's activities and exercise
+Date: 03/07/24<br>
+Task: Worked in this week's activities and exercise<br>
 Hours: 5.
 
 Date: 03/08/24<br>
