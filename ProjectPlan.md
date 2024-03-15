@@ -27,7 +27,7 @@ Week 4:
 6. Create a test version of the database for unit testing [Complete]
 7. Create unit tests for the UserDao [Complete]
 8. Create a class for the DB connection business [Complete]
-9. Create JSP for finding races
+9. Create JSP for finding races [Complete]
 10. Create JSP for race results
 11. Create controller to route to find-a-race jsp
 12. Create controller to manage the work of finding a race
