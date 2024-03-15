@@ -20,3 +20,7 @@ Date: 03/08/24<br>
 Task: Completed this week's exercise and gave prof dev feedback<br>
 Hours: 3.
 
+Date: 03/15/24<br>
+Task: Worked on the project<br>
+Hours: 4.
+

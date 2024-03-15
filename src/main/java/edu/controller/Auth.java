@@ -171,6 +171,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
         // Verify the token
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
+
         String userName = jwt.getClaim("cognito:username").asString();
 
 
