@@ -15,8 +15,15 @@
         <li>Races</li>
         <li>About</li>
         <li>Sign Up</li>
-        <li>Log In</li>
         <li>Add Results</li>
+        <c:choose>
+            <c:when test="${empty userName}">
+                <a class="text-white" href = "logIn">Log in</a>
+            </c:when>
+            <c:otherwise>
+                <p class="sm text-muted">You're logged in as: ${userName}</p>
+            </c:otherwise>
+        </c:choose>
 
     </ul>
 </nav>
