@@ -10,15 +10,14 @@
 <nav>
     <ul class="bg-primary text-white d-flex justify-content-around fw-bold p-4 list-unstyled">
 
-        <li>Home</li>
+        <a class="text-white" href = "index.jsp">Home</a>
         <li>Add Race</li>
-        <li>Races</li>
+        <a class="text-white" href = "FindRaceDisplay">Races</a>
         <li>About</li>
-        <li>Sign Up</li>
         <li>Add Results</li>
         <c:choose>
             <c:when test="${empty userName}">
-                <a class="text-white" href = "logIn">Log in</a>
+                <a class="text-white" href = "logIn">Log in or Sign up</a>
             </c:when>
             <c:otherwise>
                 <p class="sm text-muted">User: ${userName}</p>
