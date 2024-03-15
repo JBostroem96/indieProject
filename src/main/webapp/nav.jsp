@@ -21,7 +21,7 @@
                 <a class="text-white" href = "logIn">Log in</a>
             </c:when>
             <c:otherwise>
-                <p class="sm text-muted">You're logged in as: ${userName}</p>
+                <p class="sm text-muted">User: ${userName}</p>
             </c:otherwise>
         </c:choose>
 
