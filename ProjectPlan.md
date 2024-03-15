@@ -14,7 +14,7 @@ Week 3:
 - [x] Document user stories and select MVP stories 
 - [x] Confirm MVP stories meet Ent Java indie project objectives 
 - [x] Design screens - make sure all MVP user stories are covered 
-- [] Triple-check for Checkpoint 1
+- [ ] Triple-check for Checkpoint 1
 - [x] Update journal/time log/reflection <br>
 
 Week 4:
@@ -31,15 +31,15 @@ Week 4:
 - [x] Create JSP for race results 
 - [x] Create controller to route to find-a-race jsp 
 - [x] Create controller to manage the work of finding a race 
-- [] Update weekly reflection<br>
+- [ ] Update weekly reflection<br>
 
 Week 7:
 
-- [] Double-check all checkpoint 2 items (above) are complete and visible in github.
-- [] Set up Authentication in indie project (more tasks coming for this)
-- [] Create project DB on AWS.
-- [] Update project config files for AWS as needed
-- [] Deploy project to AWS
-- [] Add deployed link to indie project list in student repo
+- [ ] Double-check all checkpoint 2 items (above) are complete and visible in github.
+- [ ] Set up Authentication in indie project (more tasks coming for this)
+- [ ] Create project DB on AWS.
+- [ ] Update project config files for AWS as needed
+- [ ] Deploy project to AWS
+- [ ] Add deployed link to indie project list in student repo
 
 
