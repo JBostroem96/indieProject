@@ -49,12 +49,13 @@ public class User {
      * @param email       the email
      * @param dateOfBirth the date of birth
      */
-    public User(String firstName, String lastName, String userName, String email, LocalDate dateOfBirth) {
+    public User(String firstName, String lastName, String userName, String email, String password, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.userName = userName;
         this.dateOfBirth = dateOfBirth;
+        this.password = password;
     }
 
     /**

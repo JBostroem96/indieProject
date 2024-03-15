@@ -13,7 +13,7 @@ Week 3:
 3. Write project plan [completed]
 4. Document user stories and select MVP stories [completed]
 5. Confirm MVP stories meet Ent Java indie project objectives [completed]
-6. Design screens - make sure all MVP user stories are covered
+6. Design screens - make sure all MVP user stories are covered [complete]
 7. Triple-check for Checkpoint 1
 8. Update journal/time log/reflection [completed]<br>
 
@@ -22,9 +22,9 @@ Week 4:
 1. First cut at database design [completed]
 2. Create the dev version of the database - at least the User table [completed]
 3. Create User entity [completed]
-4. Create a class to perform CRUD on user - UserDao 
+4. Create a class to perform CRUD on user - UserDao (preferably GenericDao) [complete]
 5. Create the config files for the DB connection info (dev and test) [completed]
-6. Create a test version of the database for unit testing
+6. Create a test version of the database for unit testing [complete]
 7. Create unit tests for the UserDao [completed]
 8. Create a class for the DB connection business [completed]
 9. Create JSP for finding races
