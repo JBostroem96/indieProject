@@ -1,7 +1,6 @@
 package edu.matc.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.time.LocalDate;
@@ -9,7 +8,6 @@ import java.time.LocalDate;
 /**
  * A class to represent a user.
  *
- * @author pwaite
  * @author Jimmy Bostroem
  */
 @Entity
