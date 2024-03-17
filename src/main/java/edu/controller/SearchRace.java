@@ -31,9 +31,10 @@ public class SearchRace extends HttpServlet {
 
                 req.setAttribute("races", dao.findByPropertyEqual("name", req.getParameter("searchTerm")));
 
-            } else {
+            } else  {
 
                 req.setAttribute("races", dao.findByPropertyEqual("date", req.getParameter("searchTerm")));
+
             }
 
         }

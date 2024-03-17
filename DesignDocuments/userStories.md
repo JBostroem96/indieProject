@@ -10,17 +10,17 @@ As a registered user, I want to be able to filter by rank, so that I can see who
 FILTER BY TEAM NAME*<br>
 As a registered user, I want to be able to filter by team name, so that I can find whichever team I am interested and their stats.
 
-FILTER BY TOTAL POINTS OUT OF 500<br>
+FILTER BY LENGTH*<br>
 As a registered user, I want to be able to filter by the total points out of 500, 
 so that I can see the given score for the different teams.
 
-FILTER BY DIVISION<br>
+FILTER BY DIVISION*<br>
 As a registered user, I want to be able to filter by the the division so that I can find the division I am looking for easily.
 
-VIEW RACE<br>
+VIEW RACE*<br>
 As any user, I want to be able to view a race, so that I can view its details, such as name, time, and date.
 
-VIEW RACE RESULTS<br>
+VIEW RACE RESULTS*<br>
 As any user, I want to be able to view race results, so that I can view the results of the races.
 
 ABOUT<br>

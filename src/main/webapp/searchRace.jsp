@@ -9,10 +9,10 @@
         <form action="searchRace" class="form-inline">
                     <div class="search bg-primary text-white p-5 border rounded">
                         <label class="mb-2" for="searchTerm">Search</label>
-                        <input type="text" name="searchTerm" id="searchTerm" required>
+                        <input type="search" name="searchTerm" id="searchTerm" required>
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="radio" name="searchType" id="name" value="name">
+                            <input type="radio" name="searchType" id="name" value="name" checked>
                         </div>
                         <div class="form-group">
                             <label for="length">Length</label>
