@@ -11,9 +11,9 @@
 <html>
 <body>
 <div class="container-fluid">
-    <h1 class="text-center text-muted">Search Results:</h1>
+    <h1 class="text-center text-muted">You Added:</h1>
     <c:if test="${empty races}">
-        <h2 class="text-center text-muted">No Users were found</h2>
+        <h2 class="text-center text-muted">No Races were found</h2>
     </c:if>
     <table id="raceTable" class="display" cellspacing="=0" width="100%">
         <thead>

@@ -5,20 +5,20 @@
 <body>
 <div class="container bg-white">
     <div class="d-flex flex-column gap-5 fw-bold">
-        <h2 class="mt-5 text-center fw-bold">Add Race Result</h2>
-        <form action="submitResult" class="form-inline">
+        <h2 class="mt-5 text-center fw-bold">Add Race</h2>
+        <form action="addRace" class="form-inline" method="POST">
             <div class="search bg-primary text-white p-5 border rounded">
                 <div class="form-group">
-                    <label for="name">Division</label>
-                    <input type="text" class="form-control" name="searchTerm" id="name">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name">
                 </div>
                 <div class="form-group">
-                    <label for="name">Team Name</label>
-                    <input type="text" class="form-control" name="searchTerm" id="length">
+                    <label for="name">Length</label>
+                    <input type="number" class="form-control" name="length" id="length">
                 </div>
                 <div class="form-group">
-                    <label for="name">Division Placement</label>
-                    <input type="number" class="form-control" name="searchTerm" id="date">
+                    <label for="name">Date</label>
+                    <input type="date" class="form-control" name="date" id="date">
                 </div>
             </div>
             <div class="buttons mt-3">
