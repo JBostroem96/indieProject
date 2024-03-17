@@ -8,17 +8,19 @@
         <h2 class="mt-5 text-center fw-bold">Find race</h2>
         <form action="searchRace" class="form-inline">
                     <div class="search bg-primary text-white p-5 border rounded">
+                        <label class="mb-2" for="searchTerm">Search</label>
+                        <input type="text" name="searchTerm" id="searchTerm" required>
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" name="searchTerm" id="name">
+                            <input type="radio" name="searchType" id="name" value="name">
                         </div>
                         <div class="form-group">
                             <label for="length">Length</label>
-                            <input type="number" class="form-control" name="searchTerm" id="length">
+                            <input type="radio" name="searchType" id="length" value="length">
                         </div>
                         <div class="form-group">
                             <label for="date">Date</label>
-                            <input type="date" class="form-control" name="searchTerm" id="date">
+                            <input type="radio" name="searchType" id="date" value="date">
                         </div>
                     </div>
                 <div class="buttons mt-3">
