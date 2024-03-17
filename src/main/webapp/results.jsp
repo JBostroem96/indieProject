@@ -27,11 +27,11 @@
                 <td>${race.name}</td>
                 <td>${race.length}</td>
                 <td>${race.date}</td>
-                <td></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
 </body>
+    <%@include file="footer.jsp"%>
 </html>
