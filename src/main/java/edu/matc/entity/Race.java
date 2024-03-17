@@ -31,6 +31,12 @@ public class Race {
     public Race() {
     }
 
+    public Race(String name, String length, LocalDate date) {
+        this.name = name;
+        this.length = length;
+        this.date = date;
+    }
+
     /**
      * Gets name.
      *
