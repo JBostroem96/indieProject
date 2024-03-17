@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.time.LocalDate;
 
+/**
+ * This class' purpose is to be the Javabean for race
+ */
 @Entity
 @Table(name = "race")
 public class Race {
@@ -20,6 +23,7 @@ public class Race {
     private String length;
     @Column(name = "date")
     private LocalDate date;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -35,6 +39,24 @@ public class Race {
         this.name = name;
         this.length = length;
         this.date = date;
+    }
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -98,5 +120,18 @@ public class Race {
                 ", length='" + length + '\'' +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Race race = (Race) o;
+        return id == race.id && Objects.equals(name, race.name) && Objects.equals(length, race.length) && Objects.equals(date, race.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, length, date, id);
     }
 }

@@ -23,6 +23,10 @@ import java.util.List;
         urlPatterns = {"/addRace"}
 )
 
+/**
+ * This class' purpose is to add a race to the table and
+ * display the result for the user
+ */
 public class AddRace extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

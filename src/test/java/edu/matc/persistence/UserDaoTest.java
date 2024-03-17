@@ -108,8 +108,8 @@ class UserDaoTest {
     @Test
     void getByPropertyEqual() {
 
-        List<User> authors = userDao.findByPropertyEqual("firstName", "Joe");
-        assertEquals(1, authors.size());
-        assertEquals(1, authors.get(0).getId());
+        List<User> users = userDao.findByPropertyEqual("firstName", "Joe");
+        assertEquals(1, users.size());
+        assertEquals(1, users.get(0).getId());
     }
 }

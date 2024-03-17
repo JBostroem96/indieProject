@@ -18,10 +18,6 @@
                             <label for="length">Length</label>
                             <input type="radio" name="searchType" id="length" value="length">
                         </div>
-                        <div class="form-group">
-                            <label for="date">Date</label>
-                            <input type="radio" name="searchType" id="date" value="date">
-                        </div>
                     </div>
                 <div class="buttons mt-3">
                     <button type="submit" name="submit" class="btn btn-primary bg-success" value="search">Search</button>

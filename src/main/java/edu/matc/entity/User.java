@@ -1,14 +1,11 @@
 package edu.matc.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.time.LocalDate;
 
 /**
- * A class to represent a user.
- *
- * @author Jimmy Bostroem
+ * This class' purpose is to be the Javabean for User
  */
 @Entity
 @Table(name = "user")

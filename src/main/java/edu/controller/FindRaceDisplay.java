@@ -18,10 +18,13 @@ import java.io.IOException;
         urlPatterns = { "/FindRaceDisplay" }
 )
 
+/**
+ * This class' purpose is to forward to the searchRace JSP
+ */
 public class FindRaceDisplay extends HttpServlet {
 
     /**
-     * This method's purpose is to forward to the employee JSP
+     * This method's purpose is to forward to the searchRace JSP
      *@param  request               the request object that we forward
      *@param  response              the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet

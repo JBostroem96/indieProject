@@ -2,7 +2,6 @@ package edu.controller;
 
 import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +14,10 @@ import java.io.IOException;
         urlPatterns = {"/searchRace"}
 )
 
+/**
+ * This class' purpose is to set the attribute depending on
+ * what option the user selects
+ */
 public class SearchRace extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,14 +30,9 @@ public class SearchRace extends HttpServlet {
 
                 req.setAttribute("races", dao.findByPropertyEqual("length", req.getParameter("searchTerm")));
 
-            } else if (req.getParameter("searchType").equals("name"))  {
+            } else {
 
                 req.setAttribute("races", dao.findByPropertyEqual("name", req.getParameter("searchTerm")));
-
-            } else  {
-
-                req.setAttribute("races", dao.findByPropertyEqual("date", req.getParameter("searchTerm")));
-
             }
 
         }
