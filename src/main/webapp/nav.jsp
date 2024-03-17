@@ -11,7 +11,7 @@
     <ul class="bg-primary text-white d-flex justify-content-around fw-bold p-4 list-unstyled">
 
         <a class="text-white" href = "index.jsp">Home</a>
-        <li>Add Race</li>
+        <a class="text-white" href = "AddRaceDisplay">Add Race</a>
         <a class="text-white" href = "FindRaceDisplay">Races</a>
         <li>About</li>
         <li>Add Results</li>

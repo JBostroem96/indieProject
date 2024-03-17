@@ -13,11 +13,11 @@
                     <input type="text" class="form-control" name="name" id="name">
                 </div>
                 <div class="form-group">
-                    <label for="name">Length</label>
+                    <label for="length">Length</label>
                     <input type="number" class="form-control" name="length" id="length">
                 </div>
                 <div class="form-group">
-                    <label for="name">Date</label>
+                    <label for="date">Date</label>
                     <input type="date" class="form-control" name="date" id="date">
                 </div>
             </div>

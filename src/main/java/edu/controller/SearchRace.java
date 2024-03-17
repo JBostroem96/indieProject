@@ -1,6 +1,6 @@
 package edu.controller;
 
-import edu.matc.entity.User;
+import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -19,18 +19,18 @@ public class SearchRace extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao dao = new GenericDao(User.class);
+        GenericDao dao = new GenericDao(Race.class);
 
         if (req.getParameter("submit").equals("search")) {
 
-            //Code goes here
+            req.setAttribute("races", dao.findByPropertyEqual("name", req.getParameter("searchTerm")));
         }
         else  {
 
             req.setAttribute("races", dao.getAll());
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/searchResults.jsp");
         dispatcher.forward(req, resp);
     }
 }

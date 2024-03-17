@@ -11,7 +11,7 @@
 <html>
 <body>
 <div class="container-fluid">
-    <h1 class="text-center text-muted">You Added:</h1>
+    <h1 class="text-center text-muted">Results:</h1>
     <c:if test="${empty races}">
         <h2 class="text-center text-muted">No Races were found</h2>
     </c:if>
