@@ -24,3 +24,7 @@ Date: 03/15/24<br>
 Task: Worked on the project<br>
 Hours: 4.
 
+Date: 03/17/24<br>
+Task: Worked on the project and peer review<br>
+Hours: 8.
+
