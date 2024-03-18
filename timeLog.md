@@ -28,3 +28,7 @@ Date: 03/17/24<br>
 Task: Worked on the project and peer review<br>
 Hours: 8.
 
+Date: 03/18/24<br>
+Task: Did this week's activity, exercise and the week 8 self-evaluation<br>
+Hours: 4.
+
