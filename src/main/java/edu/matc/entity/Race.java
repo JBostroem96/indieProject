@@ -7,8 +7,10 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.time.LocalDate;
+import java.util.Set;
 
 /**
  * This class' purpose is to be the Javabean for race
@@ -24,10 +26,9 @@ public class Race {
     @Column(name = "date")
     private LocalDate date;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    private int id;
+    private long id;
+
+    private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
 
     /**
      * Instantiates a new Race.
@@ -46,7 +47,10 @@ public class Race {
      *
      * @return the id
      */
-    public int getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    public long getId() {
         return id;
     }
 
@@ -55,8 +59,32 @@ public class Race {
      *
      * @param id the id
      */
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    @OneToMany(mappedBy = "race")
+    public Set<TeamRaces> getTeamRaces() {
+        return teamRaces;
+    }
+
+    /**
+     * Sets team races.
+     *
+     * @param teamRaces the team races
+     */
+    public void setTeamRaces(Set<TeamRaces> teamRaces) {
+        this.teamRaces = teamRaces;
+    }
+
+    /**
+     * Add team race.
+     *
+     * @param teamRace the team race
+     */
+    public void addTeamRace(TeamRaces teamRace) {
+
+        this.teamRaces.add(teamRace);
     }
 
     /**

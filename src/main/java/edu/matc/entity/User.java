@@ -23,11 +23,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private int id;
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
-    @Column(name = "password")
-    private String password;
 
     /**
      * Instantiates a new User.
@@ -42,33 +37,12 @@ public class User {
      * @param lastName    the last name
      * @param userName    the username
      * @param email       the email
-     * @param dateOfBirth the date of birth
      */
-    public User(String firstName, String lastName, String userName, String email, String password, LocalDate dateOfBirth) {
+    public User(String firstName, String lastName, String userName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.userName = userName;
-        this.dateOfBirth = dateOfBirth;
-        this.password = password;
-    }
-
-    /**
-     * Gets password.
-     *
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Sets password.
-     *
-     * @param password the password
-     */
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**
@@ -96,24 +70,6 @@ public class User {
      */
     public String getFirstName() {
         return firstName;
-    }
-
-    /**
-     * Gets date of birth.
-     *
-     * @return the date of birth
-     */
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    /**
-     * Sets date of birth.
-     *
-     * @param dateOfBirth the date of birth
-     */
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     /**
@@ -191,7 +147,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", userName='" + userName + '\'' +
                 ", id=" + id +
-                ", dateOfBirth=" + dateOfBirth +
                 '}';
     }
 
@@ -200,11 +155,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(userName, user.userName) && Objects.equals(dateOfBirth, user.dateOfBirth);
+        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(userName, user.userName) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, userName, id, dateOfBirth);
+        return Objects.hash(firstName, lastName, userName, email, id);
     }
 }
