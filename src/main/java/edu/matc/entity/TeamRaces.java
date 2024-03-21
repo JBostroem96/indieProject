@@ -50,7 +50,7 @@ public class TeamRaces {
      * @return the team
      */
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "teams_id")
     public Teams getTeam() {
         return team;
     }
@@ -70,7 +70,7 @@ public class TeamRaces {
      * @return the race
      */
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "race_id")
     public Race getRace() {
         return Race;
     }

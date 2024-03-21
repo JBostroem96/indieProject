@@ -26,9 +26,9 @@ public class Race {
     @Column(name = "date")
     private LocalDate date;
 
-    private long id;
+    private int id;
 
-    private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
+    private Set<TeamRaces> teamRaces = new HashSet<>();
 
     /**
      * Instantiates a new Race.
@@ -50,7 +50,7 @@ public class Race {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -59,7 +59,7 @@ public class Race {
      *
      * @param id the id
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

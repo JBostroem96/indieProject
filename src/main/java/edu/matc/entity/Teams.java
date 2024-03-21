@@ -16,7 +16,7 @@ public class Teams {
 
     @Column(name = "name")
     private String name;
-    private long id;
+    private int id;
     private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
 
     /**
@@ -33,7 +33,7 @@ public class Teams {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -42,7 +42,7 @@ public class Teams {
      *
      * @param id the id
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -77,7 +77,7 @@ public class Teams {
      *
      * @return the team races
      */
-    @OneToMany(mappedBy = "teams")
+    @OneToMany(mappedBy = "team")
     public Set<TeamRaces> getTeamRaces() {
         return teamRaces;
     }
