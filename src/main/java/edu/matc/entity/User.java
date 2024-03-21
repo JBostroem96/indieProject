@@ -1,4 +1,5 @@
 package edu.matc.entity;
+import edu.matc.persistence.GenericDao;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import java.util.Objects;
