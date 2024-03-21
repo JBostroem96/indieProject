@@ -42,15 +42,13 @@ class UserDaoTest {
     @Test
     void update() {
 
-        String firstName = "Jon";
-        String lastName = "Janson";
+        String name = "Jon";
         String userName = "Jon";
 
         User userToUpdate = (User)userDao.getById(1);
 
         userToUpdate.setUserName(userName);
-        userToUpdate.setFirstName(firstName);
-        userToUpdate.setLastName(lastName);
+        userToUpdate.setName(name);
 
         userDao.update(userToUpdate);
 
@@ -63,7 +61,7 @@ class UserDaoTest {
      */
     @Test
     void insert() {
-        User user = new User("Anton", "Larson", "Anton", "example@hotmail.com");
+        User user = new User("Anton", "Anton", "example@hotmail.com");
         int insertedUserId = userDao.insert(user);
         assertNotEquals(0, insertedUserId);
         User insertedUser = (User)userDao.getById(insertedUserId);
@@ -108,7 +106,7 @@ class UserDaoTest {
     @Test
     void getByPropertyEqual() {
 
-        List<User> users = userDao.findByPropertyEqual("firstName", "Joe");
+        List<User> users = userDao.findByPropertyEqual("name", "Joe");
         assertEquals(1, users.size());
         assertEquals(1, users.get(0).getId());
     }

@@ -10,13 +10,11 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "user")
 public class User {
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
+
+    @Column(name = "name")
+    private String name;
     @Column(name = "user_name")
     private String userName;
-
     @Column(name = "email")
     private String email;
     @Id
@@ -33,18 +31,33 @@ public class User {
     /**
      * Instantiates a new User.
      *
-     * @param firstName   the first name
-     * @param lastName    the last name
-     * @param userName    the username
+     * @param userName the first name
+     * @param name the name
      * @param email       the email
      */
-    public User(String firstName, String lastName, String userName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String name, String userName, String email) {
+        this.name = name;
         this.email = email;
         this.userName = userName;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
     /**
      * Gets email.
      *
@@ -61,42 +74,6 @@ public class User {
      */
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    /**
-     * Gets first name.
-     *
-     * @return the first name
-     */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     * Sets first name.
-     *
-     * @param firstName the first name
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * Gets last name.
-     *
-     * @return the last name
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * Sets last name.
-     *
-     * @param lastName the last name
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     /**
@@ -142,8 +119,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", userName='" + userName + '\'' +
                 ", id=" + id +
@@ -155,11 +131,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(userName, user.userName) && Objects.equals(email, user.email);
+        return id == user.id && Objects.equals(name, user.name) && Objects.equals(userName, user.userName) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, userName, email, id);
+        return Objects.hash(name, userName, email, id);
     }
 }
