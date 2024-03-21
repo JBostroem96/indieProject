@@ -11,19 +11,29 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private int id;
-
     private String division;
 
-
-
+    /**
+     * Instantiates a new Category.
+     */
     public Category() {
 
     }
 
+    /**
+     * Gets division.
+     *
+     * @return the division
+     */
     public String getDivision() {
         return division;
     }
 
+    /**
+     * Sets division.
+     *
+     * @param division the division
+     */
     public void setDivision(String division) {
         this.division = division;
     }

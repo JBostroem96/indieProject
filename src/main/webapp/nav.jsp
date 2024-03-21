@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <nav>
-    <ul class="bg-primary text-white d-flex justify-content-around fw-bold p-4 list-unstyled">
+    <ul class="bg-danger text-white d-flex justify-content-around fw-bold p-5 list-unstyled">
 
         <a class="text-white" href = "index.jsp">Home</a>
         <a class="text-white" href = "AddRaceDisplay">Add Race</a>

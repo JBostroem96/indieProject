@@ -5,18 +5,18 @@
 <body>
 <div class="container bg-white">
     <div class="d-flex flex-column gap-5 fw-bold">
-        <h2 class="mt-5 text-center fw-bold">Find race</h2>
+        <h2 class="mt-5 text-center text-muted fw-bold"><em>Find race</em></h2>
         <form action="searchRace" class="form-inline">
-                    <div class="search bg-primary text-white p-5 border rounded">
+                    <div class="search bg-danger text-white p-5 border rounded">
                         <label class="mb-2" for="searchTerm">Search</label>
-                        <input type="search" name="searchTerm" id="searchTerm">
+                        <input  class="form-control" type="search" name="searchTerm" id="searchTerm">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="radio" name="searchType" id="name" value="name" checked>
+                            <input class="form-check-input" type="radio" name="searchType" id="name" value="name" checked>
                         </div>
                         <div class="form-group">
                             <label for="length">Length</label>
-                            <input type="radio" name="searchType" id="length" value="length">
+                            <input class="form-check-input" type="radio" name="searchType" id="length" value="length">
                         </div>
                     </div>
                 <div class="buttons mt-3">

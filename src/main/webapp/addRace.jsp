@@ -5,9 +5,9 @@
 <body>
 <div class="container bg-white">
     <div class="d-flex flex-column gap-5 fw-bold">
-        <h2 class="mt-5 text-center fw-bold">Add Race</h2>
+        <h2 class="mt-5 text-center text-muted fw-bold"><em>Add Race</em></h2>
         <form action="addRace" class="form-inline" method="POST">
-            <div class="search bg-primary text-white p-5 border rounded">
+            <div class="search bg-danger text-white p-5 border rounded">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="name" id="name">
