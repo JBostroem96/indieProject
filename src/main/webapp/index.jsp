@@ -6,7 +6,7 @@
 
     <c:choose>
         <c:when test="${empty userName}">
-            <h1 class="text-black fw-bold text-center"><em>Welcome! </em>
+            <h1 class="text-black fw-bold text-center"><em>Welcome!</em></h1>
             </c:when>
             <c:otherwise>
                 <h1 class="text-black fw-bold text-center"><em>Welcome ${userName}!</em></h1>
