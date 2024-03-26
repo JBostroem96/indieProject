@@ -55,13 +55,16 @@ public class User {
 
         GenericDao dao = new GenericDao(User.class);
         List<User> users = dao.getAll();
-        String userName = "";
+
+        String email = null;
+        String userName = null;
 
         for (User existingUsers : users) {
 
+            email = existingUsers.getEmail();
             userName = existingUsers.getUserName();
         }
-        if (!userName.equals(user.getUserName())) {
+        if (!email.equals(user.getEmail()) || !userName.equals(user.getUserName())) {
             dao.insert(user);
         }
         return user;
