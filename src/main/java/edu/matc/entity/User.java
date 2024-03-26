@@ -2,6 +2,9 @@ package edu.matc.entity;
 import edu.matc.persistence.GenericDao;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.time.LocalDate;
 
@@ -51,7 +54,16 @@ public class User {
     public User addUser(User user) {
 
         GenericDao dao = new GenericDao(User.class);
-        dao.insert(user);
+        List<User> users = dao.getAll();
+        String userName = "";
+
+        for (User existingUsers : users) {
+
+            userName = existingUsers.getUserName();
+        }
+        if (!userName.equals(user.getUserName())) {
+            dao.insert(user);
+        }
         return user;
     }
 
