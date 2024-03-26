@@ -8,16 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <nav>
-    <ul class="bg-danger text-white d-flex justify-content-around fw-bold p-5 list-unstyled">
+    <ul class="bg-danger text-black d-flex justify-content-around fw-bold p-5 list-unstyled">
 
-        <a class="text-white" href = "index.jsp">Home</a>
-        <a class="text-white" href = "AddRaceDisplay">Add Race</a>
-        <a class="text-white" href = "FindRaceDisplay">Races</a>
+        <a class="text-black" href = "index.jsp"><em>Home</em></a>
+        <a class="text-black" href = "AddRaceDisplay"><em>Add Race</em></a>
+        <a class="text-black" href = "FindRaceDisplay"><em>Races</em></a>
         <li>About</li>
         <li>Add Results</li>
         <c:choose>
             <c:when test="${empty userName}">
-                <a class="text-white" href = "logIn">Log in or Sign up</a>
+                <a class="text-black" href = "logIn"><em>Log in or Sign up</em></a>
             </c:when>
             <c:otherwise>
                 <p class="sm text-muted">User: ${userName}</p>

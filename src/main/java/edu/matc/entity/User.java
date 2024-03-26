@@ -42,6 +42,11 @@ public class User {
         this.userName = userName;
     }
 
+    public void addUser(String name, String userName, String email) {
+        GenericDao dao = new GenericDao(User.class);
+        dao.insert(new User(name, userName, email));
+    }
+
     /**
      * Gets name.
      *

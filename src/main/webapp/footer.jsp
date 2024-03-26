@@ -6,6 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<footer class="bg-danger text-white fw-bold p-5 text-center mt-5">
-    <p class="sm">Placeholder</p>
+<footer class="bg-danger text-black fw-bold p-5 text-center mt-5">
+    <p class="sm"><em>Placeholder</em></p>
 </footer>

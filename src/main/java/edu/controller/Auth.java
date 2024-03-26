@@ -7,6 +7,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.auth.*;
+import edu.matc.entity.Race;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.PropertiesLoader;
@@ -79,7 +80,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String authCode = req.getParameter("code");
-        String userName = null;
+        AddUser user = new AddUser();
 
         if (authCode == null) {
             //TODO forward to an error page or back to the login
@@ -87,8 +88,8 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
-                userName = validate(tokenResponse);
-                req.setAttribute("userName", userName);
+                User newUser = user.addUser(validate(tokenResponse));
+                req.setAttribute("userName", newUser.getUserName());
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 //TODO forward to an error page
@@ -97,6 +98,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                 //TODO forward to an error page
             }
         }
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.forward(req, resp);
 
@@ -134,7 +136,8 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      * @return
      * @throws IOException
      */
-    private String validate(TokenResponse tokenResponse) throws IOException {
+    private User validate(TokenResponse tokenResponse) throws IOException {
+
         ObjectMapper mapper = new ObjectMapper();
         CognitoTokenHeader tokenHeader = mapper.readValue(CognitoJWTParser.getHeader(tokenResponse.getIdToken()).toString(), CognitoTokenHeader.class);
 
@@ -173,9 +176,8 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
 
         String userName = jwt.getClaim("cognito:username").asString();
-        String name = jwt.getClaim("cognito:name").asString();
-        String email = jwt.getClaim("cognito:username").asString();
-
+        String email = jwt.getClaim("email").asString();
+        String name = jwt.getClaim("name").asString();
 
         logger.debug("here's the username: " + userName);
 
@@ -184,7 +186,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         // TODO decide what you want to do with the info!
         // for now, I'm just returning username for display back to the browser
 
-        return userName;
+        return new User(name, userName, email);
     }
 
     /** Create the auth url and use it to build the request.
