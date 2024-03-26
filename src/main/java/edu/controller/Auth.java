@@ -71,7 +71,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     }
 
     /**
-     * Gets the auth code from the request and exchanges it for a token containing user info.
+     * Gets the auth code from the request and exchanges it for a token containing user info, and add the user
      * @param req servlet request
      * @param resp servlet response
      * @throws ServletException
@@ -79,8 +79,9 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String authCode = req.getParameter("code");
-        AddUser user = new AddUser();
+        User newUser = new User();
 
         if (authCode == null) {
             //TODO forward to an error page or back to the login
@@ -88,8 +89,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
-                User newUser = user.addUser(validate(tokenResponse));
-                req.setAttribute("userName", newUser.getUserName());
+                req.setAttribute("userName", newUser.addUser(validate(tokenResponse)).getUserName());
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 //TODO forward to an error page

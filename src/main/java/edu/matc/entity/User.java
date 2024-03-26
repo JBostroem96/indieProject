@@ -42,9 +42,17 @@ public class User {
         this.userName = userName;
     }
 
-    public void addUser(String name, String userName, String email) {
+    /**
+     * Add user.
+     *
+     * @param user the user
+     * @return the user
+     */
+    public User addUser(User user) {
+
         GenericDao dao = new GenericDao(User.class);
-        dao.insert(new User(name, userName, email));
+        dao.insert(user);
+        return user;
     }
 
     /**
