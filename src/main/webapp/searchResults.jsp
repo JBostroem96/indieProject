@@ -29,7 +29,7 @@
                 <td>${race.date}</td>
                 <td>
                     <form action="editRace" class="form-inline" method="get">
-                        <button type="submit" name="searchTerm" class="btn btn-primary bg-success" value="${race.id}">Add Result</button>
+                        <button type="submit" name="searchTerm" class="btn btn-primary bg-success" value="${race.id}">Edit Race</button>
                     </form>
                 </td>
             </tr>
