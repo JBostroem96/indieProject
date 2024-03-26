@@ -3,7 +3,15 @@
 <%@include file="nav.jsp"%>
 <html>
 <body>
-    <h1 class="text-black fw-bold text-center"><em>Welcome!</em></h1>
+
+    <c:choose>
+        <c:when test="${empty userName}">
+            <h1 class="text-black fw-bold text-center"><em>Welcome! </em>
+            </c:when>
+            <c:otherwise>
+                <h1 class="text-black fw-bold text-center"><em>Welcome ${userName}!</em></h1>
+            </c:otherwise>
+        </c:choose>
 </body>
     <%@include file="footer.jsp"%>
 </html>
