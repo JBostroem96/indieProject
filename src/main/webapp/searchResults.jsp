@@ -27,7 +27,11 @@
                 <td>${race.name}</td>
                 <td>${race.length}</td>
                 <td>${race.date}</td>
-                <td></td>
+                <td>
+                    <form action="editRace" class="form-inline" method="get">
+                        <button type="submit" name="searchTerm" class="btn btn-primary bg-success" value="${race.id}">Add Result</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
