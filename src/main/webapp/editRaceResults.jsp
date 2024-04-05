@@ -19,13 +19,11 @@
         <th>Date</th>
         </thead>
         <tbody>
-
             <tr>
-                <td>${race}</td>
-
+                <td>${race.name}</td>
+                <td>${race.length}</td>
+                <td>${race.date}</td>
             </tr>
-
-
         </tbody>
     </table>
 </div>

@@ -24,7 +24,9 @@ public class EditRace extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(Race.class);
-        req.setAttribute("races", dao.findByPropertyEqual("id", req.getParameter("searchTerm")));
+        int raceId = Integer.parseInt(req.getParameter("id"));
+        Race retrievedRace = (Race)dao.getById(raceId);
+        req.setAttribute("race", retrievedRace);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editRace.jsp");
         dispatcher.forward(req, resp);

@@ -19,7 +19,6 @@
         <th>Date</th>
         </thead>
         <tbody>
-        <c:forEach var="race" items="${races}">
             <tr>
                 <td>${race.name}</td>
                 <td>${race.length}</td>
@@ -46,7 +45,7 @@
                 </div>
                 <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Edit Race</button>
             </form>
-            </c:forEach>
+
         </div>
     </div>
 </body>

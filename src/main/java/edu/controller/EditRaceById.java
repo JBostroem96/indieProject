@@ -30,11 +30,9 @@ public class EditRaceById extends HttpServlet {
         Race updatedRace = new Race(req.getParameter("name"),
                 req.getParameter("length"),
                 LocalDate.parse(req.getParameter(("date"))));
-       String string = req.getParameter("id");
-       int race = Integer.parseInt(string);
 
-        Race raceToUpdate = (Race)dao.getById(race);;
-
+       int raceId = Integer.parseInt(req.getParameter("id"));
+       Race raceToUpdate = (Race)dao.getById(raceId);
 
         raceToUpdate.setName(updatedRace.getName());
         raceToUpdate.setDate(updatedRace.getDate());
