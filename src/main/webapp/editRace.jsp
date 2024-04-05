@@ -25,17 +25,15 @@
                 <td>${race.length}</td>
                 <td>${race.date}</td>
             </tr>
-
-        </c:forEach>
         </tbody>
     </table>
         <div class="d-flex flex-column gap-5 fw-bold">
             <h2 class="mt-5 text-center text-muted fw-bold"><em>Edit Race</em></h2>
-            <form action="addRace" class="form-inline" method="POST">
+            <form action="editRaceById" class="form-inline" method="POST">
                 <div class="search bg-danger text-white p-5 border rounded">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input type="text" class="form-control" name="name" id="name" value="hello">
                     </div>
                     <div class="form-group">
                         <label for="length">Length</label>
@@ -46,11 +44,9 @@
                         <input type="date" class="form-control" name="date" id="date">
                     </div>
                 </div>
-                <div class="buttons mt-3">
-                    <button type="submit" name="submit" class="btn btn-primary bg-success" value="submit">Submit</button>
-                    <button type="reset" name="clear" class="btn btn-primary bg-danger" value="clear">Clear</button>
-                </div>
+                <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Edit Race</button>
             </form>
+            </c:forEach>
         </div>
     </div>
 </body>
