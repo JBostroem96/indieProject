@@ -40,3 +40,7 @@ Date: 03/21/24<br>
 Task: Worked on the project, created new Cognito and changed a table<br>
 Hours: 1.
 
+Date: 04/05/24<br>
+Task: Worked on the team project and project, added edit functionality to indie project<br>
+Hours: 4.
+
