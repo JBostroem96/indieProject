@@ -31,6 +31,10 @@
                     <form action="editRace" class="form-inline" method="get">
                         <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Edit Race</button>
                     </form>
+                    <br>
+                    <form action="deleteRace" class="form-inline" method="get">
+                        <button type="submit" name="id" class="btn btn-primary bg-danger" value="${race.id}">Delete Race</button>
+                    </form>
                 </td>
             </tr>
         </c:forEach>
