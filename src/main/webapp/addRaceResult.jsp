@@ -12,7 +12,6 @@
 <div class="container bg-white">
     <div class="d-flex flex-column gap-5 fw-bold">
         <h2 class="mt-5 text-center text-muted fw-bold"><em>Add Race Result</em></h2>
-        <form action="addRace" class="form-inline" method="POST">
             <table id="raceTable" class="display" cellspacing="=0" width="100%">
                 <thead>
                 <th>Name</th>
@@ -27,7 +26,7 @@
                         <td>${race.date}</td>
                         <td>
 
-                            <form action="addResult" class="form-inline" method="get">
+                            <form action="addRaceResult" class="form-inline" method="get">
                                 <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Add</button>
                             </form>
                         </td>
@@ -35,7 +34,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-        </form>
+
     </div>
 </div>
 </body>

@@ -12,7 +12,7 @@
 
         <a class="text-black" href = "index.jsp"><em>Home</em></a>
         <a class="text-black" href = "AddRaceDisplay"><em>Add Race</em></a>
-
+        <a class="text-black" href = "FindRaceDisplay"><em>Races</em></a>
         <li>About</li>
         <a class="text-black" href = "addRaceResultDisplay"><em>Add Race Result</em></a>
         <c:choose>
