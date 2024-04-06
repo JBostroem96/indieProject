@@ -12,9 +12,9 @@
 
         <a class="text-black" href = "index.jsp"><em>Home</em></a>
         <a class="text-black" href = "AddRaceDisplay"><em>Add Race</em></a>
-        <a class="text-black" href = "FindRaceDisplay"><em>Races</em></a>
+
         <li>About</li>
-        <li>Add Results</li>
+        <a class="text-black" href = "addRaceResultDisplay"><em>Add Race Result</em></a>
         <c:choose>
             <c:when test="${empty userName}">
                 <a class="text-black" href = "logIn"><em>Log in or Sign up</em></a>
