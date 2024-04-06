@@ -14,4 +14,5 @@
     <h1 class="text-center text-muted"><em>Your Deletion was successful!</em></h1>
 </div>
 </body>
+<%@include file="footer.jsp"%>
 </html>

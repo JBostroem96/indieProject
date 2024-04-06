@@ -28,7 +28,6 @@
     </table>
 
     <div class="d-flex flex-column gap-5 fw-bold">
-        <h2 class="mt-5 text-center text-muted fw-bold"><em>Edit Race</em></h2>
         <form action="deleteRaceById" class="form-inline" method="POST">
             <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Delete Race</button>
         </form>

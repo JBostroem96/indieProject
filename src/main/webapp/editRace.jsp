@@ -32,7 +32,7 @@
                 <div class="search bg-danger text-white p-5 border rounded">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" id="name" value="hello">
+                        <input type="text" class="form-control" name="name" id="name">
                     </div>
                     <div class="form-group">
                         <label for="length">Length</label>
