@@ -7,24 +7,27 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<nav>
-    <ul class="bg-danger text-black d-flex justify-content-around fw-bold p-5 list-unstyled">
-
-        <a class="text-black" href = "index.jsp"><em>Home</em></a>
-        <a class="text-black" href = "AddRaceDisplay"><em>Add Race</em></a>
-        <a class="text-black" href = "FindRaceDisplay"><em>Races</em></a>
-        <li>About</li>
-        <a class="text-black" href = "addRaceResultDisplay"><em>Add Race Result</em></a>
-        <a class="text-black" href = "addTeam.jsp"><em>Add a Team</em></a>
-        <c:choose>
-            <c:when test="${empty userName}">
-                <a class="text-black" href = "logIn"><em>Log in or Sign up</em></a>
-            </c:when>
-            <c:otherwise>
-                <p class="sm text-muted">User: ${userName}</p>
-            </c:otherwise>
-        </c:choose>
-
-    </ul>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark"
+     data-bs-theme="yellow">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.jsp">IndieProject</a>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false" aria-label="Toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="nav navbar-nav">
+                <li class="nav-item"><a class="nav-link" href = "index.jsp"><em>Home</em></a></li>
+                <li class="nav-item"><a class="nav-link" href = "AddRaceDisplay"><em>Add Race</em></a></li>
+                <li class="nav-item"><a class="nav-link" href = "FindRaceDisplay"><em>Races</em></a></li>
+                <li class="nav-item"><a class="nav-link" href = "FindRaceDisplay"><em>About</em></a></li>
+                <li class="nav-item"><a class="nav-link" href = "addRaceResultDisplay"><em>Add Race Result</em></a></li>
+                <li class="nav-item"><a class="nav-link" href = "addTeam.jsp"><em>Add a Team</em></a></li>
+            </ul>
+        </div>
+    </div>
 </nav>
 

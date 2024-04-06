@@ -17,12 +17,25 @@ public class Teams {
     @Column(name = "name")
     private String name;
     private int id;
+    @Column(name = "division")
+    private String division;
     private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
 
     /**
      * Instantiates a new Race.
      */
     public Teams() {
+    }
+
+    /**
+     * Instantiates a new Teams.
+     *
+     * @param name     the name
+     * @param division the division
+     */
+    public Teams(String name, String division) {
+        this.name = name;
+        this.division = division;
     }
 
     /**
@@ -70,6 +83,24 @@ public class Teams {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Gets division.
+     *
+     * @return the division
+     */
+    public String getDivision() {
+        return division;
+    }
+
+    /**
+     * Sets division.
+     *
+     * @param division the division
+     */
+    public void setDivision(String division) {
+        this.division = division;
     }
 
     /**

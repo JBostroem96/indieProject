@@ -7,7 +7,7 @@
     <div class="d-flex flex-column gap-5 fw-bold">
         <h2 class="mt-5 text-center text-muted fw-bold"><em>Find race</em></h2>
         <form action="searchRace" class="form-inline">
-                    <div class="search bg-danger text-white p-5 border rounded">
+                    <div class="search text-white p-5 border rounded" id="search_form">
                         <label class="mb-2" for="searchTerm">Search</label>
                         <input  class="form-control" type="search" name="searchTerm" id="searchTerm">
                         <div class="form-group">

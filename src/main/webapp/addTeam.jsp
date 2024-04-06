@@ -6,8 +6,8 @@
 <div class="container bg-white">
     <div class="d-flex flex-column gap-5 fw-bold">
         <h2 class="mt-5 text-center text-muted fw-bold"><em>Add a Team</em></h2>
-        <form action="addRace" class="form-inline" method="POST">
-            <div class="search bg-danger text-white p-5 border rounded">
+        <form action="addTeam" class="form-inline" method="POST">
+            <div class="search text-white p-5 border rounded" id="add_team_form">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="name" id="name">
