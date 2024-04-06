@@ -1,0 +1,35 @@
+<%@include file="head.jsp"%>
+<%@include file="taglib.jsp"%>
+<%@include file="nav.jsp"%>
+<html>
+<body>
+<div class="container bg-white">
+    <div class="d-flex flex-column gap-5 fw-bold">
+        <h2 class="mt-5 text-center text-muted fw-bold"><em>Add a Team</em></h2>
+        <form action="addRace" class="form-inline" method="POST">
+            <div class="search bg-danger text-white p-5 border rounded">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name">
+                </div>
+                <div class="form-group">
+                    <label class="fw-bold" for="division">Division (Category)</label>
+                    <select class="form-control" size="3" name="division" id="division">
+                        <option value="1">Solo Female</option>
+                        <option value="2">Female</option>
+                        <option value="3">Solo Male</option>
+                        <option value="4">Male</option>
+                        <option value="5+">Mixed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="buttons mt-3">
+                <button type="submit" name="submit" class="btn btn-primary bg-success" value="submit">Submit</button>
+                <button type="reset" name="clear" class="btn btn-primary bg-danger" value="clear">Clear</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<%@include file="footer.jsp"%>
+</html>

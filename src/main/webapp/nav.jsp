@@ -15,6 +15,7 @@
         <a class="text-black" href = "FindRaceDisplay"><em>Races</em></a>
         <li>About</li>
         <a class="text-black" href = "addRaceResultDisplay"><em>Add Race Result</em></a>
+        <a class="text-black" href = "addTeam.jsp"><em>Add a Team</em></a>
         <c:choose>
             <c:when test="${empty userName}">
                 <a class="text-black" href = "logIn"><em>Log in or Sign up</em></a>
