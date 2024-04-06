@@ -44,3 +44,7 @@ Date: 04/05/24<br>
 Task: Worked on the team project and project, added edit functionality to indie project<br>
 Hours: 4.
 
+Date: 04/06/24<br>
+Task: Worked on the indie project, reworking the style, added new JSPs and controllers, and more<br>
+Hours: 2-3.
+
