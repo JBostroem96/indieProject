@@ -4,8 +4,8 @@
 <html>
 <body>
 <div class="container bg-white">
+    <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Search Race</em></h1>
     <div class="d-flex flex-column gap-5 fw-bold">
-        <h2 class="mt-5 text-center text-muted fw-bold"><em>Find race</em></h2>
         <form action="searchRace" class="form-inline">
                     <div class="search text-white p-5 border rounded" id="search_form">
                         <label class="mb-2" for="searchTerm">Search</label>

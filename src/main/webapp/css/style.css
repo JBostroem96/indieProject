@@ -1,9 +1,9 @@
-.nav-link:hover, footer {
+.nav-link:hover {
 
     color: rgb(255, 246, 0);
 }
 
-#add_race_form, #add_team_form, #search_form {
+#add_race_form, #add_team_form, #search_form, footer {
 
     background-color: #252525;
     color: rgb(255, 246, 0);
@@ -14,3 +14,13 @@
     box-shadow: 1px 1px 1px 1px rgb(255, 246, 0);
 }
 
+#add_race_result {
+
+    background-color: #252525;
+    color: rgb(255, 246, 0);
+}
+
+h1, h2 {
+
+    font-family: "Lobster", sans-serif;
+}
