@@ -37,12 +37,10 @@ public class AddRace extends HttpServlet {
                 LocalDate.parse(req.getParameter(("date"))));
 
         dao.insert(race);
-        List<Race> races = new ArrayList<>();
-        races.add(race);
 
-        req.setAttribute("races", races);
+        req.setAttribute("race", race);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/addedRace.jsp");
         dispatcher.forward(req, resp);
     }
 }
