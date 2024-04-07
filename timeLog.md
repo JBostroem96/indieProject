@@ -46,5 +46,5 @@ Hours: 4.
 
 Date: 04/06/24<br>
 Task: Worked on the indie project, reworking the style, added new JSPs and controllers, and more<br>
-Hours: 2-3.
+Hours: 4.
 
