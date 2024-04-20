@@ -21,6 +21,15 @@ public class Category {
     }
 
     /**
+     * Instantiates a new Category.
+     *
+     * @param division the division
+     */
+    public Category(String division) {
+        this.division = division;
+    }
+
+    /**
      * Gets division.
      *
      * @return the division
