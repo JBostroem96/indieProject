@@ -25,7 +25,7 @@
                 <li class="nav-item"><a class="nav-link" href = "FindRaceDisplay"><em>Races</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "FindRaceDisplay"><em>About</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "addRaceResultDisplay"><em>Add Race Result</em></a></li>
-                <li class="nav-item"><a class="nav-link" href = "addTeam.jsp"><em>Add a Team</em></a></li>
+                <li class="nav-item"><a class="nav-link" href = "addTeamDisplay"><em>Add a Team</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "AddCategoryDisplay"><em>Add a Category</em></a></li>
                 <c:choose>
                     <c:when test="${empty userName}">

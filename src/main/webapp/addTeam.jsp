@@ -15,11 +15,9 @@
                 <div class="form-group">
                     <label class="fw-bold" for="division">Division (Category)</label>
                     <select class="form-control" size="3" name="division" id="division">
-                        <option value="1">Solo Female</option>
-                        <option value="2">Female</option>
-                        <option value="3">Solo Male</option>
-                        <option value="4">Male</option>
-                        <option value="5+">Mixed</option>
+                        <c:forEach var="category" items="${category}">
+                            <option value="${category.division}">${category.division}</option>
+                        </c:forEach>
                     </select>
                 </div>
             </div>
