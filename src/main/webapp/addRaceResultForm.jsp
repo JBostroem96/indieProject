@@ -32,10 +32,12 @@
                     <label for="length">Length</label>
                     <input type="number" class="form-control" name="length" id="length">
                 </div>
-                <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" name="date" id="date">
-                </div>
+                <label class="fw-bold" for="team">Team</label>
+                <select class="form-control" size="3" name="team" id="team">
+                    <c:forEach var="team" items="${team}">
+                        <option value="${team.name}">${team.name}</option>
+                    </c:forEach>
+                </select>
             </div>
             <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Add Results</button>
         </form>
