@@ -29,7 +29,7 @@ public class AddTeam extends HttpServlet {
 
         dao.insert(team);
 
-        req.setAttribute("teams", team);
+        req.setAttribute("team", team);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addTeamResult.jsp");
         dispatcher.forward(req, resp);

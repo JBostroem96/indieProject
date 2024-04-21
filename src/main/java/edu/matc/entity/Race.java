@@ -5,8 +5,7 @@ import jakarta.persistence.Table;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.time.LocalDate;

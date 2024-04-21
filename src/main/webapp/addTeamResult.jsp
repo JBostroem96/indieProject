@@ -12,7 +12,7 @@
 <body>
 <div class="container-fluid">
     <h1 class="text-center text-muted">You Added:</h1>
-    <c:if test="${empty teams}">
+    <c:if test="${empty team}">
         <h2 class="text-center text-muted">The team couldn't be added</h2>
     </c:if>
     <table id="teamTable" class="display" cellspacing="=0" width="100%">
@@ -23,7 +23,7 @@
         <tbody>
             <tr>
                 <td>${team.name}</td>
-                <td>${team.Division}</td>
+                <td>${team.division}</td>
             </tr>
         </tbody>
     </table>

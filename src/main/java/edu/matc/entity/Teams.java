@@ -10,15 +10,14 @@ import java.util.Set;
 /**
  * This class' purpose is to be the Javabean for race
  */
-@Entity
+@Entity(name = "Teams")
 @Table(name = "teams")
 public class Teams {
 
-    @Column(name = "name")
     private String name;
     private int id;
-    @Column(name = "division")
     private String division;
+    private Category category;
     private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
 
     /**
@@ -50,6 +49,16 @@ public class Teams {
         return id;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    public Category getCategory() {
+        return category;
+    }
+
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
     /**
      * Sets id.
      *
@@ -72,6 +81,7 @@ public class Teams {
      *
      * @return the name
      */
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -90,6 +100,7 @@ public class Teams {
      *
      * @return the division
      */
+    @Column(name = "division")
     public String getDivision() {
         return division;
     }

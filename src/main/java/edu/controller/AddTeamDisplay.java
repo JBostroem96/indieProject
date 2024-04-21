@@ -21,7 +21,7 @@ public class AddTeamDisplay extends HttpServlet {
 
     /**
      * This method's purpose is to forward to the race JSP
-     *@param  request               the request object that we forward
+     *@param  req               the request object that we forward
      *@param  response              the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
      *@exception IOException       if an error occurs with the IO operations
