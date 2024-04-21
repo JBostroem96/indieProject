@@ -24,10 +24,10 @@ public class AddRaceResult extends HttpServlet {
 
         GenericDao teamDao = new GenericDao(Teams.class);
 
-
         GenericDao dao = new GenericDao(Race.class);
         int raceId = Integer.parseInt(req.getParameter("id"));
         Race retrievedRace = (Race)dao.getById(raceId);
+
         req.setAttribute("race", retrievedRace);
         req.setAttribute("team", teamDao.getAll());
 

@@ -24,21 +24,6 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 
 
 
-    GenericDao dao = new GenericDao(Race.class);
-    Race updatedRace = new Race(req.getParameter("name"),
-            req.getParameter("length"),
-            LocalDate.parse(req.getParameter(("date"))));
-
-            int raceId = Integer.parseInt(req.getParameter("id"));
-            Race raceToUpdate = (Race)dao.getById(raceId);
-
-            raceToUpdate.setName(updatedRace.getName());
-            raceToUpdate.setDate(updatedRace.getDate());
-            raceToUpdate.setLength(updatedRace.getLength());
-            dao.update(raceToUpdate);
-
-            req.setAttribute("race", raceToUpdate);
-
             RequestDispatcher dispatcher = req.getRequestDispatcher("/editRaceResults.jsp");
             dispatcher.forward(req, resp);
         }
