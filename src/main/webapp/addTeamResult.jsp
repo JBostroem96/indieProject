@@ -5,7 +5,7 @@
 <script type="text/javascript" class="init">
 
     $(document).ready(function () {
-        $('#teamTable').DataTable();
+        $('#result').DataTable();
     });
 </script>
 <html>
@@ -15,7 +15,7 @@
     <c:if test="${empty team}">
         <h2 class="text-center text-muted">The team couldn't be added</h2>
     </c:if>
-    <table id="teamTable" class="display" cellspacing="=0" width="100%">
+    <table id="result" class="display" cellspacing="=0" width="100%">
         <thead>
         <th>Name</th>
         <th>Division</th>

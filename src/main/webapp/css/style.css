@@ -14,7 +14,7 @@
     box-shadow: 1px 1px 1px 1px rgb(255, 246, 0);
 }
 
-#add_race_result, #added_race {
+#result {
 
     background-color: #252525;
     color: rgb(255, 246, 0);

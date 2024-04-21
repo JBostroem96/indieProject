@@ -5,7 +5,7 @@
 <script type="text/javascript" class="init">
 
     $(document).ready(function () {
-        $('#categoryTable').DataTable();
+        $('#result').DataTable();
     });
 </script>
 <html>
@@ -15,7 +15,7 @@
     <c:if test="${empty category}">
         <h2 class="text-center text-muted">The category couldn't be added</h2>
     </c:if>
-    <table id="categoryTable" class="display" cellspacing="=0" width="100%">
+    <table id="result" class="display" cellspacing="=0" width="100%">
         <thead>
         <th>Category</th>
         </thead>

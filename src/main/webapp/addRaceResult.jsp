@@ -4,7 +4,7 @@
 <script type="text/javascript" class="init">
 
     $(document).ready(function () {
-        $('#addedRaceResult').DataTable();
+        $('#result').DataTable();
     });
 </script>
 <html>
@@ -12,7 +12,7 @@
 <div class="container bg-white">
         <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Add Race Result</em></h1>
             <div class="d-flex flex-column gap-5 fw-bold border rounded" id="add_race_result">
-            <table id="addedRaceResult" class="display" cellspacing="=0" width="100%">
+            <table id="result" class="display" cellspacing="=0" width="100%">
                 <thead>
                 <th>Name</th>
                 <th>Length</th>
