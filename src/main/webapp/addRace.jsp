@@ -13,7 +13,7 @@
                     <input type="text" class="form-control" name="name" id="name">
                 </div>
                 <div class="form-group">
-                    <label for="length">Length</label>
+                    <label for="length">Length (in hours)</label>
                     <input type="number" class="form-control" name="length" id="length">
                 </div>
                 <div class="form-group">

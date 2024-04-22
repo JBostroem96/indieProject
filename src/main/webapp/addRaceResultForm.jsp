@@ -22,20 +22,20 @@
         </table>
     </div>
     <div class="d-flex flex-column gap-5 fw-bold">
-        <form action="editRaceById" class="form-inline" method="POST">
+        <form action="addRaceResultById" class="form-inline" method="POST">
             <div class="search text-white p-5 border rounded" id="add_race_form">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" name="name" id="name">
+                    <label for="cp">CP</label>
+                    <input type="number" class="form-control" name="cp" id="cp">
                 </div>
                 <div class="form-group">
-                    <label for="length">Length</label>
-                    <input type="number" class="form-control" name="length" id="length">
+                    <label for="penalty">Late Penalty</label>
+                    <input type="number" class="form-control" name="penalty" id="penalty">
                 </div>
                 <label class="fw-bold" for="team">Team</label>
-                <select class="form-control" size="3" name="team" id="team">
-                    <c:forEach var="team" items="${team}">
-                        <option value="${team.name}">${team.name}</option>
+                <select class="form-control" size="3" id="team" name="team">
+                    <c:forEach var="teams" items="${team}">
+                        <option value="${teams.id}">${teams.id}</option>
                     </c:forEach>
                 </select>
             </div>

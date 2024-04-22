@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * This class' purpose is to be the Javabean for race
  */
-@Entity(name = "Teams")
+@Entity
 @Table(name = "teams")
 public class Teams {
 
@@ -24,6 +24,14 @@ public class Teams {
      * Instantiates a new Race.
      */
     public Teams() {
+    }
+
+    /**
+     * Instantiates a new Race.
+     */
+    public Teams(String name) {
+
+        this.name = name;
     }
 
     /**
@@ -43,8 +51,8 @@ public class Teams {
      * @return the id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
+    @GeneratedValue
+    @Column(name = "team_id")
     public int getId() {
         return id;
     }
@@ -68,13 +76,7 @@ public class Teams {
         this.id = id;
     }
 
-    /**
-     * Instantiates a new Race.
-     */
-    public Teams(String name) {
 
-        this.name = name;
-    }
 
     /**
      * Gets name.
@@ -147,6 +149,7 @@ public class Teams {
     public String toString() {
         return "Teams{" +
                 "name='" + name + '\'' +
+                ", division='" + division + '\'' +
                 '}';
     }
 

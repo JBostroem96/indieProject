@@ -6,21 +6,34 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.Objects;
 
 @Entity
-@Table(name = "teams_race")
+@Table(name = "team_races")
 public class TeamRaces {
 
-    private long id;
+    private int id;
+    private int total_time;
     private Teams team;
-    private Race Race;
-    private int divisionPlace;
+    private Race race;
+    private int division_place;
     private int cp;
     private int late_penalty;
-    private int overallPlace;
+    private int overall_place;
 
     /**
      * Instantiates a new Team races.
      */
     public TeamRaces() {
+    }
+
+    public TeamRaces(Teams team, Race race) {
+        this.team = team;
+        this.race = race;
+    }
+
+    public TeamRaces(Teams team, Race race, int cp, int late_penalty) {
+        this.team = team;
+        this.race = race;
+        this.cp = cp;
+        this.late_penalty = late_penalty;
     }
 
     /**
@@ -31,7 +44,8 @@ public class TeamRaces {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    public long getId() {
+    @Column(name = "teams_race_PK")
+    public int getId() {
         return id;
     }
 
@@ -40,7 +54,7 @@ public class TeamRaces {
      *
      * @param id the id
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,8 +63,9 @@ public class TeamRaces {
      *
      * @return the team
      */
+
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "teams_id")
+    @JoinColumn(name = "team_id")
     public Teams getTeam() {
         return team;
     }
@@ -69,10 +84,11 @@ public class TeamRaces {
      *
      * @return the race
      */
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "race_id")
     public Race getRace() {
-        return Race;
+        return race;
     }
 
     /**
@@ -81,7 +97,7 @@ public class TeamRaces {
      * @param race the race
      */
     public void setRace(Race race) {
-        Race = race;
+        this.race = race;
     }
 
     /**
@@ -89,8 +105,9 @@ public class TeamRaces {
      *
      * @return the division place
      */
-    public int getDivisionPlace() {
-        return divisionPlace;
+    @Column(name = "division_place")
+    public int getDivision_place() {
+        return division_place;
     }
 
     /**
@@ -98,8 +115,17 @@ public class TeamRaces {
      *
      * @param divisionPlace the division place
      */
-    public void setDivisionPlace(int divisionPlace) {
-        this.divisionPlace = divisionPlace;
+    public void setDivision_place(int divisionPlace) {
+        this.division_place = divisionPlace;
+    }
+
+    @Column(name = "total_time")
+    public int getTotal_time() {
+        return total_time;
+    }
+
+    public void setTotal_time(int total_time) {
+        this.total_time = total_time;
     }
 
     /**
@@ -107,6 +133,7 @@ public class TeamRaces {
      *
      * @return the cp
      */
+    @Column(name = "cp")
     public int getCp() {
         return cp;
     }
@@ -125,8 +152,9 @@ public class TeamRaces {
      *
      * @return the overall place
      */
-    public int getOverallPlace() {
-        return overallPlace;
+    @Column(name = "overall_place")
+    public int getOverall_place() {
+        return overall_place;
     }
 
     /**
@@ -134,8 +162,8 @@ public class TeamRaces {
      *
      * @param overallPlace the overall place
      */
-    public void setOverallPlace(int overallPlace) {
-        this.overallPlace = overallPlace;
+    public void setOverall_place(int overallPlace) {
+        this.overall_place = overallPlace;
     }
 
     /**
@@ -143,6 +171,7 @@ public class TeamRaces {
      *
      * @return the late penalty
      */
+    @Column(name = "late_penalty")
     public int getLate_penalty() {
         return late_penalty;
     }
@@ -159,13 +188,13 @@ public class TeamRaces {
     @Override
     public String toString() {
         return "TeamRaces{" +
-                "id=" + id +
+                "total_time=" + total_time +
                 ", team=" + team +
-                ", Race=" + Race +
-                ", divisionPlace=" + divisionPlace +
+                ", race=" + race +
+                ", division_place=" + division_place +
                 ", cp=" + cp +
                 ", late_penalty=" + late_penalty +
-                ", overallPlace=" + overallPlace +
+                ", overall_place=" + overall_place +
                 '}';
     }
 
@@ -174,11 +203,11 @@ public class TeamRaces {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TeamRaces teamRaces = (TeamRaces) o;
-        return id == teamRaces.id && divisionPlace == teamRaces.divisionPlace && cp == teamRaces.cp && late_penalty == teamRaces.late_penalty && overallPlace == teamRaces.overallPlace && Objects.equals(team, teamRaces.team) && Objects.equals(Race, teamRaces.Race);
+        return id == teamRaces.id && division_place == teamRaces.division_place && cp == teamRaces.cp && late_penalty == teamRaces.late_penalty && overall_place == teamRaces.overall_place && Objects.equals(team, teamRaces.team) && Objects.equals(race, teamRaces.race);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, team, Race, divisionPlace, cp, late_penalty, overallPlace);
+        return Objects.hash(id, team, race, division_place, cp, late_penalty, overall_place);
     }
 }

@@ -2,6 +2,7 @@
 package edu.controller;
 
 import edu.matc.entity.Race;
+import edu.matc.entity.TeamRaces;
 import edu.matc.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -20,9 +21,9 @@ public class AddRaceResultDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao dao = new GenericDao(Race.class);
+        GenericDao raceDao = new GenericDao(Race.class);
 
-        req.setAttribute("races", dao.getAll());
+        req.setAttribute("races", raceDao.getAll());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResult.jsp");
         dispatcher.forward(req, resp);

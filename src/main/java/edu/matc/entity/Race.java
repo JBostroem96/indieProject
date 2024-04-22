@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.time.LocalDate;
 import java.util.Set;
@@ -27,7 +28,7 @@ public class Race {
 
     private int id;
 
-    private Set<TeamRaces> teamRaces = new HashSet<>();
+    private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
 
     /**
      * Instantiates a new Race.
@@ -47,8 +48,8 @@ public class Race {
      * @return the id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
+    @GeneratedValue
+    @Column(name = "race_id")
     public int getId() {
         return id;
     }
@@ -140,6 +141,30 @@ public class Race {
         this.date = date;
     }
 
+    public void addTeam(Teams team) {
+
+        TeamRaces teamRaces = new TeamRaces(team, this);
+        this.teamRaces.add(teamRaces);
+        team.getTeamRaces().add(teamRaces);
+    }
+
+    public void removeTeam(Teams team) {
+
+        for (Iterator<TeamRaces> iterator = teamRaces.iterator();
+           iterator.hasNext();) {
+
+            TeamRaces teamRace = iterator.next();
+
+            if (teamRace.getTeam().equals(this) && teamRace.getRace().equals(team)) {
+
+              iterator.remove();
+              teamRace.getTeam().getTeamRaces().remove(teamRace);
+              teamRace.setTeam(null);
+              teamRace.setRace(null);
+
+            }
+        }
+    }
     @Override
     public String toString() {
         return "Race{" +

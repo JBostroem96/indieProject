@@ -29,6 +29,11 @@
                                 <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Add</button>
                             </form>
                         </td>
+                        <td>
+                            <form action="viewRaceResult" class="form-inline" method="get">
+                                <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">View</button>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
