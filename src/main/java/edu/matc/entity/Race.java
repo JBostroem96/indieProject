@@ -48,7 +48,8 @@ public class Race {
      * @return the id
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "race_id")
     public int getId() {
         return id;

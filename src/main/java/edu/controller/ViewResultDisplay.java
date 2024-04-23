@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(
 
@@ -40,7 +41,7 @@ public class ViewResultDisplay extends HttpServlet {
 
         TeamRaces record = (TeamRaces)teamRaces.getById(raceId);
 
-        req.setAttribute("team_race", record);
+        req.setAttribute("team_races", teamRaces.findByPropertyEqual("race_id", req.getParameter("id")));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
         dispatcher.forward(req, resp);

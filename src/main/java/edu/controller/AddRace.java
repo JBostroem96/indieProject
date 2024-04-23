@@ -34,7 +34,7 @@ public class AddRace extends HttpServlet {
         GenericDao dao = new GenericDao(Race.class);
         Race race = new Race(req.getParameter("name"),
                 req.getParameter("length"),
-                LocalDate.parse(req.getParameter(("date"))));
+                LocalDate.parse(req.getParameter("date")));
 
         dao.insert(race);
 

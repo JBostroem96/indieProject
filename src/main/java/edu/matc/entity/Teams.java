@@ -51,7 +51,8 @@ public class Teams {
      * @return the id
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "team_id")
     public int getId() {
         return id;

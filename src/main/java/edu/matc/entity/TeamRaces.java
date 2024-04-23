@@ -18,6 +18,9 @@ public class TeamRaces {
     private int late_penalty;
     private int overall_place;
 
+    private int race_id;
+
+
     /**
      * Instantiates a new Team races.
      */
@@ -58,6 +61,15 @@ public class TeamRaces {
         this.id = id;
     }
 
+    @Column(name = "race_id", insertable = false, updatable = false)
+    public int getRace_id() {
+        return race_id;
+    }
+
+    public void setRace_id(int race_id) {
+        this.race_id = race_id;
+    }
+
     /**
      * Gets team.
      *
@@ -84,6 +96,7 @@ public class TeamRaces {
      *
      * @return the race
      */
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "race_id")

@@ -14,6 +14,7 @@
     <div class="d-flex flex-column gap-5 fw-bold border rounded" id="add_race_result">
         <table id="addedRaceResult" class="display" cellspacing="=0" width="100%">
             <thead>
+            <th>Race id</th>
             <th>Overall Place</th>
             <th>Division Place</th>
             <th>Team Name</th>
@@ -24,15 +25,18 @@
             </thead>
             <tbody>
 
-                <tr>
-                    <td class="text-black">${team_race.overall_place}</td>
-                    <td class="text-black">${team_race.division_place}</td>
-                    <td class="text-black">${team_race.team.name}</td>
-                    <td class="text-black">${team_race.team.division}</td>
-                    <td class="text-black">${team_race.cp}</td>
-                    <td class="text-black">${team_race.late_penalty}</td>
-                    <td class="text-black">${team_race.total_time}</td>
-                </tr>
+                <c:forEach var="team_race" items="${team_races}">
+                    <tr>
+                        <td class="text-black">${team_race.race_id}</td>
+                        <td class="text-black">${team_race.overall_place}</td>
+                        <td class="text-black">${team_race.division_place}</td>
+                        <td class="text-black">${team_race.team.name}</td>
+                        <td class="text-black">${team_race.team.division}</td>
+                        <td class="text-black">${team_race.cp}</td>
+                        <td class="text-black">${team_race.late_penalty}</td>
+                        <td class="text-black">${team_race.total_time}</td>
+                    </tr>
+                </c:forEach>
 
             </tbody>
         </table>
