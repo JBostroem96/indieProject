@@ -35,7 +35,7 @@
                 <label class="fw-bold" for="team">Team</label>
                 <select class="form-control" size="3" id="team" name="team">
                     <c:forEach var="teams" items="${team}">
-                        <option value="${teams.id}">${teams.id}</option>
+                        <option value="${teams.id}">${teams.name}</option>
                     </c:forEach>
                 </select>
             </div>
