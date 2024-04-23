@@ -28,6 +28,14 @@ import java.util.List;
  * display the result for the user
  */
 public class AddRace extends HttpServlet {
+
+    /**
+     * This method's purpose is to add the race to the table
+     * @param req the request object
+     * @param resp the response object
+     * @throws ServletException the servlet exception object
+     * @throws IOException the io exception object
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

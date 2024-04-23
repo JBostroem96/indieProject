@@ -16,11 +16,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class' purpose is to add the team to our table
+ */
 @WebServlet(
         urlPatterns = {"/addTeam"}
 )
 public class AddTeam extends HttpServlet {
 
+    /**
+     * This method's purpose is to add the team to our table
+     * @param req the request object
+     * @param resp the response object
+     * @throws ServletException the servlet exception object
+     * @throws IOException the io exception object
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

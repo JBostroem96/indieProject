@@ -17,7 +17,6 @@ public class Category {
 
     private int category_id;
     private String division;
-
     private Set<Teams> teams;
 
     /**
@@ -36,7 +35,11 @@ public class Category {
         this.division = division;
     }
 
-
+    /**
+     * Gets category id.
+     *
+     * @return the category id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -44,6 +47,11 @@ public class Category {
         return category_id;
     }
 
+    /**
+     * Sets category id.
+     *
+     * @param id the id
+     */
     public void setCategory_id(int id) {
         this.category_id = id;
     }
@@ -58,6 +66,11 @@ public class Category {
         return teams;
     }
 
+    /**
+     * Sets teams.
+     *
+     * @param teams the teams
+     */
     public void setTeams(Set<Teams> teams) {
         this.teams = teams;
     }
@@ -82,6 +95,11 @@ public class Category {
         this.division = division;
     }
 
+    /**
+     * Add team.
+     *
+     * @param team the team
+     */
     public void addTeam(Teams team) {
 
         this.teams.add(team);

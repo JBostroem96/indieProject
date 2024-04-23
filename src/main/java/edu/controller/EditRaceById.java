@@ -11,18 +11,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(
-        urlPatterns = {"/editRaceById"}
-)
 
 /**
  * This class' purpose is to edit a race and
  * display the result for the user
  */
+@WebServlet(
+        urlPatterns = {"/editRaceById"}
+)
+
 public class EditRaceById extends HttpServlet {
+
+    /**
+     * This method's purpose is to edit the entry by id
+     *@param  req               the request object that we forward
+     *@param  resp           the response object that we forward
+     *@exception ServletException  if an error occurs with the Servlet
+     *@exception IOException       if an error occurs with the IO operations
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -37,6 +44,7 @@ public class EditRaceById extends HttpServlet {
         raceToUpdate.setName(updatedRace.getName());
         raceToUpdate.setDate(updatedRace.getDate());
         raceToUpdate.setLength(updatedRace.getLength());
+
         dao.update(raceToUpdate);
 
         req.setAttribute("race", raceToUpdate);

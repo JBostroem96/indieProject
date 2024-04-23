@@ -5,6 +5,9 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import java.util.Objects;
 
+/**
+ * The type Team races.
+ */
 @Entity
 @Table(name = "team_races")
 public class TeamRaces {
@@ -26,11 +29,26 @@ public class TeamRaces {
     public TeamRaces() {
     }
 
+    /**
+     * Instantiates a new Team races.
+     *
+     * @param team the team
+     * @param race the race
+     */
     public TeamRaces(Teams team, Race race) {
         this.team = team;
         this.race = race;
     }
 
+    /**
+     * Instantiates a new Team races.
+     *
+     * @param team         the team
+     * @param race         the race
+     * @param cp           the cp
+     * @param late_penalty the late penalty
+     * @param total_time   the total time
+     */
     public TeamRaces(Teams team, Race race, int cp, int late_penalty, int total_time) {
         this.team = team;
         this.race = race;
@@ -61,11 +79,21 @@ public class TeamRaces {
         this.id = id;
     }
 
+    /**
+     * Gets race id.
+     *
+     * @return the race id
+     */
     @Column(name = "race_id", insertable = false, updatable = false)
     public int getRace_id() {
         return race_id;
     }
 
+    /**
+     * Sets race id.
+     *
+     * @param race_id the race id
+     */
     public void setRace_id(int race_id) {
         this.race_id = race_id;
     }
@@ -90,13 +118,12 @@ public class TeamRaces {
         this.team = team;
     }
 
+
     /**
      * Gets race.
      *
      * @return the race
      */
-
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "race_id")
     public Race getRace() {
@@ -131,11 +158,21 @@ public class TeamRaces {
         this.division_place = divisionPlace;
     }
 
+    /**
+     * Gets total time.
+     *
+     * @return the total time
+     */
     @Column(name = "total_time")
     public int getTotal_time() {
         return total_time;
     }
 
+    /**
+     * Sets total time.
+     *
+     * @param total_time the total time
+     */
     public void setTotal_time(int total_time) {
         this.total_time = total_time;
     }

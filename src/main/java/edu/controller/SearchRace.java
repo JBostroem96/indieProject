@@ -10,15 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(
-        urlPatterns = {"/searchRace"}
-)
-
 /**
  * This class' purpose is to set the attribute depending on
  * what option the user selects
  */
+@WebServlet(
+        urlPatterns = {"/searchRace"}
+)
+
 public class SearchRace extends HttpServlet {
+
+    /**
+     * This method's purpose is to search for a race or all races
+     * @param req the request object
+     * @param resp the response object
+     * @throws ServletException the servlet exception object
+     * @throws IOException the io exception object
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -35,8 +43,7 @@ public class SearchRace extends HttpServlet {
                 req.setAttribute("races", dao.findByPropertyEqual("name", req.getParameter("searchTerm")));
             }
 
-        }
-        else  {
+        } else  {
 
             req.setAttribute("races", dao.getAll());
         }

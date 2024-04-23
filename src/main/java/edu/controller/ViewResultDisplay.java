@@ -2,9 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Race;
 import edu.matc.entity.TeamRaces;
-import edu.matc.entity.Teams;
 import edu.matc.persistence.GenericDao;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
+
+/**
+ * This class' purpose is to view the results of a race
+ */
 @WebServlet(
 
         name = "/viewRaceResult",
@@ -22,7 +23,7 @@ import java.util.List;
 public class ViewResultDisplay extends HttpServlet {
 
     /**
-     * This method's purpose is to forward to the searchRace JSP
+     * This method's purpose is to view the results of a race
      *@param  req               the request object that we forward
      *@param  resp            the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
@@ -34,7 +35,6 @@ public class ViewResultDisplay extends HttpServlet {
 
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamRaces = new GenericDao(TeamRaces.class);
-        //we probably need the team name, the cp, and the late_penalty
 
         int raceId = Integer.parseInt(req.getParameter("id"));
         Race race = (Race)raceDao.getById(raceId);

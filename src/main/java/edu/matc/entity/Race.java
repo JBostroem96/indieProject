@@ -25,9 +25,7 @@ public class Race {
     private String length;
     @Column(name = "date")
     private LocalDate date;
-
     private int id;
-
     private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
 
     /**
@@ -36,6 +34,13 @@ public class Race {
     public Race() {
     }
 
+    /**
+     * Instantiates a new Race.
+     *
+     * @param name   the name
+     * @param length the length
+     * @param date   the date
+     */
     public Race(String name, String length, LocalDate date) {
         this.name = name;
         this.length = length;
@@ -64,6 +69,11 @@ public class Race {
         this.id = id;
     }
 
+    /**
+     * Gets team races.
+     *
+     * @return the team races
+     */
     @OneToMany(mappedBy = "race")
     public Set<TeamRaces> getTeamRaces() {
         return teamRaces;
@@ -142,6 +152,11 @@ public class Race {
         this.date = date;
     }
 
+    /**
+     * Add team.
+     *
+     * @param team the team
+     */
     public void addTeam(Teams team) {
 
         TeamRaces teamRaces = new TeamRaces(team, this);
@@ -149,6 +164,11 @@ public class Race {
         team.getTeamRaces().add(teamRaces);
     }
 
+    /**
+     * Remove team.
+     *
+     * @param team the team
+     */
     public void removeTeam(Teams team) {
 
         for (Iterator<TeamRaces> iterator = teamRaces.iterator();

@@ -2,7 +2,6 @@ package edu.matc.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -21,19 +20,26 @@ public class Teams {
     private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
 
     /**
-     * Instantiates a new Race.
+     * Instantiates a new Team.
      */
     public Teams() {
     }
 
     /**
-     * Instantiates a new Race.
+     * Instantiates a new Team.
      */
     public Teams(String name) {
 
         this.name = name;
     }
 
+    /**
+     * Instantiates a new Teams.
+     *
+     * @param name     the name
+     * @param category the category
+     * @param division the division
+     */
     public Teams(String name, Category category, String division) {
         this.name = name;
         this.category = category;
@@ -64,6 +70,11 @@ public class Teams {
         return id;
     }
 
+    /**
+     * Gets category.
+     *
+     * @return the category
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     public Category getCategory() {
@@ -71,9 +82,15 @@ public class Teams {
     }
 
 
+    /**
+     * Sets category.
+     *
+     * @param category the category
+     */
     public void setCategory(Category category) {
         this.category = category;
     }
+
     /**
      * Sets id.
      *
@@ -82,8 +99,6 @@ public class Teams {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     /**
      * Gets name.

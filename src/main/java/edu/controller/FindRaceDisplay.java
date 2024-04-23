@@ -18,9 +18,6 @@ import java.io.IOException;
         urlPatterns = { "/FindRaceDisplay" }
 )
 
-/**
- * This class' purpose is to forward to the searchRace JSP
- */
 public class FindRaceDisplay extends HttpServlet {
 
     /**
