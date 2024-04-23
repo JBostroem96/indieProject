@@ -36,9 +36,9 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
     GenericDao teamRaces = new GenericDao(TeamRaces.class);
     //we probably need the team name, the cp, and the late_penalty
 
-
     int cp = Integer.parseInt(req.getParameter("cp"));
     int penalty = Integer.parseInt(req.getParameter("penalty"));
+    int totalTime = Integer.parseInt(req.getParameter("time"));
 
     int raceId = Integer.parseInt(req.getParameter("id"));
     Race race = (Race)raceDao.getById(raceId);
@@ -46,7 +46,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
     int teamId = Integer.parseInt(req.getParameter("team"));
     Teams team = (Teams)teamDao.getById(teamId);
 
-    TeamRaces teamRace = new TeamRaces(team, race, cp, penalty);
+    TeamRaces teamRace = new TeamRaces(team, race, cp, penalty, totalTime);
     teamRaces.insert(teamRace);
     req.setAttribute("teamRaceResult", teamRace);
 

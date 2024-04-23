@@ -17,7 +17,6 @@ public class TeamRaces {
     private int cp;
     private int late_penalty;
     private int overall_place;
-
     private int race_id;
 
 
@@ -32,11 +31,12 @@ public class TeamRaces {
         this.race = race;
     }
 
-    public TeamRaces(Teams team, Race race, int cp, int late_penalty) {
+    public TeamRaces(Teams team, Race race, int cp, int late_penalty, int total_time) {
         this.team = team;
         this.race = race;
         this.cp = cp;
         this.late_penalty = late_penalty;
+        this.total_time = total_time;
     }
 
     /**
@@ -75,7 +75,6 @@ public class TeamRaces {
      *
      * @return the team
      */
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
     public Teams getTeam() {
