@@ -1,5 +1,6 @@
 package edu.controller;
 
+import edu.matc.entity.Category;
 import edu.matc.entity.Race;
 import edu.matc.entity.Teams;
 import edu.matc.persistence.GenericDao;
@@ -23,11 +24,17 @@ public class AddTeam extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao dao = new GenericDao(Teams.class);
-        Teams team = new Teams(req.getParameter("name"),
-                req.getParameter("division"));
+        GenericDao teamDao = new GenericDao(Teams.class);
+        GenericDao categoryDao = new GenericDao(Category.class);
 
-        dao.insert(team);
+        String name = req.getParameter("name");
+
+        int categoryId = Integer.parseInt(req.getParameter("id"));
+        Category category = (Category)categoryDao.getById(categoryId);
+
+        Teams team = new Teams(name, category, category.getDivision());
+
+        teamDao.insert(team);
 
         req.setAttribute("team", team);
 

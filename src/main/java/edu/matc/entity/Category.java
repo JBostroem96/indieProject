@@ -16,7 +16,6 @@ import java.util.Set;
 public class Category {
 
     private int category_id;
-
     private String division;
 
     private Set<Teams> teams;
@@ -59,14 +58,10 @@ public class Category {
         return teams;
     }
 
-    /**
-     * Sets teams.
-     *
-     * @param teams the teams
-     */
     public void setTeams(Set<Teams> teams) {
         this.teams = teams;
     }
+
 
     /**
      * Gets division.

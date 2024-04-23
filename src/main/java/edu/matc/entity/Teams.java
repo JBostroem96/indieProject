@@ -34,6 +34,12 @@ public class Teams {
         this.name = name;
     }
 
+    public Teams(String name, Category category, String division) {
+        this.name = name;
+        this.category = category;
+        this.division = division;
+    }
+
     /**
      * Instantiates a new Teams.
      *
@@ -58,8 +64,8 @@ public class Teams {
         return id;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
     public Category getCategory() {
         return category;
     }
