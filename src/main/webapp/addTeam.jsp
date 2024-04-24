@@ -11,6 +11,9 @@
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="name" id="name">
+                    <c:if test="${!empty message}">
+                        <p class="text-danger small">${message}</p>
+                    </c:if>
                 </div>
                 <div class="form-group">
                     <label class="fw-bold" for="division">Division (Category)</label>

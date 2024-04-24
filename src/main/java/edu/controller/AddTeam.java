@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Category;
 import edu.matc.entity.Race;
+import edu.matc.entity.TeamRaces;
 import edu.matc.entity.Teams;
 import edu.matc.persistence.GenericDao;
 
@@ -37,18 +38,35 @@ public class AddTeam extends HttpServlet {
         GenericDao teamDao = new GenericDao(Teams.class);
         GenericDao categoryDao = new GenericDao(Category.class);
 
+        List<Teams> teamNames = teamDao.getAll();
+        List<String> existingNames = new ArrayList<>();
+        
         String name = req.getParameter("name");
 
-        int categoryId = Integer.parseInt(req.getParameter("id"));
-        Category category = (Category)categoryDao.getById(categoryId);
+        RequestDispatcher dispatcher;
 
-        Teams team = new Teams(name, category, category.getDivision());
+        for (Teams teamName : teamNames) {
 
-        teamDao.insert(team);
+            existingNames.add(teamName.getName());
+        }
+        if (!existingNames.contains(name)) {
 
-        req.setAttribute("team", team);
+            int categoryId = Integer.parseInt(req.getParameter("id"));
+            Category category = (Category)categoryDao.getById(categoryId);
+            Teams team = new Teams(name, category, category.getDivision());
+            teamDao.insert(team);
+            req.setAttribute("team", team);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addTeamResult.jsp");
+            dispatcher = req.getRequestDispatcher("/addTeamResult.jsp");
+
+        } else {
+
+            String message = "That team already exists. Please Enter something else.";
+            req.setAttribute("message", message);
+            req.setAttribute("category", categoryDao.getAll());
+            dispatcher = req.getRequestDispatcher("/addTeam.jsp");
+        }
+
         dispatcher.forward(req, resp);
     }
 }

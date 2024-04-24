@@ -11,23 +11,31 @@
 <html>
 <body>
 <div class="container-fluid">
-    <h1 class="text-center text-muted">You Added:</h1>
-    <c:if test="${empty team}">
-        <h2 class="text-center text-muted">The team couldn't be added</h2>
-    </c:if>
-    <table id="result" class="display" cellspacing="=0" width="100%">
-        <thead>
-        <th>Name</th>
-        <th>Division</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>${team.name}</td>
-                <td>${team.division}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-</body>
-<%@include file="footer.jsp"%>
-</html>
+    <c:choose>
+        <c:when test="${!empty message}">
+            <h1 class="text-center text-muted">${message}</h1>
+            <%@include file="footer.jsp"%>
+            </body>
+            </html>
+        </c:when>
+        <c:otherwise>
+            <h1 class="text-center text-muted">You Added:</h1>
+            <table id="result" class="display" cellspacing="=0" width="100%">
+                <thead>
+                <th>Name</th>
+                <th>Division</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>${team.name}</td>
+                    <td>${team.division}</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            </body>
+            <%@include file="footer.jsp"%>
+            </html>
+        </c:otherwise>
+    </c:choose>
+
