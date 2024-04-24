@@ -48,7 +48,7 @@ public class AddRace extends HttpServlet {
 
         req.setAttribute("race", race);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addedRace.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRace.jsp");
         dispatcher.forward(req, resp);
     }
 }

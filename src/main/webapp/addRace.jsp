@@ -5,6 +5,9 @@
 <body>
 <div class="container bg-white">
     <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Add Race</em></h1>
+    <c:if test="${!empty race}">
+        <h2 class="text-success text-center">You have successfully added a new race!</h2>
+    </c:if>
     <div class="d-flex flex-column gap-5 fw-bold">
         <form action="addRace" class="form-inline" method="POST">
             <div class="search text-white p-5 border rounded" id="add_race_form">
