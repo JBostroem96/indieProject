@@ -26,18 +26,18 @@
             <div class="search text-white p-5 border rounded" id="add_race_form">
                 <div class="form-group">
                     <label for="time">Total Time (in minutes)</label>
-                    <input type="number" class="form-control" name="time" id="time">
+                    <input type="number" class="form-control" name="time" id="time" required>
                 </div>
                 <div class="form-group">
                     <label for="cp">CP</label>
-                    <input type="number" class="form-control" name="cp" id="cp">
+                    <input type="number" class="form-control" name="cp" id="cp" required>
                 </div>
                 <div class="form-group">
                     <label for="penalty">Late Penalty</label>
-                    <input type="number" class="form-control" name="penalty" id="penalty">
+                    <input type="number" class="form-control" name="penalty" id="penalty" required>
                 </div>
                 <label class="fw-bold" for="team">Team</label>
-                <select class="form-control" size="3" id="team" name="team">
+                <select class="form-control" size="3" id="team" name="team" required>
                     <c:forEach var="teams" items="${team}">
                         <option value="${teams.id}">${teams.name}</option>
                     </c:forEach>

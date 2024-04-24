@@ -26,15 +26,15 @@
                 <div class="search text-white p-5 border rounded" id="add_race_form">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input type="text" class="form-control" name="name" id="name" required>
                     </div>
                     <div class="form-group">
                         <label for="length">Length</label>
-                        <input type="number" class="form-control" name="length" id="length">
+                        <input type="number" class="form-control" name="length" id="length" required>
                     </div>
                     <div class="form-group">
                         <label for="date">Date</label>
-                        <input type="date" class="form-control" name="date" id="date">
+                        <input type="date" class="form-control" name="date" id="date" required>
                     </div>
                 </div>
                 <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Edit Race</button>
