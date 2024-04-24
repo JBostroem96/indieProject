@@ -2,7 +2,6 @@ package edu.controller;
 
 import edu.matc.entity.Race;
 import edu.matc.entity.TeamRaces;
-import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,52 +34,57 @@ public class ViewResultDisplay extends HttpServlet {
                       HttpServletResponse resp)
             throws ServletException, IOException {
 
-        int overall_place = 0;
-        int division_place = 0;
+        int overallPlace = 0;
+        int maleDivision = 0;
+        int femaleDivision = 0;
+        int soloFemaleDivision = 0;
+        int soloMaleDivision = 0;
+        int mixedDivision = 0;
+
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamRaceDao = new GenericDao(TeamRaces.class);
 
-
         List<TeamRaces> teamRaces = teamRaceDao.findByPropertyEqual("race_id", req.getParameter("id"));
-        Map<String, Integer> division_placements = new TreeMap<>();
 
         //using lambda expression to sort by the total time
         teamRaces.sort(Comparator.comparingDouble(TeamRaces::getTotal_time));
-
-        int maleCounter = 0;
-        int femaleCounter = 0;
-        int soloFemaleCounter = 0;
-        int soloMaleCounter = 0;
 
         for (TeamRaces entry : teamRaces) {
 
             switch (entry.getTeam().getDivision()) {
                 case "Male":
 
-                    maleCounter++;
-                    entry.setDivision_place(maleCounter);
+                    maleDivision++;
+                    entry.setDivision_place(maleDivision);
 
                     break;
                 case "Female":
 
-                    femaleCounter++;
-                    entry.setDivision_place(femaleCounter);
+                    femaleDivision++;
+                    entry.setDivision_place(femaleDivision);
 
                     break;
                 case "Solo Male":
 
-                    soloMaleCounter++;
-                    entry.setDivision_place(soloMaleCounter);
+                    soloMaleDivision++;
+                    entry.setDivision_place(soloMaleDivision);
 
                     break;
                 case "Solo Female":
 
-                    soloFemaleCounter++;
-                    entry.setDivision_place(soloFemaleCounter);
+                    soloFemaleDivision++;
+                    entry.setDivision_place(soloFemaleDivision);
+
+                    break;
+                case "Mixed":
+
+                    mixedDivision++;
+                    entry.setDivision_place(mixedDivision);
+
                     break;
             }
-            overall_place++;
-            entry.setOverall_place(overall_place);
+            overallPlace++;
+            entry.setOverall_place(overallPlace);
         }
 
         int raceId = Integer.parseInt(req.getParameter("id"));
@@ -88,12 +92,9 @@ public class ViewResultDisplay extends HttpServlet {
 
         TeamRaces record = (TeamRaces)teamRaceDao.getById(raceId);
 
-
         req.setAttribute("team_races", teamRaces);
-        req.setAttribute("division_placement", division_placements);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
         dispatcher.forward(req, resp);
     }
 }
-
