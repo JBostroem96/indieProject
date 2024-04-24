@@ -13,7 +13,7 @@ import java.util.Objects;
 public class TeamRaces {
 
     private int id;
-    private int total_time;
+    private double total_time;
     private Teams team;
     private Race race;
     private int division_place;
@@ -164,7 +164,7 @@ public class TeamRaces {
      * @return the total time
      */
     @Column(name = "total_time")
-    public int getTotal_time() {
+    public double getTotal_time() {
         return total_time;
     }
 
@@ -173,7 +173,7 @@ public class TeamRaces {
      *
      * @param total_time the total time
      */
-    public void setTotal_time(int total_time) {
+    public void setTotal_time(double total_time) {
         this.total_time = total_time;
     }
 
