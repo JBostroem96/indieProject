@@ -39,31 +39,32 @@ public class AddTeam extends HttpServlet {
         GenericDao categoryDao = new GenericDao(Category.class);
 
         List<Teams> teamNames = teamDao.getAll();
-        String name = req.getParameter("name");
+        List<String> existingNames = new ArrayList<>();
 
-        RequestDispatcher dispatcher = null;
+        String name = req.getParameter("name");
 
         for (Teams teamName : teamNames) {
 
-            if (teamName.getName().equals(name)) {
-
-                String message = "That team already exists. Please Enter something else.";
-                req.setAttribute("message", message);
-                req.setAttribute("category", categoryDao.getAll());
-                dispatcher = req.getRequestDispatcher("/addTeam.jsp");
-                dispatcher.forward(req, resp);
-            }
+            existingNames.add(teamName.getName());
         }
+        if (existingNames.contains(name)) {
 
-        int categoryId = Integer.parseInt(req.getParameter("id"));
-        Category category = (Category)categoryDao.getById(categoryId);
-        Teams team = new Teams(name, category, category.getDivision());
-        teamDao.insert(team);
-        req.setAttribute("team", team);
-        dispatcher = req.getRequestDispatcher("/addTeamResult.jsp");
-        dispatcher.forward(req, resp);
+            String message = "That team already exists. Please Enter something else.";
+            req.setAttribute("message", message);
 
+        } else {
+
+            int categoryId = Integer.parseInt(req.getParameter("id"));
+            Category category = (Category)categoryDao.getById(categoryId);
+            Teams team = new Teams(name, category, category.getDivision());
+            teamDao.insert(team);
+            req.setAttribute("team", team);
         }
+        req.setAttribute("category", categoryDao.getAll());
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/addTeam.jsp");
+
     }
+}
+
 
 
