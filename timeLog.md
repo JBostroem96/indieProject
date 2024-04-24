@@ -52,11 +52,21 @@ Date: 04/20/24<br>
 Task: Worked on the indie project, added the functionality to add a category, and more<br>
 Hours: 5.
 
-Date: 04/22/24<br>
+Date: 04/21/24<br>
 Task: Worked on the indie project, updated project plan, among other things<br>
 Hours: 2.
 
-Date: 04/23/24<br>
+Date: 04/22/24<br>
 Task: Worked on the indie project, mostly focusing on adding results and the many-to-many relationship<br>
 Hours: 7.
+
+Date: 04/23/24<br>
+Task: Worked on the indie project, implementing the logic to the results<br>
+Hours: 6.
+
+Date: 04/24/24<br>
+Task: Worked on the indie project, kept working on the results and some exception handling<br>
+Hours: 6.
+
+
 
