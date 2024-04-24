@@ -62,6 +62,7 @@ public class AddTeam extends HttpServlet {
         }
         req.setAttribute("category", categoryDao.getAll());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addTeam.jsp");
+        dispatcher.forward(req, resp);
 
     }
 }

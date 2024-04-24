@@ -5,6 +5,9 @@
 <body>
 <div class="container bg-white">
     <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>You are adding results to this race:</em></h1>
+    <c:if test="${!empty teamRaceResult}">
+        <h2 class="text-success text-center">You have successfully added a new team!</h2>
+    </c:if>
     <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
         <table id="addRace" class="display" cellspacing="=0" width="100%">
             <thead>
@@ -42,6 +45,9 @@
                         <option value="${teams.id}">${teams.name}</option>
                     </c:forEach>
                 </select>
+                <c:if test="${!empty message}">
+                    <p class="text-danger small">${message}</p>
+                </c:if>
             </div>
             <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Add Results</button>
         </form>

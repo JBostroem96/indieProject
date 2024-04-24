@@ -1,5 +1,6 @@
 package edu.controller;
 
+import edu.matc.entity.Category;
 import edu.matc.entity.Race;
 import edu.matc.entity.TeamRaces;
 import edu.matc.entity.Teams;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,24 +38,40 @@ public class AddRaceResultById extends HttpServlet {
 
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamDao = new GenericDao(Teams.class);
-        GenericDao teamRaces = new GenericDao(TeamRaces.class);
+        GenericDao teamRaceDao = new GenericDao(TeamRaces.class);
 
-        int cp = Integer.parseInt(req.getParameter("cp"));
-        int penalty = Integer.parseInt(req.getParameter("penalty"));
-        int totalTime = Integer.parseInt(req.getParameter("time"));
+        List<TeamRaces> teamNames = teamRaceDao.getAll();
+        List<String> existingNames = new ArrayList<>();
 
-        int raceId = Integer.parseInt(req.getParameter("id"));
-        Race race = (Race)raceDao.getById(raceId);
+        String name = req.getParameter("team");
 
-        int teamId = Integer.parseInt(req.getParameter("team"));
-        Teams team = (Teams)teamDao.getById(teamId);
+        for (TeamRaces teamName : teamNames) {
 
-        TeamRaces teamRace = new TeamRaces(team, race, cp, penalty, totalTime);
-        teamRaces.insert(teamRace);
+            existingNames.add(teamName.getTeam().getName());
+        }
+        if (existingNames.contains(name)) {
 
-        req.setAttribute("teamRaceResult", teamRace);
+            String message = "That team already exists. Please Enter something else.";
+            req.setAttribute("message", message);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addedRaceResult.jsp");
+        } else {
+
+            int cp = Integer.parseInt(req.getParameter("cp"));
+            int penalty = Integer.parseInt(req.getParameter("penalty"));
+            int totalTime = Integer.parseInt(req.getParameter("time"));
+
+            int raceId = Integer.parseInt(req.getParameter("id"));
+            Race race = (Race)raceDao.getById(raceId);
+
+            int teamId = Integer.parseInt(req.getParameter("team"));
+            Teams team = (Teams)teamDao.getById(teamId);
+            TeamRaces teamRace = new TeamRaces(team, race, cp, penalty, totalTime);
+            teamRaceDao.insert(teamRace);
+
+            req.setAttribute("teamRaceResult", teamRace);
+        }
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
         dispatcher.forward(req, resp);
     }
 }
