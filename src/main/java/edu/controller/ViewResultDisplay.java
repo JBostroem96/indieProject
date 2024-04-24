@@ -87,11 +87,6 @@ public class ViewResultDisplay extends HttpServlet {
             entry.setOverall_place(overallPlace);
         }
 
-        int raceId = Integer.parseInt(req.getParameter("id"));
-        Race race = (Race)raceDao.getById(raceId);
-
-        TeamRaces record = (TeamRaces)teamRaceDao.getById(raceId);
-
         req.setAttribute("team_races", teamRaces);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
