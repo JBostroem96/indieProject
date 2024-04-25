@@ -1,6 +1,9 @@
 package edu.matc.testUtil;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -21,6 +24,7 @@ public class Database implements PropertiesLoader {
 
     // create an object of the class Database
     private static Database instance = new Database();
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     private Properties properties;
     private Connection connection;
@@ -76,7 +80,7 @@ public class Database implements PropertiesLoader {
             try {
                 connection.close();
             } catch (SQLException e) {
-                System.out.println("Cannot close connection" + e);
+                logger.error("Cannot close connection", e);
             }
         }
 
@@ -111,13 +115,10 @@ public class Database implements PropertiesLoader {
                     sql += inputValue;
             }
 
-        } catch (SQLException se) {
-            System.out.println("SQL Exception" + se);
         } catch (Exception e) {
-            System.out.println("Exception" + e);
+            logger.error("Cannot close connection", e);
         } finally {
             disconnect();
         }
-
     }
 }
