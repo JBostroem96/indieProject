@@ -1,31 +1,28 @@
 package edu.matc.persistence;
-import com.mysql.cj.Session;
-import edu.matc.entity.Race;
+
+import edu.matc.entity.Category;
 import edu.matc.entity.TeamRaces;
 import edu.matc.entity.Teams;
-import edu.matc.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * This class' purpose is to test the functionality of this application
- */
-class TeamRacesTest {
+public class TeamDaoTest {
 
     private GenericDao teamDao;
     private GenericDao teamRaceDao;
 
-    private GenericDao raceDao;
     /**
      * Triggers before everything else
      */
     @BeforeEach
     void setUp() {
 
-
+        Database database = Database.getInstance();
+        database.runSQL("clean_DB.sql");
+        teamDao = new GenericDao(Teams.class);
     }
 
 
@@ -35,7 +32,9 @@ class TeamRacesTest {
     @Test
     void getById() {
 
-
+        Teams retrievedTeam = (Teams)teamDao.getById(1);
+        assertNotNull(retrievedTeam);
+        assertEquals(teamDao.getById(1), retrievedTeam);
     }
 
     /**
@@ -44,7 +43,17 @@ class TeamRacesTest {
     @Test
     void update() {
 
+        Teams team = new Teams("test", "test");
 
+        Teams teamToUpdate = (Teams)teamDao.getById(1);
+
+        teamToUpdate.setName(team.getName());
+        teamToUpdate.setName(team.getDivision());
+
+        teamDao.update(teamToUpdate);
+
+        Teams updatedTeam = (Teams)teamDao.getById(1);
+        assertEquals(teamToUpdate , updatedTeam);
     }
 
     /**
@@ -52,7 +61,11 @@ class TeamRacesTest {
      */
     @Test
     void insert() {
-
+        Teams team = new Teams("test", "test");
+        int insertedTeamId = teamDao.insert(team);
+        assertNotEquals(0, insertedTeamId);
+        Teams insertedTeam = (Teams)teamDao.getById(insertedTeamId);
+        assertEquals(team, insertedTeam);
     }
 
     /**
@@ -79,7 +92,8 @@ class TeamRacesTest {
     @Test
     void getAll() {
 
-
+        List<Teams> races = teamDao.getAll();
+        assertEquals(32, races.size());
     }
 
     /**
@@ -90,6 +104,9 @@ class TeamRacesTest {
     @Test
     void getByPropertyEqual() {
 
-
+        List<Teams> teams = teamDao.findByPropertyEqual("name", "Bear");
+        assertEquals(1, teams.size());
+        assertEquals(5, teams.get(0).getId());
     }
 }
+

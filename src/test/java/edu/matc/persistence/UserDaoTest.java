@@ -20,7 +20,7 @@ class UserDaoTest {
     void setUp() {
 
         Database database = Database.getInstance();
-        database.runSQL("cleanDB.sql");
+        database.runSQL("clean_DB.sql");
         userDao = new GenericDao(User.class);
     }
 
@@ -74,8 +74,8 @@ class UserDaoTest {
     @Test
     void delete() {
         userDao = new GenericDao(User.class);
-        userDao.delete(userDao.getById(2));
-        assertNull(userDao.getById(2));
+        userDao.delete(userDao.getById(1));
+        assertNull(userDao.getById(1));
 
     }
 
@@ -95,7 +95,7 @@ class UserDaoTest {
     void getAll() {
 
         List<User> users = userDao.getAll();
-        assertEquals(6, users.size());
+        assertEquals(1, users.size());
     }
 
     /**
@@ -106,7 +106,7 @@ class UserDaoTest {
     @Test
     void getByPropertyEqual() {
 
-        List<User> users = userDao.findByPropertyEqual("name", "Joe");
+        List<User> users = userDao.findByPropertyEqual("name", "jb");
         assertEquals(1, users.size());
         assertEquals(1, users.get(0).getId());
     }

@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -105,4 +106,16 @@ public class Category {
         this.teams.add(team);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return category_id == category.category_id && Objects.equals(division, category.division);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(category_id, division);
+    }
 }

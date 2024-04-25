@@ -22,7 +22,6 @@
                 <li class="nav-item"><a class="nav-link" href = "index.jsp"><em>Home</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "AddRaceDisplay"><em>Add Race</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "FindRaceDisplay"><em>Races</em></a></li>
-                <li class="nav-item"><a class="nav-link" href = "FindRaceDisplay"><em>About</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "addRaceResultDisplay"><em>Add Race Result</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "addTeamDisplay"><em>Add a Team</em></a></li>
 
