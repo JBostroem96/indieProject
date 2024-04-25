@@ -75,6 +75,7 @@ public class AddRaceResultById extends HttpServlet {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
         req.setAttribute("team", teamDao.getAll());
+        req.setAttribute("race", race);
         dispatcher.forward(req, resp);
     }
 }
