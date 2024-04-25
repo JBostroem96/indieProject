@@ -5,6 +5,9 @@
 <body>
 <div class="container bg-white">
     <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>You are editing:</em></h1>
+    <c:if test="${!empty editedRace}">
+        <h1 class="text-success text-center">You have successfully edited the race!</h1>
+    </c:if>
     <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
         <table id="addRace" class="display" cellspacing="=0" width="100%">
             <thead>
@@ -13,11 +16,22 @@
             <th>Date</th>
             </thead>
             <tbody>
-            <tr class="bg-white">
-                <td class="text-black">${race.name}</td>
-                <td class="text-black">${race.length}</td>
-                <td class="text-black">${race.date}</td>
-            </tr>
+            <c:choose>
+                <c:when test="${!empty editedRace}">
+                    <tr class="bg-white">
+                        <td class="text-black">${editedRace.name}</td>
+                        <td class="text-black">${editedRace.length}</td>
+                        <td class="text-black">${editedRace.date}</td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <tr class="bg-white">
+                        <td class="text-black">${race.name}</td>
+                        <td class="text-black">${race.length}</td>
+                        <td class="text-black">${race.date}</td>
+                    </tr>
+                </c:otherwise>
+            </c:choose>
             </tbody>
         </table>
     </div>
@@ -37,7 +51,14 @@
                         <input type="date" class="form-control" name="date" id="date" required>
                     </div>
                 </div>
-                <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Edit Race</button>
+                <c:choose>
+                    <c:when test="${!empty editedRace}">
+                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${editedRace.id}">Edit Race</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Edit Race</button>
+                    </c:otherwise>
+                </c:choose>
             </form>
         </div>
     </div>

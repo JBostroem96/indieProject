@@ -47,9 +47,9 @@ public class EditRaceById extends HttpServlet {
 
         dao.update(raceToUpdate);
 
-        req.setAttribute("race", raceToUpdate);
+        req.setAttribute("editedRace", raceToUpdate);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/editRaceResults.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/editRace.jsp");
         dispatcher.forward(req, resp);
     }
 }
