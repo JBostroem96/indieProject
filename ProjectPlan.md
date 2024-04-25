@@ -70,7 +70,7 @@ Week 12:
 
 - [X] Create the category class
 - [X] Create a way to add a category
-- [ ] Ensure that the relationship between category and teams work correctly
+- [ ] Ensure that the relationship between category and team work correctly
 - [X] Finalize, or get close to, creating the nav for the application
 
 Week 13:

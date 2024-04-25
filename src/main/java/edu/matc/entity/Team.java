@@ -11,7 +11,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "teams")
-public class Teams {
+public class Team {
 
     private String name;
     private int id;
@@ -22,37 +22,37 @@ public class Teams {
     /**
      * Instantiates a new Team.
      */
-    public Teams() {
+    public Team() {
     }
 
     /**
      * Instantiates a new Team.
      */
-    public Teams(String name) {
+    public Team(String name) {
 
         this.name = name;
     }
 
     /**
-     * Instantiates a new Teams.
+     * Instantiates a new Team.
      *
      * @param name     the name
      * @param category the category
      * @param division the division
      */
-    public Teams(String name, Category category, String division) {
+    public Team(String name, Category category, String division) {
         this.name = name;
         this.category = category;
         this.division = division;
     }
 
     /**
-     * Instantiates a new Teams.
+     * Instantiates a new Team.
      *
      * @param name     the name
      * @param division the division
      */
-    public Teams(String name, String division) {
+    public Team(String name, String division) {
         this.name = name;
         this.division = division;
     }
@@ -169,7 +169,7 @@ public class Teams {
 
     @Override
     public String toString() {
-        return "Teams{" +
+        return "Team{" +
                 "name='" + name + '\'' +
                 ", division='" + division + '\'' +
                 '}';
@@ -179,8 +179,8 @@ public class Teams {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Teams teams = (Teams) o;
-        return id == teams.id && Objects.equals(name, teams.name);
+        Team team = (Team) o;
+        return id == team.id && Objects.equals(name, team.name);
     }
 
     @Override

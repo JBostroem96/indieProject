@@ -12,7 +12,7 @@ As a registered user, I want to be able to filter by team name, so that I can fi
 
 FILTER BY LENGTH*<br>
 As a registered user, I want to be able to filter by the total points out of 500, 
-so that I can see the given score for the different teams.
+so that I can see the given score for the different team.
 
 FILTER BY DIVISION*<br>
 As a registered user, I want to be able to filter by the the division so that I can find the division I am looking for easily.

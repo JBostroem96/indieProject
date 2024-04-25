@@ -14,7 +14,7 @@ public class TeamRaces {
 
     private int id;
     private double total_time;
-    private Teams team;
+    private Team team;
     private Race race;
     private int division_place;
     private int cp;
@@ -35,7 +35,7 @@ public class TeamRaces {
      * @param team the team
      * @param race the race
      */
-    public TeamRaces(Teams team, Race race) {
+    public TeamRaces(Team team, Race race) {
         this.team = team;
         this.race = race;
     }
@@ -49,7 +49,7 @@ public class TeamRaces {
      * @param late_penalty the late penalty
      * @param total_time   the total time
      */
-    public TeamRaces(Teams team, Race race, int cp, int late_penalty, int total_time) {
+    public TeamRaces(Team team, Race race, int cp, int late_penalty, int total_time) {
         this.team = team;
         this.race = race;
         this.cp = cp;
@@ -105,7 +105,7 @@ public class TeamRaces {
      */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
-    public Teams getTeam() {
+    public Team getTeam() {
         return team;
     }
 
@@ -114,7 +114,7 @@ public class TeamRaces {
      *
      * @param team the team
      */
-    public void setTeam(Teams team) {
+    public void setTeam(Team team) {
         this.team = team;
     }
 

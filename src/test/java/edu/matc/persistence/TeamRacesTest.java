@@ -1,14 +1,6 @@
 package edu.matc.persistence;
-import com.mysql.cj.Session;
-import edu.matc.entity.Race;
-import edu.matc.entity.TeamRaces;
-import edu.matc.entity.Teams;
-import edu.matc.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.time.LocalDate;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class' purpose is to test the functionality of this application
@@ -62,7 +54,7 @@ class TeamRacesTest {
     @Test
     void delete() {
 
-        teamDao = new GenericDao(Teams.class);
+        teamDao = new GenericDao(Team.class);
         teamRaceDao = new GenericDao(Category.class);
 
         teamDao.delete(teamDao.getById(5));

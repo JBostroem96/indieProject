@@ -1,9 +1,8 @@
 package edu.controller;
 
-import edu.matc.entity.Category;
 import edu.matc.entity.Race;
+import edu.matc.entity.Team;
 import edu.matc.entity.TeamRaces;
-import edu.matc.entity.Teams;
 import edu.matc.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -37,7 +36,7 @@ public class AddRaceResultById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao raceDao = new GenericDao(Race.class);
-        GenericDao teamDao = new GenericDao(Teams.class);
+        GenericDao teamDao = new GenericDao(Team.class);
         GenericDao teamRaceDao = new GenericDao(TeamRaces.class);
 
         List<TeamRaces> teamNames = teamRaceDao.getAll();
@@ -47,7 +46,7 @@ public class AddRaceResultById extends HttpServlet {
         Race race = (Race)raceDao.getById(raceId);
 
         int teamId = Integer.parseInt(req.getParameter("team"));
-        Teams team = (Teams)teamDao.getById(teamId);
+        Team team = (Team)teamDao.getById(teamId);
 
         for (TeamRaces teamName : teamNames) {
 

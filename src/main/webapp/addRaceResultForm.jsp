@@ -43,8 +43,8 @@
                 </div>
                 <label class="fw-bold" for="team">Team</label>
                 <select class="form-control" size="3" id="team" name="team" required>
-                    <c:forEach var="teams" items="${team}">
-                        <option value="${teams.id}">${teams.name}</option>
+                    <c:forEach var="team" items="${team}">
+                        <option value="${team.id}">${team.name}</option>
                     </c:forEach>
                 </select>
                 <c:if test="${!empty message}">

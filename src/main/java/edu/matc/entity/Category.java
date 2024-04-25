@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class Category {
 
     private int category_id;
     private String division;
-    private Set<Teams> teams;
+    private Set<Team> teams;
 
     /**
      * Instantiates a new Category.
@@ -63,7 +62,7 @@ public class Category {
      * @return the teams
      */
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    public Set<Teams> getTeams() {
+    public Set<Team> getTeams() {
         return teams;
     }
 
@@ -72,7 +71,7 @@ public class Category {
      *
      * @param teams the teams
      */
-    public void setTeams(Set<Teams> teams) {
+    public void setTeams(Set<Team> teams) {
         this.teams = teams;
     }
 
@@ -101,7 +100,7 @@ public class Category {
      *
      * @param team the team
      */
-    public void addTeam(Teams team) {
+    public void addTeam(Team team) {
 
         this.teams.add(team);
     }

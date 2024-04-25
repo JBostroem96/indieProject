@@ -1,6 +1,6 @@
 **PROBLEM STATEMENT**:
 
-https://www.wisconsinadventureracingseries.com/ is a racing series that is free and offers prizes to winners. They are present in WI, IL and MN, and offer a wide variety of different racing activities, such as biking, paddling, running or trekking, not to mention other challenges. However, it is mostly not a solo sport, as teams generally form for the premier division. That said, there are races that do allow for solo racing.
+https://www.wisconsinadventureracingseries.com/ is a racing series that is free and offers prizes to winners. They are present in WI, IL and MN, and offer a wide variety of different racing activities, such as biking, paddling, running or trekking, not to mention other challenges. However, it is mostly not a solo sport, as team generally form for the premier division. That said, there are races that do allow for solo racing.
 
 With this description, it's understandable that there needs to be a way to store the data involved. They happen to store a wide variety of data, such as the rank, division, team name, total points out of the 500 max race points, and much more, into a spreadsheet. Currently, this process is completely manual, and thus requires hands-on work that could otherwise be automated.
 

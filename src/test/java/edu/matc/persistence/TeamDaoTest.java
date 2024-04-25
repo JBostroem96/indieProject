@@ -1,8 +1,6 @@
 package edu.matc.persistence;
 
-import edu.matc.entity.Category;
-import edu.matc.entity.TeamRaces;
-import edu.matc.entity.Teams;
+import edu.matc.entity.Team;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -22,7 +20,7 @@ public class TeamDaoTest {
 
         Database database = Database.getInstance();
         database.runSQL("clean_DB.sql");
-        teamDao = new GenericDao(Teams.class);
+        teamDao = new GenericDao(Team.class);
     }
 
 
@@ -32,7 +30,7 @@ public class TeamDaoTest {
     @Test
     void getById() {
 
-        Teams retrievedTeam = (Teams)teamDao.getById(1);
+        Team retrievedTeam = (Team)teamDao.getById(1);
         assertNotNull(retrievedTeam);
         assertEquals(teamDao.getById(1), retrievedTeam);
     }
@@ -43,16 +41,16 @@ public class TeamDaoTest {
     @Test
     void update() {
 
-        Teams team = new Teams("test", "test");
+        Team team = new Team("test", "test");
 
-        Teams teamToUpdate = (Teams)teamDao.getById(1);
+        Team teamToUpdate = (Team)teamDao.getById(1);
 
         teamToUpdate.setName(team.getName());
         teamToUpdate.setName(team.getDivision());
 
         teamDao.update(teamToUpdate);
 
-        Teams updatedTeam = (Teams)teamDao.getById(1);
+        Team updatedTeam = (Team)teamDao.getById(1);
         assertEquals(teamToUpdate , updatedTeam);
     }
 
@@ -61,10 +59,10 @@ public class TeamDaoTest {
      */
     @Test
     void insert() {
-        Teams team = new Teams("test", "test");
+        Team team = new Team("test", "test");
         int insertedTeamId = teamDao.insert(team);
         assertNotEquals(0, insertedTeamId);
-        Teams insertedTeam = (Teams)teamDao.getById(insertedTeamId);
+        Team insertedTeam = (Team)teamDao.getById(insertedTeamId);
         assertEquals(team, insertedTeam);
     }
 
@@ -75,7 +73,7 @@ public class TeamDaoTest {
     @Test
     void delete() {
 
-        teamDao = new GenericDao(Teams.class);
+        teamDao = new GenericDao(Team.class);
         teamRaceDao = new GenericDao(Category.class);
 
         teamDao.delete(teamDao.getById(5));
@@ -92,7 +90,7 @@ public class TeamDaoTest {
     @Test
     void getAll() {
 
-        List<Teams> races = teamDao.getAll();
+        List<Team> races = teamDao.getAll();
         assertEquals(32, races.size());
     }
 
@@ -104,7 +102,7 @@ public class TeamDaoTest {
     @Test
     void getByPropertyEqual() {
 
-        List<Teams> teams = teamDao.findByPropertyEqual("name", "Bear");
+        List<Team> teams = teamDao.findByPropertyEqual("name", "Bear");
         assertEquals(1, teams.size());
         assertEquals(5, teams.get(0).getId());
     }

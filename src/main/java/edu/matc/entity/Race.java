@@ -157,7 +157,7 @@ public class Race {
      *
      * @param team the team
      */
-    public void addTeam(Teams team) {
+    public void addTeam(Team team) {
 
         TeamRaces teamRaces = new TeamRaces(team, this);
         this.teamRaces.add(teamRaces);
@@ -169,7 +169,7 @@ public class Race {
      *
      * @param team the team
      */
-    public void removeTeam(Teams team) {
+    public void removeTeam(Team team) {
 
         for (Iterator<TeamRaces> iterator = teamRaces.iterator();
            iterator.hasNext();) {

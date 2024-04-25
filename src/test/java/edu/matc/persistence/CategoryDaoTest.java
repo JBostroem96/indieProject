@@ -1,7 +1,6 @@
 package edu.matc.persistence;
 
 import edu.matc.entity.Category;
-import edu.matc.entity.Teams;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -75,7 +74,7 @@ public class CategoryDaoTest {
     @Test
     void delete() {
 
-        teamDao = new GenericDao(Teams.class);
+        teamDao = new GenericDao(Team.class);
         teamRaceDao = new GenericDao(Category.class);
 
         teamDao.delete(teamDao.getById(5));
