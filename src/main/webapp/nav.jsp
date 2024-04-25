@@ -5,7 +5,6 @@
   Time: 12:40 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark"
      data-bs-theme="yellow">
@@ -26,14 +25,13 @@
                 <li class="nav-item"><a class="nav-link" href = "FindRaceDisplay"><em>About</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "addRaceResultDisplay"><em>Add Race Result</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "addTeamDisplay"><em>Add a Team</em></a></li>
-                <c:choose>
-                    <c:when test="${empty userName}">
-                        <li class="nav-item"><a class="nav-link" href = "logIn"><em>Login or Sign Up</em></a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="nav-item"><a class="nav-link" href = "logIn"><em>Signed in as: <strong>${userName}</strong></em></a></li>
-                    </c:otherwise>
-                </c:choose>
+
+                <c:if test="${empty userName}">
+                    <li class="nav-item"><a class="nav-link" href = "logIn"><em>Login or Sign Up</em></a></li>
+                </c:if>
+                <c:if test="${!empty userName}">
+                    <li class="nav-item"><a class="nav-link" href = "logIn"><em>${userName}</em></a></li>
+                </c:if>
             </ul>
         </div>
     </div>

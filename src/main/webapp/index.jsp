@@ -1,6 +1,8 @@
-<%@include file="head.jsp"%>
-<%@include file="taglib.jsp"%>
-<%@include file="nav.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:import url="head.jsp"/>
+<c:import url="nav.jsp"/>
+
 <html>
 <body>
 
@@ -20,5 +22,5 @@
 
         This application's goal is to automate this heavy data processing. It would spare a lot of work and effort that goes into manually entering all these different values, not to mention the tedium involved. In addition, manual input is prone to user error, especially when dealing with a lot of data, not to mention having to manage that kind of quantity. By implementing an automatic system, we are streamlining the process where there is less room for user error.</p>
 </body>
-    <%@include file="footer.jsp"%>
+<c:import url="footer.jsp"/>
 </html>

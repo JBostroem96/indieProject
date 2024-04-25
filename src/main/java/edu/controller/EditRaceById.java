@@ -41,8 +41,9 @@ public class EditRaceById extends HttpServlet {
        int raceId = Integer.parseInt(req.getParameter("id"));
        Race raceToUpdate = (Race)dao.getById(raceId);
 
-       if (raceToUpdate.getName().equals(updatedRace.getName()) && raceToUpdate.getLength().equals(updatedRace.getLength())
-                && raceToUpdate.getDate().equals(updatedRace.getDate())) {
+       if (raceToUpdate.getName().equals(updatedRace.getName())
+               && raceToUpdate.getLength().equals(updatedRace.getLength())
+               && raceToUpdate.getDate().equals(updatedRace.getDate())) {
 
            String message = "The edit and current values are the same; please use different values.";
            req.setAttribute("message", message);

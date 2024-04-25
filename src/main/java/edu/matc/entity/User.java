@@ -54,19 +54,9 @@ public class User {
     public User addUser(User user) {
 
         GenericDao dao = new GenericDao(User.class);
-        List<User> users = dao.getAll();
 
-        String email = null;
-        String userName = null;
+        dao.insert(user);
 
-        for (User existingUsers : users) {
-
-            email = existingUsers.getEmail();
-            userName = existingUsers.getUserName();
-        }
-        if (!email.equals(user.getEmail()) || !userName.equals(user.getUserName())) {
-            dao.insert(user);
-        }
         return user;
     }
 

@@ -1,6 +1,7 @@
-<%@include file="head.jsp"%>
-<%@include file="taglib.jsp"%>
-<%@include file="nav.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:import url="head.jsp"/>
+<c:import url="nav.jsp"/>
 <html>
 <div class="container bg-white">
     <body>
@@ -32,5 +33,5 @@
         </c:otherwise>
     </c:choose>
     </body>
-    <%@include file="footer.jsp"%>
+    <c:import url="footer.jsp"/>
 </html>
