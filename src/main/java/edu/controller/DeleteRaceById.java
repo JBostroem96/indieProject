@@ -35,9 +35,9 @@ public class DeleteRaceById extends HttpServlet {
 
         dao.delete(raceToDelete);
 
-        req.setAttribute("race", raceToDelete);
+        req.setAttribute("deletedRace", raceToDelete);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRace.jsp");
         dispatcher.forward(req, resp);
     }
 }
