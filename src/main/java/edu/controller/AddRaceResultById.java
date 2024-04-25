@@ -43,15 +43,22 @@ public class AddRaceResultById extends HttpServlet {
         List<TeamRaces> teamNames = teamRaceDao.getAll();
         List<String> existingNames = new ArrayList<>();
 
-        String name = req.getParameter("team");
+        int raceId = Integer.parseInt(req.getParameter("id"));
+        Race race = (Race)raceDao.getById(raceId);
+
+        int teamId = Integer.parseInt(req.getParameter("team"));
+        Teams team = (Teams)teamDao.getById(teamId);
 
         for (TeamRaces teamName : teamNames) {
 
-            existingNames.add(teamName.getTeam().getName());
-        }
-        if (existingNames.contains(name)) {
+            if (teamName.getRace_id() == raceId) {
 
-            String message = "That team already exists. Please Enter something else.";
+                existingNames.add(teamName.getTeam().getName());
+            }
+        }
+        if (existingNames.contains(team.getName())) {
+
+            String message = "That team already exists in that race. Please enter a different one.";
             req.setAttribute("message", message);
 
         } else {
@@ -60,11 +67,6 @@ public class AddRaceResultById extends HttpServlet {
             int penalty = Integer.parseInt(req.getParameter("penalty"));
             int totalTime = Integer.parseInt(req.getParameter("time"));
 
-            int raceId = Integer.parseInt(req.getParameter("id"));
-            Race race = (Race)raceDao.getById(raceId);
-
-            int teamId = Integer.parseInt(req.getParameter("team"));
-            Teams team = (Teams)teamDao.getById(teamId);
             TeamRaces teamRace = new TeamRaces(team, race, cp, penalty, totalTime);
             teamRaceDao.insert(teamRace);
 
