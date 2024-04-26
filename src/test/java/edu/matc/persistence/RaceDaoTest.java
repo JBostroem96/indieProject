@@ -55,7 +55,7 @@ class RaceDaoTest {
         dao.update(raceToUpdate);
 
         Race updatedRace = (Race)dao.getById(2);
-        assertEquals(raceToUpdate , updatedRace);
+        assertEquals(raceToUpdate, updatedRace);
     }
 
     /**
@@ -70,10 +70,7 @@ class RaceDaoTest {
         assertEquals(race, insertedRace);
     }
 
-    /**
-     * Delete.
-     */
-    /*
+
     @Test
     void delete() {
 
@@ -81,7 +78,7 @@ class RaceDaoTest {
         dao.delete(dao.getById(2));
         assertNull(dao.getById(2));
     }
-*/
+
     /**
      * Gets all.
      */

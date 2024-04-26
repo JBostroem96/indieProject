@@ -68,5 +68,9 @@ Date: 04/24/24<br>
 Task: Worked on the indie project, kept working on the results and some exception handling<br>
 Hours: 6.
 
+Date: 04/25/24<br>
+Task: Worked on the indie project, and did the peer review<br>
+Hours: 7.
+
 
 
