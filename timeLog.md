@@ -72,5 +72,9 @@ Date: 04/25/24<br>
 Task: Worked on the indie project, and did the peer review<br>
 Hours: 7.
 
+Date: 04/29/24<br>
+Task: Worked on the indie project, the authentication of a user<br>
+Hours: 7.
+
 
 
