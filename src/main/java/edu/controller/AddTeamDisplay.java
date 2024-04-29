@@ -38,10 +38,8 @@ public class AddTeamDisplay extends HttpServlet {
         HttpSession session = req.getSession();
         GenericDao dao = new GenericDao(Category.class);
         GenericDao userDao = new GenericDao(User.class);
-        User user = (User) session.getAttribute("user");
 
         req.setAttribute("category", dao.getAll());
-        req.setAttribute("user", user);
 
         String url = "/addTeam.jsp";
 

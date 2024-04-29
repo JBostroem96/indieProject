@@ -7,7 +7,7 @@
 <c:choose>
 
     <c:when test="${user.role == null}">
-        <h1 class="text-center">${"You do not have permission to this page"}</h1>
+        <h1 class="text-center">You do not have permission to this page</h1>
     </c:when>
     <c:otherwise>
         <div class="container bg-white">

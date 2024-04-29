@@ -91,7 +91,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
                 String userName = newUser.addUser(validate(tokenResponse)).getUserName();
-                req.setAttribute("userName", userName);
+
                 HttpSession session = req.getSession();
 
                 GenericDao userDao = new GenericDao(User.class);
@@ -102,8 +102,10 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                     if (userNames.getUserName().equals(userName)) {
 
                         session.setAttribute("user", userNames);
+
                     }
                 }
+
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 //TODO forward to an error page
