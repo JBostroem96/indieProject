@@ -15,6 +15,8 @@ import java.time.LocalDate;
 @Table(name = "user")
 public class User {
 
+    @Column(name = "role")
+    private String role;
     @Column(name = "name")
     private String name;
     @Column(name = "user_name")
@@ -54,10 +56,36 @@ public class User {
     public User addUser(User user) {
 
         GenericDao dao = new GenericDao(User.class);
+        List<User> names = dao.getAll();
+        List<String> existingNames = new ArrayList<>();
 
-        dao.insert(user);
+        for (User name : names) {
 
+            existingNames.add(name.getUserName());
+        }
+        if (!existingNames.contains(user.getUserName())) {
+
+            dao.insert(user);
+
+        }
         return user;
+    }
+    /**
+     * Gets role.
+     *
+     * @return the role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * Sets role.
+     *
+     * @param role the role
+     */
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /**
@@ -131,30 +159,33 @@ public class User {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "role='" + role + '\'' +
+                ", name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
     /**
      * Overrides the toString method
      * @return the first name, last name, username, id, date of birth, and age
      */
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", userName='" + userName + '\'' +
-                ", id=" + id +
-                '}';
-    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(name, user.name) && Objects.equals(userName, user.userName) && Objects.equals(email, user.email);
+        return id == user.id && Objects.equals(role, user.role) && Objects.equals(name, user.name) && Objects.equals(userName, user.userName) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, userName, email, id);
+        return Objects.hash(role, name, userName, email, id);
     }
 }

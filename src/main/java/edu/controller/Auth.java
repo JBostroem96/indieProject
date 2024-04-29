@@ -21,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -89,7 +90,20 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
-                req.setAttribute("userName", newUser.addUser(validate(tokenResponse)).getUserName());
+                String userName = newUser.addUser(validate(tokenResponse)).getUserName();
+                req.setAttribute("userName", userName);
+                HttpSession session = req.getSession();
+
+                GenericDao userDao = new GenericDao(User.class);
+                List<User> users = userDao.getAll();
+
+                for (User userNames : users) {
+
+                    if (userNames.getUserName().equals(userName)) {
+
+                        session.setAttribute("user", userNames);
+                    }
+                }
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 //TODO forward to an error page
@@ -182,8 +196,8 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         logger.debug("here's the username: " + userName);
 
         logger.debug("here are all the available claims: " + jwt.getClaims());
-
         // TODO decide what you want to do with the info!
+
         // for now, I'm just returning username for display back to the browser
 
         return new User(name, userName, email);

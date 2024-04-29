@@ -24,7 +24,7 @@
                 <li class="nav-item"><a class="nav-link" href = "FindRaceDisplay"><em>Races</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "addRaceResultDisplay"><em>Add Race Result</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "addTeamDisplay"><em>Add a Team</em></a></li>
-
+                <li class="nav-item"><a class="nav-link" href = "logout"><em>Logout</em></a></li>
                 <c:if test="${empty userName}">
                     <li class="nav-item"><a class="nav-link" href = "logIn"><em>Login or Sign Up</em></a></li>
                 </c:if>

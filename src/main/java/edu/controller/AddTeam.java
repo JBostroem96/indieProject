@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Category;
 import edu.matc.entity.Team;
+import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -34,6 +35,7 @@ public class AddTeam extends HttpServlet {
 
         GenericDao teamDao = new GenericDao(Team.class);
         GenericDao categoryDao = new GenericDao(Category.class);
+        GenericDao userDao = new GenericDao(User.class);
 
         List<Team> teamNames = teamDao.getAll();
         List<String> existingNames = new ArrayList<>();
