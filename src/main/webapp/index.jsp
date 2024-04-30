@@ -3,15 +3,15 @@
 
 <c:import url="head.jsp"/>
 
-
 <body>
-    <c:import url="nav.jsp"/>
+
+    <%@include file="nav.jsp"%>
     <c:choose>
         <c:when test="${empty user}">
-            <h1 class="text-black fw-bold text-center mt-2"><em>Welcome!</em></h1>
+            <h1 class="text-black fw-bold text-center mt-4"><em>Welcome!</em></h1>
         </c:when>
         <c:otherwise>
-                <h1 class="text-black fw-bold text-center"><em>Welcome ${user.userName}!</em></h1>
+                <h1 class="text-black fw-bold text-center mt-4"><em>Welcome ${user.userName}!</em></h1>
         </c:otherwise>
     </c:choose>
     <p class="text-black p-3 fw-italics">https://www.wisconsinadventureracingseries.com/ is a racing series that is free and offers prizes to winners. They are present in WI, IL and MN, and offer a wide variety of different racing activities, such as biking, paddling, running or trekking, not to mention other challenges. However, it is mostly not a solo sport, as team generally form for the premier division. That said, there are races that do allow for solo racing.

@@ -1,9 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:import url="head.jsp"/>
-<c:import url="nav.jsp"/>
+
 <html>
 <body>
+<%@include file="nav.jsp"%>
 <div class="container bg-white">
     <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Add Race</em></h1>
     <c:if test="${!empty race}">

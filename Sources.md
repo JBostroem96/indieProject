@@ -15,3 +15,5 @@ https://stackoverflow.com/a/15710312 was of great help when I wanted to use expr
 
 https://stackoverflow.com/a/35805892 was of great help when I wanted to sort by a specific column
 
+https://stackoverflow.com/a/62796320 was helpful when trying to force the footer to the bottom of the page
+
