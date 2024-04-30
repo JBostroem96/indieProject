@@ -1,6 +1,7 @@
 package edu.controller;
 
 import edu.matc.entity.Race;
+import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -34,32 +37,38 @@ public class EditRaceById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(Race.class);
+
+        List<String> existingNames = new ArrayList<>();
+        List<Race> races = dao.getAll();
+
         Race updatedRace = new Race(req.getParameter("name"),
                 req.getParameter("length"),
                 LocalDate.parse(req.getParameter(("date"))));
 
-       int raceId = Integer.parseInt(req.getParameter("id"));
-       Race raceToUpdate = (Race)dao.getById(raceId);
+        int raceId = Integer.parseInt(req.getParameter("id"));
+        Race raceToUpdate = (Race)dao.getById(raceId);
 
-       if (raceToUpdate.getName().equals(updatedRace.getName())
-               && raceToUpdate.getLength().equals(updatedRace.getLength())
-               && raceToUpdate.getDate().equals(updatedRace.getDate())) {
+        for (Race race : races) {
 
-           String message = "The edit and current values are the same; please use different values.";
-           req.setAttribute("message", message);
-           req.setAttribute("race", raceToUpdate);
+            existingNames.add(race.getName());
+        }
 
-       } else {
+        if (existingNames.contains(updatedRace.getName())) {
 
-           raceToUpdate.setName(updatedRace.getName());
-           raceToUpdate.setDate(updatedRace.getDate());
-           raceToUpdate.setLength(updatedRace.getLength());
+            String message = "That name already exists";
+            req.setAttribute("message", message);
+            req.setAttribute("race", raceToUpdate);
 
-           dao.update(raceToUpdate);
+        } else {
 
-           req.setAttribute("editedRace", raceToUpdate);
-       }
+            raceToUpdate.setName(updatedRace.getName());
+            raceToUpdate.setLength(updatedRace.getLength());
+            raceToUpdate.setDate(updatedRace.getDate());
 
+            dao.update(raceToUpdate);
+
+            req.setAttribute("editedRace", raceToUpdate);
+        }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editRace.jsp");
         dispatcher.forward(req, resp);

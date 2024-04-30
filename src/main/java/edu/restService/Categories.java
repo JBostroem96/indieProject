@@ -1,7 +1,6 @@
 package edu.restService;
 
 import edu.matc.entity.Category;
-import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 
 import javax.ws.rs.GET;
@@ -38,12 +37,12 @@ public class Categories {
     @Produces("text/plain")
 
     /**
-     * This method's purpose is to get the race by id
+     * This method's purpose is to get the category by id
      */
 
     public Response getRaceById(@PathParam("param") int id) {
 
-        // Return the user specified by the id
+        // Return the category specified by the id
         String output = "Here's the category: " + genericDao.getById(id);
         return Response.status(200).entity(output).build();
     }

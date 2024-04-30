@@ -19,3 +19,5 @@ https://stackoverflow.com/a/62796320 was helpful when trying to force the footer
 
 https://stackoverflow.com/a/56150258 Helped me fix the bug where the child entry deletion would also delete the parent entry
 
+https://stackoverflow.com/a/22822283 helped me resolve the lazy initialization exception bug when trying to get the categories
+

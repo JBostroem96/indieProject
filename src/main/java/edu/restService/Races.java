@@ -43,7 +43,7 @@ public class Races {
 
     public Response getRaceById(@PathParam("param") int id) {
 
-        // Return the user specified by the id
+        // Return the race specified by the id
         String output = "Here's the race: " + genericDao.getById(id);
         return Response.status(200).entity(output).build();
     }

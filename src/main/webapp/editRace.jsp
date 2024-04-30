@@ -9,9 +9,6 @@
     <c:if test="${!empty editedRace}">
         <p class="text-success text-center fw-bold">You have successfully edited the race!</p>
     </c:if>
-    <c:if test="${!empty message}">
-        <h2 class="text-danger text-center">${message}</h2>
-    </c:if>
     <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
         <table id="addRace" class="display" cellspacing="=0" width="100%">
             <thead>
@@ -45,6 +42,9 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" name="name" id="name" required>
+                        <c:if test="${!empty message}">
+                            <p class="text-danger fw-bold">${message}</p>
+                        </c:if>
                     </div>
                     <div class="form-group">
                         <label for="length">Length</label>
