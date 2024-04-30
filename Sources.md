@@ -17,3 +17,5 @@ https://stackoverflow.com/a/35805892 was of great help when I wanted to sort by 
 
 https://stackoverflow.com/a/62796320 was helpful when trying to force the footer to the bottom of the page
 
+https://stackoverflow.com/a/56150258 Helped me fix the bug where the child entry deletion would also delete the parent entry
+

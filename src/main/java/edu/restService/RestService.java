@@ -1,4 +1,6 @@
-/*package edu.restService;
+package edu.restService;
+
+import edu.matc.entity.Race;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -6,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 //Defines the base URI for all resource URIs.
-@ApplicationPath("/") //You may want to add a value here so that all traffic isn't routed to the class below.
+@ApplicationPath("/restService") //You may want to add a value here so that all traffic isn't routed to the class below.
 
 //The java class declares root resource and provider classes
 public class RestService extends Application {
@@ -15,7 +17,7 @@ public class RestService extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         HashSet webServiceList = new HashSet<Class<?>>();
-        webServiceList.add(Races.class );
+        webServiceList.add(Races.class);
         return webServiceList;
     }
-}*/
+}
