@@ -66,7 +66,6 @@
             </form>
         </div>
     </div>
-</div>
 </body>
 <c:import url="footer.jsp"/>
 </html>
