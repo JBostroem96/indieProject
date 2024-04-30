@@ -18,6 +18,7 @@ public class RestService extends Application {
     public Set<Class<?>> getClasses() {
         HashSet webServiceList = new HashSet<Class<?>>();
         webServiceList.add(Races.class);
+        webServiceList.add(Teams.class);
         return webServiceList;
     }
 }
