@@ -28,12 +28,12 @@
 
                     <c:if test="${user.role == 'admin' || user.role == 'user'}">
                         <td>
-                            <form action="editRace" class="form-inline" method="get">
+                            <form action="editTeam" class="form-inline" method="get">
                                 <button type="submit" name="id" class="btn btn-primary bg-success" value="${team.id}">Edit</button>
                             </form>
                         </td>
                         <td>
-                            <form action="deleteRace" class="form-inline" method="get">
+                            <form action="deleteTeam" class="form-inline" method="get">
                                 <button type="submit" name="id" class="btn btn-primary bg-danger" value="${team.id}">Delete</button>
                             </form>
                         </td>
