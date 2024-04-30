@@ -61,7 +61,7 @@ public class Category {
      *
      * @return the teams
      */
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     public Set<Team> getTeams() {
         return teams;
     }
@@ -103,6 +103,15 @@ public class Category {
     public void addTeam(Team team) {
 
         this.teams.add(team);
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "category_id=" + category_id +
+                ", division='" + division + '\'' +
+                ", teams=" + teams +
+                '}';
     }
 
     @Override

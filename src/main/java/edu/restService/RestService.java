@@ -1,5 +1,6 @@
 package edu.restService;
 
+import edu.matc.entity.Category;
 import edu.matc.entity.Race;
 
 import javax.ws.rs.ApplicationPath;
@@ -19,6 +20,7 @@ public class RestService extends Application {
         HashSet webServiceList = new HashSet<Class<?>>();
         webServiceList.add(Races.class);
         webServiceList.add(Teams.class);
+        webServiceList.add(Categories.class);
         return webServiceList;
     }
 }
