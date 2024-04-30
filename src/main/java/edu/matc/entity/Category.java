@@ -61,7 +61,7 @@ public class Category {
      *
      * @return the teams
      */
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Team> getTeams() {
         return teams;
     }

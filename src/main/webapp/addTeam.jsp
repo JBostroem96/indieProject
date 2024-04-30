@@ -8,13 +8,13 @@
 <c:choose>
 
     <c:when test="${user.role == null}">
-        <h1 class="text-center">You do not have permission to this page</h1>
+        <p class="text-center fw-bold text-danger">You do not have permission to this page</p>
     </c:when>
     <c:otherwise>
         <div class="container bg-white">
             <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Add a Team</em></h1>
             <c:if test="${!empty team}">
-                <h2 class="text-success text-center">You have successfully added a new team!</h2>
+                <p class="text-success text-center fw-bold">You have successfully added a new team!</p>
             </c:if>
             <div class="d-flex flex-column gap-5 fw-bold">
                 <form action="addTeam" class="form-inline" method="POST">

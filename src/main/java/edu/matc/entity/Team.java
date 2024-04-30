@@ -75,7 +75,7 @@ public class Team {
      *
      * @return the category
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     public Category getCategory() {
         return category;

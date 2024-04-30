@@ -8,10 +8,10 @@
 
         <c:choose>
             <c:when test="${!empty deletedRace}">
-                <h1 class="text-success text-center">You have successfully deleted the race!</h1>
+                <p class="text-success text-center fw-bold mt-4">You have successfully deleted the race!</p>
             </c:when>
             <c:otherwise>
-                <h1 class="mt-5 text-center fw-bold mb-5 text-danger"><em>WARNING: Deleting this race will remove all results associated with it!</em></h1>
+                <p class="mt-5 text-center fw-bold mb-5 text-danger"><em>WARNING: Deleting this race will remove all results associated with it!</em></p>
                 <form action="deleteRaceById" class="form-inline" method="POST">
                     <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
                         <table id="addRace" class="display" cellspacing="=0" width="100%">
