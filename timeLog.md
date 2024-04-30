@@ -76,5 +76,9 @@ Date: 04/29/24<br>
 Task: Worked on the indie project, the authentication of a user<br>
 Hours: 7.
 
+Date: 04/30/24<br>
+Task: Worked on the indie project, web service and adding new functionalities<br>
+Hours: 6.
+
 
 
