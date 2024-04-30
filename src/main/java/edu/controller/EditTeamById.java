@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(
         urlPatterns = {"/editTeamById"}
@@ -33,19 +35,25 @@ public class EditTeamById extends HttpServlet {
         GenericDao dao = new GenericDao(Team.class);
         GenericDao categoryDao = new GenericDao(Category.class);
 
+        List<String> existingNames = new ArrayList<>();
+        List<Team> teams = dao.getAll();
+
         Team updatedTeam = new Team(req.getParameter("name"),
                 req.getParameter("division"));
 
         int teamId = Integer.parseInt(req.getParameter("id"));
         Team teamToUpdate = (Team)dao.getById(teamId);
 
-        if (teamToUpdate.getName().equals(updatedTeam.getName())
-                && teamToUpdate.getDivision().equals(updatedTeam.getDivision())) {
+        for (Team team : teams) {
 
-            String message = "The edit and current values are the same; please use different values.";
-            req.setAttribute("message", message);
+            existingNames.add(team.getName());
+        }
+
+        if (existingNames.contains(updatedTeam.getName())) {
+
+            String message = "That name already exists";
+            req.setAttribute("alreadyExists", message);
             req.setAttribute("team", teamToUpdate);
-            req.setAttribute("category", categoryDao.getAll());
 
         } else {
 
@@ -55,9 +63,10 @@ public class EditTeamById extends HttpServlet {
             dao.update(teamToUpdate);
 
             req.setAttribute("editedTeam", teamToUpdate);
-            req.setAttribute("category", categoryDao.getAll());
+
         }
 
+        req.setAttribute("category", categoryDao.getAll());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editTeam.jsp");
         dispatcher.forward(req, resp);

@@ -9,9 +9,6 @@
     <c:if test="${!empty editedTeam}">
         <h2 class="text-success text-center">You have successfully edited the team!</h2>
     </c:if>
-    <c:if test="${!empty message}">
-        <h2 class="text-danger text-center">${message}</h2>
-    </c:if>
     <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
         <table id="addRace" class="display" cellspacing="=0" width="100%">
             <thead>
@@ -42,6 +39,9 @@
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="name" id="name" required>
+                    <c:if test="${!empty alreadyExists}">
+                        <p class="text-danger fw-bold">${alreadyExists}</p>
+                    </c:if>
                 </div>
                 <div class="form-group">
                     <label class="fw-bold" for="division">Division (Category)</label>
