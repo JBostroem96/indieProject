@@ -42,13 +42,14 @@ class UserDaoTest {
     @Test
     void update() {
 
-        String name = "Jon";
-        String userName = "Jon";
+        User user = new User("Test", "Example", "example@hotmail.com", "admin");
 
         User userToUpdate = (User)userDao.getById(1);
 
-        userToUpdate.setUserName(userName);
-        userToUpdate.setName(name);
+        userToUpdate.setUserName(user.getUserName());
+        userToUpdate.setName(user.getName());
+        userToUpdate.setName(user.getRole());
+        userToUpdate.setName(user.getEmail());
 
         userDao.update(userToUpdate);
 
@@ -61,7 +62,7 @@ class UserDaoTest {
      */
     @Test
     void insert() {
-        User user = new User("Anton", "Anton", "example@hotmail.com");
+        User user = new User("Anton", "Anton", "example@hotmail.com", "admin");
         int insertedUserId = userDao.insert(user);
         assertNotEquals(0, insertedUserId);
         User insertedUser = (User)userDao.getById(insertedUserId);
@@ -79,14 +80,6 @@ class UserDaoTest {
 
     }
 
-    /**
-     * Delete with races.
-     */
-    @Test
-    void deleteWithRaces() {
-
-
-    }
 
     /**
      * Gets all.
@@ -95,7 +88,7 @@ class UserDaoTest {
     void getAll() {
 
         List<User> users = userDao.getAll();
-        assertEquals(1, users.size());
+        assertEquals(2, users.size());
     }
 
     /**

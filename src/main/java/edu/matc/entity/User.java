@@ -41,10 +41,11 @@ public class User {
      * @param name the name
      * @param email       the email
      */
-    public User(String name, String userName, String email) {
+    public User(String name, String userName, String email, String role) {
         this.name = name;
         this.email = email;
         this.userName = userName;
+        this.role = role;
     }
 
     /**

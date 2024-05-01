@@ -24,7 +24,6 @@ class RaceDaoTest {
         dao = new GenericDao(Race.class);
     }
 
-
     /**
      * Gets by id.
      */
@@ -97,7 +96,7 @@ class RaceDaoTest {
     @Test
     void getByPropertyEqual() {
 
-        List<Race> races = dao.findByPropertyEqual("name", "Example2");
+        List<Race> races = dao.findByPropertyEqual("name", "Example3");
         assertEquals(1, races.size());
         assertEquals(4, races.get(0).getId());
     }

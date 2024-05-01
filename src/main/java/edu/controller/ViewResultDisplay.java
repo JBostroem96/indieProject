@@ -1,7 +1,7 @@
 package edu.controller;
 
 import edu.matc.entity.Race;
-import edu.matc.entity.TeamRaces;
+import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,49 +42,49 @@ public class ViewResultDisplay extends HttpServlet {
         int mixedDivision = 0;
 
         GenericDao raceDao = new GenericDao(Race.class);
-        GenericDao teamRaceDao = new GenericDao(TeamRaces.class);
+        GenericDao teamRaceDao = new GenericDao(TeamRace.class);
 
-        List<TeamRaces> teamRaces = teamRaceDao.findByPropertyEqual("race_id", req.getParameter("id"));
+        List<TeamRace> teamRaces = teamRaceDao.findByPropertyEqual("race_id", req.getParameter("id"));
 
         //using lambda expression to sort by the total time
-        teamRaces.sort(Comparator.comparingDouble(TeamRaces::getTotal_time));
+        teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 
-        for (TeamRaces entry : teamRaces) {
+        for (TeamRace entry : teamRaces) {
 
             switch (entry.getTeam().getDivision()) {
                 case "Male":
 
                     maleDivision++;
-                    entry.setDivision_place(maleDivision);
+                    entry.setDivisionPlace(maleDivision);
 
                     break;
                 case "Female":
 
                     femaleDivision++;
-                    entry.setDivision_place(femaleDivision);
+                    entry.setDivisionPlace(femaleDivision);
 
                     break;
                 case "Solo Male":
 
                     soloMaleDivision++;
-                    entry.setDivision_place(soloMaleDivision);
+                    entry.setDivisionPlace(soloMaleDivision);
 
                     break;
                 case "Solo Female":
 
                     soloFemaleDivision++;
-                    entry.setDivision_place(soloFemaleDivision);
+                    entry.setDivisionPlace(soloFemaleDivision);
 
                     break;
                 case "Mixed":
 
                     mixedDivision++;
-                    entry.setDivision_place(mixedDivision);
+                    entry.setDivisionPlace(mixedDivision);
 
                     break;
             }
             overallPlace++;
-            entry.setOverall_place(overallPlace);
+            entry.setOverallPlace(overallPlace);
         }
 
         req.setAttribute("team_races", teamRaces);

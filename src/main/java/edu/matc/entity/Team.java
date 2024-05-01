@@ -17,7 +17,7 @@ public class Team {
     private int id;
     private String division;
     private Category category;
-    private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
+    private Set<TeamRace> teamRaces = new HashSet<TeamRace>();
 
     /**
      * Instantiates a new Team.
@@ -75,12 +75,12 @@ public class Team {
      *
      * @return the category
      */
+    //Needs to be looked at more
     @ManyToOne
     @JoinColumn(name = "category_id")
     public Category getCategory() {
         return category;
     }
-
 
     /**
      * Sets category.
@@ -144,7 +144,7 @@ public class Team {
      * @return the team races
      */
     @OneToMany(mappedBy = "team")
-    public Set<TeamRaces> getTeamRaces() {
+    public Set<TeamRace> getTeamRaces() {
         return teamRaces;
     }
 
@@ -153,7 +153,7 @@ public class Team {
      *
      * @param teamRaces the team races
      */
-    public void setTeamRaces(Set<TeamRaces> teamRaces) {
+    public void setTeamRaces(Set<TeamRace> teamRaces) {
         this.teamRaces = teamRaces;
     }
 
@@ -162,7 +162,7 @@ public class Team {
      *
      * @param teamRace the team race
      */
-    public void addTeamRace(TeamRaces teamRace) {
+    public void addTeamRace(TeamRace teamRace) {
 
         this.teamRaces.add(teamRace);
     }
@@ -180,11 +180,11 @@ public class Team {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Team team = (Team) o;
-        return id == team.id && Objects.equals(name, team.name);
+        return id == team.id && Objects.equals(name, team.name) && Objects.equals(division, team.division) && Objects.equals(category, team.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, id);
+        return Objects.hash(name, id, division, category);
     }
 }

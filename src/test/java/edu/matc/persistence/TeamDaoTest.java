@@ -1,5 +1,6 @@
 package edu.matc.persistence;
 
+
 import edu.matc.entity.Team;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TeamDaoTest {
 
     private GenericDao teamDao;
-    private GenericDao teamRaceDao;
 
     /**
      * Triggers before everything else
@@ -69,21 +69,16 @@ public class TeamDaoTest {
     /**
      * Delete.
      */
-    /*
+
     @Test
     void delete() {
 
         teamDao = new GenericDao(Team.class);
-        teamRaceDao = new GenericDao(Category.class);
-
-        teamDao.delete(teamDao.getById(5));
-        assertNull(teamDao.getById(5));
-
-        teamRaceDao.delete(teamRaceDao.getById(3));
-        assertNull(teamRaceDao.getById(3));
+        teamDao.delete(teamDao.getById(10));
+        assertNull(teamDao.getById(10));
 
     }
-*/
+
     /**
      * Gets all.
      */

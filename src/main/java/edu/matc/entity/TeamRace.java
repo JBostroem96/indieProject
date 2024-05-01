@@ -10,23 +10,23 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "team_races")
-public class TeamRaces {
+public class TeamRace {
 
     private int id;
-    private double total_time;
+    private double totalTime;
     private Team team;
     private Race race;
-    private int division_place;
+    private int divisionPlace;
     private int cp;
-    private int late_penalty;
-    private int overall_place;
+    private int latePenalty;
+    private int overallPlace;
     private int race_id;
 
 
     /**
      * Instantiates a new Team races.
      */
-    public TeamRaces() {
+    public TeamRace() {
     }
 
     /**
@@ -35,7 +35,7 @@ public class TeamRaces {
      * @param team the team
      * @param race the race
      */
-    public TeamRaces(Team team, Race race) {
+    public TeamRace(Team team, Race race) {
         this.team = team;
         this.race = race;
     }
@@ -46,15 +46,15 @@ public class TeamRaces {
      * @param team         the team
      * @param race         the race
      * @param cp           the cp
-     * @param late_penalty the late penalty
-     * @param total_time   the total time
+     * @param latePenalty the late penalty
+     * @param totalTime   the total time
      */
-    public TeamRaces(Team team, Race race, int cp, int late_penalty, int total_time) {
+    public TeamRace(Team team, Race race, int cp, int latePenalty, int totalTime) {
         this.team = team;
         this.race = race;
         this.cp = cp;
-        this.late_penalty = late_penalty;
-        this.total_time = total_time;
+        this.latePenalty = latePenalty;
+        this.totalTime = totalTime;
     }
 
     /**
@@ -145,8 +145,8 @@ public class TeamRaces {
      * @return the division place
      */
     @Column(name = "division_place")
-    public int getDivision_place() {
-        return division_place;
+    public int getDivisionPlace() {
+        return divisionPlace;
     }
 
     /**
@@ -154,8 +154,8 @@ public class TeamRaces {
      *
      * @param divisionPlace the division place
      */
-    public void setDivision_place(int divisionPlace) {
-        this.division_place = divisionPlace;
+    public void setDivisionPlace(int divisionPlace) {
+        this.divisionPlace = divisionPlace;
     }
 
     /**
@@ -164,17 +164,17 @@ public class TeamRaces {
      * @return the total time
      */
     @Column(name = "total_time")
-    public double getTotal_time() {
-        return total_time;
+    public double getTotalTime() {
+        return totalTime;
     }
 
     /**
      * Sets total time.
      *
-     * @param total_time the total time
+     * @param totalTime the total time
      */
-    public void setTotal_time(double total_time) {
-        this.total_time = total_time;
+    public void setTotalTime(double totalTime) {
+        this.totalTime = totalTime;
     }
 
     /**
@@ -202,8 +202,8 @@ public class TeamRaces {
      * @return the overall place
      */
     @Column(name = "overall_place")
-    public int getOverall_place() {
-        return overall_place;
+    public int getOverallPlace() {
+        return overallPlace;
     }
 
     /**
@@ -211,8 +211,8 @@ public class TeamRaces {
      *
      * @param overallPlace the overall place
      */
-    public void setOverall_place(int overallPlace) {
-        this.overall_place = overallPlace;
+    public void setOverallPlace(int overallPlace) {
+        this.overallPlace = overallPlace;
     }
 
     /**
@@ -221,29 +221,29 @@ public class TeamRaces {
      * @return the late penalty
      */
     @Column(name = "late_penalty")
-    public int getLate_penalty() {
-        return late_penalty;
+    public int getLatePenalty() {
+        return latePenalty;
     }
 
     /**
      * Sets late penalty.
      *
-     * @param late_penalty the late penalty
+     * @param latePenalty the late penalty
      */
-    public void setLate_penalty(int late_penalty) {
-        this.late_penalty = late_penalty;
+    public void setLatePenalty(int latePenalty) {
+        this.latePenalty = latePenalty;
     }
 
     @Override
     public String toString() {
-        return "TeamRaces{" +
-                "total_time=" + total_time +
+        return "TeamRace{" +
+                "totalTime=" + totalTime +
                 ", team=" + team +
                 ", race=" + race +
-                ", division_place=" + division_place +
+                ", divisionPlace=" + divisionPlace +
                 ", cp=" + cp +
-                ", late_penalty=" + late_penalty +
-                ", overall_place=" + overall_place +
+                ", latePenalty=" + latePenalty +
+                ", overallPlace=" + overallPlace +
                 '}';
     }
 
@@ -251,12 +251,12 @@ public class TeamRaces {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TeamRaces teamRaces = (TeamRaces) o;
-        return id == teamRaces.id && division_place == teamRaces.division_place && cp == teamRaces.cp && late_penalty == teamRaces.late_penalty && overall_place == teamRaces.overall_place && Objects.equals(team, teamRaces.team) && Objects.equals(race, teamRaces.race);
+        TeamRace teamRace = (TeamRace) o;
+        return id == teamRace.id && divisionPlace == teamRace.divisionPlace && cp == teamRace.cp && latePenalty == teamRace.latePenalty && overallPlace == teamRace.overallPlace && Objects.equals(team, teamRace.team) && Objects.equals(race, teamRace.race);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, team, race, division_place, cp, late_penalty, overall_place);
+        return Objects.hash(id, team, race, divisionPlace, cp, latePenalty, overallPlace);
     }
 }

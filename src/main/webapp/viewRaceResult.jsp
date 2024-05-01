@@ -29,13 +29,13 @@
                 <c:forEach var="team_race" items="${team_races}">
                     <tr>
                         <td class="text-black">${team_race.race_id}</td>
-                        <td class="text-black">${team_race.overall_place}</td>
-                        <td class="text-black">${team_race.division_place}</td>
+                        <td class="text-black">${team_race.overallPlace}</td>
+                        <td class="text-black">${team_race.divisionPlace}</td>
                         <td class="text-black">${team_race.team.name}</td>
                         <td class="text-black">${team_race.team.division}</td>
                         <td class="text-black">${team_race.cp}</td>
-                        <td class="text-black">${team_race.late_penalty}</td>
-                        <td class="text-black">${team_race.total_time}</td>
+                        <td class="text-black">${team_race.latePenalty}</td>
+                        <td class="text-black">${team_race.totalTime}</td>
                     </tr>
                 </c:forEach>
             </tbody>

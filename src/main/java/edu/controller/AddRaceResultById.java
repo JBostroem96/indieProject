@@ -2,7 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Race;
 import edu.matc.entity.Team;
-import edu.matc.entity.TeamRaces;
+import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -37,9 +37,9 @@ public class AddRaceResultById extends HttpServlet {
 
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamDao = new GenericDao(Team.class);
-        GenericDao teamRaceDao = new GenericDao(TeamRaces.class);
+        GenericDao teamRaceDao = new GenericDao(TeamRace.class);
 
-        List<TeamRaces> teamNames = teamRaceDao.getAll();
+        List<TeamRace> teamNames = teamRaceDao.getAll();
         List<String> existingNames = new ArrayList<>();
 
         int raceId = Integer.parseInt(req.getParameter("id"));
@@ -48,7 +48,7 @@ public class AddRaceResultById extends HttpServlet {
         int teamId = Integer.parseInt(req.getParameter("team"));
         Team team = (Team)teamDao.getById(teamId);
 
-        for (TeamRaces teamName : teamNames) {
+        for (TeamRace teamName : teamNames) {
 
             if (teamName.getRace_id() == raceId) {
 
@@ -66,7 +66,7 @@ public class AddRaceResultById extends HttpServlet {
             int penalty = Integer.parseInt(req.getParameter("penalty"));
             int totalTime = Integer.parseInt(req.getParameter("time"));
 
-            TeamRaces teamRace = new TeamRaces(team, race, cp, penalty, totalTime);
+            TeamRace teamRace = new TeamRace(team, race, cp, penalty, totalTime);
             teamRaceDao.insert(teamRace);
 
             req.setAttribute("teamRaceResult", teamRace);

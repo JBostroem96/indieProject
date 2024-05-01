@@ -26,7 +26,7 @@ public class Race {
     @Column(name = "date")
     private LocalDate date;
     private int id;
-    private Set<TeamRaces> teamRaces = new HashSet<TeamRaces>();
+    private Set<TeamRace> teamRaces = new HashSet<TeamRace>();
 
     /**
      * Instantiates a new Race.
@@ -75,7 +75,7 @@ public class Race {
      * @return the team races
      */
     @OneToMany(mappedBy = "race")
-    public Set<TeamRaces> getTeamRaces() {
+    public Set<TeamRace> getTeamRaces() {
         return teamRaces;
     }
 
@@ -84,7 +84,7 @@ public class Race {
      *
      * @param teamRaces the team races
      */
-    public void setTeamRaces(Set<TeamRaces> teamRaces) {
+    public void setTeamRaces(Set<TeamRace> teamRaces) {
         this.teamRaces = teamRaces;
     }
 
@@ -93,7 +93,7 @@ public class Race {
      *
      * @param teamRace the team race
      */
-    public void addTeamRace(TeamRaces teamRace) {
+    public void addTeamRace(TeamRace teamRace) {
 
         this.teamRaces.add(teamRace);
     }
@@ -159,9 +159,9 @@ public class Race {
      */
     public void addTeam(Team team) {
 
-        TeamRaces teamRaces = new TeamRaces(team, this);
-        this.teamRaces.add(teamRaces);
-        team.getTeamRaces().add(teamRaces);
+        TeamRace teamRace = new TeamRace(team, this);
+        this.teamRaces.add(teamRace);
+        team.getTeamRaces().add(teamRace);
     }
 
     /**
@@ -171,10 +171,10 @@ public class Race {
      */
     public void removeTeam(Team team) {
 
-        for (Iterator<TeamRaces> iterator = teamRaces.iterator();
-           iterator.hasNext();) {
+        for (Iterator<TeamRace> iterator = teamRaces.iterator();
+             iterator.hasNext();) {
 
-            TeamRaces teamRace = iterator.next();
+            TeamRace teamRace = iterator.next();
 
             if (teamRace.getTeam().equals(this) && teamRace.getRace().equals(team)) {
 

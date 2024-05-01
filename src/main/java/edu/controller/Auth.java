@@ -102,7 +102,6 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                     if (userNames.getUserName().equals(userName)) {
 
                         session.setAttribute("user", userNames);
-
                     }
                 }
 
@@ -202,7 +201,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
         // for now, I'm just returning username for display back to the browser
 
-        return new User(name, userName, email);
+        return new User(name, userName, email, "user");
     }
 
     /** Create the auth url and use it to build the request.
