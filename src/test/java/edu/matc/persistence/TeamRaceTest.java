@@ -1,5 +1,6 @@
 package edu.matc.persistence;
 import edu.matc.entity.Category;
+import edu.matc.testUtil.Database;
 import edu.matc.entity.Race;
 import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
@@ -74,6 +75,7 @@ class TeamRaceTest {
 
         Category category = new Category("Mixed");
         Team team = new Team("Example", category, category.getDivision());
+
         Race race = new Race("Example", "3", LocalDate.now());
 
         TeamRace teamRace = new TeamRace(team, race, 22, 0, 120);

@@ -1,7 +1,7 @@
 package edu.matc.persistence;
 
 import edu.matc.entity.Category;
-import edu.matc.entity.Race;
+import edu.matc.testUtil.Database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
