@@ -237,7 +237,8 @@ public class TeamRace {
     @Override
     public String toString() {
         return "TeamRace{" +
-                "totalTime=" + totalTime +
+                "id=" + id +
+                ", totalTime=" + totalTime +
                 ", team=" + team +
                 ", race=" + race +
                 ", divisionPlace=" + divisionPlace +
@@ -252,11 +253,11 @@ public class TeamRace {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TeamRace teamRace = (TeamRace) o;
-        return id == teamRace.id && divisionPlace == teamRace.divisionPlace && cp == teamRace.cp && latePenalty == teamRace.latePenalty && overallPlace == teamRace.overallPlace && Objects.equals(team, teamRace.team) && Objects.equals(race, teamRace.race);
+        return id == teamRace.id && Double.compare(totalTime, teamRace.totalTime) == 0 && divisionPlace == teamRace.divisionPlace && cp == teamRace.cp && latePenalty == teamRace.latePenalty && overallPlace == teamRace.overallPlace && Objects.equals(team, teamRace.team) && Objects.equals(race, teamRace.race);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, team, race, divisionPlace, cp, latePenalty, overallPlace);
+        return Objects.hash(id, totalTime, team, race, divisionPlace, cp, latePenalty, overallPlace);
     }
 }

@@ -21,5 +21,4 @@ https://stackoverflow.com/a/56150258 Helped me fix the bug where the child entry
 
 https://stackoverflow.com/a/22822283 helped me resolve the lazy initialization exception bug when trying to get the categories
 
-https://stackoverflow.com/a/17160066 Helped me fix the unsaved transient error I was getting
 

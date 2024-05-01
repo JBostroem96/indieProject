@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TeamRaceTest {
 
     private GenericDao teamRaceDao;
+    private GenericDao teamDao;
+    private GenericDao raceDao;
 
     /**
      * Triggers before everything else
@@ -29,6 +31,8 @@ class TeamRaceTest {
         Database database = Database.getInstance();
         database.runSQL("clean_DB.sql");
         teamRaceDao = new GenericDao(TeamRace.class);
+        teamDao = new GenericDao(Team.class);
+        raceDao = new GenericDao(Race.class);
     }
 
     /**
@@ -49,11 +53,15 @@ class TeamRaceTest {
     @Test
     void update() {
 
-        Category category = new Category("Mixed");
-        Team team = new Team("Example1", category, category.getDivision());
-        Race race = new Race("Example1", "3", LocalDate.now());
+        Category category = new Category();
+        category.setCategory_id(5);
+        category.setDivision("Mixed");
 
-        TeamRace teamRaceToUpdate = (TeamRace) teamRaceDao.getById(2);
+        Team team = new Team("Example2", category, category.getDivision());
+        teamDao.insert(team);
+        Race race = new Race("Example3", "5", LocalDate.now());
+        raceDao.insert(race);
+        TeamRace teamRaceToUpdate = (TeamRace) teamRaceDao.getById(5);
 
         teamRaceToUpdate.setTeam(team);
         teamRaceToUpdate.setRace(race);
@@ -63,7 +71,7 @@ class TeamRaceTest {
 
         teamRaceDao.update(teamRaceToUpdate);
         assertNotEquals(0, teamRaceToUpdate.getId());
-        TeamRace updatedTeamRace = (TeamRace) teamRaceDao.getById(2);
+        TeamRace updatedTeamRace = (TeamRace) teamRaceDao.getById(5);
         assertEquals(teamRaceToUpdate, updatedTeamRace);
     }
 
@@ -73,9 +81,11 @@ class TeamRaceTest {
     @Test
     void insert() {
 
-        Category category = new Category("Mixed");
-        Team team = new Team("Example", category, category.getDivision());
+        Category category = new Category();
+        category.setCategory_id(5);
+        category.setDivision("Mixed");
 
+        Team team = new Team("Example", category, category.getDivision());
         Race race = new Race("Example", "3", LocalDate.now());
 
         TeamRace teamRace = new TeamRace(team, race, 22, 0, 120);
@@ -84,6 +94,7 @@ class TeamRaceTest {
         assertNotEquals(0, insertedTeamRaceId);
         TeamRace insertedTeamRace = (TeamRace)teamRaceDao.getById(insertedTeamRaceId);
         assertEquals(teamRace, insertedTeamRace);
+
     }
 
 

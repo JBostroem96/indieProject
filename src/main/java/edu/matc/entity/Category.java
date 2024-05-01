@@ -110,7 +110,6 @@ public class Category {
         return "Category{" +
                 "category_id=" + category_id +
                 ", division='" + division + '\'' +
-                ", teams=" + teams +
                 '}';
     }
 

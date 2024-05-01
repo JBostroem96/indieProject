@@ -171,7 +171,9 @@ public class Team {
     public String toString() {
         return "Team{" +
                 "name='" + name + '\'' +
+                ", id=" + id +
                 ", division='" + division + '\'' +
+                ", category=" + category +
                 '}';
     }
 
