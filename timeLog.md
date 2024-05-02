@@ -80,5 +80,13 @@ Date: 04/30/24<br>
 Task: Worked on the indie project, web service and adding new functionalities<br>
 Hours: 6.
 
+Date: 04/30/24<br>
+Task: Worked on the peer review<br>
+Hours: 1.
+
+Date: 05/1-2/24<br>
+Task: Worked on the project, mostly on the unit tests, and completed the peer review<br>
+Hours: 6.
+
 
 

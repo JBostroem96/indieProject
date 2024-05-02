@@ -4,6 +4,7 @@ package edu.restService;
 
 import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
+import org.json.JSONObject;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -44,6 +45,21 @@ public class Races {
     public Response getRaceById(@PathParam("param") int id) {
 
         // Return the race specified by the id
+        String output = "Here's the race: " + genericDao.getById(id);
+        return Response.status(200).entity(output).build();
+    }
+
+    @GET
+
+    @Path("/{param}")
+
+    @Produces("application/JSON")
+
+    public Response getRaceByIdByJSON(@PathParam("param") int id) {
+
+        // Return the race specified by the id
+        JSONObject json = new JSONObject();
+
         String output = "Here's the race: " + genericDao.getById(id);
         return Response.status(200).entity(output).build();
     }
