@@ -57,9 +57,6 @@ public class Races {
 
     public Response getRaceByIdByJSON(@PathParam("param") int id) {
 
-        // Return the race specified by the id
-        JSONObject json = new JSONObject();
-
         String output = "Here's the race: " + genericDao.getById(id);
         return Response.status(200).entity(output).build();
     }
