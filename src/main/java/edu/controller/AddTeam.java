@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Category;
 import edu.matc.entity.Team;
+import edu.matc.entity.TeamRace;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 
@@ -37,16 +38,9 @@ public class AddTeam extends HttpServlet {
         GenericDao categoryDao = new GenericDao(Category.class);
         GenericDao userDao = new GenericDao(User.class);
 
-        List<Team> teamNames = teamDao.getAll();
-        List<String> existingNames = new ArrayList<>();
-
         String name = req.getParameter("name");
 
-        for (Team teamName : teamNames) {
-
-            existingNames.add(teamName.getName());
-        }
-        if (existingNames.contains(name)) {
+        if (validateName().contains(name)) {
 
             String message = "That team already exists. Please Enter something else.";
             req.setAttribute("message", message);
@@ -59,10 +53,27 @@ public class AddTeam extends HttpServlet {
             teamDao.insert(team);
             req.setAttribute("team", team);
         }
+
         req.setAttribute("category", categoryDao.getAll());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addTeam.jsp");
         dispatcher.forward(req, resp);
+    }
 
+    /**
+     * This method's purpose is to validate the team name
+     * @return the list of existing names
+     */
+    public List<String> validateName() {
+
+        GenericDao teamDao = new GenericDao(Team.class);
+        List<Team> teamNames = teamDao.getAll();
+        List<String> existingNames = new ArrayList<>();
+
+        for (Team teamName : teamNames) {
+
+            existingNames.add(teamName.getName());
+        }
+        return existingNames;
     }
 }
 
