@@ -82,6 +82,9 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String authCode = req.getParameter("code");
+
+        HttpSession session = req.getSession();
+        Validate validate = new Validate();
         User newUser = new User();
 
         if (authCode == null) {
@@ -92,9 +95,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                 TokenResponse tokenResponse = getToken(authRequest);
                 String userName = newUser.addUser(validate(tokenResponse)).getUserName();
 
-                HttpSession session = req.getSession();
-
-                validateUser(session, userName);
+                validate.validateUser(session, userName);
 
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
@@ -107,25 +108,6 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.forward(req, resp);
-    }
-
-    /**
-     * This method's purpose is to validate the user
-     * @param session the session object
-     * @param userName the username
-     */
-    public void validateUser(HttpSession session, String userName) {
-
-        GenericDao userDao = new GenericDao(User.class);
-        List<User> users = userDao.getAll();
-
-        for (User user : users) {
-
-            if (user.getUserName().equals(userName)) {
-
-                session.setAttribute("user", user);
-            }
-        }
     }
 
     /**

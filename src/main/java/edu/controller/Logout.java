@@ -3,8 +3,6 @@ package edu.controller;
 import edu.matc.util.PropertiesLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,8 +58,8 @@ public class Logout extends HttpServlet implements PropertiesLoader {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // TODO if properties weren't loaded properly, route to an error page
 
-        //End the session
         HttpSession session = req.getSession();
+        //End the session
         session.invalidate();
 
         String url = LOGOUT_URL + "?response_type=code&client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URL;

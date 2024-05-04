@@ -6,6 +6,7 @@ import edu.matc.entity.TeamRace;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,5 +95,24 @@ public class Validate {
 
         }
         return user;
+    }
+
+    /**
+     * This method's purpose is to validate the user
+     * @param session the session object
+     * @param userName the username
+     */
+    public void validateUser(HttpSession session, String userName) {
+
+        GenericDao userDao = new GenericDao(User.class);
+        List<User> users = userDao.getAll();
+
+        for (User user : users) {
+
+            if (user.getUserName().equals(userName)) {
+
+                session.setAttribute("user", user);
+            }
+        }
     }
 }
