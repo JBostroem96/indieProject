@@ -13,6 +13,8 @@ https://stackoverflow.com/a/73550428 was of great help when trying to access the
 
 https://stackoverflow.com/a/15710312 was of great help when I wanted to use expression language to output the values of a map
 
+https://thorben-janssen.com/hibernate-enum-mappings/ was of great help when trying to map enum using hibernate
+
 https://stackoverflow.com/a/35805892 was of great help when I wanted to sort by a specific column
 
 https://stackoverflow.com/a/62796320 was helpful when trying to force the footer to the bottom of the page

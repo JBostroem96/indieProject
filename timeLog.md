@@ -88,5 +88,9 @@ Date: 05/1-2/24<br>
 Task: Worked on the project, mostly on the unit tests, and completed the peer review<br>
 Hours: 6.
 
+Date: 05/4/24<br>
+Task: Worked on the project, refactoring code and implementing enum<br>
+Hours: 6.
+
 
 
