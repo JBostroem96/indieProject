@@ -1,6 +1,5 @@
 package edu.controller;
 
-import edu.matc.entity.Race;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
@@ -31,22 +30,10 @@ public class DeleteTeamById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(Team.class);
-        final Logger logger = LogManager.getLogger(this.getClass());
 
-        int teamId = Integer.parseInt(req.getParameter("id"));
-        Team teamToDelete = (Team) dao.getById(teamId);
+        Team teamToDelete = (Team) dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        try {
-            dao.delete(teamToDelete);
-
-        } catch (ConstraintViolationException e) {
-
-            logger.error("This can't be deleted because it's in results", e);
-
-        } catch (Error er) {
-
-            logger.error("There was an issue", er);
-        }
+        dao.delete(teamToDelete);
 
         req.setAttribute("deletedTeam", teamToDelete);
 

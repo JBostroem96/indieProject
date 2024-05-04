@@ -35,8 +35,7 @@ public class DeleteRaceById extends HttpServlet {
         GenericDao dao = new GenericDao(Race.class);
         final Logger logger = LogManager.getLogger(this.getClass());
 
-        int raceId = Integer.parseInt(req.getParameter("id"));
-        Race raceToDelete = (Race)dao.getById(raceId);
+        Race raceToDelete = (Race)dao.getById(Integer.parseInt(req.getParameter("id")));
 
         try {
             dao.delete(raceToDelete);

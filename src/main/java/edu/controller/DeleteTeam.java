@@ -1,6 +1,6 @@
 package edu.controller;
 
-import edu.matc.entity.Race;
+
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 
@@ -28,8 +28,7 @@ public class DeleteTeam extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(Team.class);
-        int teamId = Integer.parseInt(req.getParameter("id"));
-        Team retrievedTeam = (Team)dao.getById(teamId);
+        Team retrievedTeam = (Team)dao.getById(Integer.parseInt(req.getParameter("id")));
         req.setAttribute("team", retrievedTeam);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");

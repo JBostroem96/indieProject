@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Race;
 import edu.matc.entity.Team;
+import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -37,23 +38,15 @@ public class EditRaceById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(Race.class);
-
-        List<String> existingNames = new ArrayList<>();
         List<Race> races = dao.getAll();
 
         Race updatedRace = new Race(req.getParameter("name"),
                 req.getParameter("length"),
                 LocalDate.parse(req.getParameter(("date"))));
 
-        int raceId = Integer.parseInt(req.getParameter("id"));
-        Race raceToUpdate = (Race)dao.getById(raceId);
+        Race raceToUpdate = (Race)dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        for (Race race : races) {
-
-            existingNames.add(race.getName());
-        }
-
-        if (existingNames.contains(updatedRace.getName())) {
+        if (validateRace(races).contains(updatedRace.getName())) {
 
             String message = "That name already exists";
             req.setAttribute("message", message);
@@ -72,5 +65,24 @@ public class EditRaceById extends HttpServlet {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editRace.jsp");
         dispatcher.forward(req, resp);
+    }
+
+
+    /**
+     * Validate race list.
+     *
+     * @param races the races
+     * @return the list
+     */
+    public List<String> validateRace(List<Race> races) {
+
+        List<String> existingRaces = new ArrayList<>();
+
+        for (Race race : races) {
+
+            existingRaces.add(race.getName());
+        }
+
+        return existingRaces;
     }
 }
