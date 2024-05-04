@@ -52,9 +52,9 @@ class TeamRaceTest {
 
         Category category = new Category();
         category.setCategory_id(5);
-        category.setDivision(Division.SOLO_MALE);
+        category.setDivision(Division.MIXED);
 
-        Team team = new Team("Example2", category, category.getDivision().toString());
+        Team team = new Team("Example2", category, category.getDivision().name());
         teamDao.insert(team);
         Race race = new Race("Example3", "5", LocalDate.now());
         raceDao.insert(race);
@@ -80,9 +80,9 @@ class TeamRaceTest {
 
         Category category = new Category();
         category.setCategory_id(5);
-        category.setDivision(Division.SOLO_MALE);
+        category.setDivision(Division.MIXED);
 
-        Team team = new Team("Example", category, category.getDivision().toString());
+        Team team = new Team("Example", category, category.getDivision().name());
         Race race = new Race("Example", "3", LocalDate.now());
 
         TeamRace teamRace = new TeamRace(team, race, 22, 0, 120);
