@@ -34,13 +34,6 @@ public class ViewResultDisplay extends HttpServlet {
                       HttpServletResponse resp)
             throws ServletException, IOException {
 
-        int overallPlace = 0;
-        int maleDivision = 0;
-        int femaleDivision = 0;
-        int soloFemaleDivision = 0;
-        int soloMaleDivision = 0;
-        int mixedDivision = 0;
-
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamRaceDao = new GenericDao(TeamRace.class);
 
@@ -48,6 +41,26 @@ public class ViewResultDisplay extends HttpServlet {
 
         //using lambda expression to sort by the total time
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
+
+        req.setAttribute("team_races", rankDivision(teamRaces));
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+    /**
+     * This method's purpose is to rank the different divisions
+     * @param teamRaces the team races
+     * @return the team races
+     */
+    public List<TeamRace> rankDivision(List<TeamRace> teamRaces) {
+
+        int overallPlace = 0;
+        int maleDivision = 0;
+        int femaleDivision = 0;
+        int soloFemaleDivision = 0;
+        int soloMaleDivision = 0;
+        int mixedDivision = 0;
 
         for (TeamRace entry : teamRaces) {
 
@@ -86,10 +99,6 @@ public class ViewResultDisplay extends HttpServlet {
             overallPlace++;
             entry.setOverallPlace(overallPlace);
         }
-
-        req.setAttribute("team_races", teamRaces);
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
-        dispatcher.forward(req, resp);
+        return teamRaces;
     }
 }

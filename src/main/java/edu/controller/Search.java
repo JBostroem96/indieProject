@@ -63,7 +63,6 @@ public class Search extends HttpServlet {
             req.setAttribute("teams", teamDao.getAll());
         }
 
-
         RequestDispatcher dispatcher = req.getRequestDispatcher("/searchResults.jsp");
         dispatcher.forward(req, resp);
     }
