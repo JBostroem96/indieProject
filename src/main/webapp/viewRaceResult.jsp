@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
+<c:import url="head.jsp"/>
 
 <script type="text/javascript" class="init">
 
@@ -6,8 +8,6 @@
         $('.display').DataTable();
     });
 </script>
-<html>
-<c:import url="head.jsp"/>
 <body>
     <%@include file="nav.jsp"%>
     <div class="container bg-white">

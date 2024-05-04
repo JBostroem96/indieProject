@@ -50,7 +50,7 @@ public class LogIn extends HttpServlet implements PropertiesLoader {
     }
 
     /**
-     * Route to the aws-hosted cognito login page.
+     * Route to the aws-hosted cognito logout page.
      * @param req servlet request
      * @param resp servlet response
      * @throws ServletException

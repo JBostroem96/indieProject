@@ -1,7 +1,6 @@
 package edu.controller;
 import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,15 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * This Servlet's purpose is to add the entered user
  * @author Jimmy Bostroem
  */
-
 @WebServlet(
         urlPatterns = {"/addRace"}
 )

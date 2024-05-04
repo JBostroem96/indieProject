@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * This class' purpose is to add the reace result by grabbing the id
  */
@@ -37,10 +36,9 @@ public class AddRaceResultById extends HttpServlet {
 
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamDao = new GenericDao(Team.class);
-        GenericDao teamRaceDao = new GenericDao(TeamRace.class);
 
+        GenericDao teamRaceDao = new GenericDao(TeamRace.class);
         List<TeamRace> teamNames = teamRaceDao.getAll();
-        List<String> existingNames = new ArrayList<>();
 
         int raceId = Integer.parseInt(req.getParameter("id"));
         Race race = (Race)raceDao.getById(raceId);
@@ -48,14 +46,7 @@ public class AddRaceResultById extends HttpServlet {
         int teamId = Integer.parseInt(req.getParameter("team"));
         Team team = (Team)teamDao.getById(teamId);
 
-        for (TeamRace teamName : teamNames) {
-
-            if (teamName.getRace_id() == raceId) {
-
-                existingNames.add(teamName.getTeam().getName());
-            }
-        }
-        if (existingNames.contains(team.getName())) {
+        if (validateName(raceId, teamNames).contains(team.getName())) {
 
             String message = "That team already exists in that race. Please enter a different one.";
             req.setAttribute("message", message);
@@ -76,5 +67,25 @@ public class AddRaceResultById extends HttpServlet {
         req.setAttribute("team", teamDao.getAll());
         req.setAttribute("race", race);
         dispatcher.forward(req, resp);
+    }
+
+    /**
+     * This method's purpose is to validate the team name
+     * @param raceId the race id
+     * @param teamNames the team names
+     * @return the list of existing names
+     */
+    public List<String> validateName(int raceId, List<TeamRace> teamNames) {
+
+        List<String> existingNames = new ArrayList<>();
+
+        for (TeamRace teamName : teamNames) {
+
+            if (teamName.getRace_id() == raceId) {
+
+                existingNames.add(teamName.getTeam().getName());
+            }
+        }
+        return existingNames;
     }
 }

@@ -21,4 +21,5 @@ https://stackoverflow.com/a/56150258 Helped me fix the bug where the child entry
 
 https://stackoverflow.com/a/22822283 helped me resolve the lazy initialization exception bug when trying to get the categories
 
+https://www.codejava.net/java-ee/servlet/how-to-handle-error-in-web-xml-for-java-web-applications Helped me implement error pages
 
