@@ -14,6 +14,9 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" name="name" id="name" required>
+                        <c:if test="${!empty message}">
+                            <p class="text-danger small">${message}</p>
+                        </c:if>
                     </div>
                     <div class="form-group">
                         <label for="length">Length (in hours)</label>

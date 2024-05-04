@@ -39,6 +39,7 @@ public class EditRaceById extends HttpServlet {
 
         GenericDao dao = new GenericDao(Race.class);
         List<Race> races = dao.getAll();
+        Validate validate = new Validate();
 
         Race updatedRace = new Race(req.getParameter("name"),
                 req.getParameter("length"),
@@ -46,9 +47,9 @@ public class EditRaceById extends HttpServlet {
 
         Race raceToUpdate = (Race)dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        if (validateRace(races).contains(updatedRace.getName())) {
+        if (validate.validateRace(races).contains(updatedRace.getName())) {
 
-            String message = "That name already exists";
+            String message = "That race already exists";
             req.setAttribute("message", message);
             req.setAttribute("race", raceToUpdate);
 
@@ -65,24 +66,5 @@ public class EditRaceById extends HttpServlet {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editRace.jsp");
         dispatcher.forward(req, resp);
-    }
-
-
-    /**
-     * Validate race list.
-     *
-     * @param races the races
-     * @return the list
-     */
-    public List<String> validateRace(List<Race> races) {
-
-        List<String> existingRaces = new ArrayList<>();
-
-        for (Race race : races) {
-
-            existingRaces.add(race.getName());
-        }
-
-        return existingRaces;
     }
 }

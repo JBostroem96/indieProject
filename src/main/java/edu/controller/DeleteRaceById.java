@@ -33,21 +33,10 @@ public class DeleteRaceById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(Race.class);
-        final Logger logger = LogManager.getLogger(this.getClass());
 
         Race raceToDelete = (Race)dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        try {
-            dao.delete(raceToDelete);
-
-        } catch (ConstraintViolationException e) {
-
-            logger.error("This can't be deleted because it's in results", e);
-            
-        } catch (Error er) {
-
-            logger.error("There was an issue", er);
-        }
+        dao.delete(raceToDelete);
 
         req.setAttribute("deletedRace", raceToDelete);
 

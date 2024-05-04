@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * This Servlet's purpose is to add the entered user
@@ -35,13 +36,25 @@ public class AddRace extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(Race.class);
-        Race race = new Race(req.getParameter("name"),
-                req.getParameter("length"),
-                LocalDate.parse(req.getParameter("date")));
+        List<Race> races = dao.getAll();
+        Validate validate = new Validate();
+        String name = req.getParameter("name");
 
-        dao.insert(race);
+        if (validate.validateRace(races).contains(name)) {
 
-        req.setAttribute("race", race);
+            String message = "That race already exists";
+            req.setAttribute("message", message);
+
+        } else {
+
+            Race race = new Race(req.getParameter("name"),
+                    req.getParameter("length"),
+                    LocalDate.parse(req.getParameter("date")));
+
+            dao.insert(race);
+
+            req.setAttribute("race", race);
+        }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addRace.jsp");
         dispatcher.forward(req, resp);

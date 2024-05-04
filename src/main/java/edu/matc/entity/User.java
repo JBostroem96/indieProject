@@ -1,4 +1,5 @@
 package edu.matc.entity;
+import edu.controller.Validate;
 import edu.matc.persistence.GenericDao;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -56,20 +57,9 @@ public class User {
      */
     public User addUser(User user) {
 
-        GenericDao dao = new GenericDao(User.class);
-        List<User> names = dao.getAll();
-        List<String> existingNames = new ArrayList<>();
+        Validate validate = new Validate();
 
-        for (User name : names) {
-
-            existingNames.add(name.getUserName());
-        }
-        if (!existingNames.contains(user.getUserName())) {
-
-            dao.insert(user);
-
-        }
-        return user;
+        return validate.validateUser(user);
     }
     /**
      * Gets role.

@@ -36,19 +36,17 @@ public class AddTeam extends HttpServlet {
 
         GenericDao teamDao = new GenericDao(Team.class);
         GenericDao categoryDao = new GenericDao(Category.class);
-        GenericDao userDao = new GenericDao(User.class);
-
+        Validate validate = new Validate();
         String name = req.getParameter("name");
 
-        if (validateName().contains(name)) {
+        if (validate.validateName().contains(name)) {
 
             String message = "That team already exists. Please Enter something else.";
             req.setAttribute("message", message);
 
         } else {
 
-            int categoryId = Integer.parseInt(req.getParameter("id"));
-            Category category = (Category)categoryDao.getById(categoryId);
+            Category category = (Category)categoryDao.getById(Integer.parseInt(req.getParameter("id")));
             Team team = new Team(name, category, category.getDivision());
             teamDao.insert(team);
             req.setAttribute("team", team);
@@ -57,23 +55,6 @@ public class AddTeam extends HttpServlet {
         req.setAttribute("category", categoryDao.getAll());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addTeam.jsp");
         dispatcher.forward(req, resp);
-    }
-
-    /**
-     * This method's purpose is to validate the team name
-     * @return the list of existing names
-     */
-    public List<String> validateName() {
-
-        GenericDao teamDao = new GenericDao(Team.class);
-        List<Team> teamNames = teamDao.getAll();
-        List<String> existingNames = new ArrayList<>();
-
-        for (Team teamName : teamNames) {
-
-            existingNames.add(teamName.getName());
-        }
-        return existingNames;
     }
 }
 

@@ -39,6 +39,7 @@ public class AddRaceResultById extends HttpServlet {
 
         GenericDao teamRaceDao = new GenericDao(TeamRace.class);
         List<TeamRace> teamNames = teamRaceDao.getAll();
+        Validate validate = new Validate();
 
         int raceId = Integer.parseInt(req.getParameter("id"));
         Race race = (Race)raceDao.getById(raceId);
@@ -46,7 +47,7 @@ public class AddRaceResultById extends HttpServlet {
         int teamId = Integer.parseInt(req.getParameter("team"));
         Team team = (Team)teamDao.getById(teamId);
 
-        if (validateName(raceId, teamNames).contains(team.getName())) {
+        if (validate.validateName(raceId, teamNames).contains(team.getName())) {
 
             String message = "That team already exists in that race. Please enter a different one.";
             req.setAttribute("message", message);
@@ -67,25 +68,5 @@ public class AddRaceResultById extends HttpServlet {
         req.setAttribute("team", teamDao.getAll());
         req.setAttribute("race", race);
         dispatcher.forward(req, resp);
-    }
-
-    /**
-     * This method's purpose is to validate the team name
-     * @param raceId the race id
-     * @param teamNames the team names
-     * @return the list of existing names
-     */
-    public List<String> validateName(int raceId, List<TeamRace> teamNames) {
-
-        List<String> existingNames = new ArrayList<>();
-
-        for (TeamRace teamName : teamNames) {
-
-            if (teamName.getRace_id() == raceId) {
-
-                existingNames.add(teamName.getTeam().getName());
-            }
-        }
-        return existingNames;
     }
 }
