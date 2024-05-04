@@ -1,6 +1,7 @@
 package edu.matc.persistence;
 
 import edu.matc.entity.Category;
+import edu.matc.entity.Division;
 import edu.matc.testUtil.Database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ public class CategoryDaoTest {
     @Test
     void update() {
 
-        Category category = new Category("test");
+        Category category = new Category(Division.SOLO_FEMALE);
 
         Category categoryToUpdate = (Category)categoryDao.getById(1);
 
@@ -60,7 +61,7 @@ public class CategoryDaoTest {
      */
     @Test
     void insert() {
-        Category category = new Category("test");
+        Category category = new Category(Division.SOLO_MALE);
         int insertedCategoryId = categoryDao.insert(category);
         assertNotEquals(0, insertedCategoryId);
         Category insertedCategory = (Category) categoryDao.getById(insertedCategoryId);

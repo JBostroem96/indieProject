@@ -16,7 +16,9 @@ import java.util.Set;
 public class Category {
 
     private int category_id;
-    private String division;
+
+
+    private Division division;
     private Set<Team> teams;
 
     /**
@@ -31,7 +33,7 @@ public class Category {
      *
      * @param division the division
      */
-    public Category(String division) {
+    public Category(Division division) {
         this.division = division;
     }
 
@@ -81,8 +83,9 @@ public class Category {
      *
      * @return the division
      */
+    @Enumerated(EnumType.STRING)
     @Column(name = "division")
-    public String getDivision() {
+    public Division getDivision() {
         return division;
     }
 
@@ -91,7 +94,7 @@ public class Category {
      *
      * @param division the division
      */
-    public void setDivision(String division) {
+    public void setDivision(Division division) {
         this.division = division;
     }
 

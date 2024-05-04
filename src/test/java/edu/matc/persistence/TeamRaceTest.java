@@ -1,9 +1,6 @@
 package edu.matc.persistence;
-import edu.matc.entity.Category;
+import edu.matc.entity.*;
 import edu.matc.testUtil.Database;
-import edu.matc.entity.Race;
-import edu.matc.entity.Team;
-import edu.matc.entity.TeamRace;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -55,9 +52,9 @@ class TeamRaceTest {
 
         Category category = new Category();
         category.setCategory_id(5);
-        category.setDivision("Mixed");
+        category.setDivision(Division.SOLO_MALE);
 
-        Team team = new Team("Example2", category, category.getDivision());
+        Team team = new Team("Example2", category, category.getDivision().toString());
         teamDao.insert(team);
         Race race = new Race("Example3", "5", LocalDate.now());
         raceDao.insert(race);
@@ -83,9 +80,9 @@ class TeamRaceTest {
 
         Category category = new Category();
         category.setCategory_id(5);
-        category.setDivision("Mixed");
+        category.setDivision(Division.SOLO_MALE);
 
-        Team team = new Team("Example", category, category.getDivision());
+        Team team = new Team("Example", category, category.getDivision().toString());
         Race race = new Race("Example", "3", LocalDate.now());
 
         TeamRace teamRace = new TeamRace(team, race, 22, 0, 120);

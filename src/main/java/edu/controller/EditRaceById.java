@@ -1,8 +1,6 @@
 package edu.controller;
 
 import edu.matc.entity.Race;
-import edu.matc.entity.Team;
-import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;

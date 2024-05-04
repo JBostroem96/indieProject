@@ -2,8 +2,6 @@ package edu.controller;
 
 import edu.matc.entity.Category;
 import edu.matc.entity.Team;
-import edu.matc.entity.TeamRace;
-import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * This class' purpose is to add the team to our table
@@ -47,7 +44,7 @@ public class AddTeam extends HttpServlet {
         } else {
 
             Category category = (Category)categoryDao.getById(Integer.parseInt(req.getParameter("id")));
-            Team team = new Team(name, category, category.getDivision());
+            Team team = new Team(name, category, category.getDivision().toString());
             teamDao.insert(team);
             req.setAttribute("team", team);
         }

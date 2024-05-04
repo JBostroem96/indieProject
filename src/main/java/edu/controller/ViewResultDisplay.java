@@ -1,5 +1,6 @@
 package edu.controller;
 
+import edu.matc.entity.Division;
 import edu.matc.entity.Race;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
@@ -62,43 +63,62 @@ public class ViewResultDisplay extends HttpServlet {
         int soloMaleDivision = 0;
         int mixedDivision = 0;
 
+        for (Division division : Division.values()) {
+
+            loopThrough(division, teamRaces, overallPlace,
+                    maleDivision, femaleDivision, mixedDivision,
+                    soloFemaleDivision, soloMaleDivision);
+        }
+        return teamRaces;
+    }
+
+    /**
+     * This method's purpose is to loop through the results and display the ranks
+     * @param division the division
+     * @param teamRaces the list of results
+     * @param overallPlace the overall rank
+     * @param maleDivision the male category
+     * @param femaleDivision the female category
+     * @param mixedDivision the mixed category
+     * @param soloFemaleDivision the solo female category
+     * @param soloMaleDivision the solo male category
+     */
+    public void loopThrough(Division division, List<TeamRace> teamRaces, int overallPlace, int maleDivision, int femaleDivision, int mixedDivision, int soloFemaleDivision, int soloMaleDivision) {
+
         for (TeamRace entry : teamRaces) {
 
-            switch (entry.getTeam().getDivision()) {
-                case "Male":
+            switch (entry.getTeam().getCategory().getDivision()) {
+                case MALE:
 
                     maleDivision++;
                     entry.setDivisionPlace(maleDivision);
 
                     break;
-                case "Female":
+                case FEMALE:
 
                     femaleDivision++;
                     entry.setDivisionPlace(femaleDivision);
 
                     break;
-                case "Solo Male":
+                case SOLO_MALE:
 
                     soloMaleDivision++;
                     entry.setDivisionPlace(soloMaleDivision);
 
                     break;
-                case "Solo Female":
+                case SOLO_FEMALE:
 
                     soloFemaleDivision++;
                     entry.setDivisionPlace(soloFemaleDivision);
-
-                    break;
-                case "Mixed":
+                break;
+                case MIXED:
 
                     mixedDivision++;
                     entry.setDivisionPlace(mixedDivision);
-
-                    break;
+                break;
             }
             overallPlace++;
             entry.setOverallPlace(overallPlace);
         }
-        return teamRaces;
     }
 }
