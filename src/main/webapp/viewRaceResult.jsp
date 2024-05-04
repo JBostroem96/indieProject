@@ -1,49 +1,48 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<c:import url="head.jsp"/>
-
 <script type="text/javascript" class="init">
 
     $(document).ready(function () {
-        $('#addedRaceResult').DataTable();
+        $('.display').DataTable();
     });
 </script>
 <html>
+<c:import url="head.jsp"/>
 <body>
-<%@include file="nav.jsp"%>
-<div class="container bg-white">
-    <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Results:</em></h1>
-    <div class="d-flex flex-column gap-5 fw-bold border rounded" id="add_race_result">
-        <table id="addedRaceResult" class="display" cellspacing="=0" width="100%">
-            <thead>
-                <th>Race id</th>
-                <th>Overall Place</th>
-                <th>Division Place</th>
-                <th>Team Name</th>
-                <th>Division</th>
-                <th>CP</th>
-                <th>Late Penalty</th>
-                <th>Total Time</th>
-            </thead>
-            <tbody>
-                <c:forEach var="team_race" items="${team_races}">
-                    <tr>
-                        <td class="text-black">${team_race.race_id}</td>
-                        <td class="text-black">${team_race.overallPlace}</td>
-                        <td class="text-black">${team_race.divisionPlace}</td>
-                        <td class="text-black">${team_race.team.name}</td>
-                        <td class="text-black">${team_race.team.division}</td>
-                        <td class="text-black">${team_race.cp}</td>
-                        <td class="text-black">${team_race.latePenalty}</td>
-                        <td class="text-black">${team_race.totalTime}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+    <%@include file="nav.jsp"%>
+    <div class="container bg-white">
+        <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Results:</em></h1>
+        <div class="d-flex flex-column gap-5 fw-bold border rounded" id="add_race_result">
+            <table class="display" cellspacing="=0" width="100%">
+                <thead>
+                    <th>Race id</th>
+                    <th>Overall Place</th>
+                    <th>Division Place</th>
+                    <th>Team Name</th>
+                    <th>Division</th>
+                    <th>CP</th>
+                    <th>Late Penalty</th>
+                    <th>Total Time</th>
+                </thead>
+                <tbody>
+                    <c:forEach var="team_race" items="${team_races}">
+                        <tr>
+                            <td class="text-black">${team_race.race_id}</td>
+                            <td class="text-black">${team_race.overallPlace}</td>
+                            <td class="text-black">${team_race.divisionPlace}</td>
+                            <td class="text-black">${team_race.team.name}</td>
+                            <td class="text-black">${team_race.team.division}</td>
+                            <td class="text-black">${team_race.cp}</td>
+                            <td class="text-black">${team_race.latePenalty}</td>
+                            <td class="text-black">${team_race.totalTime}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </body>
 <c:import url="footer.jsp"/>
 </html>
-<br>
+
 

@@ -1,11 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <html>
     <c:import url="head.jsp"/>
     <body>
         <%@include file="nav.jsp"%>
         <div class="container bg-white">
-
         <c:choose>
             <c:when test="${!empty deletedRace}">
                 <p class="text-success text-center fw-bold mt-4">You have successfully deleted the race!</p>
