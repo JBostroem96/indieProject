@@ -92,5 +92,9 @@ Date: 05/4/24<br>
 Task: Worked on the project, refactoring code and implementing enum<br>
 Hours: 6.
 
+Date: 05/5/24<br>
+Task: Worked on the project, implementing update and delete for results<br>
+Hours: 5.
+
 
 

@@ -103,7 +103,7 @@ public class TeamRace {
      *
      * @return the team
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "team_id")
     public Team getTeam() {
         return team;
@@ -118,13 +118,12 @@ public class TeamRace {
         this.team = team;
     }
 
-
     /**
      * Gets race.
      *
      * @return the race
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "race_id")
     public Race getRace() {
         return race;
