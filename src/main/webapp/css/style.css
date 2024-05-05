@@ -4,13 +4,13 @@
 }
 
 
-#add_race_form, #add_team_form, #search_form, footer {
+#add_race_form, #add_team_form, #search_form, #edit_race_result, footer {
 
     background-color: #252525;
     color: rgb(255, 246, 0);
 }
 
-#add_race_form:hover, #add_team_form:hover, #search_form:hover {
+#add_race_form:hover, #add_team_form:hover, #search_form:hover, #edit_race_result:hover {
 
     box-shadow: 1px 1px 1px 1px rgb(255, 246, 0);
 }

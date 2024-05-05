@@ -22,11 +22,11 @@
             <c:choose>
                 <c:when test="${!empty editedRaceResult}">
                     <tr class="bg-white">
-                        <td class="text-black">${team_race.team.name}</td>
-                        <td class="text-black">${team_race.team.division}</td>
-                        <td class="text-black">${team_race.cp}</td>
-                        <td class="text-black">${team_race.latePenalty}</td>
-                        <td class="text-black">${team_race.totalTime}</td>
+                        <td class="text-black">${editedRaceResult.team.name}</td>
+                        <td class="text-black">${editedRaceResult.team.division}</td>
+                        <td class="text-black">${editedRaceResult.cp}</td>
+                        <td class="text-black">${editedRaceResult.latePenalty}</td>
+                        <td class="text-black">${editedRaceResult.totalTime}</td>
                     </tr>
                 </c:when>
                 <c:otherwise>
@@ -44,27 +44,29 @@
     </div>
     <div class="d-flex flex-column gap-5 fw-bold">
         <form action="editRaceResultById" class="form-inline" method="POST">
-            <div class="form-group">
-                <label for="time">Total Time (in minutes)</label>
-                <input type="number" class="form-control" name="time" id="time" required>
+            <div class="search text-white p-5 border rounded" id="add_race_form">
+                <div class="form-group">
+                    <label for="time">Total Time (in minutes)</label>
+                    <input type="number" class="form-control" name="time" id="time" required>
+                </div>
+                <div class="form-group">
+                    <label for="cp">CP</label>
+                    <input type="number" class="form-control" name="cp" id="cp" required>
+                </div>
+                <div class="form-group">
+                    <label for="penalty">Late Penalty</label>
+                    <input type="number" class="form-control" name="penalty" id="penalty" required>
+                </div>
+                <label class="fw-bold" for="team">Team</label>
+                <select class="form-control" size="3" id="team" name="team" required>
+                    <c:forEach var="team" items="${team}">
+                        <option value="${team.id}">${team.name}</option>
+                    </c:forEach>
+                </select>
+                <c:if test="${!empty message}">
+                    <p class="text-danger small">${message}</p>
+                </c:if>
             </div>
-            <div class="form-group">
-                <label for="cp">CP</label>
-                <input type="number" class="form-control" name="cp" id="cp" required>
-            </div>
-            <div class="form-group">
-                <label for="penalty">Late Penalty</label>
-                <input type="number" class="form-control" name="penalty" id="penalty" required>
-            </div>
-            <label class="fw-bold" for="team">Team</label>
-            <select class="form-control" size="3" id="team" name="team" required>
-                <c:forEach var="team" items="${team}">
-                    <option value="${team.id}">${team.name}</option>
-                </c:forEach>
-            </select>
-            <c:if test="${!empty message}">
-                <p class="text-danger small">${message}</p>
-            </c:if>
             <c:choose>
                 <c:when test="${!empty editedRaceResult}">
                     <button type="submit" name="id" class="btn btn-primary bg-success" value="${editedRaceResult.id}">Edit Race Result</button>
@@ -75,7 +77,6 @@
             </c:choose>
         </form>
     </div>
-</div>
 </body>
 <c:import url="footer.jsp"/>
 </html>

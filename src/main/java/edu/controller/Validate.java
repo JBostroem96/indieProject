@@ -123,18 +123,25 @@ public class Validate {
     }
 
     /**
-     * Validate result list.
+     * Validate edit result list.
      *
-     * @param teamRaces the team races
+     * @param name      the name
+     * @param teamNames the team names
+     * @param raceId    the race id
      * @return the list
      */
-    public List<String> validateResult(List<TeamRace> teamRaces) {
+    public List<String> validateEditResult(String name, List<TeamRace> teamNames, int raceId) {
 
-        for (TeamRace teamRace : teamRaces) {
+        for (TeamRace teamName : teamNames) {
 
-            existingNames.add(teamRace.getTeam().getName());
+            if (teamName.getRace_id() == raceId) {
+
+                if (!teamName.getTeam().getName().equals(name)) {
+
+                    existingNames.add(teamName.getTeam().getName());
+                }
+            }
         }
-
         return existingNames;
     }
 

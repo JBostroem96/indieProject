@@ -48,7 +48,7 @@ public class EditRaceResultById extends HttpServlet {
 
         TeamRace updatedTeamRace = new TeamRace(team, race, cp, penalty, totalTime);
 
-        if (validate.validateResult(teamNames).contains(updatedTeamRace.getTeam().getName())) {
+        if (validate.validateEditResult(teamRaceToUpdate.getTeam().getName(), teamNames, race.getId()).contains(updatedTeamRace.getTeam().getName())) {
 
             String message = "That team name already exists";
             req.setAttribute("message", message);
