@@ -16,6 +16,8 @@ import java.util.List;
 public class Validate {
 
     private List<String> existingNames;
+    private List<Race> races;
+    private List<Team> teamNames;
 
     /**
      * Instantiates a new Validate.
@@ -29,10 +31,30 @@ public class Validate {
      * This method's purpose is to validate the team name
      * @return the list of existing names
      */
-    public List<String> validateName() {
+    public List<String> validateEditTeam(String name, GenericDao dao) {
 
-        GenericDao teamDao = new GenericDao(Team.class);
-        List<Team> teamNames = teamDao.getAll();
+        teamNames = dao.getAll();
+
+        for (Team teamName : teamNames) {
+
+            if (!teamName.getName().equals(name)) {
+
+                existingNames.add(teamName.getName());
+            }
+        }
+        return existingNames;
+    }
+
+    /**
+     * Validate add team list.
+     *
+     * @param name the name
+     * @param dao  the dao
+     * @return the list
+     */
+    public List<String> validateAddTeam(String name, GenericDao dao) {
+
+        teamNames = dao.getAll();
 
         for (Team teamName : teamNames) {
 
@@ -47,7 +69,7 @@ public class Validate {
      * @param teamNames the team names
      * @return the list of existing names
      */
-    public List<String> validateName(int raceId, List<TeamRace> teamNames) {
+    public List<String> validateResult(int raceId, List<TeamRace> teamNames) {
 
         for (TeamRace teamName : teamNames) {
 
@@ -59,17 +81,58 @@ public class Validate {
         return existingNames;
     }
 
+
     /**
-     * Validate race list.
+     * Validate edit race list.
      *
-     * @param races the races
+     * @param name the name
+     * @param dao  the dao
      * @return the list
      */
-    public List<String> validateRace(List<Race> races) {
+    public List<String> validateEditRace(String name, GenericDao dao) {
+
+        races = dao.getAll();
+
+        for (Race race : races) {
+
+            if (!race.getName().equals(name)) {
+                existingNames.add(race.getName());
+            }
+        }
+
+        return existingNames;
+    }
+
+    /**
+     * Validate add race list.
+     *
+     * @param name the name
+     * @param dao  the dao
+     * @return the list
+     */
+    public List<String> validateAddRace(String name, GenericDao dao) {
+
+        List<Race> races = dao.getAll();
 
         for (Race race : races) {
 
             existingNames.add(race.getName());
+        }
+
+        return existingNames;
+    }
+
+    /**
+     * Validate result list.
+     *
+     * @param teamRaces the team races
+     * @return the list
+     */
+    public List<String> validateResult(List<TeamRace> teamRaces) {
+
+        for (TeamRace teamRace : teamRaces) {
+
+            existingNames.add(teamRace.getTeam().getName());
         }
 
         return existingNames;

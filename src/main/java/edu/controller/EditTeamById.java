@@ -39,7 +39,7 @@ public class EditTeamById extends HttpServlet {
 
         Team teamToUpdate = (Team)dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        if (validate.validateName().contains(updatedTeam.getName())) {
+        if (validate.validateEditTeam(teamToUpdate.getName(), dao).contains(updatedTeam.getName())) {
 
             String message = "That name already exists";
             req.setAttribute("alreadyExists", message);

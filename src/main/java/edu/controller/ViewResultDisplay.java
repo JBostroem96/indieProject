@@ -83,7 +83,9 @@ public class ViewResultDisplay extends HttpServlet {
      * @param soloFemaleDivision the solo female category
      * @param soloMaleDivision the solo male category
      */
-    public void loopThrough(Division division, List<TeamRace> teamRaces, int overallPlace, int maleDivision, int femaleDivision, int mixedDivision, int soloFemaleDivision, int soloMaleDivision) {
+    public void loopThrough(Division division, List<TeamRace> teamRaces, int overallPlace, int maleDivision,
+                            int femaleDivision, int mixedDivision,
+                            int soloFemaleDivision, int soloMaleDivision) {
 
         for (TeamRace entry : teamRaces) {
 
@@ -110,12 +112,12 @@ public class ViewResultDisplay extends HttpServlet {
 
                     soloFemaleDivision++;
                     entry.setDivisionPlace(soloFemaleDivision);
-                break;
+                    break;
                 case MIXED:
 
                     mixedDivision++;
                     entry.setDivisionPlace(mixedDivision);
-                break;
+                    break;
             }
             overallPlace++;
             entry.setOverallPlace(overallPlace);

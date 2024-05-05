@@ -35,18 +35,15 @@ public class AddRaceResultById extends HttpServlet {
 
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamDao = new GenericDao(Team.class);
-
         GenericDao teamRaceDao = new GenericDao(TeamRace.class);
+        
         List<TeamRace> teamNames = teamRaceDao.getAll();
         Validate validate = new Validate();
 
-        int raceId = Integer.parseInt(req.getParameter("id"));
-        Race race = (Race)raceDao.getById(raceId);
+        Race race = (Race)raceDao.getById(Integer.parseInt(req.getParameter("id")));
+        Team team = (Team)teamDao.getById(Integer.parseInt(req.getParameter("team")));
 
-        int teamId = Integer.parseInt(req.getParameter("team"));
-        Team team = (Team)teamDao.getById(teamId);
-
-        if (validate.validateName(raceId, teamNames).contains(team.getName())) {
+        if (validate.validateResult(race.getId(), teamNames).contains(team.getName())) {
 
             String message = "That team already exists in that race. Please enter a different one.";
             req.setAttribute("message", message);

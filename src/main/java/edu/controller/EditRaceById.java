@@ -36,7 +36,7 @@ public class EditRaceById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(Race.class);
-        List<Race> races = dao.getAll();
+
         Validate validate = new Validate();
 
         Race updatedRace = new Race(req.getParameter("name"),
@@ -45,7 +45,7 @@ public class EditRaceById extends HttpServlet {
 
         Race raceToUpdate = (Race)dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        if (validate.validateRace(races).contains(updatedRace.getName())) {
+        if (validate.validateEditRace(raceToUpdate.getName(), dao).contains(updatedRace.getName())) {
 
             String message = "That race already exists";
             req.setAttribute("message", message);

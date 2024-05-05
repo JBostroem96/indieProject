@@ -36,11 +36,11 @@ public class AddRace extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(Race.class);
-        List<Race> races = dao.getAll();
+
         Validate validate = new Validate();
         String name = req.getParameter("name");
 
-        if (validate.validateRace(races).contains(name)) {
+        if (validate.validateAddRace(name, dao).contains(name)) {
 
             String message = "That race already exists";
             req.setAttribute("message", message);
