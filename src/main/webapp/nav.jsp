@@ -32,6 +32,7 @@
                     <c:otherwise>
                         <li class="nav-item"><a class="nav-link" href = "AddRaceDisplay"><em>Add Race</em></a></li>
                         <li class="nav-item"><a class="nav-link" href = "addTeamDisplay"><em>Add a Team</em></a></li>
+                        <li class="nav-item"><a class="nav-link" href = "displayUsers"><em>Assign Roles</em></a></li>
                         <li class="nav-item"><a class="nav-link" href = "logout"><em>Logout</em></a></li>
                         <li class="nav-item"><a class="nav-link"><em>User: ${user.userName}</em></a></li>
                     </c:otherwise>
