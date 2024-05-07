@@ -38,12 +38,19 @@ public class ViewResultDisplay extends HttpServlet {
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamRaceDao = new GenericDao(TeamRace.class);
 
-        List<TeamRace> teamRaces = teamRaceDao.findByPropertyEqual("race_id", req.getParameter("id"));
+        List<TeamRace> teamRaces = (ArrayList) teamRaceDao.findByPropertyEqual("race_id", req.getParameter("id"));
 
         //using lambda expression to sort by the total time
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 
-        req.setAttribute("team_races", rankDivision(teamRaces));
+        rankDivision(teamRaces);
+
+        for (TeamRace teamRace : teamRaces) {
+
+            teamRaceDao.update(teamRace);
+        }
+
+        req.setAttribute("team_races", teamRaces);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
         dispatcher.forward(req, resp);
@@ -69,6 +76,7 @@ public class ViewResultDisplay extends HttpServlet {
                     maleDivision, femaleDivision, mixedDivision,
                     soloFemaleDivision, soloMaleDivision);
         }
+
         return teamRaces;
     }
 
