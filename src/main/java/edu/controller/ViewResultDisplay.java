@@ -1,6 +1,6 @@
 package edu.controller;
 
-import com.mysql.cj.jdbc.exceptions.SQLError;
+
 import edu.matc.entity.Division;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.util.*;
 
 
