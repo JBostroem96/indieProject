@@ -15,7 +15,6 @@
         <div class="d-flex flex-column gap-5 fw-bold border rounded">
             <table class="display" cellspacing="=0" width="100%">
                 <thead>
-                    <th>Race id</th>
                     <th>Overall Place</th>
                     <th>Division Place</th>
                     <th>Team Name</th>
@@ -27,7 +26,6 @@
                 <tbody>
                     <c:forEach var="team_race" items="${team_races}">
                         <tr>
-                            <td class="text-black">${team_race.race_id}</td>
                             <td class="text-black">${team_race.overallPlace}</td>
                             <td class="text-black">${team_race.divisionPlace}</td>
                             <td class="text-black">${team_race.team.name}</td>
@@ -35,12 +33,12 @@
                             <td class="text-black">${team_race.cp}</td>
                             <td class="text-black">${team_race.latePenalty}</td>
                             <td class="text-black">${team_race.totalTime} minutes</td>
-                            <td>
-                                <form action="reportResultDisplay" class="form-inline" method="get">
-                                    <button type="submit" name="id" class="btn btn-warning bg-warning btn-sm" value="${team_race.id}">Report</button>
-                                </form>
-                            </td>
                             <c:if test="${user.role == 'admin' || user.role == 'user'}">
+                                <td>
+                                    <form action="reportResultDisplay" class="form-inline" method="get">
+                                        <button type="submit" name="id" class="btn btn-warning bg-warning btn-sm" value="${team_race.id}">Report</button>
+                                    </form>
+                                </td>
                                 <td>
                                     <form action="editRaceResultDisplay" class="form-inline" method="get">
                                         <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${team_race.id}">Edit</button>
