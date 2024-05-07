@@ -16,9 +16,7 @@ import java.util.List;
 public class Validate {
 
     private List<String> existingNames;
-    private List<Race> races;
-    private List<Team> teamNames;
-
+    
     /**
      * Instantiates a new Validate.
      */
@@ -33,15 +31,16 @@ public class Validate {
      */
     public List<String> validateEditTeam(String name, GenericDao dao) {
 
-        teamNames = dao.getAll();
+        for (Object team : dao.getAll()) {
 
-        for (Team teamName : teamNames) {
+            Team teamEntry = (Team) team;
 
-            if (!teamName.getName().equals(name)) {
+            if (!teamEntry.getName().equals(name)) {
 
-                existingNames.add(teamName.getName());
+                existingNames.add(teamEntry.getName());
             }
         }
+
         return existingNames;
     }
 
@@ -54,28 +53,30 @@ public class Validate {
      */
     public List<String> validateAddTeam(String name, GenericDao dao) {
 
-        teamNames = dao.getAll();
+        for (Object team : dao.getAll()) {
 
-        for (Team teamName : teamNames) {
-
-            existingNames.add(teamName.getName());
+            Team teamEntry = (Team) team;
+            existingNames.add(teamEntry.getName());
         }
         return existingNames;
+
     }
 
     /**
      * This method's purpose is to validate the team name
      * @param raceId the race id
-     * @param teamNames the team names
+     * @param dao the teamRace dao
      * @return the list of existing names
      */
-    public List<String> validateResult(int raceId, List<TeamRace> teamNames) {
+    public List<String> validateResult(int raceId, GenericDao dao) {
 
-        for (TeamRace teamName : teamNames) {
+        for (Object teamRace : dao.getAll()) {
 
-            if (teamName.getRace_id() == raceId) {
+            TeamRace teamRaceEntry = (TeamRace) teamRace;
 
-                existingNames.add(teamName.getTeam().getName());
+            if (teamRaceEntry.getRace_id() == raceId) {
+
+                existingNames.add(teamRaceEntry.getTeam().getName());
             }
         }
         return existingNames;
@@ -91,15 +92,14 @@ public class Validate {
      */
     public List<String> validateEditRace(String name, GenericDao dao) {
 
-        races = dao.getAll();
+        for (Object race : dao.getAll()) {
 
-        for (Race race : races) {
+            Race raceEntry = (Race) race;
 
-            if (!race.getName().equals(name)) {
-                existingNames.add(race.getName());
+            if (!raceEntry.getName().equals(name)) {
+                existingNames.add(raceEntry.getName());
             }
         }
-
         return existingNames;
     }
 
@@ -112,11 +112,10 @@ public class Validate {
      */
     public List<String> validateAddRace(String name, GenericDao dao) {
 
-        List<Race> races = dao.getAll();
+        for (Object race : dao.getAll()) {
 
-        for (Race race : races) {
-
-            existingNames.add(race.getName());
+            Race raceEntry = (Race) race;
+            existingNames.add(raceEntry.getName());
         }
 
         return existingNames;
@@ -126,19 +125,21 @@ public class Validate {
      * Validate edit result list.
      *
      * @param name      the name
-     * @param teamNames the team names
+     * @param dao the teamRace dao
      * @param raceId    the race id
      * @return the list
      */
-    public List<String> validateEditResult(String name, List<TeamRace> teamNames, int raceId) {
+    public List<String> validateEditResult(String name, GenericDao dao, int raceId) {
 
-        for (TeamRace teamName : teamNames) {
+        for (Object teamRace : dao.getAll()) {
 
-            if (teamName.getRace_id() == raceId) {
+            TeamRace teamRaceEntry = (TeamRace) teamRace;
 
-                if (!teamName.getTeam().getName().equals(name)) {
+            if (teamRaceEntry.getRace_id() == raceId) {
 
-                    existingNames.add(teamName.getTeam().getName());
+                if (!teamRaceEntry.getTeam().getName().equals(name)) {
+
+                    existingNames.add(teamRaceEntry.getTeam().getName());
                 }
             }
         }
@@ -153,16 +154,16 @@ public class Validate {
     public User validateUser(User user) {
 
         GenericDao dao = new GenericDao(User.class);
-        List<User> names = dao.getAll();
 
-        for (User name : names) {
+        for (Object userName : dao.getAll()) {
 
-            existingNames.add(name.getUserName());
+            User userEntry = (User) userName;
+            existingNames.add(userEntry.getUserName());
         }
+
         if (!existingNames.contains(user.getUserName())) {
 
             dao.insert(user);
-
         }
         return user;
     }
@@ -174,14 +175,15 @@ public class Validate {
      */
     public void validateUser(HttpSession session, String userName) {
 
-        GenericDao userDao = new GenericDao(User.class);
-        List<User> users = userDao.getAll();
+        GenericDao dao = new GenericDao(User.class);
 
-        for (User user : users) {
+        for (Object user : dao.getAll()) {
 
-            if (user.getUserName().equals(userName)) {
+            User userEntry = (User) user;
 
-                session.setAttribute("user", user);
+            if (userEntry.getUserName().equals(userName)) {
+
+                session.setAttribute("user", userEntry);
             }
         }
     }
