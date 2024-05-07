@@ -9,7 +9,7 @@
 <body>
     <%@include file="nav.jsp"%>
     <div class="container bg-white">
-        <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Add Race Result</em></h1>
+        <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Race Result</em></h1>
         <div class="d-flex flex-column gap-5 fw-bold border rounded" id="add_race_result">
             <table class="display" cellspacing="=0" width="100%">
                 <thead>
@@ -26,13 +26,13 @@
                             <c:if test="${user.role == 'admin' || user.role == 'user'}">
                                 <td>
                                     <form action="addRaceResult" class="form-inline" method="get">
-                                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Add</button>
+                                        <button type="submit" name="id" class="btn btn-primary bg-primary btn-sm" value="${race.id}">Add</button>
                                     </form>
                                 </td>
                             </c:if>
                             <td>
                                 <form action="viewRaceResult" class="form-inline" method="get">
-                                    <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">View</button>
+                                    <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${race.id}">View</button>
                                 </form>
                             </td>
                         </tr>

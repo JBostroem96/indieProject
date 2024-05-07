@@ -1,7 +1,5 @@
 package edu.controller;
 
-import edu.matc.entity.Team;
-import edu.matc.entity.TeamRace;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 
@@ -16,7 +14,7 @@ import java.io.IOException;
 @WebServlet(
         urlPatterns = {"/editUserRole"}
 )
-public class EditUserRole extends HttpServlet {
+public class EditUserRoleDisplay extends HttpServlet {
 
     /**
      * This method's purpose is to verify the update of the entry

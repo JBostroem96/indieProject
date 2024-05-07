@@ -8,7 +8,7 @@ import javax.mail.Session;
 import java.util.Properties;
 
 /**
- * https://www.digitalocean.com/community/tutorials/javamail-example-send-mail-in-java-smtp
+ * Source: https://www.digitalocean.com/community/tutorials/javamail-example-send-mail-in-java-smtp
  */
 
 /**

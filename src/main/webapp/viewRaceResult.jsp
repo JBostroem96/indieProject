@@ -34,21 +34,21 @@
                             <td class="text-black">${team_race.team.division}</td>
                             <td class="text-black">${team_race.cp}</td>
                             <td class="text-black">${team_race.latePenalty}</td>
-                            <td class="text-black">${team_race.totalTime}</td>
+                            <td class="text-black">${team_race.totalTime} minutes</td>
                             <td>
                                 <form action="reportResultDisplay" class="form-inline" method="get">
-                                    <button type="submit" name="id" class="btn btn-primary bg-danger" value="${team_race.id}">Report</button>
+                                    <button type="submit" name="id" class="btn btn-warning bg-warning btn-sm" value="${team_race.id}">Report</button>
                                 </form>
                             </td>
                             <c:if test="${user.role == 'admin' || user.role == 'user'}">
                                 <td>
                                     <form action="editRaceResultDisplay" class="form-inline" method="get">
-                                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${team_race.id}">Edit</button>
+                                        <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${team_race.id}">Edit</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="deleteRaceResultDisplay" class="form-inline" method="get">
-                                        <button type="submit" name="id" class="btn btn-primary bg-danger" value="${team_race.id}">Delete</button>
+                                        <button type="submit" name="id" class="btn btn-danger bg-danger btn-sm" value="${team_race.id}">Delete</button>
                                     </form>
                                 </td>
                             </c:if>

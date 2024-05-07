@@ -29,7 +29,7 @@
             <form action="addRaceResultById" class="form-inline" method="POST">
                 <div class="search text-white p-5 border rounded" id="add_race_form">
                     <div class="form-group">
-                        <label for="time">Total Time (in minutes)</label>
+                        <label for="time">Total Time (in minutes.seconds)</label>
                         <input type="number" class="form-control" name="time" id="time" required>
                     </div>
                     <div class="form-group">

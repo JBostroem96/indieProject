@@ -18,7 +18,7 @@ import java.io.IOException;
         urlPatterns = {"/editRace"}
 )
 
-public class EditRace extends HttpServlet {
+public class EditRaceDisplay extends HttpServlet {
 
     /**
      * This method's purpose is to verify the update of the entry

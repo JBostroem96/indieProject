@@ -16,7 +16,7 @@ import java.io.IOException;
         urlPatterns = {"/editTeam"}
 )
 
-public class EditTeam extends HttpServlet {
+public class EditTeamDisplay extends HttpServlet {
 
     /**
      * This method's purpose is to verify the update of the entry

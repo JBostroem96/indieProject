@@ -10,7 +10,7 @@
             </c:when>
             <c:otherwise>
                 <p class="mt-5 text-center fw-bold mb-5 text-danger"><em>WARNING: Deleting this team will remove all results associated with it!</em></p>
-                <form action="deleteTeamById" class="form-inline" method="POST">
+                <form action="deleteTeamById" class="form-inline text-center" method="POST">
                     <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
                         <table id="addRace" class="display" cellspacing="=0" width="100%">
                             <thead>
