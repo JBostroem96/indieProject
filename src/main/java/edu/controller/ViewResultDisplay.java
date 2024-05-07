@@ -35,7 +35,7 @@ public class ViewResultDisplay extends HttpServlet {
                       HttpServletResponse resp)
             throws ServletException, IOException {
 
-        GenericDao raceDao = new GenericDao(Race.class);
+
         GenericDao teamRaceDao = new GenericDao(TeamRace.class);
 
         List<TeamRace> teamRaces = (ArrayList) teamRaceDao.findByPropertyEqual("race_id", req.getParameter("id"));
@@ -43,17 +43,26 @@ public class ViewResultDisplay extends HttpServlet {
         //using lambda expression to sort by the total time
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 
-        rankDivision(teamRaces);
-
-        for (TeamRace teamRace : teamRaces) {
-
-            teamRaceDao.update(teamRace);
-        }
-
-        req.setAttribute("team_races", teamRaces);
+        req.setAttribute("team_races", updateResults(rankDivision(teamRaces), teamRaceDao));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
         dispatcher.forward(req, resp);
+    }
+
+    /**
+     * Update results list.
+     *
+     * @param teamRaces the team races
+     * @param dao       the dao
+     * @return the list
+     */
+    public List<TeamRace> updateResults(List<TeamRace> teamRaces, GenericDao dao) {
+
+        for (TeamRace teamRace : teamRaces) {
+
+            dao.update(teamRace);
+        }
+        return teamRaces;
     }
 
     /**
