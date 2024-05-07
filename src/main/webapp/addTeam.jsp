@@ -3,12 +3,12 @@
 <html>
 <c:import url="head.jsp"/>
 <body>
-    <%@include file="nav.jsp"%>
     <c:choose>
         <c:when test="${user.role == null}">
             <p class="text-center fw-bold text-danger">You do not have permission to this page</p>
         </c:when>
         <c:otherwise>
+            <%@include file="nav.jsp"%>
             <div class="container bg-white">
                 <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Add a Team</em></h1>
                 <c:if test="${!empty team}">
