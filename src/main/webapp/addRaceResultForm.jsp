@@ -27,7 +27,7 @@
         </div>
         <div class="d-flex flex-column gap-5 fw-bold">
             <form action="addRaceResultById" class="form-inline" method="POST">
-                <div class="search text-white p-5 border rounded" id="add_race_form">
+                <div class="search text-white p-5 border rounded" id="add_result">
                     <div class="form-group">
                         <label for="time">Total Time (in minutes.seconds)</label>
                         <input type="number" class="form-control" name="time" id="time" required>
@@ -50,7 +50,7 @@
                         <p class="text-danger small">${message}</p>
                     </c:if>
                 </div>
-                <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Add Results</button>
+                <button type="submit" name="id" class="btn btn-success bg-success" value="${race.id}">Add Results</button>
             </form>
         </div>
     </div>

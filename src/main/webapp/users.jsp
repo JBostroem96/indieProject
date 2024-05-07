@@ -17,7 +17,7 @@
     <c:choose>
         <c:when test="${empty userRole}">
             <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Results:</em></h1>
-            <div class="d-flex flex-column gap-5 fw-bold border rounded" id="add_race_result">
+            <div class="d-flex flex-column gap-5 fw-bold border rounded">
                 <table class="display" cellspacing="=0" width="100%">
                     <thead>
                         <th>Name</th>
@@ -30,7 +30,7 @@
                                 <td class="text-black">${user.role}</td>
                                 <td>
                                     <form action="editUserRole" class="form-inline" method="get">
-                                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${user.id}">Edit</button>
+                                        <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${user.id}">Edit</button>
                                     </form>
                                 </td>
                             </tr>
@@ -47,7 +47,7 @@
             </c:if>
             <div class="d-flex flex-column gap-5 fw-bold">
                 <form action="editUserRoleById" class="form-inline">
-                    <div class="search text-white p-5 border rounded" id="search_form">
+                    <div class="search text-white p-5 border rounded" id="assign_role">
                         <label for="name">Name</label>
                         <input class="form-control" type="text" name="name" id="name" placeholder="${userRole.name}" disabled>
                         <div class="form-group">
@@ -62,9 +62,7 @@
                             <p class="text-danger fw-bold">${failure}</p>
                         </c:if>
                     </div>
-                    <div class="buttons mt-3">
-                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${userRole.id}">Submit</button>
-                    </div>
+                    <button type="submit" name="id" class="btn btn-success bg-success" value="${userRole.id}">Submit</button>
                 </form>
             </div>
         </c:otherwise>

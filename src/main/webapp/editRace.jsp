@@ -38,7 +38,7 @@
         </div>
         <div class="d-flex flex-column gap-5 fw-bold">
             <form action="editRaceById" class="form-inline" method="POST">
-                <div class="search text-white p-5 border rounded" id="add_race_form">
+                <div class="search text-white p-5 border rounded" id="edit_race">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" name="name" id="name" required>
@@ -60,7 +60,7 @@
                         <button type="submit" name="id" class="btn btn-primary bg-success" value="${editedRace.id}">Edit Race</button>
                     </c:when>
                     <c:otherwise>
-                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${race.id}">Edit Race</button>
+                        <button type="submit" name="id" class="btn btn-success bg-success" value="${race.id}">Edit Race</button>
                     </c:otherwise>
                 </c:choose>
             </form>

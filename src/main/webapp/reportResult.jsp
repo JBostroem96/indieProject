@@ -9,9 +9,9 @@
         <c:if test="${!empty resultReported}">
             <p class="text-success text-center fw-bold">Your report concerning ${resultReported} has been submitted</p>
         </c:if>
-        <div class="d-flex flex-column gap-5 fw-bold" id="added_race">
+        <div class="d-flex flex-column gap-5 fw-bold">
             <form action="reportResultById" class="form-inline" method="POST">
-                <div class="search text-white p-5 border rounded" id="add_race_form">
+                <div class="search text-white p-5 border rounded" id="report">
                     <label for="name">Name</label>
                     <input class="form-control" type="text" name="name" id="name" placeholder="${result.team.name}" value="${result.team.name}" disabled>
                     <div class="form-group">
@@ -24,7 +24,7 @@
                         <textarea name="teamTextArea" class="form-control" rows="5" cols="80" id="teamTextArea"></textarea>
                     </div>
                 </div>
-                <button type="submit" name="id" class="btn btn-primary bg-success" value="${result.id}">Submit</button>
+                <button type="submit" name="id" class="btn btn-success bg-success" value="${result.id}">Submit</button>
             </form>
         </div>
     </div>

@@ -9,7 +9,7 @@
     <c:if test="${!empty editedRaceResult}">
         <p class="text-success text-center fw-bold">You have successfully edited the race!</p>
     </c:if>
-    <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
+    <div class="d-flex flex-column gap-5 fw-bold border rounded" id="form">
         <table id="addRace" class="display" cellspacing="=0" width="100%">
             <thead>
             <th>team name</th>
@@ -44,7 +44,7 @@
     </div>
     <div class="d-flex flex-column gap-5 fw-bold">
         <form action="editRaceResultById" class="form-inline" method="POST">
-            <div class="search text-white p-5 border rounded" id="add_race_form">
+            <div class="search text-white p-5 border rounded" id="edit_race_result">
                 <div class="form-group">
                     <label for="time">Total Time (in minutes)</label>
                     <input type="number" class="form-control" name="time" id="time" required>
@@ -69,10 +69,10 @@
             </div>
             <c:choose>
                 <c:when test="${!empty editedRaceResult}">
-                    <button type="submit" name="id" class="btn btn-primary bg-success" value="${editedRaceResult.id}">Edit Race Result</button>
+                    <button type="submit" name="id" class="btn btn-success bg-success" value="${editedRaceResult.id}">Edit Race Result</button>
                 </c:when>
                 <c:otherwise>
-                    <button type="submit" name="id" class="btn btn-primary bg-success" value="${team_race.id}">Edit Race Result</button>
+                    <button type="submit" name="id" class="btn btn-success bg-success" value="${team_race.id}">Edit Race Result</button>
                 </c:otherwise>
             </c:choose>
         </form>

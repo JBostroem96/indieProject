@@ -16,7 +16,7 @@
                 </c:if>
                 <div class="d-flex flex-column gap-5 fw-bold">
                     <form action="addTeam" class="form-inline" method="POST">
-                        <div class="search text-white p-5 border rounded" id="add_team_form">
+                        <div class="search text-white p-5 border rounded" id="add_team">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" name="name" id="name">
@@ -33,10 +33,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="buttons mt-3">
-                            <button type="submit" name="submit" class="btn btn-primary bg-success" value="submit">Submit</button>
-                            <button type="reset" name="clear" class="btn btn-primary bg-danger" value="clear">Clear</button>
-                        </div>
+                        <button type="submit" name="submit" class="btn btn-success bg-success" value="submit">Submit</button>
+                        <button type="reset" name="clear" class="btn btn-danger bg-danger" value="clear">Clear</button>
                     </form>
                 </div>
             </div>

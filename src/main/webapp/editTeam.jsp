@@ -35,7 +35,7 @@
         </div>
         <div class="d-flex flex-column gap-5 fw-bold">
             <form action="editTeamById" class="form-inline" method="POST">
-                <div class="search text-white p-5 border rounded" id="add_race_form">
+                <div class="search text-white p-5 border rounded" id="edit_team">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" name="name" id="name" required>
@@ -54,10 +54,10 @@
                 </div>
                 <c:choose>
                     <c:when test="${!empty editedTeam}">
-                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${editedTeam.id}">Edit Team</button>
+                        <button type="submit" name="id" class="btn btn-success bg-success" value="${editedTeam.id}">Edit Team</button>
                     </c:when>
                     <c:otherwise>
-                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${team.id}">Edit Team</button>
+                        <button type="submit" name="id" class="btn btn-success bg-success" value="${team.id}">Edit Team</button>
                     </c:otherwise>
                 </c:choose>
             </form>

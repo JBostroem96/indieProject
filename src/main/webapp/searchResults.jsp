@@ -15,7 +15,7 @@
         <c:if test="${!empty report}">
             <p class="text-success fw-bold">${report}</p>
         </c:if>
-        <div class="d-flex flex-column gap-5 fw-bold border rounded" id="add_race_result">
+        <div class="d-flex flex-column gap-5 fw-bold border rounded">
             <table class="display" cellspacing="=0" width="100%">
                 <c:choose>
                     <c:when test="${!empty races}">

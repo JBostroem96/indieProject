@@ -4,13 +4,17 @@
 }
 
 
-#add_race_form, #add_team_form, #search_form, #edit_race_result, footer {
+div#add_race_result, div#report, div#add_race, div#add_team,
+        div#add_result, div#edit_race, div#edit_race_result,
+        div#edit_team, div#search_race, div#search_team, div#assign_role, footer {
 
     background-color: #252525;
     color: rgb(255, 246, 0);
 }
 
-#add_race_form:hover, #add_team_form:hover, #search_form:hover, #edit_race_result:hover {
+#add_race_result:hover, #add_race:hover, #add_team:hover, #add_result:hover,
+        #edit_race:hover, #edit_race_result:hover,
+        #edit_team:hover, #report:hover, #search_race:hover, #search_team:hover, div#assign_role:hover {
 
     box-shadow: 1px 1px 1px 1px rgb(255, 246, 0);
 }
