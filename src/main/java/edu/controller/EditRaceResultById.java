@@ -4,6 +4,8 @@ import edu.matc.entity.Race;
 import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,6 +36,7 @@ public class EditRaceResultById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamDao = new GenericDao(Team.class);
 
@@ -65,7 +68,11 @@ public class EditRaceResultById extends HttpServlet {
             teamRaceToUpdate.setTotalTime(updatedTeamRace.getTotalTime());
             teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
 
-            teamRaceDao.update(teamRaceToUpdate);
+            try {
+                teamRaceDao.update(teamRaceToUpdate);
+            } catch (Exception e) {
+                logger.error("There was an issue updating the data", e);
+            }
 
             req.setAttribute("editedRaceResult", teamRaceToUpdate);
         }

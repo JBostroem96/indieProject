@@ -3,6 +3,8 @@ package edu.controller;
 import edu.matc.entity.Category;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,6 +33,7 @@ public class AddTeam extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao teamDao = new GenericDao(Team.class);
         GenericDao categoryDao = new GenericDao(Category.class);
 
@@ -46,7 +49,13 @@ public class AddTeam extends HttpServlet {
 
             Category category = (Category)categoryDao.getById(Integer.parseInt(req.getParameter("id")));
             Team team = new Team(name, category, category.getDivision().toString());
-            teamDao.insert(team);
+
+            try {
+                teamDao.insert(team);
+            } catch (Exception e) {
+                logger.error("There was an issue inserting the data", e);
+            }
+
             req.setAttribute("team", team);
         }
 

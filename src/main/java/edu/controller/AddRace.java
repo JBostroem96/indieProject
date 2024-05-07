@@ -1,6 +1,9 @@
 package edu.controller;
 import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,6 +39,7 @@ public class AddRace extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao dao = new GenericDao(Race.class);
 
         Validate validate = new Validate();
@@ -51,7 +56,13 @@ public class AddRace extends HttpServlet {
                     req.getParameter("length"),
                     LocalDate.parse(req.getParameter("date")));
 
-            dao.insert(race);
+            try {
+                dao.insert(race);
+
+            } catch (Exception e) {
+
+                logger.error("There was an issue inserting the data", e);
+            }
 
             req.setAttribute("race", race);
         }

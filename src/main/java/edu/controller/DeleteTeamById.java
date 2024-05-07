@@ -32,11 +32,16 @@ public class DeleteTeamById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao dao = new GenericDao(Team.class);
 
         Team teamToDelete = (Team) dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        dao.delete(teamToDelete);
+        try {
+            dao.delete(teamToDelete);
+        } catch (Exception e) {
+            logger.error("There was an issue deleting the data", e);
+        }
 
         req.setAttribute("deletedTeam", teamToDelete);
 

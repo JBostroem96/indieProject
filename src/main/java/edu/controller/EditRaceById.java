@@ -2,6 +2,8 @@ package edu.controller;
 
 import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,6 +37,7 @@ public class EditRaceById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao dao = new GenericDao(Race.class);
 
         Validate validate = new Validate();
@@ -57,7 +60,11 @@ public class EditRaceById extends HttpServlet {
             raceToUpdate.setLength(updatedRace.getLength());
             raceToUpdate.setDate(updatedRace.getDate());
 
-            dao.update(raceToUpdate);
+            try {
+                dao.update(raceToUpdate);
+            } catch (Exception e) {
+                logger.error("There was an issue updating the data", e);
+            }
 
             req.setAttribute("editedRace", raceToUpdate);
         }

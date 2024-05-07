@@ -3,6 +3,8 @@ package edu.controller;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.restService.TLSEmail;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,10 +32,14 @@ public class ReportResultById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao dao = new GenericDao(TeamRace.class);
         TeamRace resultToReport = (TeamRace)dao.getById(Integer.parseInt(req.getParameter("id")));
+
         String description = req.getParameter("teamTextArea");
-        String subject = req.getParameter("subject") + " regarding " + resultToReport.getTeam().getName() + " in race " + resultToReport.getRace().getName();
+        String subject = req.getParameter("subject") + " regarding "
+                + resultToReport.getTeam().getName() + " in race "
+                + resultToReport.getRace().getName();
 
         TLSEmail mail = new TLSEmail();
 

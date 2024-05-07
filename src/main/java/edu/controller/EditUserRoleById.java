@@ -2,6 +2,8 @@ package edu.controller;
 
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,6 +31,7 @@ public class EditUserRoleById extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao dao = new GenericDao(User.class);
 
         User retrievedUser = (User)dao.getById(Integer.parseInt(req.getParameter("id")));
@@ -43,7 +46,13 @@ public class EditUserRoleById extends HttpServlet {
         } else {
 
             retrievedUser.setRole(role);
-            dao.update(retrievedUser);
+
+            try {
+                dao.update(retrievedUser);
+            } catch (Exception e) {
+                logger.error("There was an issue updating the data", e);
+            }
+
             String message = "You updated the user's role!";
             req.setAttribute("userRole", retrievedUser);
             req.setAttribute("success", message);

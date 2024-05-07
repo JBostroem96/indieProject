@@ -1,9 +1,12 @@
 package edu.controller;
 
+import com.mysql.cj.jdbc.exceptions.SQLError;
 import edu.matc.entity.Division;
-import edu.matc.entity.Race;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.*;
 
 
@@ -35,7 +40,6 @@ public class ViewResultDisplay extends HttpServlet {
                       HttpServletResponse resp)
             throws ServletException, IOException {
 
-
         GenericDao teamRaceDao = new GenericDao(TeamRace.class);
 
         List<TeamRace> teamRaces = (ArrayList) teamRaceDao.findByPropertyEqual("race_id", req.getParameter("id"));
@@ -58,9 +62,18 @@ public class ViewResultDisplay extends HttpServlet {
      */
     public List<TeamRace> updateResults(List<TeamRace> teamRaces, GenericDao dao) {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
+
         for (TeamRace teamRace : teamRaces) {
 
-            dao.update(teamRace);
+            try {
+                dao.update(teamRace);
+
+            } catch (Exception e) {
+
+                logger.error("There was an issue updating the data", e);
+            }
+
         }
         return teamRaces;
     }

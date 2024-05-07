@@ -32,11 +32,16 @@ public class DeleteRaceById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao dao = new GenericDao(Race.class);
 
         Race raceToDelete = (Race)dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        dao.delete(raceToDelete);
+        try {
+            dao.delete(raceToDelete);
+        } catch (Exception e) {
+            logger.error("There was an issue deleting the data", e);
+        }
 
         req.setAttribute("deletedRace", raceToDelete);
 

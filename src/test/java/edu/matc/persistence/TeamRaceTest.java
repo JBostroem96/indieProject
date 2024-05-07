@@ -85,6 +85,9 @@ class TeamRaceTest {
         Team team = new Team("Example", category, category.getDivision().name());
         Race race = new Race("Example", "3", LocalDate.now());
 
+        teamDao.insert(team);
+        raceDao.insert(race);
+
         TeamRace teamRace = new TeamRace(team, race, 22, 0, 120);
 
         int insertedTeamRaceId = teamRaceDao.insert(teamRace);
@@ -93,7 +96,6 @@ class TeamRaceTest {
         assertEquals(teamRace, insertedTeamRace);
 
     }
-
 
     @Test
     void delete() {
