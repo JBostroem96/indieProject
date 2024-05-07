@@ -21,7 +21,7 @@ import java.io.IOException;
 public class ReportResultDisplay extends HttpServlet {
 
     /**
-     * This method's purpose is to forward to the team race to the corresponding JSP
+     * This method's purpose is to forward to the jsp
      *@param  req               the request object that we forward
      *@param  resp           the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet

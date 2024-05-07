@@ -29,3 +29,5 @@ https://www.codejava.net/java-ee/servlet/how-to-handle-error-in-web-xml-for-java
 
 https://www.digitalocean.com/community/tutorials/javamail-example-send-mail-in-java-smtp was immensely helpful setting up javamail
 
+https://stackoverflow.com/a/19012837 was of great help when wanting to submit a value with decimals
+

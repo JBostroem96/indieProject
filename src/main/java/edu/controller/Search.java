@@ -22,7 +22,7 @@ import java.io.IOException;
 public class Search extends HttpServlet {
 
     /**
-     * This method's purpose is to search for a race or all races
+     * This method's purpose is to search for races or teams
      * @param req the request object
      * @param resp the response object
      * @throws ServletException the servlet exception object

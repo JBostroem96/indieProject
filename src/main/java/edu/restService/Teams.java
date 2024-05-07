@@ -13,9 +13,11 @@ import javax.ws.rs.core.Response;
 @Path("/teams")
 public class Teams {
 
-    // The Java method will process HTTP GET requests
     private GenericDao genericDao;
 
+    /**
+     * Instantiates a new Teams.
+     */
     public Teams() {
 
         genericDao = new GenericDao<>(Team.class);
@@ -23,7 +25,6 @@ public class Teams {
 
     @GET
 
-    // The Java method will produce content identified by the MIME Media type "text/plain"
     @Produces("text/plain")
     public Response getTeams() {
 
@@ -38,9 +39,8 @@ public class Teams {
     @Produces("text/plain")
 
     /**
-     * This method's purpose is to get the race by id
+     * This method's purpose is to get the team by id
      */
-
     public Response getTeamById(@PathParam("param") int id) {
 
         // Return the team specified by the id

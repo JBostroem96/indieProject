@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * This class' purpose is to edit a race result
+ */
 @WebServlet(
         urlPatterns = {"/editRaceResultById"}
 )
@@ -40,7 +43,7 @@ public class EditRaceResultById extends HttpServlet {
 
         int cp = Integer.parseInt(req.getParameter("cp"));
         int penalty = Integer.parseInt(req.getParameter("penalty"));
-        int totalTime = Integer.parseInt(req.getParameter("time"));
+        double totalTime = Double.parseDouble(req.getParameter("time"));
 
         TeamRace teamRaceToUpdate = (TeamRace) teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
         Team team = (Team)teamDao.getById(Integer.parseInt(req.getParameter("team")));

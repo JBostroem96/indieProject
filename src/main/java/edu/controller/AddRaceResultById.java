@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * This class' purpose is to add the reace result by grabbing the id
+ * This class' purpose is to add the race result by grabbing the id
  */
 @WebServlet(
         urlPatterns = {"/addRaceResultById"}
@@ -52,7 +52,7 @@ public class AddRaceResultById extends HttpServlet {
 
             int cp = Integer.parseInt(req.getParameter("cp"));
             int penalty = Integer.parseInt(req.getParameter("penalty"));
-            int totalTime = Integer.parseInt(req.getParameter("time"));
+            double totalTime = Double.parseDouble(req.getParameter("time"));
 
             TeamRace teamRace = new TeamRace(team, race, cp, penalty, totalTime);
             teamRaceDao.insert(teamRace);

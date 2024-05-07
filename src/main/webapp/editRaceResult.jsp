@@ -52,7 +52,7 @@
                         <div class="search text-white p-5 border rounded" id="edit_race_result">
                             <div class="form-group">
                                 <label for="time">Total Time (in minutes)</label>
-                                <input type="number" class="form-control" name="time" id="time" required>
+                                <input type="number" class="form-control" name="time" step="0.01" id="time" required>
                             </div>
                             <div class="form-group">
                                 <label for="cp">CP</label>

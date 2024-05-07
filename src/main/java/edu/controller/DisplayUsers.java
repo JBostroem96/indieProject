@@ -1,6 +1,6 @@
 package edu.controller;
 
-import edu.matc.entity.Category;
+
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 
@@ -12,13 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class' purpose is to forward all users
+ */
 @WebServlet(
         urlPatterns = {"/displayUsers"}
 )
 public class DisplayUsers extends HttpServlet {
 
     /**
-     * This method's purpose is to forward all the divisions to the jsp
+     * This method's purpose is to forward all users
      *@param  req               the request object that we forward
      *@param  response             the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet

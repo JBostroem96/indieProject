@@ -1,20 +1,22 @@
 package edu.restService;
 
-import edu.matc.entity.Category;
-import edu.matc.entity.Race;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-//Defines the base URI for all resource URIs.
-@ApplicationPath("/restService") //You may want to add a value here so that all traffic isn't routed to the class below.
+/**
+ * This class' purpose is to add all the classes where you want to integrate the web service
+ */
+@ApplicationPath("/restService")
 
-//The java class declares root resource and provider classes
 public class RestService extends Application {
 
-    //The method returns a non-empty collection with classes, that must be included in the published JAX-RS application
+    /**
+     * This method's purpose is to store all the corresponding classes
+     * @return webServiceList a list of the webService classes
+     */
     @Override
     public Set<Class<?>> getClasses() {
         HashSet webServiceList = new HashSet<Class<?>>();

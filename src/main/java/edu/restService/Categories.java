@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 @Path("/categories")
 public class Categories {
 
-    // The Java method will process HTTP GET requests
+
     private GenericDao genericDao;
 
     public Categories() {
@@ -22,7 +22,7 @@ public class Categories {
 
     @GET
 
-    // The Java method will produce content identified by the MIME Media type "text/plain"
+
     @Produces("text/plain")
     public Response getCategories() {
 

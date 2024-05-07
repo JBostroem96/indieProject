@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class' purpose is to forward to the jsp
+ */
 @WebServlet(
 
         name = "/FindTeamDisplay",
@@ -16,7 +19,7 @@ import java.io.IOException;
 public class FindTeamDisplay extends HttpServlet {
 
     /**
-     * This method's purpose is to forward to the searchRace JSP
+     * This method's purpose is to forward to the searchTeams JSP
      *@param  request               the request object that we forward
      *@param  response              the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet

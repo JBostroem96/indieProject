@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * This class' purpose is to verify the update of the entry
+ * This class' purpose is to forward to the jsp
  */
 @WebServlet(
         urlPatterns = {"/editRace"}
@@ -21,7 +21,7 @@ import java.io.IOException;
 public class EditRaceDisplay extends HttpServlet {
 
     /**
-     * This method's purpose is to verify the update of the entry
+     * This method's purpose is to forward to the jsp
      *@param  req               the request object that we forward
      *@param  resp           the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet

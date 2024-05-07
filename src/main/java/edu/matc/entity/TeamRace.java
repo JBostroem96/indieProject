@@ -49,7 +49,7 @@ public class TeamRace {
      * @param latePenalty the late penalty
      * @param totalTime   the total time
      */
-    public TeamRace(Team team, Race race, int cp, int latePenalty, int totalTime) {
+    public TeamRace(Team team, Race race, int cp, int latePenalty, double totalTime) {
         this.team = team;
         this.race = race;
         this.cp = cp;

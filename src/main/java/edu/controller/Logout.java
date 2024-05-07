@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * This class' purpose is to log the user out
+ */
 @WebServlet(
         urlPatterns = {"/logout"}
 )

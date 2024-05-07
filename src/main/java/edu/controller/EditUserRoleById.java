@@ -11,13 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class' purpose is to edit a user role
+ */
 @WebServlet(
         urlPatterns = {"/editUserRoleById"}
 )
 public class EditUserRoleById extends HttpServlet {
 
     /**
-     * This method's purpose is to verify the update of the entry
+     * This method's purpose is to edit entry by id
      *@param  req               the request object that we forward
      *@param  resp           the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet

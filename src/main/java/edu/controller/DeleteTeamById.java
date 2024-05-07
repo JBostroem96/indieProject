@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 
+/**
+ * This class' purpose is to delete a team
+ */
 @WebServlet(
         urlPatterns = {"/deleteTeamById"}
 )

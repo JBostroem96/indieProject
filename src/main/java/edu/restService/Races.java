@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/races")
 public class Races {
-    // The Java method will process HTTP GET requests
+
     private GenericDao genericDao;
 
     public Races() {
@@ -24,7 +24,6 @@ public class Races {
 
     @GET
 
-    // The Java method will produce content identified by the MIME Media type "text/plain"
     @Produces("text/plain")
     public Response getRaces() {
 
@@ -41,7 +40,6 @@ public class Races {
     /**
      * This method's purpose is to get the race by id
      */
-
     public Response getRaceById(@PathParam("param") int id) {
 
         // Return the race specified by the id

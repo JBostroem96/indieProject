@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
+/**
+ * This class' purpose is to edit a team
+ */
 @WebServlet(
         urlPatterns = {"/editTeamById"}
 )
