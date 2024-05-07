@@ -39,14 +39,14 @@ These technologies are expected to be used. However, do note that they could cha
 **Hosting**<br>
     AWS
 
-**Project Lombok**
-
 **Unit Testing**<br>
 JUnit
 
 **Text Editor**<br>
 IntelliJ IDEA
 
+**Mail Service**<br>
+JavaMail
 
 More information about this project can be found below:
 
