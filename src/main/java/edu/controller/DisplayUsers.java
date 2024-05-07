@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class' purpose is to forward all users
@@ -21,7 +23,7 @@ import java.io.IOException;
 public class DisplayUsers extends HttpServlet {
 
     /**
-     * This method's purpose is to forward all users
+     * This method's purpose is to forward all users with the role 'user'
      *@param  req               the request object that we forward
      *@param  response             the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
@@ -32,9 +34,19 @@ public class DisplayUsers extends HttpServlet {
             throws ServletException, IOException {
 
         GenericDao dao = new GenericDao(User.class);
+        List<User> users = new ArrayList<>();
 
-        req.setAttribute("users", dao.getAll());
+        for (Object user : dao.getAll()) {
 
+            User userRole = (User) user;
+
+            if (userRole.getRole().equals("user")) {
+
+                users.add(userRole);
+            }
+        }
+
+        req.setAttribute("users", users);
         String url = "/users.jsp";
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
