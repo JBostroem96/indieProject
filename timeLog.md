@@ -100,5 +100,9 @@ Date: 05/6-7/24<br>
 Task: Worked on the project, implementing javamail<br>
 Hours: 6.
 
+Date: 05/7/24<br>
+Task: Worked on the project, refactored code, changed permissions, and more<br>
+Hours: 7.
+
 
 
