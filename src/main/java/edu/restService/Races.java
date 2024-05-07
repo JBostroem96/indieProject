@@ -49,15 +49,4 @@ public class Races {
         return Response.status(200).entity(output).build();
     }
 
-    @GET
-
-    @Path("/{param}")
-
-    @Produces("application/JSON")
-
-    public Response getRaceByIdByJSON(@PathParam("param") int id) {
-
-        String output = "Here's the race: " + genericDao.getById(id);
-        return Response.status(200).entity(output).build();
-    }
 }

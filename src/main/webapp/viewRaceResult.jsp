@@ -35,6 +35,11 @@
                             <td class="text-black">${team_race.cp}</td>
                             <td class="text-black">${team_race.latePenalty}</td>
                             <td class="text-black">${team_race.totalTime}</td>
+                            <td>
+                                <form action="reportResultDisplay" class="form-inline" method="get">
+                                    <button type="submit" name="id" class="btn btn-primary bg-danger" value="${team_race.id}">Report</button>
+                                </form>
+                            </td>
                             <c:if test="${user.role == 'admin' || user.role == 'user'}">
                                 <td>
                                     <form action="editRaceResultDisplay" class="form-inline" method="get">

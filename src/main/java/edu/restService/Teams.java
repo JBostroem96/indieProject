@@ -1,6 +1,5 @@
 package edu.restService;
 
-import edu.matc.entity.Race;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 
@@ -9,6 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
 
 @Path("/teams")
 public class Teams {
@@ -41,7 +41,7 @@ public class Teams {
      * This method's purpose is to get the race by id
      */
 
-    public Response getRaceById(@PathParam("param") int id) {
+    public Response getTeamById(@PathParam("param") int id) {
 
         // Return the team specified by the id
         String output = "Here's the team: " + genericDao.getById(id);

@@ -39,8 +39,7 @@ public class Categories {
     /**
      * This method's purpose is to get the category by id
      */
-
-    public Response getRaceById(@PathParam("param") int id) {
+    public Response getCategoryById(@PathParam("param") int id) {
 
         // Return the category specified by the id
         String output = "Here's the category: " + genericDao.getById(id);

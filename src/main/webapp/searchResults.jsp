@@ -12,6 +12,9 @@
     <%@include file="nav.jsp"%>
     <div class="container bg-white">
         <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Results:</em></h1>
+        <c:if test="${!empty report}">
+            <p class="text-success fw-bold">${report}</p>
+        </c:if>
         <div class="d-flex flex-column gap-5 fw-bold border rounded" id="add_race_result">
             <table class="display" cellspacing="=0" width="100%">
                 <c:choose>

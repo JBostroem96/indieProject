@@ -27,3 +27,5 @@ https://stackoverflow.com/a/22822283 helped me resolve the lazy initialization e
 
 https://www.codejava.net/java-ee/servlet/how-to-handle-error-in-web-xml-for-java-web-applications Helped me implement error pages
 
+https://www.digitalocean.com/community/tutorials/javamail-example-send-mail-in-java-smtp was immensely helpful setting up javamail
+
