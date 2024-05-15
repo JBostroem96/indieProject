@@ -91,8 +91,7 @@ class RaceDaoTest {
 
     /**
      * This test's purpose is to ensure that the property has the
-     * matching value. In this case "Joe" is a first name in
-     * the table
+     * matching value.
      */
     @Test
     void getByPropertyEqual() {
