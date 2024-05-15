@@ -58,7 +58,7 @@ Week 10:
 
 - [X] Add a way to delete a race
 - [X] Add a way to edit a race
-- [ ] Take another look at user stories and adjust them accordingly
+- [X] Take another look at user stories and adjust them accordingly
 
 Week 11:
 
@@ -70,34 +70,34 @@ Week 12:
 
 - [X] Create the category class
 - [X] Create a way to add a category
-- [ ] Ensure that the relationship between category and team work correctly
+- [X] Ensure that the relationship between category and team work correctly
 - [X] Finalize, or get close to, creating the nav for the application
 
 Week 13:
 
 - [X] Work on the results
-- [ ] Create a way to add results
-- [ ] Ensure that the many-to-many relationship is working correctly with hibernate
+- [X] Create a way to add results
+- [X] Ensure that the many-to-many relationship is working correctly with hibernate
 - [ ] Submit application for checkpoint 3
 
 Week 14:
 
-- [ ] Finalize the application's aesthetics
-- [ ] Work on any remaining logic in the application
-- [ ] Work on feedback given via the peer review
-- [ ] Give the logging a look, ensuring that the system works as intended
+- [X] Finalize the application's aesthetics
+- [X] Work on any remaining logic in the application
+- [X] Work on feedback given via the peer review
+- [X] Give the logging a look, ensuring that the system works as intended
 
 Week 15:
 
-- [ ] Work on limiting the accessibility to the application between users and admins
-- [ ] If not finalized, get close to finishing the work on authorization
+- [X] Work on limiting the accessibility to the application between users and admins
+- [X] If not finalized, get close to finishing the work on authorization
 
 Week 16:
 
-- [ ] Finalize work on the authorization
+- [X] Finalize work on the authorization
 - [ ] "Proofread" code
-- [ ] Work on the final presentation
-- [ ] Finalize the final presentation
+- [X] Work on the final presentation
+- [X] Finalize the final presentation
 
 
 
