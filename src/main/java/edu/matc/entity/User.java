@@ -4,6 +4,7 @@ import edu.matc.persistence.GenericDao;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -55,11 +56,11 @@ public class User {
      * @param user the user
      * @return the user
      */
-    public Boolean addUser(User user) {
+    public Boolean addUser(HttpSession session, User user) {
 
         Validate validate = new Validate();
 
-        return validate.validateUser(user);
+        return validate.validateUser(session, user);
     }
     /**
      * Gets role.

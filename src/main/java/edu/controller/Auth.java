@@ -94,9 +94,9 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
 
-                if (newUser.addUser(validate(tokenResponse))) {
+                if (newUser.addUser(session, validate(tokenResponse))) {
 
-                    validate.validateUser(session, validate(tokenResponse).getUserName());
+                    validate.validateUser(session, validate(tokenResponse));
                 };
 
 

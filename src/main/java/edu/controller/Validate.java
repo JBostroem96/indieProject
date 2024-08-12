@@ -26,11 +26,10 @@ public class Validate {
     }
 
     /**
-     * Validate team.
-     *
+     * This method's purpose is to validate the team
      * @param name the name
      * @param dao  the dao
-     * @return the list
+     * @return entryExists — if the team already exists
      */
     public boolean validateTeam(String name, GenericDao dao) {
 
@@ -49,11 +48,10 @@ public class Validate {
 
 
     /**
-     * Validate edit race list.
-     *
+     * This method's purpose is to validate the race
      * @param name the name
      * @param dao  the dao
-     * @return the list
+     * @return entryExists — if the race already exists
      */
     public boolean validateRace(String name, GenericDao dao) {
 
@@ -71,12 +69,11 @@ public class Validate {
     }
 
     /**
-     * Validate edit result list.
-     *
+     * This method's purpose is to validate the result
      * @param name      the name
      * @param dao the teamRace dao
      * @param raceId    the race id
-     * @return the list
+     * @return entryExists — if the result already exists
      */
     public boolean validateResult(int raceId, GenericDao dao, String name) {
 
@@ -98,10 +95,11 @@ public class Validate {
 
     /**
      * This method's purpose is to validate the user
+     * @param session the session object
      * @param user the user
-     * @return the user
+     * @return entryExists — if the user already exists
      */
-    public boolean validateUser(User user) {
+    public boolean validateUser(HttpSession session, User user) {
 
         GenericDao dao = new GenericDao(User.class);
 
@@ -112,32 +110,17 @@ public class Validate {
             if (userEntry.getName().equals(user.getUserName())) {
 
                 entryExists = true;
+                //sign the user in
+                session.setAttribute("user", userEntry);
                 break;
-
             }
-            //insert user
+        }
+        //Only insert the user if they don't already exist
+        if (!entryExists) {
+
+            dao.insert(user);
         }
 
         return entryExists;
-    }
-
-    /**
-     * This method's purpose is to validate the user
-     * @param session the session object
-     * @param userName the username
-     */
-    public void validateUser(HttpSession session, String userName) {
-
-        GenericDao dao = new GenericDao(User.class);
-
-        for (Object user : dao.getAll()) {
-
-            User userEntry = (User) user;
-
-            if (userEntry.getUserName().equals(userName)) {
-
-                session.setAttribute("user", userEntry);
-            }
-        }
     }
 }
