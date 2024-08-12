@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class' purpose is to perform different validations
+ * This class' purpose is to perform different validations,
+ * and a single boolean flag is used because the different validations
+ * are using different instances
  */
 public class Validate {
 
@@ -107,20 +109,31 @@ public class Validate {
 
             User userEntry = (User) userName;
 
-            if (userEntry.getName().equals(user.getUserName())) {
+            authenticateUser(dao, session, userEntry, user);
+        }
 
-                entryExists = true;
-                //sign the user in
-                session.setAttribute("user", userEntry);
-                break;
-            }
+        return entryExists;
+    }
+
+    /**
+     * This method's purpose is to authenticate the user
+     * @param dao the GenericDao object
+     * @param session the session object
+     * @param userEntry the user entry
+     * @param user the user
+     */
+    public void authenticateUser(GenericDao dao, HttpSession session, User userEntry, User user) {
+
+        if (userEntry.getName().equals(user.getUserName())) {
+
+            entryExists = true;
+            //sign the user in
+            session.setAttribute("user", userEntry);
         }
         //Only insert the user if they don't already exist
         if (!entryExists) {
 
             dao.insert(user);
         }
-
-        return entryExists;
     }
 }
