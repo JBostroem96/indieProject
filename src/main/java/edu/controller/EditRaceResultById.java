@@ -42,8 +42,6 @@ public class EditRaceResultById extends HttpServlet {
 
         GenericDao teamRaceDao = new GenericDao(TeamRace.class);
 
-        Validate validate = new Validate();
-
         int cp = Integer.parseInt(req.getParameter("cp"));
         int penalty = Integer.parseInt(req.getParameter("penalty"));
         double totalTime = Double.parseDouble(req.getParameter("time"));
@@ -54,7 +52,7 @@ public class EditRaceResultById extends HttpServlet {
 
         TeamRace updatedTeamRace = new TeamRace(team, race, cp, penalty, totalTime);
 
-        if (validate.validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName())) {
+        if (new Validate().validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName())) {
 
             String message = "That team name already exists";
             req.setAttribute("message", message);

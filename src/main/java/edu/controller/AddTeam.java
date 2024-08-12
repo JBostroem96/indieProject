@@ -37,10 +37,9 @@ public class AddTeam extends HttpServlet {
         GenericDao teamDao = new GenericDao(Team.class);
         GenericDao categoryDao = new GenericDao(Category.class);
 
-        Validate validate = new Validate();
         String name = req.getParameter("name");
 
-        if (validate.validateTeam(name, teamDao)) {
+        if (new Validate().validateTeam(name, teamDao)) {
 
             String message = "That team already exists. Please Enter something else.";
             req.setAttribute("message", message);

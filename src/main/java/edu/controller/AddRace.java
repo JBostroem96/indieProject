@@ -42,10 +42,9 @@ public class AddRace extends HttpServlet {
         final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao dao = new GenericDao(Race.class);
 
-        Validate validate = new Validate();
         String name = req.getParameter("name");
 
-        if (validate.validateRace(name, dao)) {
+        if (new Validate().validateRace(name, dao)) {
 
             String message = "That race already exists";
             req.setAttribute("message", message);

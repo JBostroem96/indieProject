@@ -40,15 +40,13 @@ public class EditRaceById extends HttpServlet {
         final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao dao = new GenericDao(Race.class);
 
-        Validate validate = new Validate();
-
         Race updatedRace = new Race(req.getParameter("name"),
                 req.getParameter("length"),
                 LocalDate.parse(req.getParameter(("date"))));
 
         Race raceToUpdate = (Race)dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        if (validate.validateRace(updatedRace.getName(), dao)) {
+        if (new Validate().validateRace(updatedRace.getName(), dao)) {
 
             String message = "That race already exists";
             req.setAttribute("message", message);

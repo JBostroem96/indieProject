@@ -38,14 +38,12 @@ public class EditTeamById extends HttpServlet {
         GenericDao dao = new GenericDao(Team.class);
         GenericDao categoryDao = new GenericDao(Category.class);
 
-        Validate validate = new Validate();
-
         Team updatedTeam = new Team(req.getParameter("name"),
                 req.getParameter("division"));
 
         Team teamToUpdate = (Team)dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        if (validate.validateTeam(updatedTeam.getName(), dao)) {
+        if (new Validate().validateTeam(updatedTeam.getName(), dao)) {
 
             String message = "That name already exists";
             req.setAttribute("alreadyExists", message);
