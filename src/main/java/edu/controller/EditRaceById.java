@@ -48,7 +48,7 @@ public class EditRaceById extends HttpServlet {
 
         Race raceToUpdate = (Race)dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        if (validate.validateEditRace(raceToUpdate.getName(), dao).contains(updatedRace.getName())) {
+        if (validate.validateRace(updatedRace.getName(), dao)) {
 
             String message = "That race already exists";
             req.setAttribute("message", message);

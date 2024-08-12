@@ -45,7 +45,7 @@ public class AddRace extends HttpServlet {
         Validate validate = new Validate();
         String name = req.getParameter("name");
 
-        if (validate.validateAddRace(name, dao).contains(name)) {
+        if (validate.validateRace(name, dao)) {
 
             String message = "That race already exists";
             req.setAttribute("message", message);

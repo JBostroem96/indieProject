@@ -40,7 +40,7 @@ public class AddTeam extends HttpServlet {
         Validate validate = new Validate();
         String name = req.getParameter("name");
 
-        if (validate.validateAddTeam(name, teamDao).contains(name)) {
+        if (validate.validateTeam(name, teamDao)) {
 
             String message = "That team already exists. Please Enter something else.";
             req.setAttribute("message", message);

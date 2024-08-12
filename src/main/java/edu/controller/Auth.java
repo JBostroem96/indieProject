@@ -93,9 +93,13 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
-                String userName = newUser.addUser(validate(tokenResponse)).getUserName();
 
-                validate.validateUser(session, userName);
+                if (newUser.addUser(validate(tokenResponse))) {
+
+                    validate.validateUser(session, validate(tokenResponse).getUserName());
+                };
+
+
 
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);

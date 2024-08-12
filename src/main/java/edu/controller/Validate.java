@@ -15,71 +15,36 @@ import java.util.List;
  */
 public class Validate {
 
-    private List<String> existingNames;
-    
+    private boolean entryExists;
+
     /**
      * Instantiates a new Validate.
      */
     public Validate() {
 
-        existingNames = new ArrayList<>();
+        entryExists = false;
     }
 
     /**
-     * This method's purpose is to validate the team name
-     * @return the list of existing names
-     */
-    public List<String> validateEditTeam(String name, GenericDao dao) {
-
-        for (Object team : dao.getAll()) {
-
-            Team teamEntry = (Team) team;
-
-            if (!teamEntry.getName().equals(name)) {
-
-                existingNames.add(teamEntry.getName());
-            }
-        }
-
-        return existingNames;
-    }
-
-    /**
-     * Validate add team list.
+     * Validate team.
      *
      * @param name the name
      * @param dao  the dao
      * @return the list
      */
-    public List<String> validateAddTeam(String name, GenericDao dao) {
+    public boolean validateTeam(String name, GenericDao dao) {
 
         for (Object team : dao.getAll()) {
 
             Team teamEntry = (Team) team;
-            existingNames.add(teamEntry.getName());
-        }
-        return existingNames;
 
-    }
+            if (teamEntry.getName().equals(name)) {
 
-    /**
-     * This method's purpose is to validate the team name
-     * @param raceId the race id
-     * @param dao the teamRace dao
-     * @return the list of existing names
-     */
-    public List<String> validateResult(int raceId, GenericDao dao) {
-
-        for (Object teamRace : dao.getAll()) {
-
-            TeamRace teamRaceEntry = (TeamRace) teamRace;
-
-            if (teamRaceEntry.getRace_id() == raceId) {
-
-                existingNames.add(teamRaceEntry.getTeam().getName());
+                entryExists = true;
+                break;
             }
         }
-        return existingNames;
+        return entryExists;
     }
 
 
@@ -90,35 +55,19 @@ public class Validate {
      * @param dao  the dao
      * @return the list
      */
-    public List<String> validateEditRace(String name, GenericDao dao) {
+    public boolean validateRace(String name, GenericDao dao) {
 
         for (Object race : dao.getAll()) {
 
             Race raceEntry = (Race) race;
 
-            if (!raceEntry.getName().equals(name)) {
-                existingNames.add(raceEntry.getName());
+            if (raceEntry.getName().equals(name)) {
+
+                entryExists = true;
+                break;
             }
         }
-        return existingNames;
-    }
-
-    /**
-     * Validate add race list.
-     *
-     * @param name the name
-     * @param dao  the dao
-     * @return the list
-     */
-    public List<String> validateAddRace(String name, GenericDao dao) {
-
-        for (Object race : dao.getAll()) {
-
-            Race raceEntry = (Race) race;
-            existingNames.add(raceEntry.getName());
-        }
-
-        return existingNames;
+        return entryExists;
     }
 
     /**
@@ -129,7 +78,7 @@ public class Validate {
      * @param raceId    the race id
      * @return the list
      */
-    public List<String> validateEditResult(String name, GenericDao dao, int raceId) {
+    public boolean validateResult(int raceId, GenericDao dao, String name) {
 
         for (Object teamRace : dao.getAll()) {
 
@@ -137,13 +86,14 @@ public class Validate {
 
             if (teamRaceEntry.getRace_id() == raceId) {
 
-                if (!teamRaceEntry.getTeam().getName().equals(name)) {
+                if (teamRaceEntry.getTeam().getName().equals(name)) {
 
-                    existingNames.add(teamRaceEntry.getTeam().getName());
+                    entryExists = true;
+                    break;
                 }
             }
         }
-        return existingNames;
+        return entryExists;
     }
 
     /**
@@ -151,21 +101,24 @@ public class Validate {
      * @param user the user
      * @return the user
      */
-    public User validateUser(User user) {
+    public boolean validateUser(User user) {
 
         GenericDao dao = new GenericDao(User.class);
 
         for (Object userName : dao.getAll()) {
 
             User userEntry = (User) userName;
-            existingNames.add(userEntry.getUserName());
+
+            if (userEntry.getName().equals(user.getUserName())) {
+
+                entryExists = true;
+                break;
+
+            }
+            //insert user
         }
 
-        if (!existingNames.contains(user.getUserName())) {
-
-            dao.insert(user);
-        }
-        return user;
+        return entryExists;
     }
 
     /**

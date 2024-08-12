@@ -55,7 +55,7 @@ public class User {
      * @param user the user
      * @return the user
      */
-    public User addUser(User user) {
+    public Boolean addUser(User user) {
 
         Validate validate = new Validate();
 
