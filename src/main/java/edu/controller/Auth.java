@@ -84,8 +84,6 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         String authCode = req.getParameter("code");
 
         HttpSession session = req.getSession();
-        Validate validate = new Validate();
-        User newUser = new User();
 
         if (authCode == null) {
             //TODO forward to an error page or back to the login
@@ -93,13 +91,14 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
+                User newUser = validate(tokenResponse);
 
-                if (newUser.addUser(session, validate(tokenResponse))) {
+                if (!new Validate().validateUser(session, newUser)) {
 
-                    validate.validateUser(session, validate(tokenResponse));
-                };
-
-
+                    new User().addUser(newUser);
+                }
+                //Sign the user in by setting the session
+                session.setAttribute("user", newUser);
 
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);

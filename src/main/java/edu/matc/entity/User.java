@@ -54,13 +54,11 @@ public class User {
      * Add user.
      * This method's purpose is to add a user if they don't already exist
      * @param user the user
-     * @return the user
      */
-    public Boolean addUser(HttpSession session, User user) {
+    public void addUser(User user) {
 
-        Validate validate = new Validate();
-
-        return validate.validateUser(session, user);
+        //insert user
+        new GenericDao(User.class).insert(user);
     }
     /**
      * Gets role.

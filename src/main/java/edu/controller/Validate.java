@@ -39,11 +39,7 @@ public class Validate {
 
             Team teamEntry = (Team) team;
 
-            if (teamEntry.getName().equals(name)) {
-
-                entryExists = true;
-                break;
-            }
+            checkExistence(teamEntry.getName(), name);
         }
         return entryExists;
     }
@@ -61,11 +57,8 @@ public class Validate {
 
             Race raceEntry = (Race) race;
 
-            if (raceEntry.getName().equals(name)) {
+            checkExistence(raceEntry.getName(), name);
 
-                entryExists = true;
-                break;
-            }
         }
         return entryExists;
     }
@@ -85,11 +78,7 @@ public class Validate {
 
             if (teamRaceEntry.getRace_id() == raceId) {
 
-                if (teamRaceEntry.getTeam().getName().equals(name)) {
-
-                    entryExists = true;
-                    break;
-                }
+                checkExistence(teamRaceEntry.getTeam().getName(), name);
             }
         }
         return entryExists;
@@ -109,31 +98,23 @@ public class Validate {
 
             User userEntry = (User) userName;
 
-            authenticateUser(dao, session, userEntry, user);
+            checkExistence(userEntry.getName(), user.getUserName());
         }
 
         return entryExists;
     }
 
     /**
-     * This method's purpose is to authenticate the user
-     * @param dao the GenericDao object
-     * @param session the session object
-     * @param userEntry the user entry
-     * @param user the user
+     * This method's purpose is to check the name's existence in the database
+     * @param entryName the entry name
+     * @param name the name
      */
-    public void authenticateUser(GenericDao dao, HttpSession session, User userEntry, User user) {
+    public void checkExistence(String entryName, String name) {
 
-        if (userEntry.getName().equals(user.getUserName())) {
+        if (entryName.equals(name)) {
 
             entryExists = true;
-            //sign the user in
-            session.setAttribute("user", userEntry);
-        }
-        //Only insert the user if they don't already exist
-        if (!entryExists) {
-
-            dao.insert(user);
         }
     }
 }
+
