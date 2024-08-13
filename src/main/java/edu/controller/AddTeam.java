@@ -34,7 +34,7 @@ public class AddTeam extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao teamDao = new GenericDao(Team.class);
+        GenericDao<Team> teamDao = new GenericDao(Team.class);
         GenericDao categoryDao = new GenericDao(Category.class);
 
         String name = req.getParameter("name");

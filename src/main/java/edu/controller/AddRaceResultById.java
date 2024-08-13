@@ -39,7 +39,7 @@ public class AddRaceResultById extends HttpServlet {
 
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamDao = new GenericDao(Team.class);
-        GenericDao teamRaceDao = new GenericDao(TeamRace.class);
+        GenericDao<TeamRace> teamRaceDao = new GenericDao(TeamRace.class);
 
         Race race = (Race)raceDao.getById(Integer.parseInt(req.getParameter("id")));
         Team team = (Team)teamDao.getById(Integer.parseInt(req.getParameter("team")));

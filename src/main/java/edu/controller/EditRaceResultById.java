@@ -40,13 +40,13 @@ public class EditRaceResultById extends HttpServlet {
         GenericDao raceDao = new GenericDao(Race.class);
         GenericDao teamDao = new GenericDao(Team.class);
 
-        GenericDao teamRaceDao = new GenericDao(TeamRace.class);
+        GenericDao<TeamRace> teamRaceDao = new GenericDao(TeamRace.class);
 
         int cp = Integer.parseInt(req.getParameter("cp"));
         int penalty = Integer.parseInt(req.getParameter("penalty"));
         double totalTime = Double.parseDouble(req.getParameter("time"));
 
-        TeamRace teamRaceToUpdate = (TeamRace) teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
+        TeamRace teamRaceToUpdate = teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
         Team team = (Team)teamDao.getById(Integer.parseInt(req.getParameter("team")));
         Race race = (Race) raceDao.getById(teamRaceToUpdate.getRace().getId());
 

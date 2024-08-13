@@ -5,8 +5,11 @@ import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +36,11 @@ public class Validate {
      * @param dao  the dao
      * @return entryExists — if the team already exists
      */
-    public boolean validateTeam(String name, GenericDao dao) {
+    public boolean validateTeam(String name, GenericDao<Team> dao) {
 
-        for (Object team : dao.getAll()) {
+        for (Team team : dao.getAll()) {
 
-            Team teamEntry = (Team) team;
-
-            checkExistence(teamEntry.getName(), name);
+            checkExistence(team.getName(), name);
         }
         return entryExists;
     }
@@ -51,13 +52,11 @@ public class Validate {
      * @param dao  the dao
      * @return entryExists — if the race already exists
      */
-    public boolean validateRace(String name, GenericDao dao) {
+    public boolean validateRace(String name, GenericDao<Race> dao) {
 
-        for (Object race : dao.getAll()) {
+        for (Race race : dao.getAll()) {
 
-            Race raceEntry = (Race) race;
-
-            checkExistence(raceEntry.getName(), name);
+            checkExistence(race.getName(), name);
 
         }
         return entryExists;
@@ -70,15 +69,13 @@ public class Validate {
      * @param raceId    the race id
      * @return entryExists — if the result already exists
      */
-    public boolean validateResult(int raceId, GenericDao dao, String name) {
+    public boolean validateResult(int raceId, GenericDao<TeamRace> dao, String name) {
 
-        for (Object teamRace : dao.getAll()) {
+        for (TeamRace teamRace : dao.getAll()) {
 
-            TeamRace teamRaceEntry = (TeamRace) teamRace;
+            if (teamRace.getRace_id() == raceId) {
 
-            if (teamRaceEntry.getRace_id() == raceId) {
-
-                checkExistence(teamRaceEntry.getTeam().getName(), name);
+                checkExistence(teamRace.getTeam().getName(), name);
             }
         }
         return entryExists;
@@ -86,19 +83,16 @@ public class Validate {
 
     /**
      * This method's purpose is to validate the user
-     * @param session the session object
      * @param user the user
      * @return entryExists — if the user already exists
      */
-    public boolean validateUser(HttpSession session, User user) {
+    public boolean validateUser(User user) {
 
-        GenericDao dao = new GenericDao(User.class);
+        GenericDao<User> dao = new GenericDao(User.class);
 
-        for (Object userName : dao.getAll()) {
-
-            User userEntry = (User) userName;
-
-            checkExistence(userEntry.getName(), user.getUserName());
+        for (User userName : dao.getAll()) {
+            
+            checkExistence(userName.getName(), user.getUserName());
         }
 
         return entryExists;

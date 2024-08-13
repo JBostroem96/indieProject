@@ -35,13 +35,13 @@ public class EditTeamById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao dao = new GenericDao(Team.class);
+        GenericDao<Team> dao = new GenericDao(Team.class);
         GenericDao categoryDao = new GenericDao(Category.class);
 
         Team updatedTeam = new Team(req.getParameter("name"),
                 req.getParameter("division"));
 
-        Team teamToUpdate = (Team)dao.getById(Integer.parseInt(req.getParameter("id")));
+        Team teamToUpdate = dao.getById(Integer.parseInt(req.getParameter("id")));
 
         if (new Validate().validateTeam(updatedTeam.getName(), dao)) {
 
