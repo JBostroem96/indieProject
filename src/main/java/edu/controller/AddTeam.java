@@ -34,8 +34,9 @@ public class AddTeam extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao<Team> teamDao = new GenericDao(Team.class);
-        GenericDao categoryDao = new GenericDao(Category.class);
+
+        GenericDao<Team> teamDao = new GenericDao<>(Team.class);
+        GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
 
         String name = req.getParameter("name");
 
@@ -46,7 +47,7 @@ public class AddTeam extends HttpServlet {
 
         } else {
 
-            Category category = (Category)categoryDao.getById(Integer.parseInt(req.getParameter("id")));
+            Category category = categoryDao.getById(Integer.parseInt(req.getParameter("id")));
             Team team = new Team(name, category, category.getDivision().toString());
 
             try {

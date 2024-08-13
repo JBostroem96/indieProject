@@ -40,7 +40,7 @@ public class AddRace extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao<Race> dao = new GenericDao(Race.class);
+        GenericDao<Race> dao = new GenericDao<>(Race.class);
 
         String name = req.getParameter("name");
 

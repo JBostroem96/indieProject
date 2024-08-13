@@ -38,7 +38,8 @@ public class EditRaceById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao<Race> dao = new GenericDao(Race.class);
+
+        GenericDao<Race> dao = new GenericDao<>(Race.class);
 
         Race updatedRace = new Race(req.getParameter("name"),
                 req.getParameter("length"),

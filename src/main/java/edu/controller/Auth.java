@@ -93,7 +93,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                 TokenResponse tokenResponse = getToken(authRequest);
                 User newUser = validate(tokenResponse);
 
-                if (!new Validate().validateUser(newUser)) {
+                if (!new Validate().validateUser(newUser, new GenericDao<>(User.class))) {
 
                     new User().addUser(newUser);
                 }

@@ -23,7 +23,7 @@ public class Validate {
     private boolean entryExists;
 
     /**
-     * Instantiates a new Validate.
+     * Instantiates a new Validate, thus resetting the boolean
      */
     public Validate() {
 
@@ -45,7 +45,6 @@ public class Validate {
         return entryExists;
     }
 
-
     /**
      * This method's purpose is to validate the race
      * @param name the name
@@ -57,7 +56,6 @@ public class Validate {
         for (Race race : dao.getAll()) {
 
             checkExistence(race.getName(), name);
-
         }
         return entryExists;
     }
@@ -84,14 +82,13 @@ public class Validate {
     /**
      * This method's purpose is to validate the user
      * @param user the user
+     * @param dao the User dao
      * @return entryExists — if the user already exists
      */
-    public boolean validateUser(User user) {
-
-        GenericDao<User> dao = new GenericDao(User.class);
+    public boolean validateUser(User user, GenericDao<User> dao) {
 
         for (User userName : dao.getAll()) {
-            
+
             checkExistence(userName.getName(), user.getUserName());
         }
 
@@ -99,7 +96,20 @@ public class Validate {
     }
 
     /**
-     * This method's purpose is to check the name's existence in the database
+     * This method's purpose is to validate the user role
+     * @param newRole the new role to be assigned
+     * @param role the current role
+     * @return entryExists — if it already exists
+     */
+    public boolean validateUserRole(String newRole, String role) {
+
+        checkExistence(role, newRole);
+
+        return entryExists;
+    }
+
+    /**
+     * This method's purpose is to check the entry's existence in the database
      * @param entryName the entry name
      * @param name the name
      */

@@ -37,12 +37,11 @@ public class AddRaceResultById extends HttpServlet {
 
         final Logger logger = LogManager.getLogger(this.getClass());
 
-        GenericDao raceDao = new GenericDao(Race.class);
-        GenericDao teamDao = new GenericDao(Team.class);
-        GenericDao<TeamRace> teamRaceDao = new GenericDao(TeamRace.class);
+        GenericDao<Team> teamDao = new GenericDao<>(Team.class);
+        GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
 
-        Race race = (Race)raceDao.getById(Integer.parseInt(req.getParameter("id")));
-        Team team = (Team)teamDao.getById(Integer.parseInt(req.getParameter("team")));
+        Race race = new GenericDao<>(Race.class).getById(Integer.parseInt(req.getParameter("id")));
+        Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
 
         if (new Validate().validateResult(race.getId(), teamRaceDao, team.getName())) {
 

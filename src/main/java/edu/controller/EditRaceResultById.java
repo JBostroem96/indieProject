@@ -37,18 +37,17 @@ public class EditRaceResultById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao raceDao = new GenericDao(Race.class);
-        GenericDao teamDao = new GenericDao(Team.class);
+        GenericDao<Team> teamDao = new GenericDao<>(Team.class);
 
-        GenericDao<TeamRace> teamRaceDao = new GenericDao(TeamRace.class);
+        GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
 
         int cp = Integer.parseInt(req.getParameter("cp"));
         int penalty = Integer.parseInt(req.getParameter("penalty"));
         double totalTime = Double.parseDouble(req.getParameter("time"));
 
         TeamRace teamRaceToUpdate = teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
-        Team team = (Team)teamDao.getById(Integer.parseInt(req.getParameter("team")));
-        Race race = (Race) raceDao.getById(teamRaceToUpdate.getRace().getId());
+        Team team = (Team) teamDao.getById(Integer.parseInt(req.getParameter("team")));
+        Race race = new GenericDao<>(Race.class).getById(teamRaceToUpdate.getRace().getId());
 
         TeamRace updatedTeamRace = new TeamRace(team, race, cp, penalty, totalTime);
 

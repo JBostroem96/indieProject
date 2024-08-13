@@ -32,12 +32,12 @@ public class EditUserRoleById extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao dao = new GenericDao(User.class);
+        GenericDao<User> dao = new GenericDao<>(User.class);
 
-        User retrievedUser = (User)dao.getById(Integer.parseInt(req.getParameter("id")));
-        String role = req.getParameter("role");
+        User retrievedUser = dao.getById(Integer.parseInt(req.getParameter("id")));
+        String newRole = req.getParameter("role");
 
-        if (retrievedUser.getRole().equals(role)) {
+        if (new Validate().validateUserRole(newRole, retrievedUser.getRole())) {
 
             String message = "That user already has that role";
             req.setAttribute("userRole", retrievedUser);
@@ -45,7 +45,7 @@ public class EditUserRoleById extends HttpServlet {
 
         } else {
 
-            retrievedUser.setRole(role);
+            retrievedUser.setRole(newRole);
 
             try {
                 dao.update(retrievedUser);
