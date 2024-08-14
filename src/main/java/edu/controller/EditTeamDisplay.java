@@ -31,10 +31,10 @@ public class EditTeamDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao dao = new GenericDao(Team.class);
-        GenericDao categoryDao = new GenericDao(Category.class);
+        GenericDao<Team> dao = new GenericDao<>(Team.class);
+        GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
 
-        Team retrievedTeam = (Team)dao.getById(Integer.parseInt(req.getParameter("id")));
+        Team retrievedTeam = dao.getById(Integer.parseInt(req.getParameter("id")));
 
         req.setAttribute("team", retrievedTeam);
         req.setAttribute("category", categoryDao.getAll());

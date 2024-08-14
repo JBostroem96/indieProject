@@ -38,9 +38,9 @@ public class ViewResultDisplay extends HttpServlet {
                       HttpServletResponse resp)
             throws ServletException, IOException {
 
-        GenericDao teamRaceDao = new GenericDao(TeamRace.class);
+        GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
 
-        List<TeamRace> teamRaces = (ArrayList) teamRaceDao.findByPropertyEqual("race_id", req.getParameter("id"));
+        List<TeamRace> teamRaces = teamRaceDao.findByPropertyEqual("race_id", req.getParameter("id"));
 
         //using lambda expression to sort by the total time
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
@@ -58,7 +58,7 @@ public class ViewResultDisplay extends HttpServlet {
      * @param dao       the dao
      * @return the list
      */
-    public List<TeamRace> updateResults(List<TeamRace> teamRaces, GenericDao dao) {
+    public List<TeamRace> updateResults(List<TeamRace> teamRaces, GenericDao<TeamRace> dao) {
 
         final Logger logger = LogManager.getLogger(this.getClass());
 
@@ -92,7 +92,7 @@ public class ViewResultDisplay extends HttpServlet {
 
         for (Division division : Division.values()) {
 
-            loopThrough(division, teamRaces, overallPlace,
+            loopThrough(teamRaces, overallPlace,
                     maleDivision, femaleDivision, mixedDivision,
                     soloFemaleDivision, soloMaleDivision);
         }
@@ -102,7 +102,6 @@ public class ViewResultDisplay extends HttpServlet {
 
     /**
      * This method's purpose is to loop through the results and display the ranks
-     * @param division the division
      * @param teamRaces the list of results
      * @param overallPlace the overall rank
      * @param maleDivision the male category
@@ -111,7 +110,7 @@ public class ViewResultDisplay extends HttpServlet {
      * @param soloFemaleDivision the solo female category
      * @param soloMaleDivision the solo male category
      */
-    public void loopThrough(Division division, List<TeamRace> teamRaces, int overallPlace, int maleDivision,
+    public void loopThrough(List<TeamRace> teamRaces, int overallPlace, int maleDivision,
                             int femaleDivision, int mixedDivision,
                             int soloFemaleDivision, int soloMaleDivision) {
 

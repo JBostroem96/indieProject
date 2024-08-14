@@ -31,8 +31,8 @@ public class Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao raceDao = new GenericDao(Race.class);
-        GenericDao teamDao = new GenericDao(Team.class);
+        GenericDao<Race> raceDao = new GenericDao<>(Race.class);
+        GenericDao<Team> teamDao = new GenericDao<>(Team.class);
 
         if (req.getParameter("submit").equals("search")) {
 
@@ -51,7 +51,6 @@ public class Search extends HttpServlet {
             } else if (req.getParameter("searchType").equals("teamName")) {
 
                 req.setAttribute("teams", teamDao.findByPropertyEqual("name", req.getParameter("searchTerm")));
-
             }
 
         } else if (req.getParameter("submit").equals("viewAllRaces"))  {

@@ -37,8 +37,8 @@ public class EditRaceResultById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao<Team> teamDao = new GenericDao<>(Team.class);
 
+        GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
 
         int cp = Integer.parseInt(req.getParameter("cp"));

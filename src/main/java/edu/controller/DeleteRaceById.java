@@ -33,9 +33,9 @@ public class DeleteRaceById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao dao = new GenericDao(Race.class);
+        GenericDao<Race> dao = new GenericDao<>(Race.class);
 
-        Race raceToDelete = (Race)dao.getById(Integer.parseInt(req.getParameter("id")));
+        Race raceToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
 
         try {
             dao.delete(raceToDelete);

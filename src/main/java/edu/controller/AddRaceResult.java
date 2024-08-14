@@ -31,11 +31,11 @@ public class AddRaceResult extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao teamDao = new GenericDao(Team.class);
+        GenericDao<Team> teamDao = new GenericDao<>(Team.class);
+        GenericDao<Race> dao = new GenericDao<>(Race.class);
 
-        GenericDao dao = new GenericDao(Race.class);
         int raceId = Integer.parseInt(req.getParameter("id"));
-        Race retrievedRace = (Race)dao.getById(raceId);
+        Race retrievedRace = dao.getById(raceId);
 
         req.setAttribute("race", retrievedRace);
         req.setAttribute("team", teamDao.getAll());

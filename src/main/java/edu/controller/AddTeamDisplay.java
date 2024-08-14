@@ -35,7 +35,7 @@ public class AddTeamDisplay extends HttpServlet {
                       HttpServletResponse response)
             throws ServletException, IOException {
 
-        GenericDao dao = new GenericDao(Category.class);
+        GenericDao<Category> dao = new GenericDao<>(Category.class);
 
         req.setAttribute("category", dao.getAll());
 

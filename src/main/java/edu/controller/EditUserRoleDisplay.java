@@ -29,9 +29,9 @@ public class EditUserRoleDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao dao = new GenericDao(User.class);
+        GenericDao<User> dao = new GenericDao<>(User.class);
 
-        User retrievedUser = (User)dao.getById(Integer.parseInt(req.getParameter("id")));
+        User retrievedUser = dao.getById(Integer.parseInt(req.getParameter("id")));
         req.setAttribute("userRole", retrievedUser);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/users.jsp");

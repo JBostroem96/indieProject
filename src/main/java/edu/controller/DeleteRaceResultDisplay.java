@@ -30,8 +30,8 @@ public class DeleteRaceResultDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao dao = new GenericDao(TeamRace.class);
-        TeamRace retrievedTeamRace = (TeamRace)dao.getById(Integer.parseInt(req.getParameter("id")));
+        GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
+        TeamRace retrievedTeamRace = dao.getById(Integer.parseInt(req.getParameter("id")));
         req.setAttribute("team_race", retrievedTeamRace);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");

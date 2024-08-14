@@ -33,9 +33,9 @@ public class DeleteTeamById extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao dao = new GenericDao(Team.class);
+        GenericDao<Team> dao = new GenericDao<>(Team.class);
 
-        Team teamToDelete = (Team) dao.getById(Integer.parseInt(req.getParameter("id")));
+        Team teamToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
 
         try {
             dao.delete(teamToDelete);

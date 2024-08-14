@@ -32,10 +32,10 @@ public class EditRaceResultDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao dao = new GenericDao(TeamRace.class);
-        GenericDao teamDao = new GenericDao(Team.class);
+        GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
+        GenericDao<Team> teamDao = new GenericDao<>(Team.class);
 
-        TeamRace retrievedRace = (TeamRace)dao.getById(Integer.parseInt(req.getParameter("id")));
+        TeamRace retrievedRace = dao.getById(Integer.parseInt(req.getParameter("id")));
         req.setAttribute("team_race", retrievedRace);
         req.setAttribute("team", teamDao.getAll());
 
