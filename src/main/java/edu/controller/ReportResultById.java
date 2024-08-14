@@ -32,9 +32,8 @@ public class ReportResultById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
-        GenericDao dao = new GenericDao(TeamRace.class);
-        TeamRace resultToReport = (TeamRace)dao.getById(Integer.parseInt(req.getParameter("id")));
+        GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
+        TeamRace resultToReport = dao.getById(Integer.parseInt(req.getParameter("id")));
 
         String description = req.getParameter("teamTextArea");
         String subject = req.getParameter("subject") + " regarding "

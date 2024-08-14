@@ -5,14 +5,7 @@ import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import javax.servlet.http.HttpSession;
-import javax.swing.text.html.parser.Entity;
-import java.security.Signature;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class' purpose is to perform different validations,
