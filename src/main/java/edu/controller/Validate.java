@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.text.html.parser.Entity;
+import java.security.Signature;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,19 +81,26 @@ public class Validate {
     }
 
     /**
-     * This method's purpose is to validate the user
+     * This method's purpose is to validate the user,
+     * and it checks to see if the user's username that's sent over matches
+     * any in the table, and if it does, it returns the one from the table
      * @param user the user
      * @param dao the User dao
      * @return entryExists — if the user already exists
      */
-    public boolean validateUser(User user, GenericDao<User> dao) {
+    public User validateUser(User user, GenericDao<User> dao) {
 
-        for (User userName : dao.getAll()) {
+        for (User userEntry : dao.getAll()) {
 
-            checkExistence(userName.getName(), user.getUserName());
+            checkExistence(userEntry.getUserName(), user.getUserName());
+
+            if (entryExists) {
+
+                return userEntry;
+            }
         }
 
-        return entryExists;
+        return user;
     }
 
     /**

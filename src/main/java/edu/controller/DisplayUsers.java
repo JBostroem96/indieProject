@@ -33,16 +33,14 @@ public class DisplayUsers extends HttpServlet {
                       HttpServletResponse response)
             throws ServletException, IOException {
 
-        GenericDao dao = new GenericDao(User.class);
+        GenericDao<User> dao = new GenericDao<>(User.class);
         List<User> users = new ArrayList<>();
 
-        for (Object user : dao.getAll()) {
+        for (User user : dao.getAll()) {
 
-            User userRole = (User) user;
+            if (user.getRole().equals("user")) {
 
-            if (userRole.getRole().equals("user")) {
-
-                users.add(userRole);
+                users.add(user);
             }
         }
 

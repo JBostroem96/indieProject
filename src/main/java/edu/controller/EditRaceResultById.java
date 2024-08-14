@@ -46,7 +46,7 @@ public class EditRaceResultById extends HttpServlet {
         double totalTime = Double.parseDouble(req.getParameter("time"));
 
         TeamRace teamRaceToUpdate = teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
-        Team team = (Team) teamDao.getById(Integer.parseInt(req.getParameter("team")));
+        Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
         Race race = new GenericDao<>(Race.class).getById(teamRaceToUpdate.getRace().getId());
 
         TeamRace updatedTeamRace = new TeamRace(team, race, cp, penalty, totalTime);

@@ -93,12 +93,18 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                 TokenResponse tokenResponse = getToken(authRequest);
                 User newUser = validate(tokenResponse);
 
-                if (!new Validate().validateUser(newUser, new GenericDao<>(User.class))) {
+                //See if the new user already exists, and if it does, gets the one from the table rather than the one signing
+                // up or logging in ...
+                User checkUser = new Validate().validateUser(newUser, new GenericDao<>(User.class));
 
+                //if the new user matches the one found, meaning there was no match
+                if (checkUser.equals(newUser)) {
+                    //adds the user to the table because there wasn't a match
                     new User().addUser(newUser);
                 }
+
                 //Sign the user in by setting the session
-                session.setAttribute("user", newUser);
+                session.setAttribute("user", checkUser);
 
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
