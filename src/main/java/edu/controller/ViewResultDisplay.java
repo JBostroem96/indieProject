@@ -84,9 +84,9 @@ public class ViewResultDisplay extends HttpServlet {
      */
     public List<TeamRace> rankDivision(List<TeamRace> teamRaces) {
 
-        int[] divisions = {0, 0, 0, 0, 0, 0};
+        int[] divisionPlacements = {0, 0, 0, 0, 0, 0};
 
-        loopThrough(teamRaces, divisions);
+        incrementDivisions(teamRaces, divisionPlacements);
 
         return teamRaces;
     }
@@ -94,44 +94,44 @@ public class ViewResultDisplay extends HttpServlet {
     /**
      * This method's purpose is to loop through the results and display the ranks
      * @param teamRaces the list of results
-     * @param divisions the different division rankings
+     * @param divisionPlacements the different division rankings
      */
-    public void loopThrough(List<TeamRace> teamRaces, int[] divisions) {
+    public void incrementDivisions(List<TeamRace> teamRaces, int[] divisionPlacements) {
 
         for (TeamRace entry : teamRaces) {
 
             switch (entry.getTeam().getCategory().getDivision()) {
                 case MALE:
 
-                    divisions[0]++;
-                    entry.setDivisionPlace(divisions[0]);
+                    divisionPlacements[0]++;
+                    entry.setDivisionPlace(divisionPlacements[0]);
 
                     break;
                 case FEMALE:
 
-                    divisions[1]++;
-                    entry.setDivisionPlace(divisions[1]);
+                    divisionPlacements[1]++;
+                    entry.setDivisionPlace(divisionPlacements[1]);
 
                     break;
                 case SOLO_MALE:
 
-                    divisions[2]++;
-                    entry.setDivisionPlace(divisions[2]);
+                    divisionPlacements[2]++;
+                    entry.setDivisionPlace(divisionPlacements[2]);
 
                     break;
                 case SOLO_FEMALE:
 
-                    divisions[3]++;
-                    entry.setDivisionPlace(divisions[3]);
+                    divisionPlacements[3]++;
+                    entry.setDivisionPlace(divisionPlacements[3]);
                     break;
                 case MIXED:
 
-                    divisions[4]++;
-                    entry.setDivisionPlace(divisions[4]);
+                    divisionPlacements[4]++;
+                    entry.setDivisionPlace(divisionPlacements[4]);
                     break;
             }
-            divisions[5]++;
-            entry.setOverallPlace(divisions[5]);
+            divisionPlacements[5]++;
+            entry.setOverallPlace(divisionPlacements[5]);
         }
     }
 }
