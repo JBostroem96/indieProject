@@ -27,10 +27,11 @@ public class AddRaceResultById extends HttpServlet {
 
     /**
      * This method's purpose is to add the race result by getting the id
-     * @param req the request object
+     *
+     * @param req  the request object
      * @param resp the response object
      * @throws ServletException the servlet exception object
-     * @throws IOException the io exception object
+     * @throws IOException      the io exception object
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,32 +44,52 @@ public class AddRaceResultById extends HttpServlet {
         Race race = new GenericDao<>(Race.class).getById(Integer.parseInt(req.getParameter("id")));
         Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
 
-        if (new Validate().validateResult(race.getId(), teamRaceDao, team.getName())) {
+        try {
 
-            String message = "That team already exists in that race. Please enter a different one.";
-            req.setAttribute("message", message);
+            if (team != null && race != null
+                    && req.getParameter("cp") != null
+                    && req.getParameter("penalty") != null
+                    && req.getParameter("time") != null) {
 
-        } else {
+                int cp = Integer.parseInt(req.getParameter("cp"));
+                int penalty = Integer.parseInt(req.getParameter("penalty"));
+                double totalTime = Double.parseDouble(req.getParameter("time"));
 
-            int cp = Integer.parseInt(req.getParameter("cp"));
-            int penalty = Integer.parseInt(req.getParameter("penalty"));
-            double totalTime = Double.parseDouble(req.getParameter("time"));
+                if (new Validate().validateResult(race.getId(), teamRaceDao, team.getName())) {
 
-            TeamRace teamRace = new TeamRace(team, race, cp, penalty, totalTime);
+                    String message = "That team already exists in that race. Please enter a different one.";
+                    req.setAttribute("message", message);
 
-            try {
-                teamRaceDao.insert(teamRace);
+                } else {
 
-            } catch (Exception e) {
-                logger.error("there was an issue inserting the data", e);
+                    TeamRace teamRace = new TeamRace(team, race, cp, penalty, totalTime);
+
+                    teamRaceDao.insert(teamRace);
+
+                    req.setAttribute("teamRaceResult", teamRace);
+                }
             }
 
-            req.setAttribute("teamRaceResult", teamRace);
+        } catch (NumberFormatException nfe) {
+
+            req.setAttribute("nfe", nfe);
+            logger.error("there was an issue parsing the data", nfe);
+
+        } catch (Exception e) {
+
+            logger.error("there was an issue inserting the data", e);
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
         req.setAttribute("team", teamDao.getAll());
         req.setAttribute("race", race);
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
         dispatcher.forward(req, resp);
     }
 }
+
+
+
+
+
+
