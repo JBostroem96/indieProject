@@ -9,6 +9,7 @@
         <c:otherwise>
         <%@include file="nav.jsp"%>
             <div class="container bg-white">
+                <c:if test="${!empty e}"><p class="text-danger fw-bold">Something went wrong!</p></c:if>
                 <c:choose>
                     <c:when test="${!empty deletedRaceResult}">
                         <p class="text-success text-center fw-bold mt-4">You have successfully deleted the result!</p>
@@ -36,6 +37,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <input type="hidden" name="race_id" value="${team_race.race_id}">
                             <button type="submit" name="id" class="btn btn-primary bg-danger mt-2" value="${team_race.id}">Delete Result</button>
                         </form>
                     </c:otherwise>

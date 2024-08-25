@@ -41,38 +41,57 @@ public class EditRaceResultById extends HttpServlet {
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
 
-        int cp = Integer.parseInt(req.getParameter("cp"));
-        int penalty = Integer.parseInt(req.getParameter("penalty"));
-        double totalTime = Double.parseDouble(req.getParameter("time"));
-
         TeamRace teamRaceToUpdate = teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
         Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
-        Race race = new GenericDao<>(Race.class).getById(teamRaceToUpdate.getRace().getId());
+        Race race = teamRaceToUpdate.getRace();
 
-        TeamRace updatedTeamRace = new TeamRace(team, race, cp, penalty, totalTime);
-
-        if (new Validate().validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName())) {
-
-            String message = "That team name already exists";
-            req.setAttribute("message", message);
-            req.setAttribute("team_race", teamRaceToUpdate);
-
-        } else {
-
-            teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
-            teamRaceToUpdate.setRace(updatedTeamRace.getRace());
-            teamRaceToUpdate.setCp(updatedTeamRace.getCp());
-            teamRaceToUpdate.setTotalTime(updatedTeamRace.getTotalTime());
-            teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
+        if (req.getParameter("cp") != null
+                && req.getParameter("penalty") != null
+                && req.getParameter("time") != null
+                && team != null
+                && race != null) {
 
             try {
-                teamRaceDao.update(teamRaceToUpdate);
-            } catch (Exception e) {
-                logger.error("There was an issue updating the data", e);
-            }
 
+                int cp = Integer.parseInt(req.getParameter("cp"));
+                int penalty = Integer.parseInt(req.getParameter("penalty"));
+                double totalTime = Double.parseDouble(req.getParameter("time"));
+
+                TeamRace updatedTeamRace = new TeamRace(team, race, cp, penalty, totalTime);
+
+                if (new Validate().validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName())) {
+
+                    String message = "That team name already exists";
+                    req.setAttribute("message", message);
+                    req.setAttribute("team_race", teamRaceToUpdate);
+
+                } else {
+
+                    teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
+                    teamRaceToUpdate.setRace(updatedTeamRace.getRace());
+                    teamRaceToUpdate.setCp(updatedTeamRace.getCp());
+                    teamRaceToUpdate.setTotalTime(updatedTeamRace.getTotalTime());
+                    teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
+
+                    teamRaceDao.update(teamRaceToUpdate);
+
+                    //Update the results after editing
+                    new UpdateResults(teamRaceDao, req);
+                }
+
+            } catch (NumberFormatException nfe) {
+
+                req.setAttribute("nfe", nfe);
+                logger.error("there was an issue parsing the data", nfe);
+
+            } catch (Exception e) {
+
+                req.setAttribute("e", e);
+                logger.error("there was an issue inserting the data", e);
+            }
             req.setAttribute("editedRaceResult", teamRaceToUpdate);
         }
+
         req.setAttribute("team", teamDao.getAll());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editRaceResult.jsp");
         dispatcher.forward(req, resp);

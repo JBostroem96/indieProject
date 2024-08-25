@@ -1,6 +1,7 @@
 package edu.controller;
 
 
+import edu.matc.entity.Race;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
@@ -34,13 +35,19 @@ public class DeleteRaceResultById extends HttpServlet {
 
         final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
-
         TeamRace resultToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        try {
-            dao.delete(resultToDelete);
-        } catch (Exception e) {
-            logger.error("There was an issue deleting the data", e);
+        if (resultToDelete != null) {
+
+            try {
+                dao.delete(resultToDelete);
+                //update the results after deletion
+                new UpdateResults(dao, req);
+
+            } catch (Exception e) {
+                req.setAttribute("e", e);
+                logger.error("There was an issue deleting the data", e);
+            }
         }
 
         req.setAttribute("deletedRaceResult", resultToDelete);
