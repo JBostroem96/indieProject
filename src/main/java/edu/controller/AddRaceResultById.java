@@ -42,14 +42,15 @@ public class AddRaceResultById extends HttpServlet {
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
 
         Race race = new GenericDao<>(Race.class).getById(Integer.parseInt(req.getParameter("race_id")));
-        Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
 
-        if (team != null && race != null
-                && req.getParameter("cp") != null
-                && req.getParameter("penalty") != null
-                && req.getParameter("time") != null) {
+        try {
 
-            try {
+            if (teamDao.getById(Integer.parseInt(req.getParameter("team"))) != null
+                    && req.getParameter("cp") != null
+                    && req.getParameter("penalty") != null
+                    && req.getParameter("time") != null) {
+
+                Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
 
                 int cp = Integer.parseInt(req.getParameter("cp"));
                 int penalty = Integer.parseInt(req.getParameter("penalty"));
@@ -71,26 +72,27 @@ public class AddRaceResultById extends HttpServlet {
 
                     req.setAttribute("teamRaceResult", teamRace);
                 }
-
-            } catch (NumberFormatException nfe) {
-
-                req.setAttribute("nfe", nfe);
-                logger.error("there was an issue parsing the data", nfe);
-
-            } catch (Exception e) {
-
-                req.setAttribute("e", e);
-                logger.error("there was an issue inserting the data", e);
             }
 
-            req.setAttribute("team", teamDao.getAll());
-            req.setAttribute("race", race);
+        } catch (NumberFormatException nfe) {
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
-            dispatcher.forward(req, resp);
+            req.setAttribute("nfe", nfe);
+            logger.error("there was an issue parsing the data", nfe);
+
+        } catch (Exception e) {
+
+            req.setAttribute("e", e);
+            logger.error("there was an issue inserting the data", e);
         }
+
+        req.setAttribute("team", teamDao.getAll());
+        req.setAttribute("race", race);
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
+        dispatcher.forward(req, resp);
     }
 }
+
 
 
 

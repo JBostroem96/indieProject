@@ -40,18 +40,18 @@ public class EditRaceResultById extends HttpServlet {
 
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
-
         TeamRace teamRaceToUpdate = teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
-        Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
-        Race race = teamRaceToUpdate.getRace();
 
-        if (req.getParameter("cp") != null
-                && req.getParameter("penalty") != null
-                && req.getParameter("time") != null
-                && team != null
-                && race != null) {
+        try {
 
-            try {
+            if (req.getParameter("cp") != null
+                    && req.getParameter("penalty") != null
+                    && req.getParameter("time") != null
+                    && teamDao.getById(Integer.parseInt(req.getParameter("team"))) != null
+                    && teamRaceDao.getById(Integer.parseInt(req.getParameter("id"))) != null) {
+
+                Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
+                Race race = teamRaceToUpdate.getRace();
 
                 int cp = Integer.parseInt(req.getParameter("cp"));
                 int penalty = Integer.parseInt(req.getParameter("penalty"));
@@ -78,22 +78,23 @@ public class EditRaceResultById extends HttpServlet {
                     //Update the results after editing
                     new UpdateResults(teamRaceDao, req);
                 }
-
-            } catch (NumberFormatException nfe) {
-
-                req.setAttribute("nfe", nfe);
-                logger.error("there was an issue parsing the data", nfe);
-
-            } catch (Exception e) {
-
-                req.setAttribute("e", e);
-                logger.error("there was an issue inserting the data", e);
             }
-            req.setAttribute("editedRaceResult", teamRaceToUpdate);
+
+        } catch (NumberFormatException nfe) {
+
+            req.setAttribute("nfe", nfe);
+            logger.error("there was an issue parsing the data", nfe);
+
+        } catch (Exception e) {
+
+            req.setAttribute("e", e);
+            logger.error("there was an issue inserting the data", e);
         }
 
+        req.setAttribute("editedRaceResult", teamRaceToUpdate);
         req.setAttribute("team", teamDao.getAll());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editRaceResult.jsp");
         dispatcher.forward(req, resp);
     }
 }
+
