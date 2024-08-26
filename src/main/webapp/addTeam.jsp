@@ -16,17 +16,19 @@
                 </c:if>
                 <div class="d-flex flex-column gap-5 fw-bold">
                     <form action="addTeam" class="form-inline" method="POST">
+                        <c:if test="${!empty missingField}"><p class="text-danger fw-bold">${missingField}</p></c:if>
+                        <c:if test="${!empty e}"><p class="text-danger fw-bold">Something went wrong!</p></c:if>
                         <div class="search text-white p-5 border rounded" id="add_team">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" name="name" id="name">
+                                <input type="text" class="form-control" name="name" id="name" required>
                                 <c:if test="${!empty message}">
                                     <p class="text-danger small">${message}</p>
                                 </c:if>
                             </div>
                             <div class="form-group">
                                 <label class="fw-bold" for="division">Division (Category)</label>
-                                <select class="form-control" size="3" name="id" id="division">
+                                <select class="form-control" size="3" name="id" id="division" required>
                                     <c:forEach var="category" items="${category}">
                                         <option value="${category.category_id}">${category.division}</option>
                                     </c:forEach>

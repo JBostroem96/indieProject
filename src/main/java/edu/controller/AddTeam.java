@@ -38,25 +38,36 @@ public class AddTeam extends HttpServlet {
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
 
-        String name = req.getParameter("name");
+        try {
 
-        if (new Validate().validateTeam(name, teamDao)) {
+            if (req.getParameter("name") != null && !req.getParameter("name").isEmpty() ) {
 
-            String message = "That team already exists. Please Enter something else.";
-            req.setAttribute("message", message);
+                if (new Validate().validateTeam(req.getParameter("name"), teamDao)) {
 
-        } else {
+                    String message = "That team already exists. Please Enter something else.";
+                    req.setAttribute("message", message);
 
-            Category category = categoryDao.getById(Integer.parseInt(req.getParameter("id")));
-            Team team = new Team(name, category, category.getDivision().toString());
+                } else {
 
-            try {
-                teamDao.insert(team);
-            } catch (Exception e) {
-                logger.error("There was an issue inserting the data", e);
+                    Category category = categoryDao.getById(Integer.parseInt(req.getParameter("id")));
+
+                    if (category != null) {
+
+                        Team team = new Team(req.getParameter("name"), category, category.getDivision().toString());
+
+                        teamDao.insert(team);
+                    }
+                }
+
+            } else {
+
+                req.setAttribute("missingField", "Please enter the team name");
             }
 
-            req.setAttribute("team", team);
+        } catch (Exception e) {
+
+            req.setAttribute("e", e);
+            logger.error("there was an issue inserting the data", e);
         }
 
         req.setAttribute("category", categoryDao.getAll());
