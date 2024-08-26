@@ -45,13 +45,13 @@ public class AddRaceResultById extends HttpServlet {
 
         try {
 
-            if (teamDao.getById(Integer.parseInt(req.getParameter("team"))) != null
-                    && req.getParameter("cp") != null
-                    && req.getParameter("penalty") != null
-                    && req.getParameter("time") != null) {
+            if (
+                    req.getParameter("team") != null && !req.getParameter("team").isEmpty()
+                    && req.getParameter("cp") != null && !req.getParameter("cp").isEmpty()
+                    && req.getParameter("penalty") != null && !req.getParameter("penalty").isEmpty()
+                    && req.getParameter("time") != null && !req.getParameter("time").isEmpty()) {
 
                 Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
-
                 int cp = Integer.parseInt(req.getParameter("cp"));
                 int penalty = Integer.parseInt(req.getParameter("penalty"));
                 double totalTime = Double.parseDouble(req.getParameter("time"));
@@ -72,6 +72,9 @@ public class AddRaceResultById extends HttpServlet {
 
                     req.setAttribute("teamRaceResult", teamRace);
                 }
+            } else {
+
+                req.setAttribute("missingField", "Fields can't be empty");
             }
 
         } catch (NumberFormatException nfe) {

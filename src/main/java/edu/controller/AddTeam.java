@@ -40,7 +40,7 @@ public class AddTeam extends HttpServlet {
 
         try {
 
-            if (req.getParameter("name") != null && !req.getParameter("name").isEmpty() ) {
+            if (req.getParameter("name") != null && !req.getParameter("name").isEmpty()) {
 
                 if (new Validate().validateTeam(req.getParameter("name"), teamDao)) {
 

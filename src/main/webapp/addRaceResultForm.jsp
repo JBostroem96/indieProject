@@ -32,6 +32,7 @@
                 </div>
                 <div class="d-flex flex-column gap-5 fw-bold">
                     <form action="addRaceResultById" class="form-inline" method="POST">
+                        <c:if test="${!empty missingField}"><p class="text-danger fw-bold">${missingField}</p></c:if>
                         <c:if test="${!empty nfe}"><p class="text-danger fw-bold">Please make sure the formatting is correct</p></c:if>
                         <c:if test="${!empty e}"><p class="text-danger fw-bold">Something went wrong!</p></c:if>
                         <div class="search text-white p-5 border rounded" id="add_result">
