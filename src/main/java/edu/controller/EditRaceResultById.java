@@ -47,8 +47,7 @@ public class EditRaceResultById extends HttpServlet {
             if (req.getParameter("cp") != null
                     && req.getParameter("penalty") != null
                     && req.getParameter("time") != null
-                    && teamDao.getById(Integer.parseInt(req.getParameter("team"))) != null
-                    && teamRaceDao.getById(Integer.parseInt(req.getParameter("id"))) != null) {
+                    && teamDao.getById(Integer.parseInt(req.getParameter("team"))) != null) {
 
                 Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
                 Race race = teamRaceToUpdate.getRace();

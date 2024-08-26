@@ -76,7 +76,7 @@
                         </div>
                         <c:choose>
                             <c:when test="${!empty editedRaceResult}">
-                                <input type="hidden" name="race_id" value="${team_race.race_id}">
+                                <input type="hidden" name="race_id" value="${editedRaceResult.race_id}">
                                 <button type="submit" name="id" class="btn btn-success bg-success" value="${editedRaceResult.id}">Edit Race Result</button>
                             </c:when>
                             <c:otherwise>
