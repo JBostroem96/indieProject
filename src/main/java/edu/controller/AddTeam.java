@@ -40,7 +40,10 @@ public class AddTeam extends HttpServlet {
 
         try {
 
-            if (req.getParameter("name") != null && !req.getParameter("name").isEmpty()) {
+            if (req.getParameter("name") != null && !req.getParameter("name").isEmpty()
+                && req.getParameter("id") != null && !req.getParameter("id").isEmpty()) {
+
+                Category category = categoryDao.getById(Integer.parseInt(req.getParameter("id")));
 
                 if (new Validate().validateTeam(req.getParameter("name"), teamDao)) {
 
@@ -49,19 +52,13 @@ public class AddTeam extends HttpServlet {
 
                 } else {
 
-                    Category category = categoryDao.getById(Integer.parseInt(req.getParameter("id")));
-
-                    if (category != null) {
-
-                        Team team = new Team(req.getParameter("name"), category, category.getDivision().toString());
-
-                        teamDao.insert(team);
-                    }
+                    Team team = new Team(req.getParameter("name"), category, category.getDivision().toString());
+                    teamDao.insert(team);
                 }
 
             } else {
 
-                req.setAttribute("missingField", "Please enter the team name");
+                req.setAttribute("missingField", "Fields can't be empty");
             }
 
         } catch (Exception e) {
