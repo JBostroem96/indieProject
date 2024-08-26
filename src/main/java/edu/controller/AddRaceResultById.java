@@ -41,15 +41,19 @@ public class AddRaceResultById extends HttpServlet {
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
 
-        Race race = new GenericDao<>(Race.class).getById(Integer.parseInt(req.getParameter("race_id")));
+        Race race = null;
 
         try {
 
-            if (
-                    req.getParameter("team") != null && !req.getParameter("team").isEmpty()
+            race = new GenericDao<>(Race.class).getById(Integer.parseInt(req.getParameter("race_id")));
+            
+            if (req.getParameter("team") != null && !req.getParameter("team").isEmpty()
                     && req.getParameter("cp") != null && !req.getParameter("cp").isEmpty()
                     && req.getParameter("penalty") != null && !req.getParameter("penalty").isEmpty()
-                    && req.getParameter("time") != null && !req.getParameter("time").isEmpty()) {
+                    && req.getParameter("time") != null && !req.getParameter("time").isEmpty()
+                    && req.getParameter("race_id") != null
+                    && !req.getParameter("race_id").isEmpty()) {
+
 
                 Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
                 int cp = Integer.parseInt(req.getParameter("cp"));

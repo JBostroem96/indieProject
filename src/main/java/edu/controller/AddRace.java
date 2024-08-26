@@ -42,31 +42,44 @@ public class AddRace extends HttpServlet {
         final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<Race> dao = new GenericDao<>(Race.class);
 
-        String name = req.getParameter("name");
+        try {
 
-        if (new Validate().validateRace(name, dao)) {
+            if (req.getParameter("name") != null
+                    && !req.getParameter("name").isEmpty()
+                    && req.getParameter("length") != null
+                    && !req.getParameter("length").isEmpty()
+                    && req.getParameter("date") != null
+                    && !req.getParameter("date").isEmpty()) {
 
-            String message = "That race already exists";
-            req.setAttribute("message", message);
 
-        } else {
+                if (new Validate().validateRace(req.getParameter("name"), dao)) {
 
-            Race race = new Race(req.getParameter("name"),
-                    req.getParameter("length"),
-                    LocalDate.parse(req.getParameter("date")));
+                    String message = "That race already exists";
+                    req.setAttribute("message", message);
 
-            try {
-                dao.insert(race);
+                } else {
 
-            } catch (Exception e) {
+                    Race race = new Race(req.getParameter("name"),
+                            req.getParameter("length"),
+                            LocalDate.parse(req.getParameter("date")));
 
-                logger.error("There was an issue inserting the data", e);
+                    dao.insert(race);
+
+                    req.setAttribute("race", race);
+                }
+
+            } else {
+
+                req.setAttribute("missingField", "Fields can't be empty");
             }
 
-            req.setAttribute("race", race);
+        } catch (Exception e) {
+
+            logger.error("There was an issue inserting the data", e);
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addRace.jsp");
         dispatcher.forward(req, resp);
+
     }
 }

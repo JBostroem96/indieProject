@@ -35,22 +35,33 @@ public class DeleteRaceResultById extends HttpServlet {
 
         final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
-        TeamRace resultToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        if (resultToDelete != null) {
+        try {
 
-            try {
+            TeamRace resultToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
+
+            if (req.getParameter("id") != null
+                && !req.getParameter("id").isEmpty()
+                && resultToDelete != null) {
+
                 dao.delete(resultToDelete);
+
                 //update the results after deletion
                 new UpdateResults(dao, req);
 
-            } catch (Exception e) {
-                req.setAttribute("e", e);
-                logger.error("There was an issue deleting the data", e);
+                req.setAttribute("deletedRaceResult", resultToDelete);
             }
-        }
 
-        req.setAttribute("deletedRaceResult", resultToDelete);
+        } catch (NumberFormatException nfe) {
+
+            req.setAttribute("nfe", nfe);
+            logger.error("There was an issue with the formatting", nfe);
+
+        } catch (Exception e) {
+
+            req.setAttribute("e", e);
+            logger.error("There was an issue deleting the data", e);
+        }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");
         dispatcher.forward(req, resp);

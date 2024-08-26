@@ -9,6 +9,8 @@
             <c:otherwise>
             <%@include file="nav.jsp"%>
                 <div class="container bg-white">
+                    <c:if test="${!empty nfe}"><p class="text-danger fw-bold">Please make sure the formatting is correct</p></c:if>
+                    <c:if test="${!empty e}"><p class="text-danger fw-bold">Something went wrong!</p></c:if>
                     <c:choose>
                         <c:when test="${!empty deletedRace}">
                             <p class="text-success text-center fw-bold mt-4">You have successfully deleted the race!</p>
