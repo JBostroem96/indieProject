@@ -37,34 +37,36 @@ public class ReportResultById extends HttpServlet {
 
         String description = req.getParameter("teamTextArea");
         String subject = req.getParameter("subject");
-        TeamRace resultToReport;
+        String id = req.getParameter("id");
 
-        try {
+        if (id != null && !id.isEmpty()) {
 
-            resultToReport = dao.getById(Integer.parseInt(req.getParameter("id")));
+            try {
 
-            if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
-                && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {
+                TeamRace resultToReport = dao.getById(Integer.parseInt(id));
 
-                description = req.getParameter("teamTextArea");
-                subject += " regarding "
-                        + resultToReport.getTeam().getName() + " in race "
-                        + resultToReport.getRace().getName();
+                if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
+                        && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {
+
+                    description = req.getParameter("teamTextArea");
+                    subject += " regarding "
+                            + resultToReport.getTeam().getName() + " in race "
+                            + resultToReport.getRace().getName();
+                }
+
+                req.setAttribute("resultReported", resultToReport.getTeam().getName());
+                req.setAttribute("result", resultToReport);
+
+                TLSEmail mail = new TLSEmail();
+
+                mail.simpleEmailWithTLS(subject, description);
+
+            } catch (Exception e) {
+
+                logger.error("Something went wrong!", e);
             }
-
-            req.setAttribute("resultReported", resultToReport.getTeam().getName());
-            req.setAttribute("result", resultToReport);
-
-            TLSEmail mail = new TLSEmail();
-
-            mail.simpleEmailWithTLS(subject, description);
-
-        } catch (Exception e) {
-
-            logger.error("Something went wrong!", e);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");
+            dispatcher.forward(req, resp);
         }
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");
-        dispatcher.forward(req, resp);
     }
 }
