@@ -36,7 +36,7 @@ public class EditRaceDisplay extends HttpServlet {
         GenericDao<Race> dao = new GenericDao<>(Race.class);
         String id = req.getParameter("id");
 
-        if (id != null && id.isEmpty()) {
+        if (id != null && !id.isEmpty()) {
 
             try {
 
