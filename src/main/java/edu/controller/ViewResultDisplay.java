@@ -35,11 +35,10 @@ public class ViewResultDisplay extends HttpServlet {
             throws ServletException, IOException {
 
         String id = req.getParameter("id");
-        List<TeamRace> teamRaces = null;
 
         if (id != null && !id.isEmpty()) {
 
-            teamRaces = new GenericDao<>(TeamRace.class).findByPropertyEqual("race_id", id);
+            List<TeamRace> teamRaces = new GenericDao<>(TeamRace.class).findByPropertyEqual("race_id", id);
             //using lambda expression to sort by the total time
             teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 
