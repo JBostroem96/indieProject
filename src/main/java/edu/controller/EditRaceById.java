@@ -41,32 +41,53 @@ public class EditRaceById extends HttpServlet {
 
         GenericDao<Race> dao = new GenericDao<>(Race.class);
 
-        Race updatedRace = new Race(req.getParameter("name"),
-                req.getParameter("length"),
-                LocalDate.parse(req.getParameter(("date"))));
+        String name = req.getParameter("name");
+        String length = req.getParameter("length");
+        String date = req.getParameter("date");
 
-        Race raceToUpdate = dao.getById(Integer.parseInt(req.getParameter("id")));
+        Race raceToUpdate = null;
 
-        if (new Validate().validateRace(updatedRace.getName(), dao)) {
 
-            String message = "That race already exists";
-            req.setAttribute("message", message);
-            req.setAttribute("race", raceToUpdate);
+        try {
 
-        } else {
+            raceToUpdate = dao.getById(Integer.parseInt(req.getParameter("id")));
 
-            raceToUpdate.setName(updatedRace.getName());
-            raceToUpdate.setLength(updatedRace.getLength());
-            raceToUpdate.setDate(updatedRace.getDate());
+            if (name != null && !name.isEmpty()
+                    && length != null && !length.isEmpty()
+                    && date != null && !date.isEmpty()) {
 
-            try {
-                dao.update(raceToUpdate);
-            } catch (Exception e) {
-                logger.error("There was an issue updating the data", e);
+                Race updatedRace = new Race(name,
+                        length,
+                        LocalDate.parse(date));
+
+                if (new Validate().validateRace(updatedRace.getName(), dao)) {
+
+                    String message = "That race already exists";
+                    req.setAttribute("message", message);
+
+                } else {
+
+                    raceToUpdate.setName(updatedRace.getName());
+                    raceToUpdate.setLength(updatedRace.getLength());
+                    raceToUpdate.setDate(updatedRace.getDate());
+                    dao.update(raceToUpdate);
+
+                    String message = "You have successfully updated the race!";
+                    req.setAttribute("messageSuccess", message);
+                }
+
+            } else {
+
+                req.setAttribute("missingField", "Fields can't be empty");
             }
 
-            req.setAttribute("editedRace", raceToUpdate);
+        } catch (Exception e) {
+
+            logger.error("There was an issue updating the data", e);
+            req.setAttribute("e", "Something went wrong!");
         }
+
+        req.setAttribute("race", raceToUpdate);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editRace.jsp");
         dispatcher.forward(req, resp);

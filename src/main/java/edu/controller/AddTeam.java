@@ -38,33 +38,37 @@ public class AddTeam extends HttpServlet {
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
 
-        try {
+        String name = req.getParameter("name");
+        String id = req.getParameter("id");
 
-            if (req.getParameter("name") != null && !req.getParameter("name").isEmpty()
-                && req.getParameter("id") != null && !req.getParameter("id").isEmpty()) {
+        if (name != null && !name.isEmpty()
+                && id != null && !id.isEmpty()) {
 
-                Category category = categoryDao.getById(Integer.parseInt(req.getParameter("id")));
+            try {
 
-                if (new Validate().validateTeam(req.getParameter("name"), teamDao)) {
+                Category category = categoryDao.getById(Integer.parseInt(id));
+
+                if (new Validate().validateTeam(name, teamDao)) {
 
                     String message = "That team already exists. Please Enter something else.";
                     req.setAttribute("message", message);
 
                 } else {
 
-                    Team team = new Team(req.getParameter("name"), category, category.getDivision().toString());
+                    Team team = new Team(name, category, category.getDivision().toString());
                     teamDao.insert(team);
+                    req.setAttribute("team", team);
                 }
 
-            } else {
+            } catch (Exception e) {
 
-                req.setAttribute("missingField", "Fields can't be empty");
+                req.setAttribute("e", "Something went wrong!");
+                logger.error("Something went wrong!", e);
             }
 
-        } catch (Exception e) {
+        } else {
 
-            req.setAttribute("e", e);
-            logger.error("there was an issue inserting the data", e);
+            req.setAttribute("missingField", "Fields can't be empty");
         }
 
         req.setAttribute("category", categoryDao.getAll());

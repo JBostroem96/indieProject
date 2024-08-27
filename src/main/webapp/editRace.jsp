@@ -11,8 +11,8 @@
             <%@include file="nav.jsp"%>
             <div class="container bg-white">
                 <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>You are editing:</em></h1>
-                <c:if test="${!empty editedRace}">
-                    <p class="text-success text-center fw-bold">You have successfully edited the race!</p>
+                <c:if test="${!empty messageSuccess}">
+                    <p class="text-success text-center fw-bold">${messageSuccess}</p>
                 </c:if>
                 <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
                     <table id="addRace" class="display" cellspacing="=0" width="100%">
@@ -43,6 +43,8 @@
                 </div>
                 <div class="d-flex flex-column gap-5 fw-bold">
                     <form action="editRaceById" class="form-inline" method="POST">
+                        <c:if test="${!empty missingField}"><p class="text-danger fw-bold">${missingField}</p></c:if>
+                        <c:if test="${!empty e}"><p class="text-danger fw-bold">${e}</p></c:if>
                         <div class="search text-white p-5 border rounded" id="edit_race">
                             <div class="form-group">
                                 <label for="name">Name</label>

@@ -39,23 +39,13 @@ public class DeleteRaceById extends HttpServlet {
 
             Race raceToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
 
-            if (
-                req.getParameter("id") != null
-                    && !req.getParameter("id").isEmpty()
-                    && raceToDelete != null) {
-
-                dao.delete(raceToDelete);
-                req.setAttribute("deletedRace", raceToDelete);
-            }
-
-        } catch (NumberFormatException nfe) {
-
-            req.setAttribute("nfe", nfe);
-            logger.error("There was an issue with the formatting", nfe);
+            dao.delete(raceToDelete);
+            req.setAttribute("deletedRace", raceToDelete);
 
         } catch (Exception e) {
 
-            logger.error("There was an issue deleting the data", e);
+            req.setAttribute("e", e);
+            logger.error("Something went wrong!", e);
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRace.jsp");

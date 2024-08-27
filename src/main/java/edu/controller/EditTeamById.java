@@ -38,31 +38,46 @@ public class EditTeamById extends HttpServlet {
         GenericDao<Team> dao = new GenericDao<>(Team.class);
         GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
 
-        Team updatedTeam = new Team(req.getParameter("name"),
-                req.getParameter("division"));
+        String name = req.getParameter("name");
+        String division = req.getParameter("division");
 
-        Team teamToUpdate = dao.getById(Integer.parseInt(req.getParameter("id")));
+        Team teamToUpdate = null;
 
-        if (new Validate().validateTeam(updatedTeam.getName(), dao)) {
+        try {
 
-            String message = "That name already exists";
-            req.setAttribute("alreadyExists", message);
-            req.setAttribute("team", teamToUpdate);
+            teamToUpdate = dao.getById(Integer.parseInt(req.getParameter("id")));
 
-        } else {
+            if (name != null && !name.isEmpty()
+                    && division != null && !division.isEmpty()) {
 
-            teamToUpdate.setName(updatedTeam.getName());
-            teamToUpdate.setDivision(updatedTeam.getDivision());
+                Team updatedTeam = new Team(name,
+                        division);
 
-            try {
-                dao.update(teamToUpdate);
-            } catch (Exception e) {
-                logger.error("There was an issue updating the data");
+                if (new Validate().validateTeam(updatedTeam.getName(), dao)) {
+
+                    String message = "That name already exists";
+                    req.setAttribute("alreadyExists", message);
+
+                } else {
+
+                    teamToUpdate.setName(updatedTeam.getName());
+                    teamToUpdate.setDivision(updatedTeam.getDivision());
+                    dao.update(teamToUpdate);
+                    req.setAttribute("messageSuccess", "You have successfully updated the team!");
+                }
+
+            } else {
+
+                req.setAttribute("missingField", "Fields can't be empty");
             }
 
-            req.setAttribute("editedTeam", teamToUpdate);
+        } catch (Exception e) {
+
+            logger.error("There was an issue updating the data");
+            req.setAttribute("e", "Something went wrong!");
         }
 
+        req.setAttribute("team", teamToUpdate);
         req.setAttribute("category", categoryDao.getAll());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editTeam.jsp");

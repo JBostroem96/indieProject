@@ -41,24 +41,25 @@ public class AddRaceResultById extends HttpServlet {
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
 
+        String raceEntry = req.getParameter("race_id");
+        String teamEntry = req.getParameter("team");
+        String cpEntry = req.getParameter("cp");
+        String penaltyEntry = req.getParameter("penalty");
+        String timeEntry = req.getParameter("time");
+
         Race race = null;
 
         try {
 
-            race = new GenericDao<>(Race.class).getById(Integer.parseInt(req.getParameter("race_id")));
-            
-            if (req.getParameter("team") != null && !req.getParameter("team").isEmpty()
-                    && req.getParameter("cp") != null && !req.getParameter("cp").isEmpty()
-                    && req.getParameter("penalty") != null && !req.getParameter("penalty").isEmpty()
-                    && req.getParameter("time") != null && !req.getParameter("time").isEmpty()
-                    && req.getParameter("race_id") != null
-                    && !req.getParameter("race_id").isEmpty()) {
+            race = new GenericDao<>(Race.class).getById(Integer.parseInt(raceEntry));
 
+            if (cpEntry != null && !cpEntry.isEmpty()
+                    && penaltyEntry != null && !penaltyEntry.isEmpty()
+                    && timeEntry != null && !timeEntry.isEmpty()
+                    && !raceEntry.isEmpty()
+                    && !teamEntry.isEmpty()) {
 
-                Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
-                int cp = Integer.parseInt(req.getParameter("cp"));
-                int penalty = Integer.parseInt(req.getParameter("penalty"));
-                double totalTime = Double.parseDouble(req.getParameter("time"));
+                Team team = teamDao.getById(Integer.parseInt(teamEntry));
 
                 if (new Validate().validateResult(race.getId(), teamRaceDao, team.getName())) {
 
@@ -66,6 +67,10 @@ public class AddRaceResultById extends HttpServlet {
                     req.setAttribute("message", message);
 
                 } else {
+
+                    int cp = Integer.parseInt(cpEntry);
+                    int penalty = Integer.parseInt(penaltyEntry);
+                    double totalTime = Double.parseDouble(timeEntry);
 
                     TeamRace teamRace = new TeamRace(team, race, cp, penalty, totalTime);
 
@@ -76,20 +81,16 @@ public class AddRaceResultById extends HttpServlet {
 
                     req.setAttribute("teamRaceResult", teamRace);
                 }
+
             } else {
 
                 req.setAttribute("missingField", "Fields can't be empty");
             }
 
-        } catch (NumberFormatException nfe) {
-
-            req.setAttribute("nfe", nfe);
-            logger.error("there was an issue parsing the data", nfe);
-
-        } catch (Exception e) {
+        } catch(Exception e){
 
             req.setAttribute("e", e);
-            logger.error("there was an issue inserting the data", e);
+            logger.error("Something went wrong!", e);
         }
 
         req.setAttribute("team", teamDao.getAll());
@@ -99,6 +100,8 @@ public class AddRaceResultById extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 }
+
+
 
 
 

@@ -35,15 +35,16 @@ public class DeleteTeamById extends HttpServlet {
         final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<Team> dao = new GenericDao<>(Team.class);
 
-        Team teamToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
-
         try {
-            dao.delete(teamToDelete);
-        } catch (Exception e) {
-            logger.error("There was an issue deleting the data", e);
-        }
 
-        req.setAttribute("deletedTeam", teamToDelete);
+            Team teamToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
+            dao.delete(teamToDelete);
+            req.setAttribute("deletedTeam", teamToDelete);
+
+        } catch (Exception e) {
+
+            logger.error("Something went wrong!", e);
+        }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
         dispatcher.forward(req, resp);

@@ -16,7 +16,7 @@
                 <div class="d-flex flex-column gap-5 fw-bold">
                     <form action="addRace" class="form-inline" method="POST">
                         <c:if test="${!empty missingField}"><p class="text-danger fw-bold">${missingField}</p></c:if>
-                        <c:if test="${!empty e}"><p class="text-danger fw-bold">Something went wrong!</p></c:if>
+                        <c:if test="${!empty e}"><p class="text-danger fw-bold">${e}</p></c:if>
                         <div class="search text-white p-5 border rounded" id="add_race">
                             <div class="form-group">
                                 <label for="name">Name</label>

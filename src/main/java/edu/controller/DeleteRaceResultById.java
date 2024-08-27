@@ -40,27 +40,17 @@ public class DeleteRaceResultById extends HttpServlet {
 
             TeamRace resultToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
 
-            if (req.getParameter("id") != null
-                && !req.getParameter("id").isEmpty()
-                && resultToDelete != null) {
+            dao.delete(resultToDelete);
 
-                dao.delete(resultToDelete);
+            //update the results after deletion
+            new UpdateResults(dao, req);
 
-                //update the results after deletion
-                new UpdateResults(dao, req);
-
-                req.setAttribute("deletedRaceResult", resultToDelete);
-            }
-
-        } catch (NumberFormatException nfe) {
-
-            req.setAttribute("nfe", nfe);
-            logger.error("There was an issue with the formatting", nfe);
+            req.setAttribute("deletedRaceResult", resultToDelete);
 
         } catch (Exception e) {
 
             req.setAttribute("e", e);
-            logger.error("There was an issue deleting the data", e);
+            logger.error("Something went wrong!", e);
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");

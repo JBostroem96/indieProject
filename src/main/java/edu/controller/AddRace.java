@@ -42,44 +42,44 @@ public class AddRace extends HttpServlet {
         final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<Race> dao = new GenericDao<>(Race.class);
 
-        try {
+        String name = req.getParameter("name");
+        String length = req.getParameter("length");
+        String date = req.getParameter("date");
 
-            if (req.getParameter("name") != null
-                    && !req.getParameter("name").isEmpty()
-                    && req.getParameter("length") != null
-                    && !req.getParameter("length").isEmpty()
-                    && req.getParameter("date") != null
-                    && !req.getParameter("date").isEmpty()) {
+        if (name != null && !name.isEmpty()
+                && length != null && !length.isEmpty()
+                && date != null && !date.isEmpty()) {
 
+            try {
 
-                if (new Validate().validateRace(req.getParameter("name"), dao)) {
+                if (new Validate().validateRace(name, dao)) {
 
                     String message = "That race already exists";
                     req.setAttribute("message", message);
 
                 } else {
 
-                    Race race = new Race(req.getParameter("name"),
-                            req.getParameter("length"),
-                            LocalDate.parse(req.getParameter("date")));
+                    Race race = new Race(name,
+                            length,
+                            LocalDate.parse(date));
 
                     dao.insert(race);
 
                     req.setAttribute("race", race);
                 }
 
-            } else {
+            } catch (Exception e) {
 
-                req.setAttribute("missingField", "Fields can't be empty");
+                req.setAttribute("e", "Something went wrong!");
+                logger.error("There was an issue inserting the data", e);
             }
 
-        } catch (Exception e) {
+        } else {
 
-            logger.error("There was an issue inserting the data", e);
+            req.setAttribute("missingField", "Fields can't be empty");
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/addRace.jsp");
         dispatcher.forward(req, resp);
-
     }
 }

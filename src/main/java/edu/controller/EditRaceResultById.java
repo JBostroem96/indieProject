@@ -40,23 +40,29 @@ public class EditRaceResultById extends HttpServlet {
 
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
-        TeamRace teamRaceToUpdate = teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
+
+        String cp = req.getParameter("cp");
+        String penalty = req.getParameter("penalty");
+        String time = req.getParameter("time");
+
+        TeamRace teamRaceToUpdate = null;
 
         try {
 
-            if (req.getParameter("cp") != null
-                    && req.getParameter("penalty") != null
-                    && req.getParameter("time") != null
-                    && teamDao.getById(Integer.parseInt(req.getParameter("team"))) != null) {
+            teamRaceToUpdate = teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
+
+            if (cp != null && !cp.isEmpty()
+                    && penalty != null && !penalty.isEmpty()
+                    && time != null && !time.isEmpty()) {
 
                 Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
                 Race race = teamRaceToUpdate.getRace();
 
-                int cp = Integer.parseInt(req.getParameter("cp"));
-                int penalty = Integer.parseInt(req.getParameter("penalty"));
-                double totalTime = Double.parseDouble(req.getParameter("time"));
+                int cpEntry = Integer.parseInt(cp);
+                int penaltyEntry = Integer.parseInt(penalty);
+                double totalTimeEntry = Double.parseDouble(time);
 
-                TeamRace updatedTeamRace = new TeamRace(team, race, cp, penalty, totalTime);
+                TeamRace updatedTeamRace = new TeamRace(team, race, cpEntry, penaltyEntry, totalTimeEntry);
 
                 if (new Validate().validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName())) {
 
@@ -76,13 +82,14 @@ public class EditRaceResultById extends HttpServlet {
 
                     //Update the results after editing
                     new UpdateResults(teamRaceDao, req);
+
+                    req.setAttribute("messageSuccess", "You have successfully updated the results!");
                 }
+
+            } else {
+
+                req.setAttribute("missingField", "Fields can't be empty");
             }
-
-        } catch (NumberFormatException nfe) {
-
-            req.setAttribute("nfe", nfe);
-            logger.error("there was an issue parsing the data", nfe);
 
         } catch (Exception e) {
 
