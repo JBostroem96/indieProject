@@ -44,57 +44,60 @@ public class EditRaceResultById extends HttpServlet {
         String cp = req.getParameter("cp");
         String penalty = req.getParameter("penalty");
         String time = req.getParameter("time");
-
+        String id = req.getParameter("id");
         TeamRace teamRaceToUpdate = null;
 
-        try {
+        if (id != null && !id.isEmpty()) {
 
-            teamRaceToUpdate = teamRaceDao.getById(Integer.parseInt(req.getParameter("id")));
+            try {
 
-            if (cp != null && !cp.isEmpty()
-                    && penalty != null && !penalty.isEmpty()
-                    && time != null && !time.isEmpty()) {
+                teamRaceToUpdate = teamRaceDao.getById(Integer.parseInt(id));
 
-                Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
-                Race race = teamRaceToUpdate.getRace();
+                if (cp != null && !cp.isEmpty()
+                        && penalty != null && !penalty.isEmpty()
+                        && time != null && !time.isEmpty()) {
 
-                int cpEntry = Integer.parseInt(cp);
-                int penaltyEntry = Integer.parseInt(penalty);
-                double totalTimeEntry = Double.parseDouble(time);
+                    Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
+                    Race race = teamRaceToUpdate.getRace();
 
-                TeamRace updatedTeamRace = new TeamRace(team, race, cpEntry, penaltyEntry, totalTimeEntry);
+                    int cpEntry = Integer.parseInt(cp);
+                    int penaltyEntry = Integer.parseInt(penalty);
+                    double totalTimeEntry = Double.parseDouble(time);
 
-                if (new Validate().validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName())) {
+                    TeamRace updatedTeamRace = new TeamRace(team, race, cpEntry, penaltyEntry, totalTimeEntry);
 
-                    String message = "That team name already exists";
-                    req.setAttribute("message", message);
-                    req.setAttribute("team_race", teamRaceToUpdate);
+                    if (new Validate().validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName())) {
+
+                        String message = "That team name already exists";
+                        req.setAttribute("message", message);
+                        req.setAttribute("team_race", teamRaceToUpdate);
+
+                    } else {
+
+                        teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
+                        teamRaceToUpdate.setRace(updatedTeamRace.getRace());
+                        teamRaceToUpdate.setCp(updatedTeamRace.getCp());
+                        teamRaceToUpdate.setTotalTime(updatedTeamRace.getTotalTime());
+                        teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
+
+                        teamRaceDao.update(teamRaceToUpdate);
+
+                        //Update the results after editing
+                        new UpdateResults(teamRaceDao, req);
+
+                        req.setAttribute("messageSuccess", "You have successfully updated the results!");
+                    }
 
                 } else {
 
-                    teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
-                    teamRaceToUpdate.setRace(updatedTeamRace.getRace());
-                    teamRaceToUpdate.setCp(updatedTeamRace.getCp());
-                    teamRaceToUpdate.setTotalTime(updatedTeamRace.getTotalTime());
-                    teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
-
-                    teamRaceDao.update(teamRaceToUpdate);
-
-                    //Update the results after editing
-                    new UpdateResults(teamRaceDao, req);
-
-                    req.setAttribute("messageSuccess", "You have successfully updated the results!");
+                    req.setAttribute("missingField", "Fields can't be empty");
                 }
 
-            } else {
+            } catch (Exception e) {
 
-                req.setAttribute("missingField", "Fields can't be empty");
+                req.setAttribute("e", e);
+                logger.error("there was an issue inserting the data", e);
             }
-
-        } catch (Exception e) {
-
-            req.setAttribute("e", e);
-            logger.error("there was an issue inserting the data", e);
         }
 
         req.setAttribute("editedRaceResult", teamRaceToUpdate);

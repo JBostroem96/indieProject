@@ -2,6 +2,8 @@ package edu.controller;
 
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,11 +32,23 @@ public class ReportResultDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
-        TeamRace resultToReport = dao.getById(Integer.parseInt(req.getParameter("id")));
+        String id = req.getParameter("id");
 
-        req.setAttribute("result", resultToReport);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");
-        dispatcher.forward(req, resp);
+        if (id != null && !id.isEmpty()) {
+
+            try {
+
+                TeamRace resultToReport = dao.getById(Integer.parseInt(id));
+                req.setAttribute("result", resultToReport);
+
+            } catch (Exception e) {
+
+                logger.error("Something went wrong!", e);
+            }
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 }

@@ -49,48 +49,50 @@ public class AddRaceResultById extends HttpServlet {
 
         Race race = null;
 
-        try {
+        if (raceEntry != null && !raceEntry.isEmpty()) {
 
-            race = new GenericDao<>(Race.class).getById(Integer.parseInt(raceEntry));
+            try {
 
-            if (cpEntry != null && !cpEntry.isEmpty()
-                    && penaltyEntry != null && !penaltyEntry.isEmpty()
-                    && timeEntry != null && !timeEntry.isEmpty()
-                    && !raceEntry.isEmpty()
-                    && !teamEntry.isEmpty()) {
+                race = new GenericDao<>(Race.class).getById(Integer.parseInt(raceEntry));
 
-                Team team = teamDao.getById(Integer.parseInt(teamEntry));
+                if (cpEntry != null && !cpEntry.isEmpty()
+                        && penaltyEntry != null && !penaltyEntry.isEmpty()
+                        && timeEntry != null && !timeEntry.isEmpty()
+                        && !teamEntry.isEmpty()) {
 
-                if (new Validate().validateResult(race.getId(), teamRaceDao, team.getName())) {
+                    Team team = teamDao.getById(Integer.parseInt(teamEntry));
 
-                    String message = "That team already exists in that race. Please enter a different one.";
-                    req.setAttribute("message", message);
+                    if (new Validate().validateResult(race.getId(), teamRaceDao, team.getName())) {
+
+                        String message = "That team already exists in that race. Please enter a different one.";
+                        req.setAttribute("message", message);
+
+                    } else {
+
+                        int cp = Integer.parseInt(cpEntry);
+                        int penalty = Integer.parseInt(penaltyEntry);
+                        double totalTime = Double.parseDouble(timeEntry);
+
+                        TeamRace teamRace = new TeamRace(team, race, cp, penalty, totalTime);
+
+                        teamRaceDao.insert(teamRace);
+
+                        //update the results once inserted
+                        new UpdateResults(teamRaceDao, req);
+
+                        req.setAttribute("teamRaceResult", teamRace);
+                    }
 
                 } else {
 
-                    int cp = Integer.parseInt(cpEntry);
-                    int penalty = Integer.parseInt(penaltyEntry);
-                    double totalTime = Double.parseDouble(timeEntry);
-
-                    TeamRace teamRace = new TeamRace(team, race, cp, penalty, totalTime);
-
-                    teamRaceDao.insert(teamRace);
-
-                    //update the results once inserted
-                    new UpdateResults(teamRaceDao, req);
-
-                    req.setAttribute("teamRaceResult", teamRace);
+                    req.setAttribute("missingField", "Fields can't be empty");
                 }
 
-            } else {
+            } catch(Exception e){
 
-                req.setAttribute("missingField", "Fields can't be empty");
+                req.setAttribute("e", e);
+                logger.error("Something went wrong!", e);
             }
-
-        } catch(Exception e){
-
-            req.setAttribute("e", e);
-            logger.error("Something went wrong!", e);
         }
 
         req.setAttribute("team", teamDao.getAll());

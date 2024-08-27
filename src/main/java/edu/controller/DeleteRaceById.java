@@ -34,21 +34,24 @@ public class DeleteRaceById extends HttpServlet {
 
         final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<Race> dao = new GenericDao<>(Race.class);
+        String id = req.getParameter("id");
 
-        try {
+        if (id != null && !id.isEmpty()) {
 
-            Race raceToDelete = dao.getById(Integer.parseInt(req.getParameter("id")));
+            try {
 
-            dao.delete(raceToDelete);
-            req.setAttribute("deletedRace", raceToDelete);
+                Race raceToDelete = dao.getById(Integer.parseInt(id));
+                dao.delete(raceToDelete);
+                req.setAttribute("deletedRace", raceToDelete);
 
-        } catch (Exception e) {
+            } catch (Exception e) {
 
-            req.setAttribute("e", e);
-            logger.error("Something went wrong!", e);
+                req.setAttribute("e", e);
+                logger.error("Something went wrong!", e);
+            }
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRace.jsp");
+            dispatcher.forward(req, resp);
         }
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRace.jsp");
-        dispatcher.forward(req, resp);
     }
 }

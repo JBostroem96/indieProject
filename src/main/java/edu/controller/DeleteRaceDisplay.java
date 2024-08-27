@@ -2,6 +2,8 @@ package edu.controller;
 
 import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,12 +32,24 @@ public class DeleteRaceDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<Race> dao = new GenericDao<>(Race.class);
-        Race retrievedRace = dao.getById(Integer.parseInt(req.getParameter("id")));
+        String id = req.getParameter("id");
 
-        req.setAttribute("race", retrievedRace);
+        if (id != null && !id.isEmpty()) {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRace.jsp");
-        dispatcher.forward(req, resp);
+            try {
+
+                Race retrievedRace = dao.getById(Integer.parseInt(id));
+                req.setAttribute("race", retrievedRace);
+
+            } catch (Exception e) {
+
+                logger.error("Something went wrong!", e);
+            }
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRace.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 }

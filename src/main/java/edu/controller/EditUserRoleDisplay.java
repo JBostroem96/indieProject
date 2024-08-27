@@ -2,6 +2,8 @@ package edu.controller;
 
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,12 +31,25 @@ public class EditUserRoleDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<User> dao = new GenericDao<>(User.class);
+        String id = req.getParameter("id");
 
-        User retrievedUser = dao.getById(Integer.parseInt(req.getParameter("id")));
-        req.setAttribute("userRole", retrievedUser);
+        if (id != null && !id.isEmpty()) {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/users.jsp");
-        dispatcher.forward(req, resp);
+            try {
+
+               User retrievedUser = dao.getById(Integer.parseInt(req.getParameter("id")));
+
+                req.setAttribute("userRole", retrievedUser);
+
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/users.jsp");
+                dispatcher.forward(req, resp);
+
+            } catch (Exception e) {
+
+                logger.error("Something went wrong!", e);
+            }
+        }
     }
 }

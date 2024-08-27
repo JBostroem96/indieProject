@@ -3,6 +3,8 @@ package edu.controller;
 import edu.matc.entity.Category;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,15 +33,27 @@ public class EditTeamDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<Team> dao = new GenericDao<>(Team.class);
         GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
+        String id = req.getParameter("id");
 
-        Team retrievedTeam = dao.getById(Integer.parseInt(req.getParameter("id")));
+        if (id != null && !id.isEmpty()) {
 
-        req.setAttribute("team", retrievedTeam);
-        req.setAttribute("category", categoryDao.getAll());
+            try {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/editTeam.jsp");
-        dispatcher.forward(req, resp);
+               Team retrievedTeam = dao.getById(Integer.parseInt(id));
+
+                req.setAttribute("team", retrievedTeam);
+                req.setAttribute("category", categoryDao.getAll());
+
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/editTeam.jsp");
+                dispatcher.forward(req, resp);
+
+            } catch (Exception e) {
+
+                logger.error("Something went wrong!", e);
+            }
+        }
     }
 }

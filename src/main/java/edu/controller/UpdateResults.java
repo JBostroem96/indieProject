@@ -22,8 +22,13 @@ public class UpdateResults {
      */
     public UpdateResults(GenericDao<TeamRace> dao, HttpServletRequest req) {
 
-        teamRaces = dao.findByPropertyEqual("race_id", req.getParameter("race_id"));
-        updateResults(dao);
+        String raceId = req.getParameter("race_id");
+
+        if (raceId != null && !raceId.isEmpty()) {
+
+            teamRaces = dao.findByPropertyEqual("race_id", raceId);
+            updateResults(dao);
+        }
     }
 
     /**

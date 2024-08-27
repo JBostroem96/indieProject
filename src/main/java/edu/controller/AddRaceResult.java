@@ -5,6 +5,9 @@ package edu.controller;
 import edu.matc.entity.Race;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,16 +34,25 @@ public class AddRaceResult extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<Race> dao = new GenericDao<>(Race.class);
+        String id = req.getParameter("id");
 
-        int raceId = Integer.parseInt(req.getParameter("id"));
-        Race retrievedRace = dao.getById(raceId);
+        if (id != null && !id.isEmpty()) {
 
-        req.setAttribute("race", retrievedRace);
-        req.setAttribute("team", teamDao.getAll());
+            try {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
-        dispatcher.forward(req, resp);
+                Race retrievedRace = dao.getById(Integer.parseInt(id));
+                req.setAttribute("race", retrievedRace);
+                req.setAttribute("team", teamDao.getAll());
+
+            } catch (Exception e) {
+
+                logger.error("Something went wrong!", e);
+            }
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 }

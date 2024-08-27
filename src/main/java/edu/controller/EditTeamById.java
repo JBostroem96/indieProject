@@ -40,43 +40,46 @@ public class EditTeamById extends HttpServlet {
 
         String name = req.getParameter("name");
         String division = req.getParameter("division");
-
+        String id = req.getParameter("id");
         Team teamToUpdate = null;
 
-        try {
+        if (id != null && !id.isEmpty()) {
 
-            teamToUpdate = dao.getById(Integer.parseInt(req.getParameter("id")));
+            try {
 
-            if (name != null && !name.isEmpty()
-                    && division != null && !division.isEmpty()) {
+                teamToUpdate = dao.getById(Integer.parseInt(id));
 
-                Team updatedTeam = new Team(name,
-                        division);
+                if (name != null && !name.isEmpty()
+                        && division != null && !division.isEmpty()) {
 
-                if (new Validate().validateTeam(updatedTeam.getName(), dao)) {
+                    Team updatedTeam = new Team(name,
+                            division);
 
-                    String message = "That name already exists";
-                    req.setAttribute("alreadyExists", message);
+                    if (new Validate().validateTeam(updatedTeam.getName(), dao)) {
+
+                        String message = "That name already exists";
+                        req.setAttribute("alreadyExists", message);
+
+                    } else {
+
+                        teamToUpdate.setName(updatedTeam.getName());
+                        teamToUpdate.setDivision(updatedTeam.getDivision());
+                        dao.update(teamToUpdate);
+                        req.setAttribute("messageSuccess", "You have successfully updated the team!");
+                    }
 
                 } else {
 
-                    teamToUpdate.setName(updatedTeam.getName());
-                    teamToUpdate.setDivision(updatedTeam.getDivision());
-                    dao.update(teamToUpdate);
-                    req.setAttribute("messageSuccess", "You have successfully updated the team!");
+                    req.setAttribute("missingField", "Fields can't be empty");
                 }
 
-            } else {
+            } catch (Exception e) {
 
-                req.setAttribute("missingField", "Fields can't be empty");
+                logger.error("There was an issue updating the data");
+                req.setAttribute("e", "Something went wrong!");
             }
-
-        } catch (Exception e) {
-
-            logger.error("There was an issue updating the data");
-            req.setAttribute("e", "Something went wrong!");
         }
-
+        
         req.setAttribute("team", teamToUpdate);
         req.setAttribute("category", categoryDao.getAll());
 

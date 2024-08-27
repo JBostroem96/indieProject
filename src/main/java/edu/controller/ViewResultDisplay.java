@@ -34,14 +34,19 @@ public class ViewResultDisplay extends HttpServlet {
                       HttpServletResponse resp)
             throws ServletException, IOException {
 
-        List<TeamRace> teamRaces = new GenericDao<>(TeamRace.class).findByPropertyEqual("race_id", req.getParameter("id"));
+        String id = req.getParameter("id");
+        List<TeamRace> teamRaces = null;
 
-        //using lambda expression to sort by the total time
-        teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
+        if (id != null && !id.isEmpty()) {
 
-        req.setAttribute("team_races", teamRaces);
+            teamRaces = new GenericDao<>(TeamRace.class).findByPropertyEqual("race_id", id);
+            //using lambda expression to sort by the total time
+            teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
-        dispatcher.forward(req, resp);
+            req.setAttribute("team_races", teamRaces);
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 }

@@ -3,6 +3,8 @@ package edu.controller;
 
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,11 +32,24 @@ public class DeleteTeamDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final Logger logger = LogManager.getLogger(this.getClass());
         GenericDao<Team> dao = new GenericDao<>(Team.class);
-        Team retrievedTeam = dao.getById(Integer.parseInt(req.getParameter("id")));
-        req.setAttribute("team", retrievedTeam);
+        String id = req.getParameter("id");
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
-        dispatcher.forward(req, resp);
+        if (id != null && !id.isEmpty()) {
+
+            try {
+
+                Team retrievedTeam = dao.getById(Integer.parseInt(id));
+                req.setAttribute("team", retrievedTeam);
+
+            } catch (Exception e) {
+
+                logger.error("Something went wrong!", e);
+            }
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
+            dispatcher.forward(req, resp);
+
+        }
     }
 }
