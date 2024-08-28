@@ -45,6 +45,5 @@ public class DeleteRaceById extends HttpServlet implements UseLogger {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRace.jsp");
         dispatcher.forward(req, resp);
-
     }
 }

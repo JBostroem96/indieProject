@@ -47,8 +47,6 @@ public class DeleteRaceResultById extends HttpServlet implements UseLogger {
             logger.error("Something went wrong!", e);
         }
 
-        req.setAttribute("deletedEntry", teamRace);
-
         //Update the results after deletion
         new UpdateResults(dao, req);
 

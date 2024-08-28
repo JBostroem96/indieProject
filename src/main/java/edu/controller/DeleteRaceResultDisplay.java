@@ -36,8 +36,7 @@ public class DeleteRaceResultDisplay extends HttpServlet implements UseLogger {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = log();
-        GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
-        TeamRace retrievedTeamRace = (TeamRace) new GetEntry().parseEntry(dao, req, logger);
+        TeamRace retrievedTeamRace = (TeamRace) new GetEntry().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
         req.setAttribute("team_race", retrievedTeamRace);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");

@@ -45,7 +45,6 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
 
         //Update the results after deletion
 
-
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
         dispatcher.forward(req, resp);
     }
