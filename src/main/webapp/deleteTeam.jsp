@@ -10,7 +10,7 @@
             <%@include file="nav.jsp"%>
             <div class="container bg-white">
                 <c:choose>
-                    <c:when test="${!empty deletedTeam}">
+                    <c:when test="${!empty deletedEntry}">
                         <p class="text-success text-center fw-bold mt-4">You have successfully deleted the team!</p>
                     </c:when>
                     <c:otherwise>

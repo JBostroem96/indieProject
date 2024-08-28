@@ -11,7 +11,7 @@
             <div class="container bg-white">
                 <c:if test="${!empty e}"><p class="text-danger fw-bold">Something went wrong!</p></c:if>
                 <c:choose>
-                    <c:when test="${!empty deletedRaceResult}">
+                    <c:when test="${!empty deletedEntry}">
                         <p class="text-success text-center fw-bold mt-4">You have successfully deleted the result!</p>
                     </c:when>
                     <c:otherwise>

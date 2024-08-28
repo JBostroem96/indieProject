@@ -33,24 +33,10 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = log();
         GenericDao<Team> dao = new GenericDao<>(Team.class);
-        String id = req.getParameter("id");
+        new DeleteEntry(dao, req);
 
-        if (id != null && !id.isEmpty()) {
-
-            try {
-
-                Team teamToDelete = dao.getById(Integer.parseInt(id));
-                dao.delete(teamToDelete);
-                req.setAttribute("deletedTeam", teamToDelete);
-
-            } catch (Exception e) {
-
-                logger.error("Something went wrong!", e);
-            }
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
-            dispatcher.forward(req, resp);
-        }
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
+        dispatcher.forward(req, resp);
     }
 }

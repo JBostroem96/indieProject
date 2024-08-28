@@ -34,30 +34,14 @@ public class DeleteRaceResultById extends HttpServlet implements UseLogger {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = log();
         GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
-        String id = req.getParameter("id");
+        new DeleteEntry(dao, req);
 
-        if (id != null && !id.isEmpty()) {
+        //Update the results after deletion
+        new UpdateResults(dao, req);
 
-            try {
-
-                TeamRace resultToDelete = dao.getById(Integer.parseInt(id));
-
-                dao.delete(resultToDelete);
-
-                //update the results after deletion
-                new UpdateResults(dao, req);
-
-                req.setAttribute("deletedRaceResult", resultToDelete);
-
-            } catch (Exception e) {
-
-                req.setAttribute("e", e);
-                logger.error("Something went wrong!", e);
-            }
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");
-            dispatcher.forward(req, resp);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");
+        dispatcher.forward(req, resp);
         }
     }
-}
+
