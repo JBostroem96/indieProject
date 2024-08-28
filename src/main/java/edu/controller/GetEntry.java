@@ -1,36 +1,41 @@
 package edu.controller;
 
-
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * This class' purpose is to delete the entry
+ * This class' purpose is to get the entry
  * @param <T> the entity
  */
-public class DeleteEntry<T> implements UseLogger {
-
+public class GetEntry<T> {
 
     /**
-     * This method's purpose is to delete the entry
+     * This is the constructor
+     */
+    public GetEntry() {
+
+
+    }
+
+    /**
+     * This method's purpose is to make sure the id is valid and to get/parse the entry
      * @param dao the generic dao
      * @param req the request object
+     * @param logger the logger
+     * @return the entry - the parsed entry
      */
-    public DeleteEntry(GenericDao<T> dao, HttpServletRequest req) {
+    public T parseEntry(GenericDao<T> dao, HttpServletRequest req, Logger logger) {
 
-        final Logger logger = log();
-
+        T entry = null;
         String id = req.getParameter("id");
 
         if (id != null && !id.isEmpty()) {
 
             try {
 
-                T entry = dao.getById(Integer.parseInt(id));
-                dao.delete(entry);
-                req.setAttribute("deletedEntry", entry);
+                entry = dao.getById(Integer.parseInt(id));
 
             } catch (Exception e) {
 
@@ -38,5 +43,7 @@ public class DeleteEntry<T> implements UseLogger {
                 logger.error("Something went wrong!", e);
             }
         }
+        return entry;
     }
 }
+

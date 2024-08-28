@@ -1,6 +1,7 @@
 package edu.controller;
 
 
+import edu.matc.entity.Race;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
@@ -25,31 +26,23 @@ public class DeleteRaceResultDisplay extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to forward to the jsp
-     *@param  req               the request object that we forward
-     *@param  resp           the response object that we forward
-     *@exception ServletException  if an error occurs with the Servlet
-     *@exception IOException       if an error occurs with the IO operations
+     *
+     * @param req  the request object that we forward
+     * @param resp the response object that we forward
+     * @throws ServletException if an error occurs with the Servlet
+     * @throws IOException      if an error occurs with the IO operations
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = log();
         GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
-        String id = req.getParameter("id");
+        TeamRace retrievedTeamRace = (TeamRace) new GetEntry().parseEntry(dao, req, logger);
+        req.setAttribute("team_race", retrievedTeamRace);
 
-        if (id != null && !id.isEmpty()) {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");
+        dispatcher.forward(req, resp);
 
-            try {
-
-                TeamRace retrievedTeamRace = dao.getById(Integer.parseInt(id));
-                req.setAttribute("team_race", retrievedTeamRace);
-
-            } catch (Exception e) {
-
-                logger.error("Something went wrong!", e);
-            }
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");
-            dispatcher.forward(req, resp);
-        }
     }
 }
+

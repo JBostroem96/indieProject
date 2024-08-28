@@ -11,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 
 /**
@@ -20,7 +19,7 @@ import java.io.IOException;
 @WebServlet(
         urlPatterns = {"/deleteRaceById"}
 )
-public class DeleteRaceById extends HttpServlet {
+public class DeleteRaceById extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to delete the entry by id
@@ -32,9 +31,17 @@ public class DeleteRaceById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+        final Logger logger = log();
         GenericDao<Race> dao = new GenericDao<>(Race.class);
-        new DeleteEntry(dao, req);
+        Race race = (Race) new GetEntry().parseEntry(dao, req, logger);
+        try {
+
+            dao.delete(race);
+            req.setAttribute("deletedEntry", race);
+        } catch (Exception e) {
+            req.setAttribute("e", e);
+            logger.error("Something went wrong!", e);
+        }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRace.jsp");
         dispatcher.forward(req, resp);

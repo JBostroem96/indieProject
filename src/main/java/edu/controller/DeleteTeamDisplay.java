@@ -1,6 +1,7 @@
 package edu.controller;
 
 
+import edu.matc.entity.Race;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
@@ -34,23 +35,11 @@ public class DeleteTeamDisplay extends HttpServlet implements UseLogger {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = log();
-        GenericDao<Team> dao = new GenericDao<>(Team.class);
-        String id = req.getParameter("id");
+        Team retrievedTeam = (Team) new GetEntry().parseEntry(new GenericDao<>(Team.class), req, logger);
+        req.setAttribute("team", retrievedTeam);
 
-        if (id != null && !id.isEmpty()) {
-
-            try {
-
-                Team retrievedTeam = dao.getById(Integer.parseInt(id));
-                req.setAttribute("team", retrievedTeam);
-
-            } catch (Exception e) {
-
-                logger.error("Something went wrong!", e);
-            }
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
-            dispatcher.forward(req, resp);
-
-        }
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
+        dispatcher.forward(req, resp);
     }
 }
+
