@@ -44,7 +44,6 @@ public class GenericDao<T> {
         List<T> list = session.createSelectionQuery(query).getResultList();
         session.close();
         return list;
-
     }
 
     /**
