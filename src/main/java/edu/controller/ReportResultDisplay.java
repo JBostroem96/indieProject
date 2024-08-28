@@ -34,22 +34,11 @@ public class ReportResultDisplay extends HttpServlet implements UseLogger {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = log();
-        GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
-        String id = req.getParameter("id");
+        TeamRace resultToReport = (TeamRace) new GetEntry().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
+        req.setAttribute("result", resultToReport);
 
-        if (id != null && !id.isEmpty()) {
-
-            try {
-
-                TeamRace resultToReport = dao.getById(Integer.parseInt(id));
-                req.setAttribute("result", resultToReport);
-
-            } catch (Exception e) {
-
-                logger.error("Something went wrong!", e);
-            }
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");
-            dispatcher.forward(req, resp);
-        }
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");
+        dispatcher.forward(req, resp);
     }
 }
+

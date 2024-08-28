@@ -1,6 +1,7 @@
 package edu.controller;
 
 import edu.matc.entity.Team;
+import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.Logger;
@@ -32,8 +33,10 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = log();
+        GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
         GenericDao<Team> dao = new GenericDao<>(Team.class);
         Team team = (Team) new GetEntry().parseEntry(dao, req, logger);
+
         try {
 
             dao.delete(team);
@@ -44,6 +47,7 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
         }
 
         //Update the results after deletion
+
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
         dispatcher.forward(req, resp);
