@@ -21,7 +21,7 @@ import java.io.IOException;
 @WebServlet(
         urlPatterns = {"/deleteTeamById"}
 )
-public class DeleteTeamById extends HttpServlet implements UseLogger {
+public class DeleteTeamById extends HttpServlet {
 
     /**
      * This method's purpose is to delete the entry by id
