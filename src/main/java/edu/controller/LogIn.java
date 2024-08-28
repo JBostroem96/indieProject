@@ -1,6 +1,7 @@
 package edu.controller;
 
 import edu.matc.util.PropertiesLoader;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,9 +20,9 @@ import java.util.Properties;
 /** Begins the authentication process using AWS Cognito
  *
  */
-public class LogIn extends HttpServlet implements PropertiesLoader {
+public class LogIn extends HttpServlet implements PropertiesLoader, UseLogger {
     Properties properties;
-    private final Logger logger = LogManager.getLogger(this.getClass());
+    private final Logger logger = log();
     public static String CLIENT_ID;
     public static String LOGIN_URL;
     public static String REDIRECT_URL;

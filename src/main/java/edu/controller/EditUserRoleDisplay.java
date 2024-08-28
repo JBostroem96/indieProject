@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,7 +20,7 @@ import java.io.IOException;
 @WebServlet(
         urlPatterns = {"/editUserRole"}
 )
-public class EditUserRoleDisplay extends HttpServlet {
+public class EditUserRoleDisplay extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to forward to the jsp
@@ -31,7 +32,7 @@ public class EditUserRoleDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
         GenericDao<User> dao = new GenericDao<>(User.class);
         String id = req.getParameter("id");
 

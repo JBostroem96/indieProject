@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,7 +20,7 @@ import java.io.IOException;
 @WebServlet(
         urlPatterns = {"/editUserRoleById"}
 )
-public class EditUserRoleById extends HttpServlet {
+public class EditUserRoleById extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to edit entry by id
@@ -31,7 +32,7 @@ public class EditUserRoleById extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
         GenericDao<User> dao = new GenericDao<>(User.class);
 
         String message;

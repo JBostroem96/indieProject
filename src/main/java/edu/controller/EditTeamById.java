@@ -3,6 +3,7 @@ package edu.controller;
 import edu.matc.entity.Category;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +23,7 @@ import java.io.IOException;
         urlPatterns = {"/editTeamById"}
 )
 
-public class EditTeamById extends HttpServlet {
+public class EditTeamById extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to edit the entry by id
@@ -34,7 +35,7 @@ public class EditTeamById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
         GenericDao<Team> dao = new GenericDao<>(Team.class);
         GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
 

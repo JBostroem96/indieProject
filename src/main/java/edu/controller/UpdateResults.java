@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * This class' purpose is to update the results in the database whenever needed
  */
-public class UpdateResults {
+public class UpdateResults implements UseLogger {
 
     private List<TeamRace> teamRaces;
 
@@ -37,7 +38,7 @@ public class UpdateResults {
      */
     public void updateResults(GenericDao<TeamRace> dao) {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
 
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 

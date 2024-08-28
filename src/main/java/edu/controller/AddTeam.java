@@ -3,6 +3,7 @@ package edu.controller;
 import edu.matc.entity.Category;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +22,7 @@ import java.io.IOException;
 @WebServlet(
         urlPatterns = {"/addTeam"}
 )
-public class AddTeam extends HttpServlet {
+public class AddTeam extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to add the team to our table
@@ -33,7 +34,7 @@ public class AddTeam extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
 
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<Category> categoryDao = new GenericDao<>(Category.class);

@@ -2,7 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
-import org.apache.logging.log4j.LogManager;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -25,7 +23,7 @@ import java.util.List;
         urlPatterns = {"/editRaceById"}
 )
 
-public class EditRaceById extends HttpServlet {
+public class EditRaceById extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to edit the entry by id
@@ -37,7 +35,7 @@ public class EditRaceById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
 
         GenericDao<Race> dao = new GenericDao<>(Race.class);
 

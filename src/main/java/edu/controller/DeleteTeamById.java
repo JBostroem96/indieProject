@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +21,7 @@ import java.io.IOException;
 @WebServlet(
         urlPatterns = {"/deleteTeamById"}
 )
-public class DeleteTeamById extends HttpServlet {
+public class DeleteTeamById extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to delete the entry by id
@@ -32,7 +33,7 @@ public class DeleteTeamById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
         GenericDao<Team> dao = new GenericDao<>(Team.class);
         String id = req.getParameter("id");
 

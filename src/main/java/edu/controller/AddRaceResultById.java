@@ -4,6 +4,7 @@ import edu.matc.entity.Race;
 import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,7 +24,7 @@ import java.util.List;
         urlPatterns = {"/addRaceResultById"}
 )
 
-public class AddRaceResultById extends HttpServlet {
+public class AddRaceResultById extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to add the race result by getting the id
@@ -36,7 +37,7 @@ public class AddRaceResultById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
 
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);

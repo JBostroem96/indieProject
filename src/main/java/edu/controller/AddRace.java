@@ -1,6 +1,7 @@
 package edu.controller;
 import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +28,7 @@ import java.util.List;
  * This class' purpose is to add a race to the table and
  * display the result for the user
  */
-public class AddRace extends HttpServlet {
+public class AddRace extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to add the race to the table
@@ -39,7 +40,7 @@ public class AddRace extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
         GenericDao<Race> dao = new GenericDao<>(Race.class);
 
         String name = req.getParameter("name");

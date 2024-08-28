@@ -2,6 +2,8 @@ package edu.controller;
 
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.PropertiesLoader;
+import edu.matc.util.UseLogger;
 import edu.restService.TLSEmail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +22,7 @@ import java.io.IOException;
 /**
  * This class' purpose is to submit the report and send the email
  */
-public class ReportResultById extends HttpServlet {
+public class ReportResultById extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to submit the report and send the email
@@ -32,7 +34,7 @@ public class ReportResultById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = LogManager.getLogger(this.getClass());
+        final Logger logger = log();
         GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
 
         String description = req.getParameter("teamTextArea");
