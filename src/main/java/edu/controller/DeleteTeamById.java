@@ -42,20 +42,27 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
             dao.delete(team);
             req.setAttribute("deletedEntry", team);
             //Update the results after deletion
-            for (String race : req.getParameterValues("race_id")) {
-
-                new UpdateResults(race, teamRaceDao, req);
-            }
+            updateRaces(teamRaceDao, req);
 
         } catch (Exception e) {
             req.setAttribute("e", e);
             logger.error("Something went wrong!", e);
         }
 
-        //Update the results after deletion
-
-
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
         dispatcher.forward(req, resp);
+    }
+
+    /**
+     * This method's purpose is to update the races/results
+     * @param dao the teamRace dao
+     * @param req the request object
+     */
+    public void updateRaces(GenericDao<TeamRace> dao, HttpServletRequest req) {
+
+        for (String race : req.getParameterValues("race_id")) {
+
+            new UpdateResults(race, dao, req);
+        }
     }
 }
