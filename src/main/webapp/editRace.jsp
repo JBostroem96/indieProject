@@ -11,8 +11,8 @@
             <%@include file="nav.jsp"%>
             <div class="container bg-white">
                 <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>You are editing:</em></h1>
-                <c:if test="${!empty messageSuccess}">
-                    <p class="text-success text-center fw-bold">${messageSuccess}</p>
+                <c:if test="${!empty raceUpdated}">
+                    <p class="text-success text-center fw-bold">${raceUpdated}</p>
                 </c:if>
                 <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
                     <table id="addRace" class="display" cellspacing="=0" width="100%">
@@ -23,11 +23,11 @@
                         </thead>
                         <tbody>
                             <c:choose>
-                                <c:when test="${!empty editedRace}">
+                                <c:when test="${!empty raceToUpdate}">
                                     <tr class="bg-white">
-                                        <td class="text-black">${editedRace.name}</td>
-                                        <td class="text-black">${editedRace.length}</td>
-                                        <td class="text-black">${editedRace.date}</td>
+                                        <td class="text-black">${raceToUpdate.name}</td>
+                                        <td class="text-black">${raceToUpdate.length}</td>
+                                        <td class="text-black">${raceToUpdate.date}</td>
                                     </tr>
                                 </c:when>
                                 <c:otherwise>
@@ -63,8 +63,8 @@
                             </div>
                         </div>
                         <c:choose>
-                            <c:when test="${!empty editedRace}">
-                                <button type="submit" name="id" class="btn btn-primary bg-success" value="${editedRace.id}">Edit Race</button>
+                            <c:when test="${!empty raceToUpdate}">
+                                <button type="submit" name="id" class="btn btn-primary bg-success" value="${raceToUpdate.id}">Edit Race</button>
                             </c:when>
                             <c:otherwise>
                                 <button type="submit" name="id" class="btn btn-success bg-success" value="${race.id}">Edit Race</button>

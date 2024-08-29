@@ -10,8 +10,8 @@
             <%@include file="nav.jsp"%>
             <div class="container bg-white">
                 <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Add Race</em></h1>
-                <c:if test="${!empty race}">
-                    <p class="text-success text-center fw-bold">You have successfully added a new race!</p>
+                <c:if test="${!empty raceAdded}">
+                    <p class="text-success text-center fw-bold">${raceAdded}</p>
                 </c:if>
                 <div class="d-flex flex-column gap-5 fw-bold">
                     <form action="addRace" class="form-inline" method="POST">

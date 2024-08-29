@@ -44,8 +44,8 @@
                 </c:when>
                 <c:otherwise>
                     <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Assign Role</em></h1>
-                    <c:if test="${!empty success}">
-                        <p class="text-success text-center fw-bold">${success}</p>
+                    <c:if test="${!empty updatedRole}">
+                        <p class="text-success text-center fw-bold">${updatedRole}</p>
                     </c:if>
                     <div class="d-flex flex-column gap-5 fw-bold">
                         <form action="editUserRoleById" class="form-inline">
@@ -60,8 +60,8 @@
                                     <label for="admin">Admin</label>
                                     <input class="form-check-input" type="radio" name="role" id="admin" value="admin">
                                 </div>
-                                <c:if test="${!empty failure}">
-                                    <p class="text-danger fw-bold">${failure}</p>
+                                <c:if test="${!empty message}">
+                                    <p class="text-danger fw-bold">${message}</p>
                                 </c:if>
                             </div>
                             <button type="submit" name="id" class="btn btn-success bg-success" value="${userRole.id}">Submit</button>

@@ -49,16 +49,11 @@ public class AddTeam extends HttpServlet implements UseLogger {
 
                 Category category = categoryDao.getById(Integer.parseInt(id));
 
-                if (new Validate().validateTeam(name, teamDao)) {
-
-                    String message = "That team already exists. Please Enter something else.";
-                    req.setAttribute("message", message);
-
-                } else {
+                if (new Validate().validateTeam(name, teamDao, req)) {
 
                     Team team = new Team(name, category, category.getDivision().toString());
                     teamDao.insert(team);
-                    req.setAttribute("team", team);
+                    req.setAttribute("teamAdded", "You successfully added the team!");
                 }
 
             } catch (Exception e) {

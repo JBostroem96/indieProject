@@ -56,17 +56,12 @@ public class EditTeamById extends HttpServlet implements UseLogger {
                     Team updatedTeam = new Team(name,
                             division);
 
-                    if (new Validate().validateTeam(updatedTeam.getName(), dao)) {
-
-                        String message = "That name already exists";
-                        req.setAttribute("alreadyExists", message);
-
-                    } else {
+                    if (!new Validate().validateTeam(updatedTeam.getName(), dao, req)) {
 
                         teamToUpdate.setName(updatedTeam.getName());
                         teamToUpdate.setDivision(updatedTeam.getDivision());
                         dao.update(teamToUpdate);
-                        req.setAttribute("messageSuccess", "You have successfully updated the team!");
+                        req.setAttribute("teamUpdated", "You have successfully updated the team!");
                     }
 
                 } else {

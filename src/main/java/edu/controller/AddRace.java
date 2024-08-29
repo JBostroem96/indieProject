@@ -2,7 +2,6 @@ package edu.controller;
 import edu.matc.entity.Race;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -12,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * This Servlet's purpose is to add the entered user
@@ -53,12 +50,7 @@ public class AddRace extends HttpServlet implements UseLogger {
 
             try {
 
-                if (new Validate().validateRace(name, dao)) {
-
-                    String message = "That race already exists";
-                    req.setAttribute("message", message);
-
-                } else {
+                if (new Validate().validateRace(name, dao, req)) {
 
                     Race race = new Race(name,
                             length,
@@ -66,7 +58,7 @@ public class AddRace extends HttpServlet implements UseLogger {
 
                     dao.insert(race);
 
-                    req.setAttribute("race", race);
+                    req.setAttribute("raceAdded", "You successfully added the race!");
                 }
 
             } catch (Exception e) {

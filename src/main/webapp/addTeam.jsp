@@ -11,8 +11,8 @@
             <%@include file="nav.jsp"%>
             <div class="container bg-white">
                 <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Add a Team</em></h1>
-                <c:if test="${!empty team}">
-                    <p class="text-success text-center fw-bold">You have successfully added a new team!</p>
+                <c:if test="${!empty teamAdded}">
+                    <p class="text-success text-center fw-bold">${teamAdded}</p>
                 </c:if>
                 <div class="d-flex flex-column gap-5 fw-bold">
                     <form action="addTeam" class="form-inline" method="POST">

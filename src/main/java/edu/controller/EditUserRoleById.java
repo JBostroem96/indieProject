@@ -48,22 +48,14 @@ public class EditUserRoleById extends HttpServlet implements UseLogger {
 
                 if (newRole != null && !newRole.isEmpty()) {
 
-                    if (new Validate().validateUserRole(newRole, retrievedUser.getRole())) {
-
-                        message = "That user already has that role";
-                        req.setAttribute("userRole", retrievedUser);
-                        req.setAttribute("failure", message);
-
-                    } else {
+                    if (new Validate().validateUserRole(newRole, retrievedUser.getRole(), req)) {
 
                         retrievedUser.setRole(newRole);
                         dao.update(retrievedUser);
 
-                        message = "You updated the user's role!";
-                        req.setAttribute("userRole", retrievedUser);
-                        req.setAttribute("success", message);
-                    }
+                        req.setAttribute("updatedRole", "You successfully updated the user role!");
 
+                    }
                 }
 
             } catch (Exception e) {

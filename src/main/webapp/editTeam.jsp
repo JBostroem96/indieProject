@@ -11,8 +11,8 @@
             <%@include file="nav.jsp"%>
                 <div class="container bg-white">
                     <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>You are editing:</em></h1>
-                    <c:if test="${!empty messageSuccess}">
-                        <p class="text-success text-center fw-bold">${messageSuccess}</p>
+                    <c:if test="${!empty teamUpdated}">
+                        <p class="text-success text-center fw-bold">${teamUpdated}</p>
                     </c:if>
                     <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
                         <table id="addRace" class="display" cellspacing="=0" width="100%">
@@ -46,8 +46,8 @@
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" name="name" id="name" required>
-                                    <c:if test="${!empty alreadyExists}">
-                                        <p class="text-danger fw-bold">${alreadyExists}</p>
+                                    <c:if test="${!empty message}">
+                                        <p class="text-danger fw-bold">${message}</p>
                                     </c:if>
                                 </div>
                                 <div class="form-group">

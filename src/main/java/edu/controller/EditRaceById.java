@@ -59,20 +59,13 @@ public class EditRaceById extends HttpServlet implements UseLogger {
                             length,
                             LocalDate.parse(date));
 
-                    if (new Validate().validateRace(updatedRace.getName(), dao)) {
-
-                        String message = "That race already exists";
-                        req.setAttribute("message", message);
-
-                    } else {
+                    if (new Validate().validateRace(updatedRace.getName(), dao, req)) {
 
                         raceToUpdate.setName(updatedRace.getName());
                         raceToUpdate.setLength(updatedRace.getLength());
                         raceToUpdate.setDate(updatedRace.getDate());
                         dao.update(raceToUpdate);
-
-                        String message = "You have successfully updated the race!";
-                        req.setAttribute("messageSuccess", message);
+                        req.setAttribute("raceUpdated", "You successfully updated the race");
                     }
 
                 } else {
@@ -87,7 +80,7 @@ public class EditRaceById extends HttpServlet implements UseLogger {
             }
         }
 
-        req.setAttribute("race", raceToUpdate);
+        req.setAttribute("raceToUpdate", raceToUpdate);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editRace.jsp");
         dispatcher.forward(req, resp);

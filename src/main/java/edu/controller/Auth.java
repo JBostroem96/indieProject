@@ -95,7 +95,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
                 //See if the new user already exists, and if it does, gets the one from the table rather than the one signing
                 // up or logging in ...
-                User checkUser = new Validate().validateUser(newUser, new GenericDao<>(User.class));
+                User checkUser = new Validate().validateUser(newUser, new GenericDao<>(User.class), req);
 
                 //if the new user matches the one found, meaning there was no match
                 if (checkUser.equals(newUser)) {

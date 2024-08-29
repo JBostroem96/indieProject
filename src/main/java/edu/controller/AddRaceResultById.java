@@ -5,7 +5,6 @@ import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * This class' purpose is to add the race result by grabbing the id
@@ -63,12 +61,7 @@ public class AddRaceResultById extends HttpServlet implements UseLogger {
 
                     Team team = teamDao.getById(Integer.parseInt(teamEntry));
 
-                    if (new Validate().validateResult(race.getId(), teamRaceDao, team.getName())) {
-
-                        String message = "That team already exists in that race. Please enter a different one.";
-                        req.setAttribute("message", message);
-
-                    } else {
+                    if (new Validate().validateResult(race.getId(), teamRaceDao, team.getName(), req)) {
 
                         int cp = Integer.parseInt(cpEntry);
                         int penalty = Integer.parseInt(penaltyEntry);
@@ -77,11 +70,9 @@ public class AddRaceResultById extends HttpServlet implements UseLogger {
                         TeamRace teamRace = new TeamRace(team, race, cp, penalty, totalTime);
 
                         teamRaceDao.insert(teamRace);
-
+                        req.setAttribute("resultUpdated", "You successfully added the result!");
                         //update the results once inserted
                         new UpdateResults(null, teamRaceDao, req);
-
-                        req.setAttribute("teamRaceResult", teamRace);
                     }
 
                 } else {

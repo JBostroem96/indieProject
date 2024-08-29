@@ -6,6 +6,8 @@ import edu.matc.entity.TeamRace;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * This class' purpose is to perform different validations,
@@ -30,13 +32,13 @@ public class Validate {
      * @param dao  the dao
      * @return entryExists — if the team already exists
      */
-    public boolean validateTeam(String name, GenericDao<Team> dao) {
+    public boolean validateTeam(String name, GenericDao<Team> dao, HttpServletRequest req) {
 
         for (Team team : dao.getAll()) {
 
-            checkExistence(team.getName(), name);
+            checkExistence(team.getName(), name, req);
         }
-        return entryExists;
+        return !entryExists;
     }
 
     /**
@@ -45,13 +47,13 @@ public class Validate {
      * @param dao  the dao
      * @return entryExists — if the race already exists
      */
-    public boolean validateRace(String name, GenericDao<Race> dao) {
+    public boolean validateRace(String name, GenericDao<Race> dao, HttpServletRequest req) {
 
         for (Race race : dao.getAll()) {
 
-            checkExistence(race.getName(), name);
+            checkExistence(race.getName(), name, req);
         }
-        return entryExists;
+        return !entryExists;
     }
 
     /**
@@ -61,16 +63,16 @@ public class Validate {
      * @param raceId    the race id
      * @return entryExists — if the result already exists
      */
-    public boolean validateResult(int raceId, GenericDao<TeamRace> dao, String name) {
+    public boolean validateResult(int raceId, GenericDao<TeamRace> dao, String name, HttpServletRequest req) {
 
         for (TeamRace teamRace : dao.getAll()) {
 
             if (teamRace.getRace_id() == raceId) {
 
-                checkExistence(teamRace.getTeam().getName(), name);
+                checkExistence(teamRace.getTeam().getName(), name, req);
             }
         }
-        return entryExists;
+        return !entryExists;
     }
 
     /**
@@ -81,11 +83,11 @@ public class Validate {
      * @param dao the User dao
      * @return entryExists — if the user already exists
      */
-    public User validateUser(User user, GenericDao<User> dao) {
+    public User validateUser(User user, GenericDao<User> dao, HttpServletRequest req) {
 
         for (User userEntry : dao.getAll()) {
 
-            checkExistence(userEntry.getUserName(), user.getUserName());
+            checkExistence(userEntry.getUserName(), user.getUserName(), req);
 
             if (entryExists) {
 
@@ -102,11 +104,11 @@ public class Validate {
      * @param role the current role
      * @return entryExists — if it already exists
      */
-    public boolean validateUserRole(String newRole, String role) {
+    public boolean validateUserRole(String newRole, String role, HttpServletRequest req) {
 
-        checkExistence(role, newRole);
+        checkExistence(role, newRole, req);
 
-        return entryExists;
+        return !entryExists;
     }
 
     /**
@@ -114,11 +116,12 @@ public class Validate {
      * @param entryName the entry name
      * @param name the name
      */
-    public void checkExistence(String entryName, String name) {
+    public void checkExistence(String entryName, String name, HttpServletRequest req) {
 
         if (entryName.equals(name)) {
 
             entryExists = true;
+            req.setAttribute("message", "That entry already exists");
         }
     }
 }

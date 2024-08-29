@@ -5,7 +5,6 @@ import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
 
 /**
  * This class' purpose is to edit a race result
@@ -67,13 +64,7 @@ public class EditRaceResultById extends HttpServlet implements UseLogger {
 
                     TeamRace updatedTeamRace = new TeamRace(team, race, cpEntry, penaltyEntry, totalTimeEntry);
 
-                    if (new Validate().validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName())) {
-
-                        String message = "That team name already exists";
-                        req.setAttribute("message", message);
-                        req.setAttribute("team_race", teamRaceToUpdate);
-
-                    } else {
+                    if (new Validate().validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName(), req)) {
 
                         teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
                         teamRaceToUpdate.setRace(updatedTeamRace.getRace());
@@ -82,11 +73,10 @@ public class EditRaceResultById extends HttpServlet implements UseLogger {
                         teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
 
                         teamRaceDao.update(teamRaceToUpdate);
-
+                        req.setAttribute("resultUpdated", "You successfully updated the result");
                         //Update the results after editing
                         new UpdateResults(null, teamRaceDao, req);
 
-                        req.setAttribute("messageSuccess", "You have successfully updated the results!");
                     }
 
                 } else {
