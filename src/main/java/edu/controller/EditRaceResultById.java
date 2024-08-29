@@ -84,7 +84,7 @@ public class EditRaceResultById extends HttpServlet implements UseLogger {
                         teamRaceDao.update(teamRaceToUpdate);
 
                         //Update the results after editing
-                        new UpdateResults(teamRaceDao, req);
+                        new UpdateResults(null, teamRaceDao, req);
 
                         req.setAttribute("messageSuccess", "You have successfully updated the results!");
                     }

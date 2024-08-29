@@ -41,14 +41,13 @@ public class DeleteRaceResultById extends HttpServlet implements UseLogger {
         try {
             dao.delete(teamRace);
             req.setAttribute("deletedEntry", teamRace);
+            //Update the results after deletion
+            new UpdateResults(null, dao, req);
 
         } catch (Exception e) {
             req.setAttribute("e", e);
             logger.error("Something went wrong!", e);
         }
-
-        //Update the results after deletion
-        new UpdateResults(dao, req);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResult.jsp");
         dispatcher.forward(req, resp);

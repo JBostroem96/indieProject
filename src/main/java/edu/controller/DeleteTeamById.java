@@ -41,6 +41,12 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
 
             dao.delete(team);
             req.setAttribute("deletedEntry", team);
+            //Update the results after deletion
+            for (String race : req.getParameterValues("race_id")) {
+
+                new UpdateResults(race, teamRaceDao, req);
+            }
+
         } catch (Exception e) {
             req.setAttribute("e", e);
             logger.error("Something went wrong!", e);

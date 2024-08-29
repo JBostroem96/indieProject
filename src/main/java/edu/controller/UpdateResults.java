@@ -20,16 +20,19 @@ public class UpdateResults implements UseLogger {
      * This constructor's purpose is to update the result set
      * @param dao the TeamRace dao
      * @param req the request object
+     * @param raceId the race id
      */
-    public UpdateResults(GenericDao<TeamRace> dao, HttpServletRequest req) {
+    public UpdateResults(String raceId, GenericDao<TeamRace> dao, HttpServletRequest req) {
 
-        String raceId = req.getParameter("race_id");
+        //In the event that only one race needs to be updated, get the parameter,
+        //and if it's not null, it will get all the races
+        if (raceId == null) {
 
-        if (raceId != null && !raceId.isEmpty()) {
-
-            teamRaces = dao.findByPropertyEqual("race_id", raceId);
-            updateResults(dao);
+            raceId = req.getParameter("race_id");
         }
+
+        teamRaces = dao.findByPropertyEqual("race_id", raceId);
+        updateResults(dao);
     }
 
     /**

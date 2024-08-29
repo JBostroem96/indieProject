@@ -31,7 +31,10 @@
                                 </table>
                             </div>
                             <button type="submit" name="id" class="btn btn-primary bg-danger mt-2" value="${team.id}">Delete Team</button>
-                        </form>
+                             <c:forEach var="raceId" items="${races}">
+                                <input type="hidden" name="race_id" value="${raceId}">
+                            </c:forEach>
+                            </form>
                     </c:otherwise>
                 </c:choose>
             </div>
