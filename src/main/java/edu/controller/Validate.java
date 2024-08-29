@@ -118,7 +118,7 @@ public class Validate {
      */
     public void checkExistence(String entryName, String name, HttpServletRequest req) {
 
-        if (entryName.equals(name)) {
+        if (entryName.equalsIgnoreCase(name)) {
 
             entryExists = true;
             req.setAttribute("message", "That entry already exists");
