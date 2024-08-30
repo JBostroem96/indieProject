@@ -1,5 +1,6 @@
 package edu.matc.entity;
 
+import edu.matc.util.Validation;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -17,7 +18,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "race")
-public class Race {
+public class Race implements Validation {
 
     @Column(name = "name")
     private String name;
@@ -103,6 +104,7 @@ public class Race {
      *
      * @return the name
      */
+    @Override
     public String getName() {
         return name;
     }

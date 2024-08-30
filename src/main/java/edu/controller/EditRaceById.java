@@ -59,7 +59,7 @@ public class EditRaceById extends HttpServlet implements UseLogger {
                             length,
                             LocalDate.parse(date));
 
-                    if (new Validate().validateRace(updatedRace.getName(), dao, req)) {
+                    if (new Validate().validate(updatedRace.getName(), dao, req)) {
 
                         raceToUpdate.setName(updatedRace.getName());
                         raceToUpdate.setLength(updatedRace.getLength());

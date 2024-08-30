@@ -48,7 +48,7 @@ public class EditUserRoleById extends HttpServlet implements UseLogger {
 
                 if (newRole != null && !newRole.isEmpty()) {
 
-                    if (new Validate().validateUserRole(newRole, retrievedUser.getRole(), req)) {
+                    if (new Validate().validateRole(newRole, retrievedUser.getRole(), req)) {
 
                         retrievedUser.setRole(newRole);
                         dao.update(retrievedUser);

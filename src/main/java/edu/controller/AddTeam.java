@@ -49,7 +49,7 @@ public class AddTeam extends HttpServlet implements UseLogger {
 
                 Category category = categoryDao.getById(Integer.parseInt(id));
 
-                if (new Validate().validateTeam(name, teamDao, req)) {
+                if (new Validate().validate(name, teamDao, req)) {
 
                     Team team = new Team(name, category, category.getDivision().toString());
                     teamDao.insert(team);

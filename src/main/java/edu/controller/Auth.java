@@ -81,10 +81,9 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        GenericDao<User> dao = new GenericDao<>(User.class);
         String authCode = req.getParameter("code");
-
         HttpSession session = req.getSession();
-
         if (authCode == null) {
             //TODO forward to an error page or back to the login
         } else {
@@ -95,16 +94,12 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
                 //See if the new user already exists, and if it does, gets the one from the table rather than the one signing
                 // up or logging in ...
-                User checkUser = new Validate().validateUser(newUser, new GenericDao<>(User.class), req);
+                User user = checkMatch(req, newUser, dao);
 
-                //if the new user matches the one found, meaning there was no match
-                if (checkUser.equals(newUser)) {
-                    //adds the user to the table because there wasn't a match
-                    new User().addUser(newUser);
-                }
+                if (user.equals(newUser)) {
 
-                //Sign the user in by setting the session
-                session.setAttribute("user", checkUser);
+                    dao.insert(newUser);
+                };
 
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
@@ -119,6 +114,29 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         dispatcher.forward(req, resp);
     }
 
+    /**
+     * This method's purpose is to check to see if there is a match for the new user
+     * @param req the request object
+     * @param newUser the new user
+     * @param dao the user dao
+     * @return user - the user
+     */
+    private User checkMatch(HttpServletRequest req, User newUser, GenericDao<User> dao) {
+
+        HttpSession session = req.getSession();
+
+        for (User user : dao.getAll()) {
+
+            if (newUser.getUserName().equalsIgnoreCase(user.getUserName())) {
+
+                newUser = user;
+
+            }
+        }
+
+        session.setAttribute("user", newUser);
+        return newUser;
+    }
     /**
      * Sends the request for a token to Cognito and maps the response
      * @param authRequest the request to the oauth2/token url in cognito

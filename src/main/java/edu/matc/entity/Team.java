@@ -1,5 +1,6 @@
 package edu.matc.entity;
 
+import edu.matc.util.Validation;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import java.util.HashSet;
@@ -11,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "teams")
-public class Team {
+public class Team implements Validation {
 
     private String name;
     private int id;
@@ -105,6 +106,7 @@ public class Team {
      *
      * @return the name
      */
+    @Override
     @Column(name = "name")
     public String getName() {
         return name;

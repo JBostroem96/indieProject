@@ -50,7 +50,7 @@ public class AddRace extends HttpServlet implements UseLogger {
 
             try {
 
-                if (new Validate().validateRace(name, dao, req)) {
+                if (new Validate().validate(name, dao, req)) {
 
                     Race race = new Race(name,
                             length,

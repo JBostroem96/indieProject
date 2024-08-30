@@ -1,5 +1,6 @@
 package edu.controller;
 
+import edu.matc.util.*;
 import edu.matc.entity.Race;
 import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
@@ -9,12 +10,13 @@ import edu.matc.persistence.GenericDao;
 import javax.servlet.http.HttpServletRequest;
 
 
+
 /**
  * This class' purpose is to perform different validations,
  * and a single boolean flag is used because the different validations
  * are using different instances
  */
-public class Validate {
+public class Validate<T extends Validation> {
 
     private boolean entryExists;
 
@@ -27,87 +29,31 @@ public class Validate {
     }
 
     /**
-     * This method's purpose is to validate the team
+     * This method's purpose is to check to see if there is a match or not
      * @param name the name
-     * @param dao  the dao
-     * @return entryExists — if the team already exists
+     * @param dao the generic dao
+     * @param req the request object
+     * @return entryExists - if there is a match
      */
-    public boolean validateTeam(String name, GenericDao<Team> dao, HttpServletRequest req) {
+    public boolean validate(String name, GenericDao<T> dao, HttpServletRequest req) {
 
-        for (Team team : dao.getAll()) {
+        for (T entry : dao.getAll()) {
 
-            checkExistence(team.getName(), name, req);
+            checkExistence(entry.getName(), name, req);
         }
         return !entryExists;
     }
 
     /**
-     * This method's purpose is to validate the race
-     * @param name the name
-     * @param dao  the dao
-     * @return entryExists — if the race already exists
+     * This method's purpose is to validate the role
+     * @param newRole the new role
+     * @param role the role
+     * @param req the request object
+     * @return entryExists - if the entry exists or not
      */
-    public boolean validateRace(String name, GenericDao<Race> dao, HttpServletRequest req) {
+    public boolean validateRole(String newRole, String role, HttpServletRequest req) {
 
-        for (Race race : dao.getAll()) {
-
-            checkExistence(race.getName(), name, req);
-        }
-        return !entryExists;
-    }
-
-    /**
-     * This method's purpose is to validate the result
-     * @param name      the name
-     * @param dao the teamRace dao
-     * @param raceId    the race id
-     * @return entryExists — if the result already exists
-     */
-    public boolean validateResult(int raceId, GenericDao<TeamRace> dao, String name, HttpServletRequest req) {
-
-        for (TeamRace teamRace : dao.getAll()) {
-
-            if (teamRace.getRace_id() == raceId) {
-
-                checkExistence(teamRace.getTeam().getName(), name, req);
-            }
-        }
-        return !entryExists;
-    }
-
-    /**
-     * This method's purpose is to validate the user,
-     * and it checks to see if the user's username that's sent over matches
-     * any in the table, and if it does, it returns the one from the table
-     * @param user the user
-     * @param dao the User dao
-     * @return entryExists — if the user already exists
-     */
-    public User validateUser(User user, GenericDao<User> dao, HttpServletRequest req) {
-
-        for (User userEntry : dao.getAll()) {
-
-            checkExistence(userEntry.getUserName(), user.getUserName(), req);
-
-            if (entryExists) {
-
-                return userEntry;
-            }
-        }
-
-        return user;
-    }
-
-    /**
-     * This method's purpose is to validate the user role
-     * @param newRole the new role to be assigned
-     * @param role the current role
-     * @return entryExists — if it already exists
-     */
-    public boolean validateUserRole(String newRole, String role, HttpServletRequest req) {
-
-        checkExistence(role, newRole, req);
-
+        checkExistence(newRole, role, req);
         return !entryExists;
     }
 
@@ -123,6 +69,15 @@ public class Validate {
             entryExists = true;
             req.setAttribute("message", "That entry already exists");
         }
+    }
+
+    /**
+     * This method's purpose is to return if the entry exists or not
+     * @return entryExists - if the entry exists or not
+     */
+    public boolean getEntryExists() {
+
+        return !entryExists;
     }
 }
 

@@ -64,7 +64,7 @@ public class EditRaceResultById extends HttpServlet implements UseLogger {
 
                     TeamRace updatedTeamRace = new TeamRace(team, race, cpEntry, penaltyEntry, totalTimeEntry);
 
-                    if (new Validate().validateResult(race.getId(), teamRaceDao, updatedTeamRace.getTeam().getName(), req)) {
+                    if (new ValidateResults().validate(updatedTeamRace.getTeam().getName(), race.getId(), teamRaceDao, req)) {
 
                         teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
                         teamRaceToUpdate.setRace(updatedTeamRace.getRace());

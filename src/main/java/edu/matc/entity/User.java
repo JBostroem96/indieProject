@@ -51,16 +51,6 @@ public class User {
     }
 
     /**
-     * Add user.
-     * This method's purpose is to add a user if they don't already exist
-     * @param user the user
-     */
-    public void addUser(User user) {
-
-        //insert user
-        new GenericDao(User.class).insert(user);
-    }
-    /**
      * Gets role.
      *
      * @return the role

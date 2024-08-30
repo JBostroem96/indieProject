@@ -56,7 +56,7 @@ public class EditTeamById extends HttpServlet implements UseLogger {
                     Team updatedTeam = new Team(name,
                             division);
 
-                    if (!new Validate().validateTeam(updatedTeam.getName(), dao, req)) {
+                    if (new Validate().validate(updatedTeam.getName(), dao, req)) {
 
                         teamToUpdate.setName(updatedTeam.getName());
                         teamToUpdate.setDivision(updatedTeam.getDivision());
