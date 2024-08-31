@@ -84,9 +84,7 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
 
         for (TeamRace entry : teamRace.getAll()) {
 
-            String name = entry.getTeam().getName();
-
-            if (name.equals(retrievedTeam.getName())) {
+            if (entry.getTeam().getName().equals(retrievedTeam.getName())) {
 
                 races.add(entry.getRace_id());
             }
