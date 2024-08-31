@@ -40,7 +40,7 @@ public class DeleteTeamDisplay extends HttpServlet implements UseLogger {
         final Logger logger = log();
         GenericDao<TeamRace> teamRace = new GenericDao<>(TeamRace.class);
 
-        Team retrievedTeam = (Team) new GetEntry().parseEntry(new GenericDao<>(Team.class), req, logger);
+        Team retrievedTeam = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
         List<Integer> races = new ArrayList<>();
 
         //Gets all the races where the teams are

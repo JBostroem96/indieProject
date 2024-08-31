@@ -35,7 +35,7 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
         final Logger logger = log();
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
         GenericDao<Team> dao = new GenericDao<>(Team.class);
-        Team team = (Team) new GetEntry().parseEntry(dao, req, logger);
+        Team team = new GetEntry<Team>().parseEntry(dao, req, logger);
 
         try {
 

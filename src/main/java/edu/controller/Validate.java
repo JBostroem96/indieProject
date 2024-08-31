@@ -1,15 +1,9 @@
 package edu.controller;
 
 import edu.matc.util.*;
-import edu.matc.entity.Race;
-import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
-import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
-
 import javax.servlet.http.HttpServletRequest;
-
-
 
 /**
  * This class' purpose is to perform different validations,
@@ -81,6 +75,7 @@ public class Validate<T extends Validation> {
      * This method's purpose is to check the entry's existence in the database
      * @param entryName the entry name
      * @param name the name
+     * @param req the request object
      */
     public void checkExistence(String entryName, String name, HttpServletRequest req) {
 
