@@ -1,6 +1,7 @@
 package edu.controller;
 
 import edu.matc.entity.TeamRace;
+import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.PropertiesLoader;
 import edu.matc.util.UseLogger;
@@ -39,36 +40,27 @@ public class ReportResultById extends HttpServlet implements UseLogger {
 
         String description = null;
         String subject = req.getParameter("subject");
-        String id = req.getParameter("id");
+        TeamRace resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
 
-        if (id != null && !id.isEmpty()) {
+        if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
+                && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {
 
-            try {
+            description = req.getParameter("teamTextArea");
+            subject += " regarding "
+                    + resultToReport.getTeam().getName() + " in race "
+                    + resultToReport.getRace().getName();
 
-                TeamRace resultToReport = dao.getById(Integer.parseInt(id));
+            TLSEmail mail = new TLSEmail();
+            mail.simpleEmailWithTLS(subject, description);
 
-                if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
-                        && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {
+            req.setAttribute("resultReported", resultToReport.getTeam().getName());
 
-                    description = req.getParameter("teamTextArea");
-                    subject += " regarding "
-                            + resultToReport.getTeam().getName() + " in race "
-                            + resultToReport.getRace().getName();
-                }
+        } else {
 
-                req.setAttribute("resultReported", resultToReport.getTeam().getName());
-                req.setAttribute("result", resultToReport);
-
-                TLSEmail mail = new TLSEmail();
-
-                mail.simpleEmailWithTLS(subject, description);
-
-            } catch (Exception e) {
-
-                logger.error("Something went wrong!", e);
-            }
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");
-            dispatcher.forward(req, resp);
+            req.setAttribute("missingField", "Fields can't be empty");
         }
+
+        req.setAttribute("result", resultToReport);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");dispatcher.forward(req, resp);
     }
 }

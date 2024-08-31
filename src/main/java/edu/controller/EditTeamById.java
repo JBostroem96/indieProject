@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Category;
 import edu.matc.entity.Team;
+import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.LogManager;
@@ -41,32 +42,22 @@ public class EditTeamById extends HttpServlet implements UseLogger {
 
         String name = req.getParameter("name");
         String division = req.getParameter("division");
-        String id = req.getParameter("id");
-        Team teamToUpdate = null;
+        Team teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
 
-        if (id != null && !id.isEmpty()) {
+        if (name != null && !name.isEmpty()
+                && division != null && !division.isEmpty()) {
 
             try {
 
-                teamToUpdate = dao.getById(Integer.parseInt(id));
+                Team updatedTeam = new Team(name,
+                    division);
 
-                if (name != null && !name.isEmpty()
-                        && division != null && !division.isEmpty()) {
+                if (new Validate().validate(updatedTeam.getName(), dao, req)) {
 
-                    Team updatedTeam = new Team(name,
-                            division);
-
-                    if (new Validate().validate(updatedTeam.getName(), dao, req)) {
-
-                        teamToUpdate.setName(updatedTeam.getName());
-                        teamToUpdate.setDivision(updatedTeam.getDivision());
-                        dao.update(teamToUpdate);
-                        req.setAttribute("teamUpdated", "You have successfully updated the team!");
-                    }
-
-                } else {
-
-                    req.setAttribute("missingField", "Fields can't be empty");
+                    teamToUpdate.setName(updatedTeam.getName());
+                    teamToUpdate.setDivision(updatedTeam.getDivision());
+                    dao.update(teamToUpdate);
+                    req.setAttribute("teamUpdated", "You have successfully updated the team!");
                 }
 
             } catch (Exception e) {
@@ -74,6 +65,10 @@ public class EditTeamById extends HttpServlet implements UseLogger {
                 logger.error("There was an issue updating the data");
                 req.setAttribute("e", "Something went wrong!");
             }
+
+        } else {
+
+            req.setAttribute("missingField", "Fields can't be empty");
         }
         
         req.setAttribute("team", teamToUpdate);

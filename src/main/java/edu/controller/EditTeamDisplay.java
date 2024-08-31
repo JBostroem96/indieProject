@@ -36,25 +36,12 @@ public class EditTeamDisplay extends HttpServlet implements UseLogger {
 
         final Logger logger = log();
         GenericDao<Team> dao = new GenericDao<>(Team.class);
-        GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
-        String id = req.getParameter("id");
+        Team retrievedTeam = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
 
-        if (id != null && !id.isEmpty()) {
+        req.setAttribute("team", retrievedTeam);
+        req.setAttribute("category", new GenericDao<>(Category.class).getAll());
 
-            try {
-
-               Team retrievedTeam = dao.getById(Integer.parseInt(id));
-
-                req.setAttribute("team", retrievedTeam);
-                req.setAttribute("category", categoryDao.getAll());
-
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/editTeam.jsp");
-                dispatcher.forward(req, resp);
-
-            } catch (Exception e) {
-
-                logger.error("Something went wrong!", e);
-            }
-        }
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/editTeam.jsp");
+        dispatcher.forward(req, resp);
     }
 }

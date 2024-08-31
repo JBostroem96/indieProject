@@ -34,7 +34,7 @@ public class ReportResultDisplay extends HttpServlet implements UseLogger {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = log();
-        TeamRace resultToReport = (TeamRace) new GetEntry().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
+        TeamRace resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
         req.setAttribute("result", resultToReport);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");

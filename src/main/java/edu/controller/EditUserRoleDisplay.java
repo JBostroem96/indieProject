@@ -34,23 +34,12 @@ public class EditUserRoleDisplay extends HttpServlet implements UseLogger {
 
         final Logger logger = log();
         GenericDao<User> dao = new GenericDao<>(User.class);
-        String id = req.getParameter("id");
+        User retrievedUser = new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, logger);
 
-        if (id != null && !id.isEmpty()) {
+        req.setAttribute("userRole", retrievedUser);
 
-            try {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/users.jsp");
+        dispatcher.forward(req, resp);
 
-               User retrievedUser = dao.getById(Integer.parseInt(req.getParameter("id")));
-
-                req.setAttribute("userRole", retrievedUser);
-
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/users.jsp");
-                dispatcher.forward(req, resp);
-
-            } catch (Exception e) {
-
-                logger.error("Something went wrong!", e);
-            }
-        }
     }
 }

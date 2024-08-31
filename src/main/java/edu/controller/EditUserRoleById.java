@@ -1,5 +1,6 @@
 package edu.controller;
 
+import edu.matc.entity.Team;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
@@ -35,27 +36,20 @@ public class EditUserRoleById extends HttpServlet implements UseLogger {
         final Logger logger = log();
         GenericDao<User> dao = new GenericDao<>(User.class);
 
-        String message;
         String newRole = req.getParameter("role");
-        String id = req.getParameter("id");
-        User retrievedUser = null;
+        User retrievedUser = new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, logger);
 
-        if (id != null && !id.isEmpty()) {
+        if (newRole != null && !newRole.isEmpty()) {
 
             try {
 
-                retrievedUser = dao.getById(Integer.parseInt(req.getParameter("id")));
+                if (new Validate().validateRole(newRole, retrievedUser.getRole(), req)) {
 
-                if (newRole != null && !newRole.isEmpty()) {
+                    retrievedUser.setRole(newRole);
+                    dao.update(retrievedUser);
 
-                    if (new Validate().validateRole(newRole, retrievedUser.getRole(), req)) {
+                    req.setAttribute("updatedRole", "You successfully updated the user role!");
 
-                        retrievedUser.setRole(newRole);
-                        dao.update(retrievedUser);
-
-                        req.setAttribute("updatedRole", "You successfully updated the user role!");
-
-                    }
                 }
 
             } catch (Exception e) {
