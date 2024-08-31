@@ -37,25 +37,28 @@ public class EditUserRoleById extends HttpServlet implements UseLogger {
         GenericDao<User> dao = new GenericDao<>(User.class);
 
         String newRole = req.getParameter("role");
-        User retrievedUser = new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, logger);
+        User retrievedUser = null;
 
-        if (newRole != null && !newRole.isEmpty()) {
+        try {
 
-            try {
+            retrievedUser = new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, logger);
 
-                if (new Validate().validateRole(newRole, retrievedUser.getRole(), req)) {
+            if (newRole != null && !newRole.isEmpty()) {
 
-                    retrievedUser.setRole(newRole);
-                    dao.update(retrievedUser);
+                    if (new Validate<>().validateRole(newRole, retrievedUser.getRole(), req)) {
 
-                    req.setAttribute("updatedRole", "You successfully updated the user role!");
+                        retrievedUser.setRole(newRole);
+                        dao.update(retrievedUser);
+
+                        req.setAttribute("updatedRole", "You successfully updated the user role!");
+
+                    }
 
                 }
 
-            } catch (Exception e) {
+        } catch (Exception e) {
 
-                logger.error("There was an issue updating the data", e);
-            }
+            logger.error("There was an issue updating the data", e);
         }
 
         req.setAttribute("userRole", retrievedUser);

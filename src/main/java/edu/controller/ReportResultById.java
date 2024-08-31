@@ -38,26 +38,34 @@ public class ReportResultById extends HttpServlet implements UseLogger {
         final Logger logger = log();
         GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
 
-        String description = null;
         String subject = req.getParameter("subject");
-        TeamRace resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
+        TeamRace resultToReport = null;
 
-        if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
-                && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {
+        try {
 
-            description = req.getParameter("teamTextArea");
-            subject += " regarding "
-                    + resultToReport.getTeam().getName() + " in race "
-                    + resultToReport.getRace().getName();
+            resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
 
-            TLSEmail mail = new TLSEmail();
-            mail.simpleEmailWithTLS(subject, description);
+            if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
+                    && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {
 
-            req.setAttribute("resultReported", resultToReport.getTeam().getName());
+                String description = req.getParameter("teamTextArea");
+                subject += " regarding "
+                        + resultToReport.getTeam().getName() + " in race "
+                        + resultToReport.getRace().getName();
 
-        } else {
+                TLSEmail mail = new TLSEmail();
+                mail.simpleEmailWithTLS(subject, description);
 
-            req.setAttribute("missingField", "Fields can't be empty");
+                req.setAttribute("resultReported", resultToReport.getTeam().getName());
+
+            } else {
+
+                req.setAttribute("missingField", "Fields can't be empty");
+            }
+
+        } catch (Exception e) {
+
+            logger.error("There was an issue updating the data", e);
         }
 
         req.setAttribute("result", resultToReport);

@@ -42,17 +42,19 @@ public class EditTeamById extends HttpServlet implements UseLogger {
 
         String name = req.getParameter("name");
         String division = req.getParameter("division");
-        Team teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
+        Team teamToUpdate = null;
 
-        if (name != null && !name.isEmpty()
-                && division != null && !division.isEmpty()) {
+        try {
 
-            try {
+            teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
+
+            if (name != null && !name.isEmpty()
+                    && division != null && !division.isEmpty()) {
 
                 Team updatedTeam = new Team(name,
-                    division);
+                            division);
 
-                if (new Validate().validate(updatedTeam.getName(), dao, req)) {
+                if (new Validate<Team>().validate(updatedTeam.getName(), dao, req)) {
 
                     teamToUpdate.setName(updatedTeam.getName());
                     teamToUpdate.setDivision(updatedTeam.getDivision());
@@ -60,21 +62,22 @@ public class EditTeamById extends HttpServlet implements UseLogger {
                     req.setAttribute("teamUpdated", "You have successfully updated the team!");
                 }
 
-            } catch (Exception e) {
+            } else {
 
-                logger.error("There was an issue updating the data");
-                req.setAttribute("e", "Something went wrong!");
+                req.setAttribute("missingField", "Fields can't be empty");
             }
 
-        } else {
+        } catch (Exception e) {
 
-            req.setAttribute("missingField", "Fields can't be empty");
+            logger.error("There was an issue updating the data");
+            req.setAttribute("e", "Something went wrong!");
         }
-        
+
         req.setAttribute("team", teamToUpdate);
         req.setAttribute("category", categoryDao.getAll());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editTeam.jsp");
         dispatcher.forward(req, resp);
+
     }
 }

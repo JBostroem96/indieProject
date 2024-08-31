@@ -42,35 +42,39 @@ public class EditRaceById extends HttpServlet implements UseLogger {
         String name = req.getParameter("name");
         String length = req.getParameter("length");
         String date = req.getParameter("date");
-        Race raceToUpdate = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
+        Race raceToUpdate = null;
 
-        if (name != null && !name.isEmpty()
-                && length != null && !length.isEmpty()
-                && date != null && !date.isEmpty()) {
+        try {
 
-            try {
-                Race updatedRace = new Race(name,
-                        length,
-                        LocalDate.parse(date));
+            raceToUpdate = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
 
-                if (new Validate().validate(updatedRace.getName(), dao, req)) {
+            if (name != null && !name.isEmpty()
+                    && length != null && !length.isEmpty()
+                    && date != null && !date.isEmpty()) {
 
-                    raceToUpdate.setName(updatedRace.getName());
-                    raceToUpdate.setLength(updatedRace.getLength());
-                    raceToUpdate.setDate(updatedRace.getDate());
-                    dao.update(raceToUpdate);
-                    req.setAttribute("raceUpdated", "You successfully updated the race");
-                }
 
-            } catch (Exception e) {
+                    Race updatedRace = new Race(name,
+                            length,
+                            LocalDate.parse(date));
 
-                logger.error("There was an issue updating the data", e);
-                req.setAttribute("e", "Something went wrong!");
+                    if (new Validate<Race>().validate(updatedRace.getName(), dao, req)) {
+
+                        raceToUpdate.setName(updatedRace.getName());
+                        raceToUpdate.setLength(updatedRace.getLength());
+                        raceToUpdate.setDate(updatedRace.getDate());
+                        dao.update(raceToUpdate);
+                        req.setAttribute("raceUpdated", "You successfully updated the race");
+                    }
+
+            } else {
+
+                req.setAttribute("missingField", "Fields can't be empty");
             }
 
-        } else {
+        } catch (Exception e) {
 
-            req.setAttribute("missingField", "Fields can't be empty");
+            logger.error("There was an issue updating the data", e);
+            req.setAttribute("e", "Something went wrong!");
         }
 
         req.setAttribute("raceToUpdate", raceToUpdate);

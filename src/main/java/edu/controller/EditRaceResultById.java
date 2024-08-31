@@ -42,46 +42,49 @@ public class EditRaceResultById extends HttpServlet implements UseLogger {
         String cp = req.getParameter("cp");
         String penalty = req.getParameter("penalty");
         String time = req.getParameter("time");
-        TeamRace teamRaceToUpdate = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
+        TeamRace teamRaceToUpdate = null;
 
-        if (cp != null && !cp.isEmpty()
-                && penalty != null && !penalty.isEmpty()
-                && time != null && !time.isEmpty()) {
+        try {
 
-            try {
+            teamRaceToUpdate = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
 
-                Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
-                Race race = teamRaceToUpdate.getRace();
+            if (teamRaceToUpdate != null
+                    && cp != null && !cp.isEmpty()
+                    && penalty != null && !penalty.isEmpty()
+                    && time != null && !time.isEmpty()) {
 
-                int cpEntry = Integer.parseInt(cp);
-                int penaltyEntry = Integer.parseInt(penalty);
-                double totalTimeEntry = Double.parseDouble(time);
+                    Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
+                    Race race = teamRaceToUpdate.getRace();
 
-                TeamRace updatedTeamRace = new TeamRace(team, race, cpEntry, penaltyEntry, totalTimeEntry);
+                    int cpEntry = Integer.parseInt(cp);
+                    int penaltyEntry = Integer.parseInt(penalty);
+                    double totalTimeEntry = Double.parseDouble(time);
 
-                if (new Validate().validateResults(updatedTeamRace.getTeam().getName(), race.getId(), teamRaceDao, req)) {
+                    TeamRace updatedTeamRace = new TeamRace(team, race, cpEntry, penaltyEntry, totalTimeEntry);
 
-                    teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
-                    teamRaceToUpdate.setRace(updatedTeamRace.getRace());
-                    teamRaceToUpdate.setCp(updatedTeamRace.getCp());
-                    teamRaceToUpdate.setTotalTime(updatedTeamRace.getTotalTime());
-                    teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
+                    if (new Validate<Race>().validateResults(updatedTeamRace.getTeam().getName(), race.getId(), teamRaceDao, req)) {
 
-                    teamRaceDao.update(teamRaceToUpdate);
-                    req.setAttribute("resultUpdated", "You successfully updated the result");
-                    //Update the results after editing
-                    new UpdateResults(null, teamRaceDao, req);
-                }
+                        teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
+                        teamRaceToUpdate.setRace(updatedTeamRace.getRace());
+                        teamRaceToUpdate.setCp(updatedTeamRace.getCp());
+                        teamRaceToUpdate.setTotalTime(updatedTeamRace.getTotalTime());
+                        teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
 
-            } catch (Exception e) {
+                        teamRaceDao.update(teamRaceToUpdate);
+                        req.setAttribute("resultUpdated", "You successfully updated the result");
+                        //Update the results after editing
+                        new UpdateResults(null, teamRaceDao, req);
+                    }
 
-                req.setAttribute("e", e);
-                logger.error("there was an issue inserting the data", e);
+            } else {
+
+                req.setAttribute("missingField", "Fields can't be empty");
             }
 
-        } else {
+        } catch (Exception e) {
 
-            req.setAttribute("missingField", "Fields can't be empty");
+            req.setAttribute("e", e);
+            logger.error("there was an issue inserting the data", e);
         }
 
         req.setAttribute("editedRaceResult", teamRaceToUpdate);

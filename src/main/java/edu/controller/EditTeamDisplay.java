@@ -35,7 +35,6 @@ public class EditTeamDisplay extends HttpServlet implements UseLogger {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = log();
-        GenericDao<Team> dao = new GenericDao<>(Team.class);
         Team retrievedTeam = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
 
         req.setAttribute("team", retrievedTeam);

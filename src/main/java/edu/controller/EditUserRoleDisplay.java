@@ -33,7 +33,6 @@ public class EditUserRoleDisplay extends HttpServlet implements UseLogger {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = log();
-        GenericDao<User> dao = new GenericDao<>(User.class);
         User retrievedUser = new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, logger);
 
         req.setAttribute("userRole", retrievedUser);

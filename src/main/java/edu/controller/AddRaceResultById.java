@@ -40,28 +40,24 @@ public class AddRaceResultById extends HttpServlet implements UseLogger {
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
 
-        String raceEntry = req.getParameter("race_id");
         String teamEntry = req.getParameter("team");
         String cpEntry = req.getParameter("cp");
         String penaltyEntry = req.getParameter("penalty");
         String timeEntry = req.getParameter("time");
-
         Race race = null;
 
-        if (raceEntry != null && !raceEntry.isEmpty()) {
+        try {
 
-            try {
+            race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
 
-                race = new GenericDao<>(Race.class).getById(Integer.parseInt(raceEntry));
-
-                if (cpEntry != null && !cpEntry.isEmpty()
-                        && penaltyEntry != null && !penaltyEntry.isEmpty()
-                        && timeEntry != null && !timeEntry.isEmpty()
-                        && !teamEntry.isEmpty()) {
+            if (cpEntry != null && !cpEntry.isEmpty()
+                    && penaltyEntry != null && !penaltyEntry.isEmpty()
+                    && timeEntry != null && !timeEntry.isEmpty()
+                    && !teamEntry.isEmpty()) {
 
                     Team team = teamDao.getById(Integer.parseInt(teamEntry));
 
-                    if (new Validate().validateResults(team.getName(), race.getId(), teamRaceDao, req)) {
+                    if (new Validate<Race>().validateResults(team.getName(), race.getId(), teamRaceDao, req)) {
 
                         int cp = Integer.parseInt(cpEntry);
                         int penalty = Integer.parseInt(penaltyEntry);
@@ -75,16 +71,16 @@ public class AddRaceResultById extends HttpServlet implements UseLogger {
                         new UpdateResults(null, teamRaceDao, req);
                     }
 
-                } else {
+                    
+            } else {
 
-                    req.setAttribute("missingField", "Fields can't be empty");
-                }
+                req.setAttribute("missingField", "Fields can't be empty");
 
-            } catch(Exception e){
-
-                req.setAttribute("e", e);
-                logger.error("Something went wrong!", e);
             }
+        } catch(Exception e){
+
+            req.setAttribute("e", e);
+            logger.error("Something went wrong!", e);
         }
 
         req.setAttribute("team", teamDao.getAll());
