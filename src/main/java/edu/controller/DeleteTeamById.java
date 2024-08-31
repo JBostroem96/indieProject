@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class' purpose is to delete a team
@@ -36,13 +38,16 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);
         GenericDao<Team> dao = new GenericDao<>(Team.class);
         Team team = new GetEntry<Team>().parseEntry(dao, req, logger);
+        List<Integer> races = new ArrayList<>();
+        //Gets all the races where the teams are
+        getAllRaces(teamRaceDao, team, races);
 
         try {
 
             dao.delete(team);
             req.setAttribute("deletedEntry", team);
             //Update the results after deletion
-            updateRaces(teamRaceDao, req);
+            updateRaces(teamRaceDao, req, races);
 
         } catch (Exception e) {
             req.setAttribute("e", e);
@@ -57,12 +62,32 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
      * This method's purpose is to update the races/results
      * @param dao the teamRace dao
      * @param req the request object
+     * @param races the list of race ids
      */
-    public void updateRaces(GenericDao<TeamRace> dao, HttpServletRequest req) {
+    public void updateRaces(GenericDao<TeamRace> dao, HttpServletRequest req, List<Integer> races) {
 
-        for (String race : req.getParameterValues("race_id")) {
+        for (Integer race : races) {
 
-            new UpdateResults(race, dao, req);
+            new UpdateResults(String.valueOf(race), dao, req);
+        }
+    }
+
+    /**
+     * This method's purpose is to get all the races where the teams are
+     * @param teamRace the teamRace dao
+     * @param retrievedTeam the retrieved team
+     * @param races the races
+     */
+    public void getAllRaces(GenericDao<TeamRace> teamRace, Team retrievedTeam, List<Integer> races) {
+
+        for (TeamRace entry : teamRace.getAll()) {
+
+            String name = entry.getTeam().getName();
+
+            if (name.equals(retrievedTeam.getName())) {
+
+                races.add(entry.getRace_id());
+            }
         }
     }
 }

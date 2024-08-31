@@ -38,38 +38,13 @@ public class DeleteTeamDisplay extends HttpServlet implements UseLogger {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final Logger logger = log();
-        GenericDao<TeamRace> teamRace = new GenericDao<>(TeamRace.class);
 
         Team retrievedTeam = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
-        List<Integer> races = new ArrayList<>();
 
-        //Gets all the races where the teams are
-        getAllRaces(teamRace, retrievedTeam, races);
-
-        req.setAttribute("races", races);
         req.setAttribute("team", retrievedTeam);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
         dispatcher.forward(req, resp);
-    }
-
-    /**
-     * This method's purpose is to get all the races where the teams are
-     * @param teamRace the teamRace dao
-     * @param retrievedTeam the retrieved team
-     * @param races the races
-     */
-    public void getAllRaces(GenericDao<TeamRace> teamRace, Team retrievedTeam, List<Integer> races) {
-
-        for (TeamRace entry : teamRace.getAll()) {
-
-            String name = entry.getTeam().getName();
-
-            if (name.equals(retrievedTeam.getName())) {
-
-                races.add(entry.getRace_id());
-            }
-        }
     }
 }
 
