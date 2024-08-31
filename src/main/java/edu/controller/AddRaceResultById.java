@@ -61,7 +61,7 @@ public class AddRaceResultById extends HttpServlet implements UseLogger {
 
                     Team team = teamDao.getById(Integer.parseInt(teamEntry));
 
-                    if (new ValidateResults().validate(team.getName(), race.getId(), teamRaceDao, req)) {
+                    if (new Validate().validateResults(team.getName(), race.getId(), teamRaceDao, req)) {
 
                         int cp = Integer.parseInt(cpEntry);
                         int penalty = Integer.parseInt(penaltyEntry);

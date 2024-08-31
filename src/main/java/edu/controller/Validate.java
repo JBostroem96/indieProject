@@ -45,6 +45,26 @@ public class Validate<T extends Validation> {
     }
 
     /**
+     * This method's purpose is to validate the results
+     * @param name the name
+     * @param raceId the race id
+     * @param dao the generic dao
+     * @param req the request object
+     * @return entryExists - if the entry already exists
+     */
+    public boolean validateResults(String name, int raceId, GenericDao<TeamRace> dao, HttpServletRequest req) {
+
+        for (TeamRace entry : dao.getAll()) {
+
+            if (entry.getRace_id() == raceId) {
+
+                checkExistence(entry.getTeam().getName(), name, req);
+            }
+        }
+        return !entryExists;
+    }
+
+    /**
      * This method's purpose is to validate the role
      * @param newRole the new role
      * @param role the role
@@ -69,15 +89,6 @@ public class Validate<T extends Validation> {
             entryExists = true;
             req.setAttribute("message", "That entry already exists");
         }
-    }
-
-    /**
-     * This method's purpose is to return if the entry exists or not
-     * @return entryExists - if the entry exists or not
-     */
-    public boolean getEntryExists() {
-
-        return !entryExists;
     }
 }
 
