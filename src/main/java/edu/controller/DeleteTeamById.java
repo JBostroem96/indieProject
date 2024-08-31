@@ -46,8 +46,10 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
 
             dao.delete(team);
             req.setAttribute("deletedEntry", team);
-            //Update the results after deletion
-            updateRaces(teamRaceDao, req, races);
+            //Only Update the results after deletion if the teams are in any races
+            if (!races.isEmpty()) {
+                updateRaces(teamRaceDao, req, races);
+            }
 
         } catch (Exception e) {
             req.setAttribute("e", e);
