@@ -37,23 +37,12 @@ public class AddRaceResult extends HttpServlet implements UseLogger {
 
         final Logger logger = log();
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
-        GenericDao<Race> dao = new GenericDao<>(Race.class);
-        String id = req.getParameter("id");
+        Race retrievedRace = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
 
-        if (id != null && !id.isEmpty()) {
+        req.setAttribute("race", retrievedRace);
+        req.setAttribute("team", teamDao.getAll());
 
-            try {
-
-                Race retrievedRace = dao.getById(Integer.parseInt(id));
-                req.setAttribute("race", retrievedRace);
-                req.setAttribute("team", teamDao.getAll());
-
-            } catch (Exception e) {
-
-                logger.error("Something went wrong!", e);
-            }
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
-            dispatcher.forward(req, resp);
-        }
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
+        dispatcher.forward(req, resp);
     }
 }
