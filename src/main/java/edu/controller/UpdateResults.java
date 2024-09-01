@@ -22,14 +22,7 @@ public class UpdateResults implements UseLogger {
      * @param req the request object
      * @param raceId the race id
      */
-    public UpdateResults(String raceId, GenericDao<TeamRace> dao, HttpServletRequest req) {
-
-        //In the event that only one race needs to be updated, get the parameter;
-        //however, if it's not null, get all the races
-        if (raceId == null) {
-
-            raceId = req.getParameter("race_id");
-        }
+    public UpdateResults(int raceId, GenericDao<TeamRace> dao, HttpServletRequest req) {
 
         teamRaces = dao.findByPropertyEqual("race_id", raceId);
         updateResults(dao);

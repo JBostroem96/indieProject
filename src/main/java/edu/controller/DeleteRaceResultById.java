@@ -42,7 +42,7 @@ public class DeleteRaceResultById extends HttpServlet implements UseLogger {
             dao.delete(teamRace);
             req.setAttribute("deletedEntry", teamRace);
             //Update the results after deletion
-            new UpdateResults(null, dao, req);
+            new UpdateResults(teamRace.getRace_id(), dao, req);
 
         } catch (Exception e) {
             req.setAttribute("e", e);

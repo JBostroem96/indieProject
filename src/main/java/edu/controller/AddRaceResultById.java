@@ -68,7 +68,7 @@ public class AddRaceResultById extends HttpServlet implements UseLogger {
                         teamRaceDao.insert(teamRace);
                         req.setAttribute("resultUpdated", "You successfully added the result!");
                         //update the results once inserted
-                        new UpdateResults(null, teamRaceDao, req);
+                        new UpdateResults(race.getId(), teamRaceDao, req);
                     }
 
                     

@@ -70,7 +70,7 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
 
         for (Integer race : races) {
 
-            new UpdateResults(String.valueOf(race), dao, req);
+            new UpdateResults(race, dao, req);
         }
     }
 

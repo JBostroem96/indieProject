@@ -58,7 +58,6 @@
                             </c:if>
                         </div>
                         <button type="submit" name="id" class="btn btn-success bg-success" value="${race.id}">Add Results</button>
-                        <input type="hidden" name="race_id" value="${race.id}">
                     </form>
                 </div>
             </div>

@@ -80,7 +80,6 @@
                                 <button type="submit" name="id" class="btn btn-success bg-success" value="${editedRaceResult.id}">Edit Race Result</button>
                             </c:when>
                             <c:otherwise>
-                                <input type="hidden" name="race_id" value="${team_race.race_id}">
                                 <button type="submit" name="id" class="btn btn-success bg-success" value="${team_race.id}">Edit Race Result</button>
                             </c:otherwise>
                         </c:choose>

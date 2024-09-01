@@ -37,7 +37,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <input type="hidden" name="race_id" value="${team_race.race_id}">
                             <button type="submit" name="id" class="btn btn-primary bg-danger mt-2" value="${team_race.id}">Delete Result</button>
                         </form>
                     </c:otherwise>
