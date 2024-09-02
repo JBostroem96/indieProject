@@ -39,12 +39,11 @@ public class AddTeam extends HttpServlet implements UseLogger {
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
         String name = req.getParameter("name");
+        Category category = new GetEntry<Category>().parseEntry(categoryDao, req, logger);
 
         if (name != null && !name.isEmpty()) {
 
             try {
-
-                Category category = new GetEntry<Category>().parseEntry(categoryDao, req, logger);
 
                 if (new Validate<Team>().validate(name, teamDao, req)) {
 

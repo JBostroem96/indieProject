@@ -42,11 +42,9 @@ public class EditRaceById extends HttpServlet implements UseLogger {
         String name = req.getParameter("name");
         String length = req.getParameter("length");
         String date = req.getParameter("date");
-        Race raceToUpdate = null;
+        Race raceToUpdate =   raceToUpdate = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
 
         try {
-
-            raceToUpdate = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
 
             if (name != null && !name.isEmpty()
                     && length != null && !length.isEmpty()

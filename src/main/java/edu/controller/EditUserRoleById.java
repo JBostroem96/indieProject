@@ -37,11 +37,9 @@ public class EditUserRoleById extends HttpServlet implements UseLogger {
         GenericDao<User> dao = new GenericDao<>(User.class);
 
         String newRole = req.getParameter("role");
-        User retrievedUser = null;
+        User retrievedUser = new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, logger);;
 
         try {
-
-            retrievedUser = new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, logger);
 
             if (newRole != null && !newRole.isEmpty()) {
 

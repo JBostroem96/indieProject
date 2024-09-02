@@ -42,11 +42,9 @@ public class EditTeamById extends HttpServlet implements UseLogger {
 
         String name = req.getParameter("name");
         String division = req.getParameter("division");
-        Team teamToUpdate = null;
+        Team teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);;
 
         try {
-
-            teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
 
             if (name != null && !name.isEmpty()
                     && division != null && !division.isEmpty()) {
