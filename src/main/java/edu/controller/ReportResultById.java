@@ -39,11 +39,9 @@ public class ReportResultById extends HttpServlet implements UseLogger {
         GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
 
         String subject = req.getParameter("subject");
-        TeamRace resultToReport = null;
+        TeamRace resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);;
 
         try {
-
-            resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
 
             if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
                     && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {

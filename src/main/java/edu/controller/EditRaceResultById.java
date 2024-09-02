@@ -42,7 +42,7 @@ public class EditRaceResultById extends HttpServlet implements UseLogger {
         String cp = req.getParameter("cp");
         String penalty = req.getParameter("penalty");
         String time = req.getParameter("time");
-        TeamRace teamRaceToUpdate =  teamRaceToUpdate = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);;
+        TeamRace teamRaceToUpdate = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);;
 
         try {
 
