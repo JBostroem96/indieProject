@@ -1,113 +1,99 @@
 package edu.controller;
 
+import edu.matc.entity.Division;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Comparator;
 import java.util.List;
+import java.util.EnumMap;
 
 /**
- * This class' purpose is to update the results in the database whenever needed
+ * This class updates the results in the database whenever needed.
  */
 public class UpdateResults implements UseLogger {
 
     private List<TeamRace> teamRaces;
+    private int overallPlacement;
 
     /**
-     * This constructor's purpose is to update the result set
-     * @param dao the TeamRace dao
-     * @param req the request object
-     * @param raceId the race id
+     * Constructor for updating the result set.
+     * @param raceId the race ID
+     * @param dao the TeamRace DAO
      */
-    public UpdateResults(int raceId, GenericDao<TeamRace> dao, HttpServletRequest req) {
+    public UpdateResults(int raceId, GenericDao<TeamRace> dao) {
 
-        teamRaces = dao.findByPropertyEqual("race_id", raceId);
+        this.teamRaces = dao.findByPropertyEqual("race_id", raceId);
+        this.overallPlacement = 0;
         updateResults(dao);
     }
 
     /**
-     * This method's purpose is to update the results
-     * @param dao the TeamRace dao
+     * Updates the results.
+     * @param dao the TeamRace DAO
      */
     public void updateResults(GenericDao<TeamRace> dao) {
-
         final Logger logger = log();
 
+        // Sort the team races by total time
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 
+        // Rank divisions and update results
         for (TeamRace teamRace : rankDivision(teamRaces)) {
-
             try {
                 dao.update(teamRace);
-
             } catch (Exception e) {
-
                 logger.error("There was an issue updating the data", e);
             }
         }
     }
 
     /**
-     * This method's purpose is to rank the different divisions
-     *
-     * @param teamRaces the team races
-     * @return the team races
+     * Ranks the teams by division and overall placement.
+     * @param teamRaces the list of team races
+     * @return the ranked list of team races
      */
     public List<TeamRace> rankDivision(List<TeamRace> teamRaces) {
 
-        int[] divisionPlacements = {0, 0, 0, 0, 0, 0};
+        //EnumMap for the different divisions
+        EnumMap<Division, Integer> divisionPlacements = new EnumMap<>(Division.class);
 
+        //Looping through the divisions, putting the divisions, starting at 0, into the map
+        for (Division division : Division.values()) {
+            divisionPlacements.put(division, 0);
+        }
+
+        //Increment them if they exist
         incrementDivisions(teamRaces, divisionPlacements);
 
         return teamRaces;
     }
 
     /**
-     * This method's purpose is to loop through the results and display the ranks
-     *
-     * @param teamRaces          the list of results
-     * @param divisionPlacements the different division rankings
+     * Increments division and overall placements.
+     * @param teamRaces the list of team races
+     * @param divisionPlacements the division placements map
      */
-    public void incrementDivisions(List<TeamRace> teamRaces, int[] divisionPlacements) {
+    public void incrementDivisions(List<TeamRace> teamRaces, EnumMap<Division, Integer> divisionPlacements) {
 
+        //Loop through the list
         for (TeamRace entry : teamRaces) {
 
-            switch (entry.getTeam().getCategory().getDivision()) {
-                case MALE:
+            Division division = entry.getTeam().getCategory().getDivision();
 
-                    divisionPlacements[0]++;
-                    entry.setDivisionPlace(divisionPlacements[0]);
-
-                    break;
-                case FEMALE:
-
-                    divisionPlacements[1]++;
-                    entry.setDivisionPlace(divisionPlacements[1]);
-
-                    break;
-                case SOLO_MALE:
-
-                    divisionPlacements[2]++;
-                    entry.setDivisionPlace(divisionPlacements[2]);
-
-                    break;
-                case SOLO_FEMALE:
-
-                    divisionPlacements[3]++;
-                    entry.setDivisionPlace(divisionPlacements[3]);
-                    break;
-                case MIXED:
-
-                    divisionPlacements[4]++;
-                    entry.setDivisionPlace(divisionPlacements[4]);
-                    break;
+            //If the division is encountered ...
+            if (divisionPlacements.containsKey(division)) {
+                //Increment
+                divisionPlacements.put(division, divisionPlacements.get(division) + 1);
+                entry.setDivisionPlace(divisionPlacements.get(division));
             }
-            divisionPlacements[5]++;
-            entry.setOverallPlace(divisionPlacements[5]);
+            //Also increment the overall placement
+            overallPlacement++;
+            entry.setOverallPlace(overallPlacement);
         }
     }
 }
+
 

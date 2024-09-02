@@ -48,7 +48,7 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
             req.setAttribute("deletedEntry", team);
             //Only Update the results after deletion if the teams are in any races
             if (!races.isEmpty()) {
-                updateRaces(teamRaceDao, req, races);
+                updateRaces(teamRaceDao, races);
             }
 
         } catch (Exception e) {
@@ -63,14 +63,13 @@ public class DeleteTeamById extends HttpServlet implements UseLogger {
     /**
      * This method's purpose is to update the races/results
      * @param dao the teamRace dao
-     * @param req the request object
      * @param races the list of race ids
      */
-    public void updateRaces(GenericDao<TeamRace> dao, HttpServletRequest req, List<Integer> races) {
+    public void updateRaces(GenericDao<TeamRace> dao, List<Integer> races) {
 
         for (Integer race : races) {
 
-            new UpdateResults(race, dao, req);
+            new UpdateResults(race, dao);
         }
     }
 
