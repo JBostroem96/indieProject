@@ -75,7 +75,7 @@ public class Race implements Validation {
      *
      * @return the team races
      */
-    @OneToMany(mappedBy = "race")
+    @OneToMany(mappedBy = "race", fetch = FetchType.EAGER)
     public Set<TeamRace> getTeamRaces() {
         return teamRaces;
     }

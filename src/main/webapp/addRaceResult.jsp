@@ -35,6 +35,11 @@
                                     <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${race.id}">View</button>
                                 </form>
                             </td>
+                            <td>
+                                <form action="deleteAllRaceResultsDisplay" class="form-inline" method="post">
+                                    <button type="submit" name="id" class="btn btn-danger bg-danger btn-sm" value="${race.id}">Delete Results</button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
