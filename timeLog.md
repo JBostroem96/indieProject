@@ -1,3 +1,6 @@
+NOTE: This timelog is no longer being actively updated
+
+
 Date: 02/06/24<br>
 Task: Reading material for this week and watching this week's videos and doing the demo(s)<br>
 Hours: 5.
