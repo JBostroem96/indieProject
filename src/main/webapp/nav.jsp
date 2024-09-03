@@ -25,21 +25,25 @@
                 <li class="nav-item"><a class="nav-link" href = "viewRaces"><em>Race Result</em></a></li>
             </ul>
             <ul class="nav navbar-nav">
-                <c:choose>
+                <c:if test="${user.role == 'admin'}">
+                    <li class="nav-item"><a class="nav-link" href = "AddRaceDisplay"><em>Add Race</em></a></li>
+                    <li class="nav-item"><a class="nav-link" href = "addTeamDisplay"><em>Add a Team</em></a></li>
+                    <li class="nav-item"><a class="nav-link" href = "displayUsers"><em>Assign Roles</em></a></li>
+                </c:if>
+            </ul>
+            <c:choose>
                     <c:when test="${empty user.userName}">
-                        <li class="nav-item"><a class="nav-link" href = "logIn"><em>Login or Sign Up</em></a></li>
+                        <ul class="nav navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href = "logIn"><em>Login or Sign Up</em></a></li>
+                        </ul>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-item"><a class="nav-link" href = "AddRaceDisplay"><em>Add Race</em></a></li>
-                        <li class="nav-item"><a class="nav-link" href = "addTeamDisplay"><em>Add a Team</em></a></li>
-                        <li class="nav-item"><a class="nav-link" href = "displayUsers"><em>Assign Roles</em></a></li>
-                    </ul>
-                    <ul class="nav navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href = "logout"><em>Logout</em></a></li>
-                        <li class="nav-item"><a class="nav-link"><em>User: ${user.userName}</em></a></li>
-                    </ul>
+                        <ul class="nav navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href = "logout"><em>Logout</em></a></li>
+                            <li class="nav-item"><a class="nav-link"><em>User: ${user.userName}</em></a></li>
+                        </ul>
                     </c:otherwise>
-                </c:choose>
+            </c:choose>
         </div>
     </div>
 </nav>

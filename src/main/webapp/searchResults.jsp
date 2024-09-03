@@ -30,7 +30,7 @@
                                     <td class="text-black">${race.name}</td>
                                     <td class="text-black">${race.length}</td>
                                     <td class="text-black">${race.date}</td>
-                                    <c:if test="${user.role != null}">
+                                    <c:if test="${user.role == 'admin'}">
                                         <td>
                                             <form action="editRaceDisplay" class="form-inline" method="get">
                                                 <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${race.id}">Edit</button>
@@ -56,7 +56,7 @@
                                 <tr>
                                     <td class="text-black">${team.name}</td>
                                     <td class="text-black">${team.division}</td>
-                                    <c:if test="${user.role != null}">
+                                    <c:if test="${user.role == 'admin'}">
                                         <td>
                                             <form action="editTeamDisplay" class="form-inline" method="get">
                                                 <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${team.id}">Edit</button>

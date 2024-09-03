@@ -3,7 +3,7 @@
     <c:import url="head.jsp"/>
     <body>
         <c:choose>
-            <c:when test="${user.role == null}">
+            <c:when test="${user.role != 'admin'}">
                 <p class="text-center fw-bold text-danger">You do not have permission to this page</p>
             </c:when>
             <c:otherwise>

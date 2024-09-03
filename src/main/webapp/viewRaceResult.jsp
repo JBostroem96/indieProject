@@ -39,6 +39,8 @@
                                         <button type="submit" name="id" class="btn btn-warning bg-warning btn-sm" value="${team_race.id}">Report</button>
                                     </form>
                                 </td>
+                            </c:if>
+                            <c:if test="${user.role == 'admin'}">
                                 <td>
                                     <form action="editRaceResultDisplay" class="form-inline" method="get">
                                         <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${team_race.id}">Edit</button>

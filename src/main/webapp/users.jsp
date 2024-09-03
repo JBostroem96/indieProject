@@ -11,7 +11,7 @@
 <body>
 <c:choose>
     <c:when test="${user.role != 'admin'}">
-        <p class="text-center fw-bold text-danger">You do not have permission to this page ${user.role}</p>
+        <p class="text-center fw-bold text-danger">You do not have permission to this page</p>
     </c:when>
     <c:otherwise>
         <%@include file="nav.jsp"%>
