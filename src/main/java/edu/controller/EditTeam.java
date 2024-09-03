@@ -40,7 +40,7 @@ public class EditTeam extends HttpServlet implements UseLogger {
 
         String name = req.getParameter("name");
         String division = req.getParameter("division");
-        Team teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);;
+        Team teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
 
         try {
 

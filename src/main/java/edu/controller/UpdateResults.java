@@ -34,6 +34,7 @@ public class UpdateResults implements UseLogger {
      * @param dao the TeamRace DAO
      */
     public void updateResults(GenericDao<TeamRace> dao) {
+
         final Logger logger = log();
 
         // Sort the team races by total time
