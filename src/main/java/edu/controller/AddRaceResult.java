@@ -44,11 +44,9 @@ public class AddRaceResult extends HttpServlet implements UseLogger {
         String cpEntry = req.getParameter("cp");
         String penaltyEntry = req.getParameter("penalty");
         String timeEntry = req.getParameter("time");
-        Race race = null;
+        Race race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);;
 
         try {
-
-            race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
 
             if (cpEntry != null && !cpEntry.isEmpty()
                     && penaltyEntry != null && !penaltyEntry.isEmpty()
