@@ -1,12 +1,9 @@
 package edu.controller;
 
 
-import edu.matc.entity.Race;
-import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -21,9 +18,9 @@ import java.io.IOException;
  * This class' purpose is to delete a race result
  */
 @WebServlet(
-        urlPatterns = {"/deleteRaceResultById"}
+        urlPatterns = {"/deleteRaceResult"}
 )
-public class DeleteRaceResultById extends HttpServlet implements UseLogger {
+public class DeleteRaceResult extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to delete the entry by id

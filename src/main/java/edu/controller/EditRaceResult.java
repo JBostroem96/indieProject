@@ -19,10 +19,10 @@ import java.io.IOException;
  * This class' purpose is to edit a race result
  */
 @WebServlet(
-        urlPatterns = {"/editRaceResultById"}
+        urlPatterns = {"/editRaceResult"}
 )
 
-public class EditRaceResultById extends HttpServlet implements UseLogger {
+public class EditRaceResult extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to edit the entry by id

@@ -2,10 +2,8 @@ package edu.controller;
 
 import edu.matc.entity.Category;
 import edu.matc.entity.Team;
-import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -21,10 +19,10 @@ import java.io.IOException;
  * This class' purpose is to edit a team
  */
 @WebServlet(
-        urlPatterns = {"/editTeamById"}
+        urlPatterns = {"/editTeam"}
 )
 
-public class EditTeamById extends HttpServlet implements UseLogger {
+public class EditTeam extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to edit the entry by id

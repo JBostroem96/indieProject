@@ -19,7 +19,7 @@ import java.io.IOException;
  * This class' purpose is to forward to the jsp
  */
 @WebServlet(
-        urlPatterns = {"/deleteRace"}
+        urlPatterns = {"/deleteRaceDisplay"}
 )
 
 public class DeleteRaceDisplay extends HttpServlet implements UseLogger {

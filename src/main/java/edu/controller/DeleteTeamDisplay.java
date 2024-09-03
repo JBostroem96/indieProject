@@ -23,7 +23,7 @@ import java.util.List;
  * This class' purpose is to forward to the jsp
  */
 @WebServlet(
-        urlPatterns = {"/deleteTeam"}
+        urlPatterns = {"/deleteTeamDisplay"}
 )
 public class DeleteTeamDisplay extends HttpServlet implements UseLogger {
 

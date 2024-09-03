@@ -32,12 +32,12 @@
                                     <td class="text-black">${race.date}</td>
                                     <c:if test="${user.role != null}">
                                         <td>
-                                            <form action="editRace" class="form-inline" method="get">
+                                            <form action="editRaceDisplay" class="form-inline" method="get">
                                                 <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${race.id}">Edit</button>
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="deleteRace" class="form-inline" method="get">
+                                            <form action="deleteRaceDisplay" class="form-inline" method="get">
                                                 <button type="submit" name="id" class="btn btn-danger bg-danger btn-sm" value="${race.id}">Delete</button>
                                             </form>
                                         </td>
@@ -58,12 +58,12 @@
                                     <td class="text-black">${team.division}</td>
                                     <c:if test="${user.role != null}">
                                         <td>
-                                            <form action="editTeam" class="form-inline" method="get">
+                                            <form action="editTeamDisplay" class="form-inline" method="get">
                                                 <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${team.id}">Edit</button>
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="deleteTeam" class="form-inline" method="get">
+                                            <form action="deleteTeamDisplay" class="form-inline" method="get">
                                                 <button type="submit" name="id" class="btn btn-danger bg-danger btn-sm" value="${team.id}">Delete</button>
                                             </form>
                                         </td>

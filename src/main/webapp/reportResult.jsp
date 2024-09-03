@@ -10,7 +10,7 @@
             <p class="text-success text-center fw-bold">Your report concerning ${resultReported} has been submitted</p>
         </c:if>
         <div class="d-flex flex-column gap-5 fw-bold">
-            <form action="reportResultById" class="form-inline" method="POST">
+            <form action="reportResult" class="form-inline" method="POST">
                 <c:if test="${!empty missingField}"><p class="text-danger fw-bold">${missingField}</p></c:if>
                 <div class="search text-white p-5 border rounded" id="report">
                     <label for="name">Name</label>

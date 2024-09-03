@@ -1,13 +1,8 @@
 
 package edu.controller;
 
-
 import edu.matc.entity.Race;
-import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.Logger;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,15 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * This class' purpose is to add the race result by sending the necessary data to the form
+ * This class' purpose is to forward to the jsp
  */
 @WebServlet(
-        urlPatterns = {"/addRaceResultDisplay"}
+        urlPatterns = {"/viewRaces"}
 )
-public class AddRaceResultDisplay extends HttpServlet implements UseLogger {
+public class ViewRaces extends HttpServlet {
 
     /**
-     * This method's purpose is to add the race result
+     * This method's purpose is to forward to the jsp
      * @param req the request object
      * @param resp the response object
      * @throws ServletException the servlet exception object
@@ -34,14 +29,11 @@ public class AddRaceResultDisplay extends HttpServlet implements UseLogger {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = log();
-        GenericDao<Team> teamDao = new GenericDao<>(Team.class);
-        Race retrievedRace = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
+        GenericDao<Race> raceDao = new GenericDao<>(Race.class);
 
-        req.setAttribute("race", retrievedRace);
-        req.setAttribute("team", teamDao.getAll());
+        req.setAttribute("races", raceDao.getAll());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaces.jsp");
         dispatcher.forward(req, resp);
     }
 }

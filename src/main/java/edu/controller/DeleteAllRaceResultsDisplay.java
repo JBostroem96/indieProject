@@ -39,7 +39,7 @@ public class DeleteAllRaceResultsDisplay extends HttpServlet implements UseLogge
         req.setAttribute("race", retrievedRace);
 
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteAllRaceResults.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRaceResults.jsp");
         dispatcher.forward(req, resp);
     }
 }

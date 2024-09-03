@@ -31,7 +31,7 @@
                                         <td class="text-black">${user.name}</td>
                                         <td class="text-black">${user.role}</td>
                                         <td>
-                                            <form action="editUserRole" class="form-inline" method="get">
+                                            <form action="editUserRoleDisplay" class="form-inline" method="get">
                                                 <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${user.id}">Edit</button>
                                             </form>
                                         </td>
@@ -48,7 +48,7 @@
                         <p class="text-success text-center fw-bold">${updatedRole}</p>
                     </c:if>
                     <div class="d-flex flex-column gap-5 fw-bold">
-                        <form action="editUserRoleById" class="form-inline">
+                        <form action="editUserRole" class="form-inline">
                             <div class="search text-white p-5 border rounded" id="assign_role">
                                 <label for="name">Name</label>
                                 <input class="form-control" type="text" name="name" id="name" placeholder="${userRole.name}" disabled>

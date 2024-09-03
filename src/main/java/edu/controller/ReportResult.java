@@ -1,12 +1,9 @@
 package edu.controller;
 
 import edu.matc.entity.TeamRace;
-import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.PropertiesLoader;
 import edu.matc.util.UseLogger;
 import edu.restService.TLSEmail;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -18,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(
-        urlPatterns = {"/reportResultById"}
+        urlPatterns = {"/reportResult"}
 )
 /**
  * This class' purpose is to submit the report and send the email
  */
-public class ReportResultById extends HttpServlet implements UseLogger {
+public class ReportResult extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to submit the report and send the email

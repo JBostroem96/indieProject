@@ -20,10 +20,10 @@ import java.time.LocalDate;
  * display the result for the user
  */
 @WebServlet(
-        urlPatterns = {"/editRaceById"}
+        urlPatterns = {"/editRace"}
 )
 
-public class EditRaceById extends HttpServlet implements UseLogger {
+public class EditRace extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to edit the entry by id

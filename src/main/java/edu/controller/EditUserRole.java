@@ -1,10 +1,8 @@
 package edu.controller;
 
-import edu.matc.entity.Team;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -19,9 +17,9 @@ import java.io.IOException;
  * This class' purpose is to edit a user role
  */
 @WebServlet(
-        urlPatterns = {"/editUserRoleById"}
+        urlPatterns = {"/editUserRole"}
 )
-public class EditUserRoleById extends HttpServlet implements UseLogger {
+public class EditUserRole extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to edit entry by id

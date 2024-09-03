@@ -22,7 +22,7 @@
                 <li class="nav-item"><a class="nav-link" href = "index.jsp"><em>Home</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "FindRaceDisplay"><em>Races</em></a></li>
                 <li class="nav-item"><a class="nav-link" href = "FindTeamDisplay"><em>Teams</em></a></li>
-                <li class="nav-item"><a class="nav-link" href = "addRaceResultDisplay"><em>Race Result</em></a></li>
+                <li class="nav-item"><a class="nav-link" href = "viewRaces"><em>Race Result</em></a></li>
             </ul>
             <ul class="nav navbar-nav">
                 <c:choose>

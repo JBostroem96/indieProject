@@ -20,9 +20,9 @@ import java.util.List;
  * This class' purpose is to delete a team
  */
 @WebServlet(
-        urlPatterns = {"/deleteTeamById"}
+        urlPatterns = {"/deleteTeam"}
 )
-public class DeleteTeamById extends HttpServlet implements UseLogger {
+public class DeleteTeam extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to delete the entry by id

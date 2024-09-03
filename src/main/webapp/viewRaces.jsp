@@ -25,7 +25,7 @@
                             <td class="text-black">${race.date}</td>
                             <c:if test="${user.role != null}">
                                 <td>
-                                    <form action="addRaceResult" class="form-inline" method="get">
+                                    <form action="addRaceResultDisplay" class="form-inline" method="get">
                                         <button type="submit" name="id" class="btn btn-primary bg-primary btn-sm" value="${race.id}">Add</button>
                                     </form>
                                 </td>
