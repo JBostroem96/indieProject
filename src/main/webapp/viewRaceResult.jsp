@@ -33,14 +33,14 @@
                             <td class="text-black">${team_race.cp}</td>
                             <td class="text-black">${team_race.latePenalty}</td>
                             <td class="text-black">${team_race.totalTime} minutes</td>
-                            <c:if test="${user.role == 'admin' || user.role == 'user'}">
+                            <c:if test="${user.role == 'ADMIN' || user.role == 'USER'}">
                                 <td>
                                     <form action="reportResultDisplay" class="form-inline" method="get">
                                         <button type="submit" name="id" class="btn btn-warning bg-warning btn-sm" value="${team_race.id}">Report</button>
                                     </form>
                                 </td>
                             </c:if>
-                            <c:if test="${user.role == 'admin'}">
+                            <c:if test="${user.role == 'ADMIN'}">
                                 <td>
                                     <form action="editRaceResultDisplay" class="form-inline" method="get">
                                         <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${team_race.id}">Edit</button>

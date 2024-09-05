@@ -25,7 +25,7 @@
                 <li class="nav-item"><a class="nav-link" href = "viewRaces"><em>Race Result</em></a></li>
             </ul>
             <ul class="nav navbar-nav">
-                <c:if test="${user.role == 'admin'}">
+                <c:if test="${user.role == 'ADMIN'}">
                     <li class="nav-item"><a class="nav-link" href = "AddRaceDisplay"><em>Add Race</em></a></li>
                     <li class="nav-item"><a class="nav-link" href = "addTeamDisplay"><em>Add a Team</em></a></li>
                     <li class="nav-item"><a class="nav-link" href = "displayUsers"><em>Assign Roles</em></a></li>

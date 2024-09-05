@@ -23,7 +23,7 @@
                             <td class="text-black">${race.name}</td>
                             <td class="text-black">${race.length}</td>
                             <td class="text-black">${race.date}</td>
-                            <c:if test="${user.role == 'admin'}">
+                            <c:if test="${user.role == 'ADMIN'}">
                                 <td>
                                     <form action="addRaceResultDisplay" class="form-inline" method="get">
                                         <button type="submit" name="id" class="btn btn-primary bg-primary btn-sm" value="${race.id}">Add</button>
@@ -35,7 +35,7 @@
                                     <button type="submit" name="id" class="btn btn-success bg-success btn-sm" value="${race.id}">View</button>
                                 </form>
                             </td>
-                            <c:if test="${user.role == 'admin'}">
+                            <c:if test="${user.role == 'ADMIN'}">
                                 <c:if test="${results[race.id]}">
                                     <td>
                                         <form action="deleteAllRaceResultsDisplay" class="form-inline" method="post">

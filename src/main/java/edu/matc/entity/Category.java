@@ -16,8 +16,6 @@ import java.util.Set;
 public class Category {
 
     private int category_id;
-
-
     private Division division;
     private Set<Team> teams;
 

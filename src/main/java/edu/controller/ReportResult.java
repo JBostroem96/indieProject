@@ -34,7 +34,7 @@ public class ReportResult extends HttpServlet implements Authorization {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (!authorize(resp, req, Role.admin, Role.user)) {
+        if (!authorize(resp, req, Role.ADMIN, Role.USER)) {
             return;
         }
 

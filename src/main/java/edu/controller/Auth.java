@@ -8,6 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.auth.*;
 import edu.matc.entity.Race;
+import edu.matc.entity.Role;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.PropertiesLoader;
@@ -219,7 +220,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
 
         // for now, I'm just returning username for display back to the browser
 
-        return new User(name, userName, email, "user");
+        return new User(name, userName, email, Role.USER);
     }
 
     /** Create the auth url and use it to build the request.

@@ -1,5 +1,6 @@
 package edu.controller;
 
+import edu.matc.entity.Role;
 import edu.matc.util.*;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
@@ -65,9 +66,9 @@ public class Validate<T extends Validation> {
      * @param req the request object
      * @return entryExists - if the entry exists or not
      */
-    public boolean validateRole(String newRole, String role, HttpServletRequest req) {
+    public boolean validateRole(String newRole, Role role, HttpServletRequest req) {
 
-        checkExistence(newRole, role, req);
+        checkExistence(newRole, role.toString(), req);
         return !entryExists;
     }
 

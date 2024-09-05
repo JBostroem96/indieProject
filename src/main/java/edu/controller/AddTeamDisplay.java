@@ -38,7 +38,7 @@ public class AddTeamDisplay extends HttpServlet implements Authorization {
                       HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (!authorize(response, req, Role.admin, null)) {
+        if (!authorize(response, req, Role.ADMIN, null)) {
             return;
         }
 

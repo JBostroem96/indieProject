@@ -35,7 +35,7 @@ public class DeleteRaceResultDisplay extends HttpServlet implements Authorizatio
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (!authorize(resp, req, Role.admin, null)) {
+        if (!authorize(resp, req, Role.ADMIN, null)) {
             return;
         }
 

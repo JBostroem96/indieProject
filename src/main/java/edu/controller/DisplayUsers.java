@@ -35,7 +35,7 @@ public class DisplayUsers extends HttpServlet implements Authorization {
                       HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (!authorize(response, req, Role.admin, null)) {
+        if (!authorize(response, req, Role.ADMIN, null)) {
             return;
         }
 
@@ -44,7 +44,7 @@ public class DisplayUsers extends HttpServlet implements Authorization {
 
         for (User user : dao.getAll()) {
 
-            if (user.getRole().equals("user")) {
+            if (user.getRole().equals(Role.USER)) {
 
                 users.add(user);
             }

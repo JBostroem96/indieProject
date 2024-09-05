@@ -1,14 +1,9 @@
 package edu.matc.entity;
-import edu.controller.Validate;
-import edu.matc.persistence.GenericDao;
+
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.time.LocalDate;
+
 
 /**
  * This class' purpose is to be the Javabean for User
@@ -17,8 +12,8 @@ import java.time.LocalDate;
 @Table(name = "user")
 public class User {
 
-    @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @Column(name = "name")
     private String name;
     @Column(name = "user_name")
@@ -43,7 +38,7 @@ public class User {
      * @param name the name
      * @param email       the email
      */
-    public User(String name, String userName, String email, String role) {
+    public User(String name, String userName, String email, Role role) {
         this.name = name;
         this.email = email;
         this.userName = userName;
@@ -55,7 +50,8 @@ public class User {
      *
      * @return the role
      */
-    public String getRole() {
+    @Column(name = "role")
+    public Role getRole() {
         return role;
     }
 
@@ -64,7 +60,7 @@ public class User {
      *
      * @param role the role
      */
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

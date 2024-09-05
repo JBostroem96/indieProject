@@ -36,7 +36,7 @@ public class EditRaceResultDisplay extends HttpServlet implements Authorization 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (!authorize(resp, req, Role.admin, null)) {
+        if (!authorize(resp, req, Role.ADMIN, null)) {
             return;
         }
 

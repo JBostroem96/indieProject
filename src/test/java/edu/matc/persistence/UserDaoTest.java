@@ -1,4 +1,5 @@
 package edu.matc.persistence;
+import edu.matc.entity.Role;
 import edu.matc.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,14 +43,14 @@ class UserDaoTest {
     @Test
     void update() {
 
-        User user = new User("Test", "Example", "example@hotmail.com", "admin");
+        User user = new User("Test", "Example", "example@hotmail.com", Role.ADMIN);
 
         User userToUpdate = (User)userDao.getById(1);
 
         userToUpdate.setUserName(user.getUserName());
         userToUpdate.setName(user.getName());
-        userToUpdate.setName(user.getRole());
-        userToUpdate.setName(user.getEmail());
+        userToUpdate.setRole(user.getRole());
+        userToUpdate.setEmail(user.getEmail());
 
         userDao.update(userToUpdate);
 
@@ -62,7 +63,7 @@ class UserDaoTest {
      */
     @Test
     void insert() {
-        User user = new User("Anton", "Anton", "example@hotmail.com", "admin");
+        User user = new User("Anton", "Anton", "example@hotmail.com", Role.ADMIN);
         int insertedUserId = userDao.insert(user);
         assertNotEquals(0, insertedUserId);
         User insertedUser = (User)userDao.getById(insertedUserId);

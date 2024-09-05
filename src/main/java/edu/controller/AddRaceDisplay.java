@@ -34,7 +34,7 @@ public class AddRaceDisplay extends HttpServlet implements Authorization {
                       HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (!authorize(response, request, Role.admin, null)) {
+        if (!authorize(response, request, Role.ADMIN, null)) {
             return;
         }
 

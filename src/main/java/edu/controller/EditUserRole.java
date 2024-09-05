@@ -33,7 +33,7 @@ public class EditUserRole extends HttpServlet implements Authorization {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (!authorize(resp, req, Role.admin, null)) {
+        if (!authorize(resp, req, Role.ADMIN, null)) {
             return;
         }
 
@@ -49,7 +49,7 @@ public class EditUserRole extends HttpServlet implements Authorization {
 
                     if (new Validate<>().validateRole(newRole, retrievedUser.getRole(), req)) {
 
-                        retrievedUser.setRole(newRole);
+                        retrievedUser.setRole(Role.valueOf(newRole));
                         dao.update(retrievedUser);
 
                         req.setAttribute("updatedRole", "You successfully updated the user role!");

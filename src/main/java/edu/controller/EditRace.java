@@ -37,7 +37,7 @@ public class EditRace extends HttpServlet implements Authorization {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (!authorize(resp, req, Role.admin, null)) {
+        if (!authorize(resp, req, Role.ADMIN, null)) {
             return;
         }
 
