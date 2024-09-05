@@ -1,5 +1,8 @@
 package edu.controller;
 
+import edu.matc.entity.Role;
+import edu.matc.util.Authorization;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +21,7 @@ import java.io.IOException;
         urlPatterns = { "/AddRaceDisplay" }
 )
 
-public class AddRaceDisplay extends HttpServlet {
+public class AddRaceDisplay extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to forward to the race JSP
@@ -30,6 +33,10 @@ public class AddRaceDisplay extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws ServletException, IOException {
+
+        if (!authorize(response, request, Role.admin, null)) {
+            return;
+        }
 
         String url = "/addRace.jsp";
 

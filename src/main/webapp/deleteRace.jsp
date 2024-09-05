@@ -2,13 +2,8 @@
 <html>
     <c:import url="head.jsp"/>
     <body>
-        <c:choose>
-            <c:when test="${user.role != 'admin'}">
-                <p class="text-center fw-bold text-danger">You do not have permission to this page</p>
-            </c:when>
-            <c:otherwise>
             <%@include file="nav.jsp"%>
-                <div class="container bg-white">
+            <div class="container bg-white">
                     <c:if test="${!empty e}"><p class="text-danger fw-bold">Something went wrong!</p></c:if>
                     <c:choose>
                         <c:when test="${!empty deletedEntry}">
@@ -37,9 +32,7 @@
                             </form>
                         </c:otherwise>
                     </c:choose>
-                </div>
-            </c:otherwise>
-        </c:choose>
+            </div>
     </body>
     <c:import url="footer.jsp"/>
 </html>

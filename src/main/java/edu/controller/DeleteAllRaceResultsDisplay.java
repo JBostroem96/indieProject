@@ -1,9 +1,10 @@
 package edu.controller;
 
 import edu.matc.entity.Race;
-import edu.matc.entity.TeamRace;
+import edu.matc.entity.Role;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
+import edu.matc.util.Authorization;
+import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -13,14 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Set;
 
 
 @WebServlet(
         urlPatterns = {"/deleteAllRaceResultsDisplay"}
 )
 
-public class DeleteAllRaceResultsDisplay extends HttpServlet implements UseLogger {
+public class DeleteAllRaceResultsDisplay extends HttpServlet implements Authorization {
 
 
     /**
@@ -33,6 +33,10 @@ public class DeleteAllRaceResultsDisplay extends HttpServlet implements UseLogge
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!authorize(resp, req, Role.admin, null)) {
+            return;
+        }
 
         final Logger logger = log();
         Race retrievedRace = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);

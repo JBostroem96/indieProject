@@ -1,9 +1,10 @@
 package edu.controller;
 
+import edu.matc.entity.Role;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.LogManager;
+import edu.matc.util.Authorization;
+import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -21,7 +22,7 @@ import java.io.IOException;
 /**
  * This class' purpose is to forward to the corresponding JSP
  */
-public class ReportResultDisplay extends HttpServlet implements UseLogger {
+public class ReportResultDisplay extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to forward to the jsp
@@ -32,6 +33,10 @@ public class ReportResultDisplay extends HttpServlet implements UseLogger {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!authorize(resp, req, Role.admin, Role.user)) {
+            return;
+        }
 
         final Logger logger = log();
         TeamRace resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);

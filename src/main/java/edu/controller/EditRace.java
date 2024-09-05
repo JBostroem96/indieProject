@@ -1,8 +1,10 @@
 package edu.controller;
 
 import edu.matc.entity.Race;
+import edu.matc.entity.Role;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
+import edu.matc.util.Authorization;
+import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -23,7 +25,7 @@ import java.time.LocalDate;
         urlPatterns = {"/editRace"}
 )
 
-public class EditRace extends HttpServlet implements UseLogger {
+public class EditRace extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to edit the entry by id
@@ -34,6 +36,10 @@ public class EditRace extends HttpServlet implements UseLogger {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!authorize(resp, req, Role.admin, null)) {
+            return;
+        }
 
         final Logger logger = log();
 

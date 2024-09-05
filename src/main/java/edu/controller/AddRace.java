@@ -1,8 +1,8 @@
 package edu.controller;
 import edu.matc.entity.Race;
+import edu.matc.entity.Role;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.Logger;
+import edu.matc.util.Authorization;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ import java.time.LocalDate;
  * This class' purpose is to add a race to the table and
  * display the result for the user
  */
-public class AddRace extends HttpServlet implements UseLogger {
+public class AddRace extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to add the race to the table
@@ -37,7 +37,10 @@ public class AddRace extends HttpServlet implements UseLogger {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final Logger logger = log();
+        if (!authorize(resp, req, Role.admin, null)) {
+            return;
+        }
+
         GenericDao<Race> dao = new GenericDao<>(Race.class);
 
         String name = req.getParameter("name");
@@ -64,7 +67,7 @@ public class AddRace extends HttpServlet implements UseLogger {
             } catch (Exception e) {
 
                 req.setAttribute("e", "Something went wrong!");
-                logger.error("There was an issue inserting the data", e);
+                log().error("There was an issue inserting the data", e);
             }
 
         } else {

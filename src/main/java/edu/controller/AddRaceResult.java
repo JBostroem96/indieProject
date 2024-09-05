@@ -1,10 +1,12 @@
 package edu.controller;
 
 import edu.matc.entity.Race;
+import edu.matc.entity.Role;
 import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
+import edu.matc.util.Authorization;
+import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +24,7 @@ import java.io.IOException;
         urlPatterns = {"/addRaceResult"}
 )
 
-public class AddRaceResult extends HttpServlet implements UseLogger {
+public class AddRaceResult extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to add the race result by getting the id
@@ -35,6 +37,10 @@ public class AddRaceResult extends HttpServlet implements UseLogger {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if (!authorize(resp, req, Role.admin, null)) {
+            return;
+        }
+
         final Logger logger = log();
 
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
@@ -44,14 +50,14 @@ public class AddRaceResult extends HttpServlet implements UseLogger {
         String cpEntry = req.getParameter("cp");
         String penaltyEntry = req.getParameter("penalty");
         String timeEntry = req.getParameter("time");
-        Race race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);;
+        Race race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
 
         try {
 
             if (cpEntry != null && !cpEntry.isEmpty()
                     && penaltyEntry != null && !penaltyEntry.isEmpty()
                     && timeEntry != null && !timeEntry.isEmpty()
-                    && !teamEntry.isEmpty()) {
+                    && teamEntry != null && !teamEntry.isEmpty()) {
 
                     Team team = teamDao.getById(Integer.parseInt(teamEntry));
 

@@ -1,10 +1,12 @@
 package edu.controller;
 
 import edu.matc.entity.Race;
+import edu.matc.entity.Role;
 import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
+import edu.matc.util.Authorization;
+import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +24,7 @@ import java.io.IOException;
         urlPatterns = {"/editRaceResult"}
 )
 
-public class EditRaceResult extends HttpServlet implements UseLogger {
+public class EditRaceResult extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to edit the entry by id
@@ -34,6 +36,10 @@ public class EditRaceResult extends HttpServlet implements UseLogger {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if (!authorize(resp, req, Role.admin, null)) {
+            return;
+        }
+
         final Logger logger = log();
 
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
@@ -42,37 +48,38 @@ public class EditRaceResult extends HttpServlet implements UseLogger {
         String cp = req.getParameter("cp");
         String penalty = req.getParameter("penalty");
         String time = req.getParameter("time");
+        String team = req.getParameter("team");
         TeamRace teamRaceToUpdate = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);;
 
         try {
 
-            if (teamRaceToUpdate != null
+            if (team != null && !team.isEmpty()
                     && cp != null && !cp.isEmpty()
                     && penalty != null && !penalty.isEmpty()
                     && time != null && !time.isEmpty()) {
 
-                    Team team = teamDao.getById(Integer.parseInt(req.getParameter("team")));
-                    Race race = teamRaceToUpdate.getRace();
+                Team teamEntry = teamDao.getById(Integer.parseInt(team));
+                Race race = teamRaceToUpdate.getRace();
 
-                    int cpEntry = Integer.parseInt(cp);
-                    int penaltyEntry = Integer.parseInt(penalty);
-                    double totalTimeEntry = Double.parseDouble(time);
+                int cpEntry = Integer.parseInt(cp);
+                int penaltyEntry = Integer.parseInt(penalty);
+                double totalTimeEntry = Double.parseDouble(time);
 
-                    TeamRace updatedTeamRace = new TeamRace(team, race, cpEntry, penaltyEntry, totalTimeEntry);
+                TeamRace updatedTeamRace = new TeamRace(teamEntry, race, cpEntry, penaltyEntry, totalTimeEntry);
 
-                    if (new Validate<Race>().validateResults(updatedTeamRace.getTeam().getName(), race.getId(), teamRaceDao, req)) {
+                if (new Validate<Race>().validateResults(updatedTeamRace.getTeam().getName(), race.getId(), teamRaceDao, req)) {
 
-                        teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
-                        teamRaceToUpdate.setRace(updatedTeamRace.getRace());
-                        teamRaceToUpdate.setCp(updatedTeamRace.getCp());
-                        teamRaceToUpdate.setTotalTime(updatedTeamRace.getTotalTime());
-                        teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
+                    teamRaceToUpdate.setTeam(updatedTeamRace.getTeam());
+                    teamRaceToUpdate.setRace(updatedTeamRace.getRace());
+                    teamRaceToUpdate.setCp(updatedTeamRace.getCp());
+                    teamRaceToUpdate.setTotalTime(updatedTeamRace.getTotalTime());
+                    teamRaceToUpdate.setLatePenalty(updatedTeamRace.getLatePenalty());
 
-                        teamRaceDao.update(teamRaceToUpdate);
-                        req.setAttribute("resultUpdated", "You successfully updated the result");
-                        //Update the results after editing
-                        new UpdateResults(teamRaceToUpdate.getRace_id(), teamRaceDao);
-                    }
+                    teamRaceDao.update(teamRaceToUpdate);
+                    req.setAttribute("resultUpdated", "You successfully updated the result");
+                    //Update the results after editing
+                    new UpdateResults(teamRaceToUpdate.getRace_id(), teamRaceDao);
+                }
 
             } else {
 

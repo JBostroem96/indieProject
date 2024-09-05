@@ -1,8 +1,11 @@
 package edu.controller;
 
 import edu.matc.entity.Category;
+import edu.matc.entity.Role;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.Authorization;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +25,7 @@ import java.util.List;
         name = "/addTeamDisplay",
         urlPatterns = { "/addTeamDisplay" }
 )
-public class AddTeamDisplay extends HttpServlet {
+public class AddTeamDisplay extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to forward all the divisions to the jsp
@@ -34,6 +37,10 @@ public class AddTeamDisplay extends HttpServlet {
     public void doGet(HttpServletRequest req,
                       HttpServletResponse response)
             throws ServletException, IOException {
+
+        if (!authorize(response, req, Role.admin, null)) {
+            return;
+        }
 
         GenericDao<Category> dao = new GenericDao<>(Category.class);
 

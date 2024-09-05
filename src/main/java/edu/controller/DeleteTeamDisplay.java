@@ -1,12 +1,11 @@
 package edu.controller;
 
 
-import edu.matc.entity.Race;
+import edu.matc.entity.Role;
 import edu.matc.entity.Team;
-import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
-import org.apache.logging.log4j.LogManager;
+import edu.matc.util.Authorization;
+import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -16,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class' purpose is to forward to the jsp
@@ -25,7 +22,7 @@ import java.util.List;
 @WebServlet(
         urlPatterns = {"/deleteTeamDisplay"}
 )
-public class DeleteTeamDisplay extends HttpServlet implements UseLogger {
+public class DeleteTeamDisplay extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to forward to the jsp
@@ -36,6 +33,10 @@ public class DeleteTeamDisplay extends HttpServlet implements UseLogger {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!authorize(resp, req, Role.admin, null)) {
+            return;
+        }
 
         final Logger logger = log();
 

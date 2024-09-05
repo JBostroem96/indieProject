@@ -1,8 +1,10 @@
 package edu.controller;
 
 
+import edu.matc.entity.Role;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.Authorization;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +22,7 @@ import java.util.List;
 @WebServlet(
         urlPatterns = {"/displayUsers"}
 )
-public class DisplayUsers extends HttpServlet {
+public class DisplayUsers extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to forward all users with the role 'user'
@@ -32,6 +34,10 @@ public class DisplayUsers extends HttpServlet {
     public void doGet(HttpServletRequest req,
                       HttpServletResponse response)
             throws ServletException, IOException {
+
+        if (!authorize(response, req, Role.admin, null)) {
+            return;
+        }
 
         GenericDao<User> dao = new GenericDao<>(User.class);
         List<User> users = new ArrayList<>();

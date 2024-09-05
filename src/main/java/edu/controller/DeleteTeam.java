@@ -1,9 +1,11 @@
 package edu.controller;
 
+import edu.matc.entity.Role;
 import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
+import edu.matc.util.Authorization;
+import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +24,7 @@ import java.util.List;
 @WebServlet(
         urlPatterns = {"/deleteTeam"}
 )
-public class DeleteTeam extends HttpServlet implements UseLogger {
+public class DeleteTeam extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to delete the entry by id
@@ -33,6 +35,10 @@ public class DeleteTeam extends HttpServlet implements UseLogger {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!authorize(resp, req, Role.admin, null)) {
+            return;
+        }
 
         final Logger logger = log();
         GenericDao<TeamRace> teamRaceDao = new GenericDao<>(TeamRace.class);

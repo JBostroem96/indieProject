@@ -1,8 +1,10 @@
 package edu.controller;
 
+import edu.matc.entity.Role;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.UseLogger;
+import edu.matc.util.Authorization;
+import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -19,7 +21,7 @@ import java.io.IOException;
 @WebServlet(
         urlPatterns = {"/editUserRole"}
 )
-public class EditUserRole extends HttpServlet implements UseLogger {
+public class EditUserRole extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to edit entry by id
@@ -30,6 +32,10 @@ public class EditUserRole extends HttpServlet implements UseLogger {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!authorize(resp, req, Role.admin, null)) {
+            return;
+        }
 
         final Logger logger = log();
         GenericDao<User> dao = new GenericDao<>(User.class);
