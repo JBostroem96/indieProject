@@ -40,7 +40,7 @@
                     <c:otherwise>
                         <ul class="nav navbar-nav ms-auto">
                             <li class="nav-item"><a class="nav-link" href = "logout"><em>Logout</em></a></li>
-                            <li class="nav-item"><a class="nav-link"><em>User: ${user.userName}</em></a></li>
+                            <li class="nav-item"><a class="nav-link" href = "profile"><em>User: ${user.userName}</em></a></li>
                         </ul>
                     </c:otherwise>
             </c:choose>
