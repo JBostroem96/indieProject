@@ -84,11 +84,12 @@ class TeamRaceTest {
 
         Team team = new Team("Example", category, category.getDivision().name());
         Race race = new Race("Example", "3", LocalDate.now());
+        User user = new User("Example", "Example", "Example@outlook.com", Role.USER);
 
         teamDao.insert(team);
         raceDao.insert(race);
 
-        TeamRace teamRace = new TeamRace(team, race, 22, 0, 120);
+        TeamRace teamRace = new TeamRace(team, race, user, 22, 0, 120);
 
         int insertedTeamRaceId = teamRaceDao.insert(teamRace);
         assertNotEquals(0, insertedTeamRaceId);

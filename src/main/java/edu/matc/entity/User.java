@@ -2,7 +2,8 @@ package edu.matc.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-import java.util.Objects;
+
+import java.util.*;
 
 
 /**
@@ -24,6 +25,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private int id;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TeamRace> teamRaces = new ArrayList<>();
 
     /**
      * Instantiates a new User.
@@ -63,6 +67,26 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+
+    /**
+     * Gets team races.
+     *
+     * @return the team races
+     */
+    public List<TeamRace> getTeamRaces() {
+        return teamRaces;
+    }
+
+    /**
+     * Sets team races.
+     *
+     * @param teamRaces the team races
+     */
+    public void setTeamRaces(List<TeamRace> teamRaces) {
+        this.teamRaces = teamRaces;
+    }
+
 
     /**
      * Gets name.

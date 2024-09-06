@@ -1,6 +1,9 @@
 package edu.controller;
 
+import edu.matc.entity.Role;
+import edu.matc.entity.TeamRace;
 import edu.matc.entity.User;
+import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(
         urlPatterns = {"/profile"}
@@ -32,14 +37,40 @@ public class ProfileDisplay extends HttpServlet implements Authorization {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if (!authorize(resp, req, Role.ADMIN, Role.USER)) {
+            return;
+        }
+
         HttpSession session = req.getSession();
 
         User user = (User) session.getAttribute("user");
 
         req.setAttribute("user", user);
+        req.setAttribute("results", getEntries(user));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/profile.jsp");
         dispatcher.forward(req, resp);
 
+    }
+
+
+    /**
+     * This method's purpose is to get all the results associated with the user
+     * @param user the user logged in
+     * @return the list of results
+     */
+    public List<TeamRace> getEntries(User user) {
+
+        List<TeamRace> entries = new ArrayList<>();
+
+        for (TeamRace entry : new GenericDao<>(TeamRace.class).getAll()) {
+
+            if (entry.getUser().getId() == user.getId()) {
+
+                entries.add(entry);
+            }
+        }
+
+        return entries;
     }
 }

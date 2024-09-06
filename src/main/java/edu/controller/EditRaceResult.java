@@ -1,9 +1,6 @@
 package edu.controller;
 
-import edu.matc.entity.Race;
-import edu.matc.entity.Role;
-import edu.matc.entity.Team;
-import edu.matc.entity.TeamRace;
+import edu.matc.entity.*;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
 import edu.matc.util.GetEntry;
@@ -15,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -53,6 +51,8 @@ public class EditRaceResult extends HttpServlet implements Authorization {
 
         try {
 
+            HttpSession session = req.getSession();
+
             if (team != null && !team.isEmpty()
                     && cp != null && !cp.isEmpty()
                     && penalty != null && !penalty.isEmpty()
@@ -65,7 +65,7 @@ public class EditRaceResult extends HttpServlet implements Authorization {
                 int penaltyEntry = Integer.parseInt(penalty);
                 double totalTimeEntry = Double.parseDouble(time);
 
-                TeamRace updatedTeamRace = new TeamRace(teamEntry, race, cpEntry, penaltyEntry, totalTimeEntry);
+                TeamRace updatedTeamRace = new TeamRace(teamEntry, race, (User) session.getAttribute("user"), cpEntry, penaltyEntry, totalTimeEntry);
 
                 if (new Validate<Race>().validateResults(updatedTeamRace.getTeam().getName(), race.getId(), teamRaceDao, req)) {
 

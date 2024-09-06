@@ -17,6 +17,7 @@ public class TeamRace {
     private double totalTime;
     private Team team;
     private Race race;
+    private User user;
     private int divisionPlace;
     private int cp;
     private int latePenalty;
@@ -50,9 +51,10 @@ public class TeamRace {
      * @param latePenalty the late penalty
      * @param totalTime   the total time
      */
-    public TeamRace(Team team, Race race, int cp, int latePenalty, double totalTime) {
+    public TeamRace(Team team, Race race, User user, int cp, int latePenalty, double totalTime) {
         this.team = team;
         this.race = race;
+        this.user = user;
         this.cp = cp;
         this.latePenalty = latePenalty;
         this.totalTime = totalTime;
@@ -88,6 +90,26 @@ public class TeamRace {
     @Column(name = "race_id", insertable = false, updatable = false)
     public int getRace_id() {
         return race_id;
+    }
+
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * Sets user.
+     *
+     * @param user the user
+     */
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**
