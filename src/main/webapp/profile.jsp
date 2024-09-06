@@ -49,6 +49,9 @@
                 </tbody>
             </table>
         </div>
+        <form action="deleteUser" class="form-inline" method="POST" onsubmit="return confirmDeletion();">
+            <button type="submit" name="id" class="btn btn-danger bg-danger">DELETE ACCOUNT</button>
+        </form>
     </div>
 </body>
 <c:import url="footer.jsp"/>
