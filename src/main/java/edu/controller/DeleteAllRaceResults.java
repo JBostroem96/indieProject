@@ -23,10 +23,13 @@ import java.util.Set;
         urlPatterns = {"/deleteAllRaceResults"}
 )
 
+/**
+ * This class' purpose is to delete all the results associated with the race
+ */
 public class DeleteAllRaceResults extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to delete the entry by id
+     * This method's purpose is to delete the entry
      *@param  req               the request object that we forward
      *@param  resp           the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
