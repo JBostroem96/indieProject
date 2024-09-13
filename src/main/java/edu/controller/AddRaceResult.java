@@ -50,42 +50,41 @@ public class AddRaceResult extends HttpServlet implements Authorization {
         String timeEntry = req.getParameter("time");
         Race race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
 
-        try {
+        if (cpEntry != null && !cpEntry.isEmpty()
+                && penaltyEntry != null && !penaltyEntry.isEmpty()
+                && timeEntry != null && !timeEntry.isEmpty()
+                && teamEntry != null && !teamEntry.isEmpty()) {
+            
+            try {
 
-            HttpSession session = req.getSession();
+                HttpSession session = req.getSession();
 
-            if (cpEntry != null && !cpEntry.isEmpty()
-                    && penaltyEntry != null && !penaltyEntry.isEmpty()
-                    && timeEntry != null && !timeEntry.isEmpty()
-                    && teamEntry != null && !teamEntry.isEmpty()) {
+                Team team = teamDao.getById(Integer.parseInt(teamEntry));
 
-                    Team team = teamDao.getById(Integer.parseInt(teamEntry));
-                    logger.info(race);
+                if (new Validate<>().validateResults(team.getName(), race.getId(), teamRaceDao, req)) {
 
-                    if (new Validate<>().validateResults(team.getName(), race.getId(), teamRaceDao, req)) {
+                    int cp = Integer.parseInt(cpEntry);
+                    int penalty = Integer.parseInt(penaltyEntry);
+                    double totalTime = Double.parseDouble(timeEntry);
 
-                        int cp = Integer.parseInt(cpEntry);
-                        int penalty = Integer.parseInt(penaltyEntry);
-                        double totalTime = Double.parseDouble(timeEntry);
+                    TeamRace teamRace = new TeamRace(team, race, (User) session.getAttribute("user"), cp, penalty, totalTime);
 
-                        TeamRace teamRace = new TeamRace(team, race, (User) session.getAttribute("user"), cp, penalty, totalTime);
+                    teamRaceDao.insert(teamRace);
+                    req.setAttribute("resultAdded", "You successfully added the result!");
+                    //update the results once inserted
+                    new UpdateResults(race.getId(), teamRaceDao);
+                }
 
-                        teamRaceDao.insert(teamRace);
-                        req.setAttribute("resultAdded", "You successfully added the result!");
-                        //update the results once inserted
-                        new UpdateResults(race.getId(), teamRaceDao);
-                    }
+            } catch (Exception e){
 
-                    
-            } else {
-
-                req.setAttribute("missingField", "Fields can't be empty");
-
+                req.setAttribute("e", e);
+                logger.error("Something went wrong!", e);
             }
-        } catch(Exception e){
 
-            req.setAttribute("e", e);
-            logger.error("Something went wrong!", e);
+        } else {
+
+            req.setAttribute("missingField", "Fields can't be empty");
+
         }
 
         new ForwardEntry<>("/addRaceResultForm.jsp", req, resp, race, teamDao.getAll());
