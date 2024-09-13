@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class Forward<T, U>  {
+public class ForwardEntry<T, U>  {
 
-    public Forward(String url, HttpServletRequest req, HttpServletResponse resp, T entry, List<U> displayEntries) throws ServletException, IOException {
+    public ForwardEntry(String url, HttpServletRequest req, HttpServletResponse resp, T entry, List<U> displayEntries) throws ServletException, IOException {
 
         if (entry != null) {
 

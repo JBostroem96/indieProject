@@ -1,16 +1,12 @@
 package edu.controller;
 
-import edu.matc.entity.Category;
 import edu.matc.entity.Role;
-import edu.matc.entity.Team;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
-import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,6 +36,6 @@ public class EditUserRoleDisplay extends HttpServlet implements Authorization {
             return;
         }
 
-        new Forward<>("/users.jsp", req, resp, new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, log()), null);
+        new ForwardEntry<>("/users.jsp", req, resp, new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, log()), null);
     }
 }

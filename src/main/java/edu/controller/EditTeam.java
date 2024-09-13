@@ -5,11 +5,10 @@ import edu.matc.entity.Role;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -80,6 +79,6 @@ public class EditTeam extends HttpServlet implements Authorization {
             req.setAttribute("e", "Something went wrong!");
         }
 
-        new Forward<>("/editTeam.jsp", req, resp, teamToUpdate, categoryDao.getAll());
+        new ForwardEntry<>("/editTeam.jsp", req, resp, teamToUpdate, categoryDao.getAll());
     }
 }

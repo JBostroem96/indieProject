@@ -1,8 +1,7 @@
 package edu.controller;
 
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +30,7 @@ public class FindTeamDisplay extends HttpServlet {
                       HttpServletResponse response)
             throws ServletException, IOException {
 
-        new Forward<>("/searchTeams.jsp", request, response, null, null);
+        new ForwardEntry<>("/searchTeams.jsp", request, response, null, null);
 
     }
 }

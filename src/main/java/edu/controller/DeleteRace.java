@@ -4,11 +4,10 @@ import edu.matc.entity.Race;
 import edu.matc.entity.Role;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +52,6 @@ public class DeleteRace extends HttpServlet implements Authorization {
         }
 
         req.setAttribute("races", dao.getAll());
-        new Forward<>("/searchResults.jsp", req, resp, null, null);
+        new ForwardEntry<>("/searchResults.jsp", req, resp, null, null);
     }
 }

@@ -3,11 +3,10 @@ package edu.controller;
 import edu.matc.entity.*;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -89,7 +88,7 @@ public class AddRaceResult extends HttpServlet implements Authorization {
             logger.error("Something went wrong!", e);
         }
 
-        new Forward<>("/addRaceResultForm.jsp", req, resp, race, teamDao.getAll());
+        new ForwardEntry<>("/addRaceResultForm.jsp", req, resp, race, teamDao.getAll());
     }
 }
 

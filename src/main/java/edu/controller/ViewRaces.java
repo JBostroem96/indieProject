@@ -2,21 +2,16 @@
 package edu.controller;
 
 import edu.matc.entity.Race;
-import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.DeleteAllRaceResultDisplay;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * This class' purpose is to forward to the jsp
@@ -38,6 +33,6 @@ public class ViewRaces extends HttpServlet {
 
         GenericDao<Race> raceDao = new GenericDao<>(Race.class);
 
-        new Forward<>("/viewRaces.jsp", req, resp, new DeleteAllRaceResultDisplay().showDeletionOfResults(raceDao), raceDao.getAll());
+        new ForwardEntry<>("/viewRaces.jsp", req, resp, new DeleteAllRaceResultDisplay().showDeletionOfResults(raceDao), raceDao.getAll());
     }
 }

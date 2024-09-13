@@ -1,16 +1,14 @@
 package edu.controller;
 
 import edu.matc.entity.Category;
-import edu.matc.entity.Race;
 import edu.matc.entity.Role;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -72,7 +70,7 @@ public class AddTeam extends HttpServlet implements Authorization {
             req.setAttribute("missingField", "Fields can't be empty");
         }
 
-        new Forward<>("/addTeam.jsp", req, resp, null, categoryDao.getAll());
+        new ForwardEntry<>("/addTeam.jsp", req, resp, null, categoryDao.getAll());
     }
 }
 

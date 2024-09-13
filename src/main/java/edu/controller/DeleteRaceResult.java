@@ -5,11 +5,10 @@ import edu.matc.entity.Role;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,7 +59,7 @@ public class DeleteRaceResult extends HttpServlet implements Authorization {
         //using lambda expression to sort by the total time
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 
-        new Forward<>("/viewRaceResult.jsp", req, resp, null, teamRaces);
+        new ForwardEntry<>("/viewRaceResult.jsp", req, resp, null, teamRaces);
     }
 }
 

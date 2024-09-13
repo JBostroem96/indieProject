@@ -2,20 +2,16 @@ package edu.controller;
 
 import edu.matc.entity.Category;
 import edu.matc.entity.Role;
-import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 
 /**
@@ -44,6 +40,6 @@ public class AddTeamDisplay extends HttpServlet implements Authorization {
         }
 
         //Forwards to the page
-        new Forward<>("/addTeam.jsp", req, response, null, new GenericDao<>(Category.class).getAll());
+        new ForwardEntry<>("/addTeam.jsp", req, response, null, new GenericDao<>(Category.class).getAll());
     }
 }

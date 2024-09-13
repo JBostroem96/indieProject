@@ -1,17 +1,15 @@
 package edu.controller;
 
-import edu.matc.entity.Category;
 import edu.matc.entity.Race;
 import edu.matc.entity.Role;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
 import edu.matc.util.DeleteAllRaceResultDisplay;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,7 +46,7 @@ public class DeleteAllRaceResults extends HttpServlet implements Authorization {
             //Deletes the results
             deleteResults(race.getTeamRaces());
             req.setAttribute("raceResultsDeleted", "You deleted the race results");
-            new Forward<>("/viewRaces.jsp", req, resp, new DeleteAllRaceResultDisplay().showDeletionOfResults(raceDao), raceDao.getAll());
+            new ForwardEntry<>("/viewRaces.jsp", req, resp, new DeleteAllRaceResultDisplay().showDeletionOfResults(raceDao), raceDao.getAll());
         } catch (Exception e) {
             req.setAttribute("e", "Something went wrong!");
             logger.error("Something went wrong!", e);

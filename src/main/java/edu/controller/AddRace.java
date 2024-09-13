@@ -3,9 +3,8 @@ import edu.matc.entity.Race;
 import edu.matc.entity.Role;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -77,6 +76,6 @@ public class AddRace extends HttpServlet implements Authorization {
         }
 
         //Forwards to the page
-        new Forward<>("/addRace.jsp", req, resp, null, null);
+        new ForwardEntry<>("/addRace.jsp", req, resp, null, null);
     }
 }

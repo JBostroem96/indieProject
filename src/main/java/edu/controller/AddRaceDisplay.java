@@ -1,11 +1,9 @@
 package edu.controller;
 
-import edu.matc.entity.Race;
 import edu.matc.entity.Role;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +39,6 @@ public class AddRaceDisplay extends HttpServlet implements Authorization {
         }
 
         //Forwards to the page
-        new Forward<>("/addRace.jsp", request, response, null, null);
+        new ForwardEntry<>("/addRace.jsp", request, response, null, null);
     }
 }

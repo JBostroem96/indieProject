@@ -5,11 +5,10 @@ import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
-import edu.matc.util.Forward;
+import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,7 +64,7 @@ public class DeleteTeam extends HttpServlet implements Authorization {
         }
 
         req.setAttribute("teams", dao.getAll());
-        new Forward<>("/searchResults.jsp", req, resp, null, null);
+        new ForwardEntry<>("/searchResults.jsp", req, resp, null, null);
     }
 
     /**
