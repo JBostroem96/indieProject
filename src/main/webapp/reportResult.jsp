@@ -14,7 +14,7 @@
                 <c:if test="${!empty missingField}"><p class="text-danger fw-bold">${missingField}</p></c:if>
                 <div class="search text-white p-5 border rounded" id="report">
                     <label for="name">Name</label>
-                    <input class="form-control" type="text" name="name" id="name" placeholder="${result.team.name}" value="${result.team.name}" disabled>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="${entry.team.name}" value="${entry.team.name}" disabled>
                     <div class="form-group">
                         <label for="subject">Subject</label>
                         <input type="text" class="form-control" name="subject" id="subject" required>
@@ -25,7 +25,7 @@
                         <textarea name="teamTextArea" class="form-control" rows="5" cols="80" id="teamTextArea"></textarea>
                     </div>
                 </div>
-                <button type="submit" name="id" class="btn btn-success bg-success" value="${result.id}">Submit</button>
+                <button type="submit" name="id" class="btn btn-success bg-success" value="${entry.id}">Submit</button>
             </form>
         </div>
     </div>

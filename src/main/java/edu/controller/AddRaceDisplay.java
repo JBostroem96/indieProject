@@ -1,7 +1,9 @@
 package edu.controller;
 
+import edu.matc.entity.Race;
 import edu.matc.entity.Role;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,9 +40,7 @@ public class AddRaceDisplay extends HttpServlet implements Authorization {
             return;
         }
 
-        String url = "/addRace.jsp";
-
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+        //Forwards to the page
+        new Forward<>("/addRace.jsp", request, response, null, null);
     }
 }

@@ -1,8 +1,16 @@
 package edu.controller;
 
 
+import edu.matc.entity.Category;
+import edu.matc.entity.Race;
+import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
+import edu.matc.util.GetEntry;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +29,7 @@ import java.util.*;
         name = "/viewRaceResult",
         urlPatterns = { "/viewRaceResult" }
 )
-public class ViewResultDisplay extends HttpServlet {
+public class ViewResultDisplay extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to view the results of a race
@@ -34,18 +42,13 @@ public class ViewResultDisplay extends HttpServlet {
                       HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String id = req.getParameter("id");
+        Logger logger = log();
+        Race race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
+        List<TeamRace> teamRaces = new GenericDao<>(TeamRace.class).findByPropertyEqual("race_id", race.getId());
 
-        if (id != null && !id.isEmpty()) {
+        //using lambda expression to sort by the total time
+        teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
+        new Forward<>("/viewRaceResult.jsp", req, resp, null, teamRaces);
 
-            List<TeamRace> teamRaces = new GenericDao<>(TeamRace.class).findByPropertyEqual("race_id", id);
-            //using lambda expression to sort by the total time
-            teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
-
-            req.setAttribute("team_races", teamRaces);
-
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaceResult.jsp");
-            dispatcher.forward(req, resp);
-        }
     }
 }

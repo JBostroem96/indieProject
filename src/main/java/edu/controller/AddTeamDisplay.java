@@ -5,6 +5,7 @@ import edu.matc.entity.Role;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,13 +43,7 @@ public class AddTeamDisplay extends HttpServlet implements Authorization {
             return;
         }
 
-        GenericDao<Category> dao = new GenericDao<>(Category.class);
-
-        req.setAttribute("category", dao.getAll());
-
-        String url = "/addTeam.jsp";
-
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(req, response);
+        //Forwards to the page
+        new Forward<>("/addTeam.jsp", req, response, null, new GenericDao<>(Category.class).getAll());
     }
 }

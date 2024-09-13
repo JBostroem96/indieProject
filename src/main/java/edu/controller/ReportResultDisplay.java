@@ -1,9 +1,12 @@
 package edu.controller;
 
+import edu.matc.entity.Category;
 import edu.matc.entity.Role;
+import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -38,12 +41,7 @@ public class ReportResultDisplay extends HttpServlet implements Authorization {
             return;
         }
 
-        final Logger logger = log();
-        TeamRace resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
-        req.setAttribute("result", resultToReport);
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");
-        dispatcher.forward(req, resp);
+        new Forward<>("/reportResult.jsp", req, resp, new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, log()), null);
     }
 }
 

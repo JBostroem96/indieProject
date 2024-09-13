@@ -4,6 +4,7 @@ import edu.matc.entity.Role;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import edu.restService.TLSEmail;
 import org.apache.logging.log4j.Logger;
@@ -69,7 +70,6 @@ public class ReportResult extends HttpServlet implements Authorization {
             logger.error("There was an issue updating the data", e);
         }
 
-        req.setAttribute("result", resultToReport);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/reportResult.jsp");dispatcher.forward(req, resp);
+        new Forward<>("/reportResult.jsp", req, resp, resultToReport, null);
     }
 }

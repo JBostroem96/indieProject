@@ -7,8 +7,8 @@
     <%@include file="nav.jsp"%>
     <div class="container bg-white">
         <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>You are adding results to this race:</em></h1>
-        <c:if test="${!empty resultUpdated}">
-            <p class="text-success text-center fw-bold">${resultUpdated}</p>
+        <c:if test="${!empty resultAdded}">
+            <p class="text-success text-center fw-bold">${resultAdded}</p>
         </c:if>
         <div class="d-flex flex-column gap-5 fw-bold border rounded" id="added_race">
             <table id="addRace" class="display" cellspacing="=0" width="100%">
@@ -19,9 +19,9 @@
                 </thead>
                 <tbody>
                     <tr class="bg-white">
-                        <td class="text-black">${race.name}</td>
-                        <td class="text-black">${race.length}</td>
-                        <td class="text-black">${race.date}</td>
+                        <td class="text-black">${entry.name}</td>
+                        <td class="text-black">${entry.length}</td>
+                        <td class="text-black">${entry.date}</td>
                     </tr>
                 </tbody>
             </table>
@@ -45,7 +45,7 @@
                     </div>
                     <label class="fw-bold" for="team">Team</label>
                     <select class="form-control" size="3" id="team" name="team" required>
-                        <c:forEach var="team" items="${team}">
+                        <c:forEach var="team" items="${displayEntries}">
                             <option value="${team.id}">${team.name}</option>
                         </c:forEach>
                     </select>
@@ -53,7 +53,7 @@
                         <p class="text-danger small">${message}</p>
                     </c:if>
                 </div>
-                <button type="submit" name="id" class="btn btn-success bg-success" value="${race.id}">Add Results</button>
+                <button type="submit" name="id" class="btn btn-success bg-success" value="${entry.id}">Add Results</button>
             </form>
         </div>
     </div>

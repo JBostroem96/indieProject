@@ -4,7 +4,7 @@
 <body>
     <%@include file="nav.jsp"%>
     <div class="container bg-white">
-        <h1 class="text-black fw-bold text-center mt-4"><em>Profile for ${user.userName}</em></h1>
+        <h1 class="text-black fw-bold text-center mt-4"><em>Profile for ${entry.userName}</em></h1>
         <div class="d-flex flex-column gap-5 fw-bold border rounded" id="form">
             <table id="addRace" class="display" cellspacing="=0" width="100%">
                 <thead>
@@ -15,10 +15,10 @@
                 </thead>
                 <tbody>
                     <tr class="bg-white">
-                        <td class="text-black">${user.name}</td>
-                        <td class="text-black">${user.userName}</td>
-                        <td class="text-black">${user.email}</td>
-                        <td class="text-black">${user.role}</td>
+                        <td class="text-black">${entry.name}</td>
+                        <td class="text-black">${entry.userName}</td>
+                        <td class="text-black">${entry.email}</td>
+                        <td class="text-black">${entry.role}</td>
                     </tr>
                 </tbody>
             </table>
@@ -35,7 +35,7 @@
                     <th>Late Penalty</th>
                 </thead>
                 <tbody>
-                    <c:forEach var="result" items="${results}">
+                    <c:forEach var="result" items="${displayEntries}">
                         <tr class="bg-white">
                             <td class="text-black">${result.race.name}</td>
                             <td class="text-black">${result.overallPlace}</td>

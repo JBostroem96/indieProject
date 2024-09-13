@@ -48,17 +48,6 @@ public class Team implements Validation {
     }
 
     /**
-     * Instantiates a new Team.
-     *
-     * @param name     the name
-     * @param division the division
-     */
-    public Team(String name, String division) {
-        this.name = name;
-        this.division = division;
-    }
-
-    /**
      * Gets id.
      *
      * @return the id

@@ -24,8 +24,8 @@
                     </div>
                     <div class="form-group">
                         <label class="fw-bold" for="division">Division (Category)</label>
-                        <select class="form-control" size="3" name="category" id="division" required>
-                            <c:forEach var="category" items="${category}">
+                        <select class="form-control" size="3" name="id" id="division" required>
+                            <c:forEach var="category" items="${displayEntries}">
                                 <option value="${category.category_id}">${category.division}</option>
                             </c:forEach>
                         </select>

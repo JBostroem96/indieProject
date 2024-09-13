@@ -21,13 +21,13 @@
                 </thead>
                 <tbody>
                     <c:choose>
-                        <c:when test="${!empty editedRaceResult}">
+                        <c:when test="${!empty entry}">
                             <tr class="bg-white">
-                                <td class="text-black">${editedRaceResult.team.name}</td>
-                                <td class="text-black">${editedRaceResult.team.division}</td>
-                                <td class="text-black">${editedRaceResult.cp}</td>
-                                <td class="text-black">${editedRaceResult.latePenalty}</td>
-                                <td class="text-black">${editedRaceResult.totalTime}</td>
+                                <td class="text-black">${entry.team.name}</td>
+                                <td class="text-black">${entry.team.division}</td>
+                                <td class="text-black">${entry.cp}</td>
+                                <td class="text-black">${entry.latePenalty}</td>
+                                <td class="text-black">${entry.totalTime}</td>
                             </tr>
                         </c:when>
                         <c:otherwise>
@@ -62,7 +62,7 @@
                     </div>
                     <label class="fw-bold" for="team">Team</label>
                     <select class="form-control" size="3" id="team" name="team" required>
-                        <c:forEach var="team" items="${team}">
+                        <c:forEach var="team" items="${displayEntries}">
                             <option value="${team.id}">${team.name}</option>
                         </c:forEach>
                     </select>
@@ -71,9 +71,9 @@
                     </c:if>
                 </div>
                 <c:choose>
-                    <c:when test="${!empty editedRaceResult}">
-                        <input type="hidden" name="race_id" value="${editedRaceResult.race_id}">
-                        <button type="submit" name="id" class="btn btn-success bg-success" value="${editedRaceResult.id}">Edit Race Result</button>
+                    <c:when test="${!empty entry}">
+                        <input type="hidden" name="race_id" value="${entry.race_id}">
+                        <button type="submit" name="id" class="btn btn-success bg-success" value="${entry.id}">Edit Race Result</button>
                     </c:when>
                     <c:otherwise>
                         <button type="submit" name="id" class="btn btn-success bg-success" value="${team_race.id}">Edit Race Result</button>

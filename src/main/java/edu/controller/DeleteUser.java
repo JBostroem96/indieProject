@@ -1,14 +1,8 @@
 package edu.controller;
 
-import edu.matc.entity.Role;
-import edu.matc.entity.Team;
-import edu.matc.entity.TeamRace;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +47,5 @@ public class DeleteUser extends HttpServlet implements Authorization {
 
             logger.error("There was an issue deleting this account", e);
         }
-
     }
 }

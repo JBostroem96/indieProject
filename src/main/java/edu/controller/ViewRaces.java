@@ -4,6 +4,9 @@ package edu.controller;
 import edu.matc.entity.Race;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.DeleteAllRaceResultDisplay;
+import edu.matc.util.Forward;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,18 +37,7 @@ public class ViewRaces extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GenericDao<Race> raceDao = new GenericDao<>(Race.class);
-        List<Race> races = raceDao.getAll();
 
-        Map<Integer, Boolean> raceHasResults = new HashMap<>();
-
-        //Add the id if the race has any results
-        for (Race race : races) {
-            raceHasResults.put(race.getId(), !race.getTeamRaces().isEmpty());
-        }
-
-        req.setAttribute("races", raceDao.getAll());
-        req.setAttribute("results", raceHasResults);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/viewRaces.jsp");
-        dispatcher.forward(req, resp);
+        new Forward<>("/viewRaces.jsp", req, resp, new DeleteAllRaceResultDisplay().showDeletionOfResults(raceDao), raceDao.getAll());
     }
 }

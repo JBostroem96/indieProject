@@ -4,6 +4,7 @@ import edu.matc.entity.Race;
 import edu.matc.entity.Role;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -40,16 +41,18 @@ public class DeleteRace extends HttpServlet implements Authorization {
         final Logger logger = log();
         GenericDao<Race> dao = new GenericDao<>(Race.class);
         Race race = new GetEntry<Race>().parseEntry(dao, req, logger);
+
         try {
 
             dao.delete(race);
-            req.setAttribute("deletedEntry", race);
+            req.setAttribute("entryDeleted", "You deleted the entry");
+
         } catch (Exception e) {
-            req.setAttribute("e", e);
+            req.setAttribute("e", "Something went wrong!");
             logger.error("Something went wrong!", e);
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteRace.jsp");
-        dispatcher.forward(req, resp);
+        req.setAttribute("races", dao.getAll());
+        new Forward<>("/searchResults.jsp", req, resp, null, null);
     }
 }

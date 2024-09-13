@@ -18,10 +18,10 @@
                 </thead>
                 <tbody>
                     <c:choose>
-                        <c:when test="${!empty editedTeam}">
+                        <c:when test="${!empty entry}">
                             <tr class="bg-white">
-                                <td class="text-black">${editedTeam.name}</td>
-                                <td class="text-black">${editedTeam.division}</td>
+                                <td class="text-black">${entry.name}</td>
+                                <td class="text-black">${entry.division}</td>
                             </tr>
                         </c:when>
                         <c:otherwise>
@@ -49,15 +49,15 @@
                         <div class="form-group">
                             <label class="fw-bold" for="division">Division (Category)</label>
                             <select class="form-control" size="3" name="division" id="division" required>
-                                <c:forEach var="category" items="${category}">
-                                    <option value="${category.division}">${category.division}</option>
+                                <c:forEach var="category" items="${displayEntries}">
+                                    <option value="${category.category_id}">${category.division}</option>
                                 </c:forEach>
                             </select>
                         </div>
                     </div>
                 <c:choose>
-                    <c:when test="${!empty editedTeam}">
-                        <button type="submit" name="id" class="btn btn-success bg-success" value="${editedTeam.id}">Edit Team</button>
+                    <c:when test="${!empty entry}">
+                        <button type="submit" name="id" class="btn btn-success bg-success" value="${entry.id}">Edit Team</button>
                     </c:when>
                     <c:otherwise>
                         <button type="submit" name="id" class="btn btn-success bg-success" value="${team.id}">Edit Team</button>

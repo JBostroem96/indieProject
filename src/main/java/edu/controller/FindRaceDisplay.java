@@ -1,5 +1,10 @@
 package edu.controller;
 
+import edu.matc.entity.User;
+import edu.matc.persistence.GenericDao;
+import edu.matc.util.Forward;
+import edu.matc.util.GetEntry;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,9 +36,6 @@ public class FindRaceDisplay extends HttpServlet {
                       HttpServletResponse response)
             throws ServletException, IOException {
 
-        String url = "/searchRace.jsp";
-
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+        new Forward<>("/searchRace.jsp", request, response, null, null);
     }
 }

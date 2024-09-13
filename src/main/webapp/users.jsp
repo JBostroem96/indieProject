@@ -13,7 +13,7 @@
     <%@include file="nav.jsp"%>
     <div class="container bg-white">
         <c:choose>
-            <c:when test="${empty userRole}">
+            <c:when test="${empty entry}">
                 <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Results:</em></h1>
                 <div class="d-flex flex-column gap-5 fw-bold border rounded">
                     <table class="display" cellspacing="=0" width="100%">
@@ -22,7 +22,7 @@
                             <th>Role</th>
                         </thead>
                         <tbody>
-                            <c:forEach var="user" items="${users}">
+                            <c:forEach var="user" items="${displayEntries}">
                                 <tr>
                                     <td class="text-black">${user.name}</td>
                                     <td class="text-black">${user.role}</td>
@@ -46,7 +46,7 @@
                     <form action="editUserRole" class="form-inline">
                         <div class="search text-white p-5 border rounded" id="assign_role">
                             <label for="name">Name</label>
-                            <input class="form-control" type="text" name="name" id="name" placeholder="${userRole.name}" disabled>
+                            <input class="form-control" type="text" name="name" id="name" placeholder="${entry.name}" disabled>
                             <div class="form-group">
                                 <label for="user">User</label>
                                 <input class="form-check-input" type="radio" name="role" id="user" value="USER" checked>
@@ -59,7 +59,7 @@
                             <p class="text-danger fw-bold">${message}</p>
                         </c:if>
                     </div>
-                    <button type="submit" name="id" class="btn btn-success bg-success" value="${userRole.id}">Submit</button>
+                    <button type="submit" name="id" class="btn btn-success bg-success" value="${entry.id}">Submit</button>
                 </form>
             </div>
         </c:otherwise>

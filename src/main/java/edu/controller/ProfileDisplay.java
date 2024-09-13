@@ -5,6 +5,8 @@ import edu.matc.entity.TeamRace;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
+import edu.matc.util.GetEntry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,16 +43,8 @@ public class ProfileDisplay extends HttpServlet implements Authorization {
             return;
         }
 
-        HttpSession session = req.getSession();
-
-        User user = (User) session.getAttribute("user");
-
-        req.setAttribute("user", user);
-        req.setAttribute("results", getEntries(user));
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/profile.jsp");
-        dispatcher.forward(req, resp);
-
+        User user = (User) req.getSession().getAttribute("user");
+        new Forward<>("/profile.jsp", req, resp, user, getEntries(user));
     }
 
 

@@ -3,6 +3,7 @@ import edu.matc.entity.Race;
 import edu.matc.entity.Role;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -75,7 +76,7 @@ public class AddRace extends HttpServlet implements Authorization {
             req.setAttribute("missingField", "Fields can't be empty");
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRace.jsp");
-        dispatcher.forward(req, resp);
+        //Forwards to the page
+        new Forward<>("/addRace.jsp", req, resp, null, null);
     }
 }

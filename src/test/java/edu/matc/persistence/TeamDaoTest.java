@@ -1,6 +1,7 @@
 package edu.matc.persistence;
 
 
+import edu.matc.entity.Category;
 import edu.matc.entity.Team;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TeamDaoTest {
 
     private GenericDao teamDao;
+    private GenericDao categoryDao;
 
     /**
      * Triggers before everything else
@@ -42,7 +44,9 @@ public class TeamDaoTest {
     @Test
     void update() {
 
-        Team team = new Team("test", "test");
+        categoryDao = new GenericDao<>(Category.class);
+        Category category = (Category) categoryDao.getById(3);
+        Team team = new Team("test", category, category.getDivision().toString());
 
         Team teamToUpdate = (Team)teamDao.getById(1);
 
@@ -60,7 +64,10 @@ public class TeamDaoTest {
      */
     @Test
     void insert() {
-        Team team = new Team("test", "test");
+
+        categoryDao = new GenericDao<>(Category.class);
+        Category category = (Category) categoryDao.getById(3);
+        Team team = new Team("test", category, category.getDivision().toString());
         int insertedTeamId = teamDao.insert(team);
         assertNotEquals(0, insertedTeamId);
         Team insertedTeam = (Team)teamDao.getById(insertedTeamId);

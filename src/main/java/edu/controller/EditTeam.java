@@ -5,6 +5,7 @@ import edu.matc.entity.Role;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -46,20 +47,24 @@ public class EditTeam extends HttpServlet implements Authorization {
 
         String name = req.getParameter("name");
         String division = req.getParameter("division");
-        Team teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
+        Team teamToUpdate = null;
 
         try {
+
+            teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
 
             if (name != null && !name.isEmpty()
                     && division != null && !division.isEmpty()) {
 
+                Category category = categoryDao.getById(Integer.parseInt(division));
                 Team updatedTeam = new Team(name,
-                            division);
+                            category, category.getDivision().toString());
 
                 if (new Validate<Team>().validate(updatedTeam.getName(), dao, req)) {
 
                     teamToUpdate.setName(updatedTeam.getName());
                     teamToUpdate.setDivision(updatedTeam.getDivision());
+                    teamToUpdate.setCategory(updatedTeam.getCategory());
                     dao.update(teamToUpdate);
                     req.setAttribute("teamUpdated", "You have successfully updated the team!");
                 }
@@ -75,11 +80,6 @@ public class EditTeam extends HttpServlet implements Authorization {
             req.setAttribute("e", "Something went wrong!");
         }
 
-        req.setAttribute("team", teamToUpdate);
-        req.setAttribute("category", categoryDao.getAll());
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/editTeam.jsp");
-        dispatcher.forward(req, resp);
-
+        new Forward<>("/editTeam.jsp", req, resp, teamToUpdate, categoryDao.getAll());
     }
 }

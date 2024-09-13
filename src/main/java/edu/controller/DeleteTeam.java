@@ -5,6 +5,7 @@ import edu.matc.entity.Team;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -51,19 +52,20 @@ public class DeleteTeam extends HttpServlet implements Authorization {
         try {
 
             dao.delete(team);
-            req.setAttribute("deletedEntry", team);
+            req.setAttribute("entryDeleted", "You deleted the entry");
+
             //Only Update the results after deletion if the teams are in any races
             if (!races.isEmpty()) {
                 updateRaces(teamRaceDao, races);
             }
 
         } catch (Exception e) {
-            req.setAttribute("e", e);
+            req.setAttribute("e", "Something went wrong!");
             logger.error("Something went wrong!", e);
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteTeam.jsp");
-        dispatcher.forward(req, resp);
+        req.setAttribute("teams", dao.getAll());
+        new Forward<>("/searchResults.jsp", req, resp, null, null);
     }
 
     /**

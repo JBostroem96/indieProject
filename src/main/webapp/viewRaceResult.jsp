@@ -12,6 +12,12 @@
     <%@include file="nav.jsp"%>
     <div class="container bg-white">
         <h1 class="mt-5 text-center text-black fw-bold mb-5"><em>Results:</em></h1>
+        <c:if test="${!empty entryDeleted}">
+            <p class="text-success fw-bold">${entryDeleted}</p>
+        </c:if>
+        <c:if test="${!empty e}">
+            <p class="text-danger fw-bold">${e}</p>
+        </c:if>
         <div class="d-flex flex-column gap-5 fw-bold border rounded">
             <table class="display" cellspacing="=0" width="100%">
                 <thead>
@@ -24,7 +30,7 @@
                     <th>Total Time</th>
                 </thead>
                 <tbody>
-                    <c:forEach var="team_race" items="${team_races}">
+                    <c:forEach var="team_race" items="${displayEntries}">
                         <tr>
                             <td class="text-black">${team_race.overallPlace}</td>
                             <td class="text-black">${team_race.divisionPlace}</td>
@@ -47,7 +53,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="deleteRaceResultDisplay" class="form-inline" method="get">
+                                    <form action="deleteRaceResult" class="form-inline" method="post" onsubmit="return confirmDeletion();">
                                         <button type="submit" name="id" class="btn btn-danger bg-danger btn-sm" value="${team_race.id}">Delete</button>
                                     </form>
                                 </td>

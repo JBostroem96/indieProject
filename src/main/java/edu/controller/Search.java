@@ -3,6 +3,8 @@ package edu.controller;
 import edu.matc.entity.Race;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.Forward;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -62,7 +64,6 @@ public class Search extends HttpServlet {
             req.setAttribute("teams", teamDao.getAll());
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/searchResults.jsp");
-        dispatcher.forward(req, resp);
+        new Forward<>("/searchResults.jsp", req, resp, null, null);
     }
 }

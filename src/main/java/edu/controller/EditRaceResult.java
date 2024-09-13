@@ -3,6 +3,7 @@ package edu.controller;
 import edu.matc.entity.*;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -92,10 +93,8 @@ public class EditRaceResult extends HttpServlet implements Authorization {
             logger.error("there was an issue inserting the data", e);
         }
 
-        req.setAttribute("editedRaceResult", teamRaceToUpdate);
-        req.setAttribute("team", teamDao.getAll());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/editRaceResult.jsp");
-        dispatcher.forward(req, resp);
+        new Forward<>("/editRaceResult.jsp", req, resp, teamRaceToUpdate, teamDao.getAll());
+
     }
 }
 

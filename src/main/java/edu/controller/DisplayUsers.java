@@ -5,6 +5,7 @@ import edu.matc.entity.Role;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,10 +51,6 @@ public class DisplayUsers extends HttpServlet implements Authorization {
             }
         }
 
-        req.setAttribute("users", users);
-        String url = "/users.jsp";
-
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(req, response);
+        new Forward<>("/users.jsp", req, response, null, users);
     }
 }

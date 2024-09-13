@@ -4,6 +4,7 @@ import edu.matc.entity.Role;
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -63,10 +64,7 @@ public class EditUserRole extends HttpServlet implements Authorization {
             logger.error("There was an issue updating the data", e);
         }
 
-        req.setAttribute("userRole", retrievedUser);
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/users.jsp");
-        dispatcher.forward(req, resp);
+        new Forward<>("/users.jsp", req, resp, retrievedUser, null);
     }
 }
 

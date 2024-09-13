@@ -3,8 +3,10 @@ package edu.controller;
 import edu.matc.entity.Category;
 import edu.matc.entity.Role;
 import edu.matc.entity.Team;
+import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -39,13 +41,6 @@ public class EditTeamDisplay extends HttpServlet implements Authorization {
             return;
         }
 
-        final Logger logger = log();
-        Team retrievedTeam = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
-
-        req.setAttribute("team", retrievedTeam);
-        req.setAttribute("category", new GenericDao<>(Category.class).getAll());
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/editTeam.jsp");
-        dispatcher.forward(req, resp);
+        new Forward<>("/editTeam.jsp", req, resp, new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, log()), new GenericDao<>(Category.class).getAll());
     }
 }

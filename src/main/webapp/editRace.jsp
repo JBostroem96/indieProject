@@ -19,11 +19,11 @@
                 </thead>
                 <tbody>
                     <c:choose>
-                        <c:when test="${!empty raceToUpdate}">
+                        <c:when test="${!empty entry}">
                             <tr class="bg-white">
-                                <td class="text-black">${raceToUpdate.name}</td>
-                                <td class="text-black">${raceToUpdate.length}</td>
-                                <td class="text-black">${raceToUpdate.date}</td>
+                                <td class="text-black">${entry.name}</td>
+                                <td class="text-black">${entry.length}</td>
+                                <td class="text-black">${entry.date}</td>
                             </tr>
                         </c:when>
                         <c:otherwise>
@@ -59,8 +59,8 @@
                     </div>
                 </div>
                 <c:choose>
-                    <c:when test="${!empty raceToUpdate}">
-                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${raceToUpdate.id}">Edit Race</button>
+                    <c:when test="${!empty entry}">
+                        <button type="submit" name="id" class="btn btn-primary bg-success" value="${entry.id}">Edit Race</button>
                     </c:when>
                     <c:otherwise>
                         <button type="submit" name="id" class="btn btn-success bg-success" value="${race.id}">Edit Race</button>

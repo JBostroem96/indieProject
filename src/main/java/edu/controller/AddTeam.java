@@ -1,10 +1,12 @@
 package edu.controller;
 
 import edu.matc.entity.Category;
+import edu.matc.entity.Race;
 import edu.matc.entity.Role;
 import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -44,14 +46,13 @@ public class AddTeam extends HttpServlet implements Authorization {
         GenericDao<Team> teamDao = new GenericDao<>(Team.class);
         GenericDao<Category> categoryDao = new GenericDao<>(Category.class);
         String name = req.getParameter("name");
-        String category = req.getParameter("category");
-        
+        String category = req.getParameter("id");
+        Category categoryEntry = new GetEntry<Category>().parseEntry(categoryDao, req, logger);
+
         if (category != null && !category.isEmpty()
-            && name != null && !name.isEmpty()) {
+                && name != null && !name.isEmpty()) {
 
             try {
-
-                Category categoryEntry = new GetEntry<Category>().parseEntry(categoryDao, req, logger);
 
                 if (new Validate<Team>().validate(name, teamDao, req)) {
 
@@ -71,9 +72,7 @@ public class AddTeam extends HttpServlet implements Authorization {
             req.setAttribute("missingField", "Fields can't be empty");
         }
 
-        req.setAttribute("category", categoryDao.getAll());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addTeam.jsp");
-        dispatcher.forward(req, resp);
+        new Forward<>("/addTeam.jsp", req, resp, null, categoryDao.getAll());
     }
 }
 

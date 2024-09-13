@@ -3,6 +3,7 @@ package edu.controller;
 import edu.matc.entity.*;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -60,6 +61,7 @@ public class AddRaceResult extends HttpServlet implements Authorization {
                     && teamEntry != null && !teamEntry.isEmpty()) {
 
                     Team team = teamDao.getById(Integer.parseInt(teamEntry));
+                    logger.info(race);
 
                     if (new Validate<>().validateResults(team.getName(), race.getId(), teamRaceDao, req)) {
 
@@ -70,7 +72,7 @@ public class AddRaceResult extends HttpServlet implements Authorization {
                         TeamRace teamRace = new TeamRace(team, race, (User) session.getAttribute("user"), cp, penalty, totalTime);
 
                         teamRaceDao.insert(teamRace);
-                        req.setAttribute("resultUpdated", "You successfully added the result!");
+                        req.setAttribute("resultAdded", "You successfully added the result!");
                         //update the results once inserted
                         new UpdateResults(race.getId(), teamRaceDao);
                     }
@@ -87,11 +89,7 @@ public class AddRaceResult extends HttpServlet implements Authorization {
             logger.error("Something went wrong!", e);
         }
 
-        req.setAttribute("team", teamDao.getAll());
-        req.setAttribute("race", race);
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addRaceResultForm.jsp");
-        dispatcher.forward(req, resp);
+        new Forward<>("/addRaceResultForm.jsp", req, resp, race, teamDao.getAll());
     }
 }
 

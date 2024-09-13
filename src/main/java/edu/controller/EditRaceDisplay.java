@@ -2,8 +2,10 @@ package edu.controller;
 
 import edu.matc.entity.Race;
 import edu.matc.entity.Role;
+import edu.matc.entity.Team;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
+import edu.matc.util.Forward;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
 
@@ -38,14 +40,6 @@ public class EditRaceDisplay extends HttpServlet implements Authorization {
             return;
         }
 
-        final Logger logger = log();
-        GenericDao<Race> dao = new GenericDao<>(Race.class);
-        String id = req.getParameter("id");
-        Race retrievedRace = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
-
-        req.setAttribute("race", retrievedRace);
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/editRace.jsp");
-        dispatcher.forward(req, resp);
+        new Forward<>("/editRace.jsp", req, resp, new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, log()), null);
     }
 }
