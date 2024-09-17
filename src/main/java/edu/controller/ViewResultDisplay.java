@@ -4,9 +4,7 @@ package edu.controller;
 import edu.matc.entity.Race;
 import edu.matc.entity.TeamRace;
 import edu.matc.persistence.GenericDao;
-import edu.matc.util.Authorization;
-import edu.matc.util.ForwardEntry;
-import edu.matc.util.GetEntry;
+import edu.matc.util.*;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -26,7 +24,7 @@ import java.util.*;
         name = "/viewRaceResult",
         urlPatterns = { "/viewRaceResult" }
 )
-public class ViewResultDisplay extends HttpServlet implements Authorization {
+public class ViewResultDisplay extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to view the results of a race
@@ -39,12 +37,13 @@ public class ViewResultDisplay extends HttpServlet implements Authorization {
                       HttpServletResponse resp)
             throws ServletException, IOException {
 
-        Logger logger = log();
-        Race race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
+
+        Race race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, log());
         List<TeamRace> teamRaces = new GenericDao<>(TeamRace.class).findByPropertyEqual("race_id", race.getId());
 
         //using lambda expression to sort by the total time
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
+
         new ForwardEntry<>("/viewRaceResult.jsp", req, resp, null, teamRaces);
 
     }

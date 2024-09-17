@@ -46,14 +46,12 @@ public class EditTeam extends HttpServlet implements Authorization {
 
         String name = req.getParameter("name");
         String division = req.getParameter("division");
-        Team teamToUpdate = null;
+        Team teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
 
-        try {
+        if (name != null && !name.isEmpty()
+                && division != null && !division.isEmpty()) {
 
-            teamToUpdate = new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, logger);
-
-            if (name != null && !name.isEmpty()
-                    && division != null && !division.isEmpty()) {
+            try {
 
                 Category category = categoryDao.getById(Integer.parseInt(division));
                 Team updatedTeam = new Team(name,
@@ -68,15 +66,15 @@ public class EditTeam extends HttpServlet implements Authorization {
                     req.setAttribute("teamUpdated", "You have successfully updated the team!");
                 }
 
-            } else {
+            } catch (Exception e) {
 
-                req.setAttribute("missingField", "Fields can't be empty");
+                logger.error("There was an issue updating the data");
+                req.setAttribute("e", "Something went wrong!");
             }
 
-        } catch (Exception e) {
+        } else {
 
-            logger.error("There was an issue updating the data");
-            req.setAttribute("e", "Something went wrong!");
+            req.setAttribute("missingField", "Fields can't be empty");
         }
 
         new ForwardEntry<>("/editTeam.jsp", req, resp, teamToUpdate, categoryDao.getAll());

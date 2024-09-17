@@ -43,24 +43,22 @@ public class EditUserRole extends HttpServlet implements Authorization {
         String newRole = req.getParameter("role");
         User retrievedUser = new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, logger);;
 
-        try {
+        if (newRole != null && !newRole.isEmpty()) {
 
-            if (newRole != null && !newRole.isEmpty()) {
+            try {
 
-                    if (new Validate<>().validateRole(newRole, retrievedUser.getRole(), req)) {
+                if (new Validate<>().validateRole(newRole, retrievedUser.getRole(), req)) {
 
-                        retrievedUser.setRole(Role.valueOf(newRole));
-                        dao.update(retrievedUser);
+                    retrievedUser.setRole(Role.valueOf(newRole));
+                    dao.update(retrievedUser);
 
-                        req.setAttribute("updatedRole", "You successfully updated the user role!");
-
-                    }
-
+                    req.setAttribute("updatedRole", "You successfully updated the user role!");
                 }
 
-        } catch (Exception e) {
+            } catch (Exception e) {
 
-            logger.error("There was an issue updating the data", e);
+                logger.error("There was an issue updating the data", e);
+            }
         }
 
         new ForwardEntry<>("/users.jsp", req, resp, retrievedUser, null);

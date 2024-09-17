@@ -8,7 +8,6 @@ import edu.matc.util.Authorization;
 import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +44,7 @@ public class DeleteTeam extends HttpServlet implements Authorization {
         GenericDao<Team> dao = new GenericDao<>(Team.class);
         Team team = new GetEntry<Team>().parseEntry(dao, req, logger);
         List<Integer> races = new ArrayList<>();
+
         //Gets all the races where the teams are
         getAllRaces(teamRaceDao, team, races);
 

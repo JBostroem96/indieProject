@@ -44,10 +44,10 @@ public class ReportResult extends HttpServlet implements Authorization {
         String subject = req.getParameter("subject");
         TeamRace resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);;
 
-        try {
+        if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
+                && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {
 
-            if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
-                    && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {
+            try {
 
                 String description = req.getParameter("teamTextArea");
                 subject += " regarding "
@@ -59,14 +59,14 @@ public class ReportResult extends HttpServlet implements Authorization {
 
                 req.setAttribute("resultReported", resultToReport.getTeam().getName());
 
-            } else {
+            } catch (Exception e) {
 
-                req.setAttribute("missingField", "Fields can't be empty");
+                logger.error("There was an issue updating the data", e);
             }
 
-        } catch (Exception e) {
+        } else {
 
-            logger.error("There was an issue updating the data", e);
+            req.setAttribute("missingField", "Fields can't be empty");
         }
 
         new ForwardEntry<>("/reportResult.jsp", req, resp, resultToReport, null);

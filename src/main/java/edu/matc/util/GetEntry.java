@@ -39,7 +39,6 @@ public class GetEntry<T> {
 
             } catch (Exception e) {
 
-                req.setAttribute("e", e);
                 logger.error("Something went wrong!", e);
             }
         }

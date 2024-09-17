@@ -50,35 +50,34 @@ public class EditRace extends HttpServlet implements Authorization {
         String date = req.getParameter("date");
         Race raceToUpdate = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
 
-        try {
+        if (name != null && !name.isEmpty()
+                && length != null && !length.isEmpty()
+                && date != null && !date.isEmpty()) {
 
-            if (name != null && !name.isEmpty()
-                    && length != null && !length.isEmpty()
-                    && date != null && !date.isEmpty()) {
+            try {
 
+                Race updatedRace = new Race(name,
+                        length,
+                        LocalDate.parse(date));
 
-                    Race updatedRace = new Race(name,
-                            length,
-                            LocalDate.parse(date));
+                if (new Validate<Race>().validate(updatedRace.getName(), dao, req)) {
 
-                    if (new Validate<Race>().validate(updatedRace.getName(), dao, req)) {
+                    raceToUpdate.setName(updatedRace.getName());
+                    raceToUpdate.setLength(updatedRace.getLength());
+                    raceToUpdate.setDate(updatedRace.getDate());
+                    dao.update(raceToUpdate);
+                    req.setAttribute("raceUpdated", "You successfully updated the race");
+                }
 
-                        raceToUpdate.setName(updatedRace.getName());
-                        raceToUpdate.setLength(updatedRace.getLength());
-                        raceToUpdate.setDate(updatedRace.getDate());
-                        dao.update(raceToUpdate);
-                        req.setAttribute("raceUpdated", "You successfully updated the race");
-                    }
+            } catch (Exception e) {
 
-            } else {
-
-                req.setAttribute("missingField", "Fields can't be empty");
+                logger.error("There was an issue updating the data", e);
+                req.setAttribute("e", "Something went wrong!");
             }
 
-        } catch (Exception e) {
+        } else {
 
-            logger.error("There was an issue updating the data", e);
-            req.setAttribute("e", "Something went wrong!");
+            req.setAttribute("missingField", "Fields can't be empty");
         }
 
         new ForwardEntry<>("/editRace.jsp", req, resp, raceToUpdate, null);

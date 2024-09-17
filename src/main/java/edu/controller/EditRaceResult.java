@@ -47,16 +47,16 @@ public class EditRaceResult extends HttpServlet implements Authorization {
         String penalty = req.getParameter("penalty");
         String time = req.getParameter("time");
         String team = req.getParameter("team");
-        TeamRace teamRaceToUpdate = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);;
+        TeamRace teamRaceToUpdate = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);
 
-        try {
+        if (team != null && !team.isEmpty()
+                && cp != null && !cp.isEmpty()
+                && penalty != null && !penalty.isEmpty()
+                && time != null && !time.isEmpty()) {
 
-            HttpSession session = req.getSession();
+            try {
 
-            if (team != null && !team.isEmpty()
-                    && cp != null && !cp.isEmpty()
-                    && penalty != null && !penalty.isEmpty()
-                    && time != null && !time.isEmpty()) {
+                HttpSession session = req.getSession();
 
                 Team teamEntry = teamDao.getById(Integer.parseInt(team));
                 Race race = teamRaceToUpdate.getRace();
@@ -81,19 +81,18 @@ public class EditRaceResult extends HttpServlet implements Authorization {
                     new UpdateResults(teamRaceToUpdate.getRace_id(), teamRaceDao);
                 }
 
-            } else {
+            } catch (Exception e) {
 
-                req.setAttribute("missingField", "Fields can't be empty");
+                req.setAttribute("e", e);
+                logger.error("there was an issue inserting the data", e);
             }
 
-        } catch (Exception e) {
+        } else {
 
-            req.setAttribute("e", e);
-            logger.error("there was an issue inserting the data", e);
+            req.setAttribute("missingField", "Fields can't be empty");
         }
 
         new ForwardEntry<>("/editRaceResult.jsp", req, resp, teamRaceToUpdate, teamDao.getAll());
-
     }
 }
 

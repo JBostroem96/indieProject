@@ -50,6 +50,7 @@ public class DeleteAllRaceResults extends HttpServlet implements Authorization {
             deleteResults(race.getTeamRaces());
             req.setAttribute("raceResultsDeleted", "You deleted the race results");
             new ForwardEntry<>("/viewRaces.jsp", req, resp, new DeleteAllRaceResultDisplay().showDeletionOfResults(raceDao), raceDao.getAll());
+
         } catch (Exception e) {
             req.setAttribute("e", "Something went wrong!");
             logger.error("Something went wrong!", e);

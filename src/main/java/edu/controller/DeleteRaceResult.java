@@ -8,7 +8,6 @@ import edu.matc.util.Authorization;
 import edu.matc.util.ForwardEntry;
 import edu.matc.util.GetEntry;
 import org.apache.logging.log4j.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
