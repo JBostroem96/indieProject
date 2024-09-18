@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * This class' purpose is to add the race result by sending the necessary data to the form
+ * This class' purpose is to forward to the JSP
  */
 @WebServlet(
         urlPatterns = {"/addRaceResultDisplay"}
@@ -26,7 +26,7 @@ import java.io.IOException;
 public class AddRaceResultDisplay extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to add the race result
+     * This method's purpose is to forward to the JSP
      * @param req the request object
      * @param resp the response object
      * @throws ServletException the servlet exception object

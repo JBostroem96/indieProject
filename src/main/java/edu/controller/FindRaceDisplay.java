@@ -22,7 +22,7 @@ import java.io.IOException;
 public class FindRaceDisplay extends HttpServlet {
 
     /**
-     * This method's purpose is to forward to the searchRace JSP
+     * This method's purpose is to forward to the JSP
      *@param  request               the request object that we forward
      *@param  response              the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
@@ -32,6 +32,7 @@ public class FindRaceDisplay extends HttpServlet {
                       HttpServletResponse response)
             throws ServletException, IOException {
 
+        //Forwards to the page
         new ForwardEntry<>("/searchRace.jsp", request, response, null, null);
     }
 }

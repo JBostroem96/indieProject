@@ -18,7 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * This class' purpose is to delete a race result
+ * This class' purpose is to delete the race result
  */
 @WebServlet(
         urlPatterns = {"/deleteRaceResult"}
@@ -26,7 +26,7 @@ import java.util.List;
 public class DeleteRaceResult extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to delete the entry by id
+     * This method's purpose is to delete the entry
      *@param  req               the request object that we forward
      *@param  resp           the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
@@ -58,6 +58,7 @@ public class DeleteRaceResult extends HttpServlet implements Authorization {
         //using lambda expression to sort by the total time
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 
+        //Forwards to the page
         new ForwardEntry<>("/viewRaceResult.jsp", req, resp, null, teamRaces);
     }
 }

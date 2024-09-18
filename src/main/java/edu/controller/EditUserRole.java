@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * This class' purpose is to edit a user role
+ * This class' purpose is to edit the user role
  */
 @WebServlet(
         urlPatterns = {"/editUserRole"}
@@ -24,7 +24,7 @@ import java.io.IOException;
 public class EditUserRole extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to edit entry by id
+     * This method's purpose is to edit entry
      *@param  req               the request object that we forward
      *@param  resp           the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
@@ -61,6 +61,7 @@ public class EditUserRole extends HttpServlet implements Authorization {
             }
         }
 
+        //Forwards to the page
         new ForwardEntry<>("/users.jsp", req, resp, retrievedUser, null);
     }
 }

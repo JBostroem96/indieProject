@@ -46,9 +46,12 @@ public class DeleteAllRaceResults extends HttpServlet implements Authorization {
         Race race = new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, logger);
         GenericDao<Race> raceDao = new GenericDao<>(Race.class);
         try {
+
             //Deletes the results
             deleteResults(race.getTeamRaces());
             req.setAttribute("raceResultsDeleted", "You deleted the race results");
+
+            //Forwards to the page
             new ForwardEntry<>("/viewRaces.jsp", req, resp, new DeleteAllRaceResultDisplay().showDeletionOfResults(raceDao), raceDao.getAll());
 
         } catch (Exception e) {

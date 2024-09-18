@@ -37,6 +37,7 @@ public class EditRaceDisplay extends HttpServlet implements Authorization {
             return;
         }
 
+        //Forwards to the page
         new ForwardEntry<>("/editRace.jsp", req, resp, new GetEntry<Race>().parseEntry(new GenericDao<>(Race.class), req, log()), null);
     }
 }

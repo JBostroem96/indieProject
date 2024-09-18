@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * This class' purpose is to edit a race result
+ * This class' purpose is to edit the race result
  */
 @WebServlet(
         urlPatterns = {"/editRaceResult"}
@@ -25,7 +25,7 @@ import java.io.IOException;
 public class EditRaceResult extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to edit the entry by id
+     * This method's purpose is to edit the entry
      *@param  req               the request object that we forward
      *@param  resp           the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
@@ -92,6 +92,7 @@ public class EditRaceResult extends HttpServlet implements Authorization {
             req.setAttribute("missingField", "Fields can't be empty");
         }
 
+        //Forwards to the page
         new ForwardEntry<>("/editRaceResult.jsp", req, resp, teamRaceToUpdate, teamDao.getAll());
     }
 }

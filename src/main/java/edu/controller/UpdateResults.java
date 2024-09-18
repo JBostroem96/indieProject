@@ -14,7 +14,7 @@ import java.util.EnumMap;
  */
 public class UpdateResults implements UseLogger {
 
-    private List<TeamRace> teamRaces;
+    private final List<TeamRace> teamRaces;
     private int overallPlacement;
 
     /**
@@ -26,6 +26,7 @@ public class UpdateResults implements UseLogger {
 
         this.teamRaces = dao.findByPropertyEqual("race_id", raceId);
         this.overallPlacement = 0;
+
         updateResults(dao);
     }
 
@@ -74,7 +75,7 @@ public class UpdateResults implements UseLogger {
     /**
      * Increments division and overall placements.
      * @param teamRaces the list of team races
-     * @param divisionPlacements the division placements map
+     * @param divisionPlacements the division placements
      */
     public void incrementDivisions(List<TeamRace> teamRaces, EnumMap<Division, Integer> divisionPlacements) {
 
@@ -85,10 +86,12 @@ public class UpdateResults implements UseLogger {
 
             //If the division is encountered ...
             if (divisionPlacements.containsKey(division)) {
+
                 //Increment
                 divisionPlacements.put(division, divisionPlacements.get(division) + 1);
                 entry.setDivisionPlace(divisionPlacements.get(division));
             }
+
             //Also increment the overall placement
             overallPlacement++;
             entry.setOverallPlace(overallPlacement);

@@ -44,7 +44,7 @@ public class ViewResultDisplay extends HttpServlet implements UseLogger {
         //using lambda expression to sort by the total time
         teamRaces.sort(Comparator.comparingDouble(TeamRace::getTotalTime));
 
+        //Forwards to the page
         new ForwardEntry<>("/viewRaceResult.jsp", req, resp, null, teamRaces);
-
     }
 }

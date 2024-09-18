@@ -36,6 +36,7 @@ public class EditUserRoleDisplay extends HttpServlet implements Authorization {
             return;
         }
 
+        //Forwards to the page
         new ForwardEntry<>("/users.jsp", req, resp, new GetEntry<User>().parseEntry(new GenericDao<>(User.class), req, log()), null);
     }
 }

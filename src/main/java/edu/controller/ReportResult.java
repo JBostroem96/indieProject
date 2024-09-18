@@ -69,6 +69,7 @@ public class ReportResult extends HttpServlet implements Authorization {
             req.setAttribute("missingField", "Fields can't be empty");
         }
 
+        //Forwards to the page
         new ForwardEntry<>("/reportResult.jsp", req, resp, resultToReport, null);
     }
 }

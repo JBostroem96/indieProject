@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * This class' purpose is to add the race result by grabbing the id
+ * This class' purpose is to add the race result
  */
 @WebServlet(
         urlPatterns = {"/addRaceResult"}
@@ -25,8 +25,7 @@ import java.io.IOException;
 public class AddRaceResult extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to add the race result by getting the id
-     *
+     * This method's purpose is to add the race result
      * @param req  the request object
      * @param resp the response object
      * @throws ServletException the servlet exception object
@@ -71,6 +70,7 @@ public class AddRaceResult extends HttpServlet implements Authorization {
 
                     teamRaceDao.insert(teamRace);
                     req.setAttribute("resultAdded", "You successfully added the result!");
+
                     //update the results once inserted
                     new UpdateResults(race.getId(), teamRaceDao);
                 }
@@ -87,6 +87,7 @@ public class AddRaceResult extends HttpServlet implements Authorization {
 
         }
 
+        //Forwards to the page
         new ForwardEntry<>("/addRaceResultForm.jsp", req, resp, race, teamDao.getAll());
     }
 }

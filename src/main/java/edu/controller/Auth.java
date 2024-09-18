@@ -100,7 +100,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
                 if (user.equals(newUser)) {
 
                     dao.insert(newUser);
-                };
+                }
 
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);

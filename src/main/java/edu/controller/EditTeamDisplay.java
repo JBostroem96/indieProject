@@ -38,6 +38,7 @@ public class EditTeamDisplay extends HttpServlet implements Authorization {
             return;
         }
 
+        //Forwards to the page
         new ForwardEntry<>("/editTeam.jsp", req, resp, new GetEntry<Team>().parseEntry(new GenericDao<>(Team.class), req, log()), new GenericDao<>(Category.class).getAll());
     }
 }

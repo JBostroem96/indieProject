@@ -39,6 +39,7 @@ public class EditRaceResultDisplay extends HttpServlet implements Authorization 
             return;
         }
 
+        //Forwards to the page
         new ForwardEntry<>("/editRaceResult.jsp", req, resp, new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, log()), new GenericDao<>(Team.class).getAll());
     }
 }

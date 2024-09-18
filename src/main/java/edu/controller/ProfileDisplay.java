@@ -21,13 +21,12 @@ import java.util.List;
 )
 
 /**
- * This class' purpose is to display the user profile
+ * This class' purpose is to display the user profile along with their submitted results
  */
 public class ProfileDisplay extends HttpServlet implements Authorization {
 
     /**
      * This method's purpose is to forward to the jsp
-     *
      * @param req  the request object that we forward
      * @param resp the response object that we forward
      * @throws ServletException if an error occurs with the Servlet
@@ -41,6 +40,8 @@ public class ProfileDisplay extends HttpServlet implements Authorization {
         }
 
         User user = (User) req.getSession().getAttribute("user");
+
+        //Get the submitted results by the user, and then forward to the page
         new ForwardEntry<>("/profile.jsp", req, resp, user, getEntries(user));
     }
 

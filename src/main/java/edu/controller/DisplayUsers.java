@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class' purpose is to forward all users
+ * This class' purpose is to forward all guests with the role of "user"
  */
 @WebServlet(
         urlPatterns = {"/displayUsers"}
@@ -25,7 +25,7 @@ import java.util.List;
 public class DisplayUsers extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to forward all users with the role 'user'
+     * This method's purpose is to forward all users with the role "user"
      *@param  req               the request object that we forward
      *@param  response             the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
@@ -50,6 +50,7 @@ public class DisplayUsers extends HttpServlet implements Authorization {
             }
         }
 
+        //Forwards to the JSP
         new ForwardEntry<>("/users.jsp", req, response, null, users);
     }
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * This class' purpose is to forward to the jsp
+ * This class' purpose is to view all the races
  */
 @WebServlet(
         urlPatterns = {"/viewRaces"}
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class ViewRaces extends HttpServlet {
 
     /**
-     * This method's purpose is to forward to the jsp
+     * This method's purpose is to view the races
      * @param req the request object
      * @param resp the response object
      * @throws ServletException the servlet exception object
@@ -33,6 +33,7 @@ public class ViewRaces extends HttpServlet {
 
         GenericDao<Race> raceDao = new GenericDao<>(Race.class);
 
+        //Forwards to the page
         new ForwardEntry<>("/viewRaces.jsp", req, resp, new DeleteAllRaceResultDisplay().showDeletionOfResults(raceDao), raceDao.getAll());
     }
 }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class' purpose is to delete a team
+ * This class' purpose is to delete the team
  */
 @WebServlet(
         urlPatterns = {"/deleteTeam"}
@@ -26,7 +26,7 @@ import java.util.List;
 public class DeleteTeam extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to delete the entry by id
+     * This method's purpose is to delete the entry
      *@param  req               the request object that we forward
      *@param  resp           the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
@@ -64,6 +64,8 @@ public class DeleteTeam extends HttpServlet implements Authorization {
         }
 
         req.setAttribute("teams", dao.getAll());
+
+        //Forwards to the page
         new ForwardEntry<>("/searchResults.jsp", req, resp, null, null);
     }
 

@@ -70,6 +70,7 @@ public class AddTeam extends HttpServlet implements Authorization {
             req.setAttribute("missingField", "Fields can't be empty");
         }
 
+        //Forwards to the page
         new ForwardEntry<>("/addTeam.jsp", req, resp, null, categoryDao.getAll());
     }
 }

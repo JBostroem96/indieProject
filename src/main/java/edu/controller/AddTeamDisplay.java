@@ -15,7 +15,7 @@ import java.io.IOException;
 
 
 /**
- * This class's purpose is to forward all the divisions to the jsp
+ * This class's purpose is to forward to the jsp
  */
 @WebServlet(
 
@@ -25,7 +25,7 @@ import java.io.IOException;
 public class AddTeamDisplay extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to forward all the divisions to the jsp
+     * This method's purpose is to forward to the jsp
      *@param  req               the request object that we forward
      *@param  response             the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet

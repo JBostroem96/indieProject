@@ -20,7 +20,7 @@ import java.io.IOException;
 public class DeleteUser extends HttpServlet implements Authorization {
 
     /**
-     * This method's purpose is to delete the entry by id
+     * This method's purpose is to delete the entry
      *@param  req               the request object that we forward
      *@param  resp           the response object that we forward
      *@exception ServletException  if an error occurs with the Servlet
@@ -39,8 +39,10 @@ public class DeleteUser extends HttpServlet implements Authorization {
 
             dao.delete(user);
 
+            //signs the user out
             req.getSession().invalidate();
 
+            //redirect to the home page
             resp.sendRedirect("index.jsp");
 
         } catch (Exception e) {

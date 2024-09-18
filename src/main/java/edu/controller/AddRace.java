@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 /**
- * This Servlet's purpose is to add the entered user
+ * This Servlet's purpose is to add the entered race
  * @author Jimmy Bostroem
  */
 @WebServlet(
