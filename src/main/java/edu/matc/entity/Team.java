@@ -65,7 +65,6 @@ public class Team implements Validation {
      *
      * @return the category
      */
-    //Needs to be looked at more
     @ManyToOne
     @JoinColumn(name = "category_id")
     public Category getCategory() {

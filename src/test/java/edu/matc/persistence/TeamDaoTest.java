@@ -82,8 +82,8 @@ public class TeamDaoTest {
     void delete() {
 
         teamDao = new GenericDao(Team.class);
-        teamDao.delete(teamDao.getById(10));
-        assertNull(teamDao.getById(10));
+        teamDao.delete(teamDao.getById(8));
+        assertNull(teamDao.getById(8));
 
     }
 
@@ -93,8 +93,8 @@ public class TeamDaoTest {
     @Test
     void getAll() {
 
-        List<Team> races = teamDao.getAll();
-        assertEquals(32, races.size());
+        List<Team> teams = teamDao.getAll();
+        assertEquals(9, teams.size());
     }
 
     /**
@@ -104,9 +104,9 @@ public class TeamDaoTest {
     @Test
     void getByPropertyEqual() {
 
-        List<Team> teams = teamDao.findByPropertyEqual("name", "Bear");
+        List<Team> teams = teamDao.findByPropertyEqual("name", "The Beavers");
         assertEquals(1, teams.size());
-        assertEquals(5, teams.get(0).getId());
+        assertEquals(1, teams.get(0).getId());
     }
 }
 

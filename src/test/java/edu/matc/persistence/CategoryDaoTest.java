@@ -100,6 +100,6 @@ public class CategoryDaoTest {
 
         List<Category> categories = categoryDao.findByPropertyEqual("division", "Mixed");
         assertEquals(1, categories.size());
-        assertEquals(5, categories.get(0).getCategory_id());
+        assertEquals(3, categories.get(0).getCategory_id());
     }
 }

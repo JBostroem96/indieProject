@@ -18,6 +18,7 @@ class TeamRaceTest {
     private GenericDao teamRaceDao;
     private GenericDao teamDao;
     private GenericDao raceDao;
+    private GenericDao userDao;
 
     /**
      * Triggers before everything else
@@ -30,6 +31,7 @@ class TeamRaceTest {
         teamRaceDao = new GenericDao(TeamRace.class);
         teamDao = new GenericDao(Team.class);
         raceDao = new GenericDao(Race.class);
+        userDao = new GenericDao(User.class);
     }
 
     /**
@@ -51,13 +53,15 @@ class TeamRaceTest {
     void update() {
 
         Category category = new Category();
-        category.setCategory_id(5);
+        category.setCategory_id(3);
         category.setDivision(Division.MIXED);
 
         Team team = new Team("Example2", category, category.getDivision().name());
         teamDao.insert(team);
         Race race = new Race("Example3", "5", LocalDate.now());
         raceDao.insert(race);
+        User user = new User("Example", "Example", "Example@outlook.com", Role.USER);
+        userDao.insert(user);
         TeamRace teamRaceToUpdate = (TeamRace) teamRaceDao.getById(5);
 
         teamRaceToUpdate.setTeam(team);
@@ -79,7 +83,7 @@ class TeamRaceTest {
     void insert() {
 
         Category category = new Category();
-        category.setCategory_id(5);
+        category.setCategory_id(3);
         category.setDivision(Division.MIXED);
 
         Team team = new Team("Example", category, category.getDivision().name());
@@ -88,6 +92,7 @@ class TeamRaceTest {
 
         teamDao.insert(team);
         raceDao.insert(race);
+        userDao.insert(user);
 
         TeamRace teamRace = new TeamRace(team, race, user, 22, 0, 120);
 
@@ -114,7 +119,7 @@ class TeamRaceTest {
     void getAll() {
 
         List<TeamRace> teamRaces = teamRaceDao.getAll();
-        assertEquals(17, teamRaces.size());
+        assertEquals(18, teamRaces.size());
     }
 
     /**
@@ -125,7 +130,7 @@ class TeamRaceTest {
     void getByPropertyEqual() {
 
         List<TeamRace> teamRaces = teamRaceDao.findByPropertyEqual("cp", "17");
-        assertEquals(14, teamRaces.size());
+        assertEquals(18, teamRaces.size());
         assertEquals(1, teamRaces.get(0).getId());
     }
 }

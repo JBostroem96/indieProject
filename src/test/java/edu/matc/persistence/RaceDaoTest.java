@@ -31,9 +31,9 @@ class RaceDaoTest {
     @Test
     void getById() {
 
-        Race retrievedRace = (Race)dao.getById(2);
+        Race retrievedRace = (Race)dao.getById(1);
         assertNotNull(retrievedRace);
-        assertEquals(dao.getById(2), retrievedRace);
+        assertEquals(dao.getById(1), retrievedRace);
     }
 
     /**
@@ -46,7 +46,7 @@ class RaceDaoTest {
         String length = "35";
         String name = "Example2";
 
-        Race raceToUpdate = (Race)dao.getById(2);
+        Race raceToUpdate = (Race)dao.getById(1);
 
         raceToUpdate.setName(name);
         raceToUpdate.setLength(length);
@@ -54,7 +54,7 @@ class RaceDaoTest {
 
         dao.update(raceToUpdate);
 
-        Race updatedRace = (Race)dao.getById(2);
+        Race updatedRace = (Race)dao.getById(1);
         assertEquals(raceToUpdate, updatedRace);
     }
 
@@ -75,8 +75,8 @@ class RaceDaoTest {
     void delete() {
 
         dao = new GenericDao(Race.class);
-        dao.delete(dao.getById(2));
-        assertNull(dao.getById(2));
+        dao.delete(dao.getById(1));
+        assertNull(dao.getById(1));
     }
 
     /**
@@ -96,8 +96,8 @@ class RaceDaoTest {
     @Test
     void getByPropertyEqual() {
 
-        List<Race> races = dao.findByPropertyEqual("name", "Example3");
+        List<Race> races = dao.findByPropertyEqual("name", "The Runship");
         assertEquals(1, races.size());
-        assertEquals(4, races.get(0).getId());
+        assertEquals(2, races.get(0).getId());
     }
 }
