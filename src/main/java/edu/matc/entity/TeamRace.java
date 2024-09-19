@@ -1,6 +1,5 @@
 package edu.matc.entity;
 
-import edu.matc.util.Validation;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;

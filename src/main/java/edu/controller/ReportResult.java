@@ -40,7 +40,6 @@ public class ReportResult extends HttpServlet implements Authorization {
         }
 
         final Logger logger = log();
-        GenericDao<TeamRace> dao = new GenericDao<>(TeamRace.class);
 
         String subject = req.getParameter("subject");
         TeamRace resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);;
@@ -63,7 +62,7 @@ public class ReportResult extends HttpServlet implements Authorization {
 
             } catch (Exception e) {
 
-                logger.error("There was an issue updating the data", e);
+                logger.error("There was an issue reporting this race", e);
             }
 
         } else {
