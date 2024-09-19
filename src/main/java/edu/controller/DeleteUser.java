@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
+import edu.matc.util.UseLogger;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ import java.io.IOException;
 @WebServlet(
         urlPatterns = {"/deleteUser"}
 )
-public class DeleteUser extends HttpServlet implements Authorization {
+public class DeleteUser extends HttpServlet implements UseLogger {
 
     /**
      * This method's purpose is to delete the entry

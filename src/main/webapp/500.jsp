@@ -3,10 +3,9 @@
 <html>
     <c:import url="head.jsp"/>
 <body class="bg-white container">
-
     <main class="text-center">
-        <h1>Sorry; there was an issue with the request</h1>
+        <h1>Internal Server Error (500)</h1>
+        <h2>Sorry; something went wrong on our end.</h2>
     </main>
-
 </body>
 </html>
