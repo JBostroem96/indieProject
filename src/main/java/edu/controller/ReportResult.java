@@ -2,6 +2,7 @@ package edu.controller;
 
 import edu.matc.entity.Role;
 import edu.matc.entity.TeamRace;
+import edu.matc.entity.User;
 import edu.matc.persistence.GenericDao;
 import edu.matc.util.Authorization;
 import edu.matc.util.ForwardEntry;
@@ -45,17 +46,18 @@ public class ReportResult extends HttpServlet implements Authorization {
         TeamRace resultToReport = new GetEntry<TeamRace>().parseEntry(new GenericDao<>(TeamRace.class), req, logger);;
 
         if (req.getParameter("teamTextArea") != null && !req.getParameter("teamTextArea").isEmpty()
-                && req.getParameter("subject") != null & !req.getParameter("subject").isEmpty()) {
+                && req.getParameter("subject") != null && !req.getParameter("subject").isEmpty()) {
 
             try {
 
+                User user = (User) req.getSession().getAttribute("user");
                 String description = req.getParameter("teamTextArea");
                 subject += " regarding "
                         + resultToReport.getTeam().getName() + " in race "
                         + resultToReport.getRace().getName();
 
                 TLSEmail mail = new TLSEmail();
-                mail.simpleEmailWithTLS(subject, description);
+                mail.simpleEmailWithTLS(subject, description, user.getEmail());
 
                 req.setAttribute("resultReported", resultToReport.getTeam().getName());
 

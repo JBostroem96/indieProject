@@ -38,7 +38,7 @@ public class TLSEmail implements PropertiesLoader {
      * @param subject the subject of the email
      * @param description the description of the email
      */
-    public void simpleEmailWithTLS(String subject, String description) {
+    public void simpleEmailWithTLS(String subject, String description, String replyTo) {
 
         final String fromEmail = properties.getProperty("email.from");
         final String password = properties.getProperty("email.pw");
@@ -60,6 +60,6 @@ public class TLSEmail implements PropertiesLoader {
         };
         Session session = Session.getInstance(props, auth);
 
-        Email.sendEmail(properties, session, toEmail, subject, description);
+        Email.sendEmail(properties, session, toEmail, subject, description, replyTo);
     }
 }

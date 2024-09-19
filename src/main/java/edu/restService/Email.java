@@ -37,7 +37,7 @@ public class Email implements PropertiesLoader {
      * @param subject the subject of the email
      * @param body the content of the email
      */
-    public static void sendEmail(Properties properties, Session session, String toEmail, String subject, String body) {
+    public static void sendEmail(Properties properties, Session session, String toEmail, String subject, String body, String replyTo) {
 
         final Logger logger = LogManager.getLogger();
 
@@ -55,7 +55,7 @@ public class Email implements PropertiesLoader {
             //create new internet address and set the email from
             msg.setFrom(new InternetAddress(properties.getProperty("email.from"), properties.getProperty("email.from")));
             //set the recipient
-            msg.setReplyTo(InternetAddress.parse(properties.getProperty("email.to"), false));
+            msg.setReplyTo(InternetAddress.parse(replyTo, false));
             //set the subject of the email
             msg.setSubject(subject, "UTF-8");
             //set the content of the email
